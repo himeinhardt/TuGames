@@ -452,7 +452,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) f
 
 ## Author
 
-** Holger I. Meinhardt **
+*Holger I. Meinhardt*
 Institute of Operations Research
 University of Karlsruhe (KIT) 
 E-mail: Holger.Meinhardt ät wiwi.uni-karlsruhe.de
