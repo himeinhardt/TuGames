@@ -1,0 +1,499 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     18221,        489]
+NotebookOptionsPosition[     17834,        475]
+NotebookOutlinePosition[     18169,        490]
+CellTagsIndexPosition[     18126,        487]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", "\n", "   ", 
+   RowBox[{
+    RowBox[{"PolytopeSkeleton", ".", "m"}], ",", "\n", "   ", 
+    RowBox[{"by", " ", "Komei", " ", "Fukuda"}], ",", " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"fukuda", "@", "ifor"}], ".", "math", ".", "ethz", ".", "ch"}], 
+     "\n", "   ", "Version", " ", "March", " ", "3"}], ",", " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"1999.", "\n", "   ", "--"}], " ", "This", " ", "Needs", " ", 
+       "View3D", " ", 
+       RowBox[{"package", " ", "--"}]}], "-", "\n", "\n", "   ", 
+      RowBox[{"The", " ", "function", " ", "name", " ", 
+       RowBox[{"Visible", "[", "]"}], " ", "was", " ", "changed", " ", "to", 
+       " ", 
+       RowBox[{"PolyVisible", "[", "]"}], " ", "\n", "   ", "to", " ", "be", 
+       " ", "conform", " ", "to", " ", "Mathematica", " ", "Version"}]}], " ",
+      ">=", 
+     RowBox[{
+     "6.", "\n", "   ", "Line", " ", "was", " ", "changed", " ", "to", " ", 
+      "Tube", " ", "in", " ", 
+      RowBox[{"VisibleSkeleton", ".", "\n", "\n", "   ", "by"}], " ", 
+      "Holger", " ", 
+      RowBox[{"I", ".", " ", "Meinhardt"}], "\n", "   ", "02.07", 
+      ".2016"}]}]}], "\n", "\n", "   ", "\n", "*)"}], "\n", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Off", "[", 
+     RowBox[{"Options", "::", "optnf"}], "]"}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"PolyVisible", "[", 
+      RowBox[{"ineq_Integer", ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"a_", ",", "b_"}], "}"}], ",", " ", "viewpoint_"}], "]"}], ":=",
+      "\n", "\t", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"N", "[", 
+         RowBox[{
+          RowBox[{"a", "[", 
+           RowBox[{"[", "ineq", "]"}], "]"}], ".", "viewpoint"}], "]"}], " ", 
+        ">=", " ", 
+        RowBox[{"N", "[", 
+         RowBox[{"b", "[", 
+          RowBox[{"[", "ineq", "]"}], "]"}], "]"}]}], ",", " ", "True", ",", 
+       " ", "False"}], "]"}]}], ";"}], "\n", "\t\t", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"PolyVisible", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"a_", ",", "b_"}], "}"}], ",", " ", "viewpoint_"}], "]"}], ":=",
+      "\n", "\t", 
+     RowBox[{"Map", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"PolyVisible", "[", 
+         RowBox[{"#", ",", 
+          RowBox[{"{", 
+           RowBox[{"a", ",", "b"}], "}"}], ",", "viewpoint"}], "]"}], "&"}], 
+       ",", " ", 
+       RowBox[{"Range", "[", 
+        RowBox[{"Length", "[", "b", "]"}], "]"}]}], "]"}]}], ";"}], "\n", 
+   "\t\t", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"VisibleSkeleton", "[", 
+      RowBox[{"vertices_", ",", "ecd_", ",", " ", "ead_", ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"a_", ",", " ", "b_"}], "}"}], ",", "viewpoint_"}], "]"}], ":=",
+      "\n", "\t", 
+     RowBox[{"Block", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+        "grtemp", ",", " ", "edgelist", ",", " ", "i", ",", " ", "visibility",
+          ",", " ", "viseges", ",", " ", "invisedges", ",", " ", "visibles", 
+         ",", "invisibles"}], "}"}], ",", "\n", "\t\t", 
+       RowBox[{
+        RowBox[{"edgelist", "=", 
+         RowBox[{"{", "}"}]}], ";", "\n", "\t\t", 
+        RowBox[{"Do", "[", "\t", 
+         RowBox[{
+          RowBox[{"edgelist", "=", 
+           RowBox[{"Join", "[", 
+            RowBox[{"edgelist", ",", 
+             RowBox[{"Map", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"i", ",", " ", "#"}], "}"}], "&"}], ",", " ", 
+               RowBox[{"ead", "[", 
+                RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}], "]"}]}], ",", "\n",
+           "\t\t\t", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "1", ",", 
+            RowBox[{"Length", "[", "ead", "]"}]}], "}"}]}], "\n", "\t\t", 
+         "]"}], ";", 
+        RowBox[{"edgelist", "=", 
+         RowBox[{"Select", "[", 
+          RowBox[{"edgelist", ",", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "1", "]"}], "]"}], "<", 
+             RowBox[{"#", "[", 
+              RowBox[{"[", "2", "]"}], "]"}]}], "&"}]}], "]"}]}], ";", "\n", 
+        "\t\t", 
+        RowBox[{"visibility", "=", 
+         RowBox[{"Flatten", "[", 
+          RowBox[{"Position", "[", 
+           RowBox[{
+            RowBox[{"PolyVisible", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"a", ",", " ", "b"}], "}"}], ",", "viewpoint"}], "]"}],
+             ",", "True"}], "]"}], "]"}]}], ";", "\n", "\t\t", 
+        RowBox[{"visedges", "=", 
+         RowBox[{"Select", "[", 
+          RowBox[{"edgelist", ",", " ", "\n", "\t\t", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"Intersection", "[", 
+               RowBox[{"visibility", ",", 
+                RowBox[{"ecd", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"#", "[", 
+                   RowBox[{"[", "1", "]"}], "]"}], "]"}], "]"}], ",", 
+                RowBox[{"ecd", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"#", "[", 
+                   RowBox[{"[", "2", "]"}], "]"}], "]"}], "]"}]}], " ", "]"}],
+               " ", "!=", " ", 
+              RowBox[{"{", "}"}]}], ")"}], " ", "&"}]}], "]"}]}], ";", "\n", 
+        "\t\t", 
+        RowBox[{"invisedges", "=", 
+         RowBox[{"Complement", "[", 
+          RowBox[{"edgelist", ",", "visedges"}], "]"}]}], ";", "\n", "\t\t", 
+        RowBox[{"visibles", "=", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"vertices", "[", 
+             RowBox[{"[", "#", "]"}], "]"}], "&"}], ")"}], " ", "/@", " ", 
+          "visedges"}]}], ";", "\n", "\t\t", 
+        RowBox[{"invisibles", "=", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"vertices", "[", 
+             RowBox[{"[", "#", "]"}], "]"}], "&"}], ")"}], " ", "/@", " ", 
+          "invisedges"}]}], ";", "\n", "\t\t", 
+        RowBox[{"grtemp", "=", 
+         RowBox[{"Join", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"Thickness", "[", " ", "0.0085", "]"}], "}"}], ",", "\n", 
+           "\t\t\t", 
+           RowBox[{"Tube", " ", "/@", " ", "visibles"}], ",", " ", "\n", 
+           "\t\t\t", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"Thickness", "[", " ", "0.0035", "]"}], ",", " ", 
+             RowBox[{"Dashing", "[", 
+              RowBox[{"{", 
+               RowBox[{"0.01", ",", "0.012"}], "}"}], "]"}]}], "}"}], ",", 
+           " ", 
+           RowBox[{"Tube", " ", "/@", " ", "invisibles"}]}], "]"}]}], ";", 
+        "\n", "\t\t", "grtemp"}]}], "\n", "\t", "]"}]}], ";"}], "\n", "\t\t", 
+   "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"VisibleSkeleton2", "[", 
+      RowBox[{
+      "vertices_", ",", "ecd_", ",", " ", "ead_", ",", " ", "flist_", ",", 
+       RowBox[{"{", 
+        RowBox[{"a_", ",", " ", "b_"}], "}"}], ",", "viewpoint_"}], "]"}], ":=",
+      "\n", "\t", 
+     RowBox[{"Block", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+        "grtemp", ",", " ", "edgelist", ",", " ", "i", ",", " ", "edgelist0", 
+         ",", " ", "visibility", ",", " ", "viseges", ",", " ", "invisedges", 
+         ",", " ", "visibles", ",", "invisibles"}], "}"}], ",", "\n", "\t\t", 
+       
+       RowBox[{
+        RowBox[{"edgelist0", "=", 
+         RowBox[{"{", "}"}]}], ";", "\n", "\t\t", 
+        RowBox[{"Do", "[", "\t", 
+         RowBox[{
+          RowBox[{"edgelist0", "=", 
+           RowBox[{"Join", "[", 
+            RowBox[{"edgelist0", ",", 
+             RowBox[{"Map", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"i", ",", " ", "#"}], "}"}], "&"}], ",", " ", 
+               RowBox[{"ead", "[", 
+                RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}], "]"}]}], ",", "\n",
+           "\t\t\t", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "1", ",", 
+            RowBox[{"Length", "[", "ead", "]"}]}], "}"}]}], "\n", "\t\t", 
+         "]"}], ";", 
+        RowBox[{"edgelist0", "=", 
+         RowBox[{"Select", "[", 
+          RowBox[{"edgelist0", ",", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "1", "]"}], "]"}], "<", 
+             RowBox[{"#", "[", 
+              RowBox[{"[", "2", "]"}], "]"}]}], "&"}]}], "]"}]}], ";", "\n", 
+        "\t\t", 
+        RowBox[{"edgelist", "=", 
+         RowBox[{"Select", "[", 
+          RowBox[{"edgelist0", ",", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"Intersection", "[", 
+               RowBox[{
+                RowBox[{"ecd", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"#", "[", 
+                   RowBox[{"[", "1", "]"}], "]"}], "]"}], "]"}], ",", 
+                RowBox[{"ecd", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"#", "[", 
+                   RowBox[{"[", "2", "]"}], "]"}], "]"}], "]"}], ",", 
+                "flist"}], "]"}], " ", "!=", " ", 
+              RowBox[{"{", "}"}]}], ")"}], "&"}]}], "]"}]}], ";", " ", "\n", 
+        "\t\t", 
+        RowBox[{"visibility", "=", 
+         RowBox[{"Flatten", "[", 
+          RowBox[{"Position", "[", 
+           RowBox[{
+            RowBox[{"PolyVisible", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"a", ",", " ", "b"}], "}"}], ",", "viewpoint"}], "]"}],
+             ",", "True"}], "]"}], "]"}]}], ";", "\n", "\t\t", 
+        RowBox[{"visedges", "=", 
+         RowBox[{"Select", "[", 
+          RowBox[{"edgelist", ",", " ", "\n", "\t\t", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"Intersection", "[", 
+               RowBox[{"visibility", ",", 
+                RowBox[{"ecd", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"#", "[", 
+                   RowBox[{"[", "1", "]"}], "]"}], "]"}], "]"}], ",", 
+                RowBox[{"ecd", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"#", "[", 
+                   RowBox[{"[", "2", "]"}], "]"}], "]"}], "]"}]}], " ", "]"}],
+               " ", "!=", " ", 
+              RowBox[{"{", "}"}]}], ")"}], " ", "&"}]}], "]"}]}], ";", "\n", 
+        "\t\t", 
+        RowBox[{"invisedges", "=", 
+         RowBox[{"Complement", "[", 
+          RowBox[{"edgelist", ",", "visedges"}], "]"}]}], ";", "\n", "\t\t", 
+        RowBox[{"visibles", "=", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"vertices", "[", 
+             RowBox[{"[", "#", "]"}], "]"}], "&"}], ")"}], " ", "/@", " ", 
+          "visedges"}]}], ";", "\n", "\t\t", 
+        RowBox[{"invisibles", "=", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"vertices", "[", 
+             RowBox[{"[", "#", "]"}], "]"}], "&"}], ")"}], " ", "/@", " ", 
+          "invisedges"}]}], ";", "\n", "\t\t", 
+        RowBox[{"grtemp", "=", 
+         RowBox[{"Join", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"Thickness", "[", " ", "0.0085", "]"}], "}"}], ",", "\n", 
+           "\t\t\t", 
+           RowBox[{"Line", " ", "/@", " ", "visibles"}], ",", " ", "\n", 
+           "\t\t\t", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"Thickness", "[", " ", "0.0035", "]"}], ",", " ", 
+             RowBox[{"Dashing", "[", 
+              RowBox[{"{", 
+               RowBox[{"0.01", ",", "0.012"}], "}"}], "]"}]}], "}"}], ",", 
+           " ", 
+           RowBox[{"Line", " ", "/@", " ", "invisibles"}]}], "]"}]}], ";", 
+        "\n", "\t\t", "grtemp"}]}], "\n", "\t", "]"}]}], ";"}]}]}]], "Code",Ex\
+pressionUUID->"8f9e47ac-0ada-4366-8530-365ba413655a"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"VisibleSkeleton3", "[", 
+     RowBox[{"vertices_", ",", "ecd_", ",", " ", "ead_", ",", " ", 
+      RowBox[{"{", 
+       RowBox[{"a_", ",", " ", "b_"}], "}"}], ",", "viewpoint_"}], "]"}], ":=",
+     "\n", "\t", 
+    RowBox[{"Block", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "grtemp", ",", " ", "edgelist", ",", " ", "i", ",", " ", "visibility", 
+        ",", " ", "viseges", ",", " ", "invisedges", ",", " ", "visibles", 
+        ",", "invisibles"}], "}"}], ",", "\n", "\t\t", 
+      RowBox[{
+       RowBox[{"edgelist", "=", 
+        RowBox[{"{", "}"}]}], ";", "\n", "\t\t", 
+       RowBox[{"Do", "[", "\t", 
+        RowBox[{
+         RowBox[{"edgelist", "=", 
+          RowBox[{"Join", "[", 
+           RowBox[{"edgelist", ",", 
+            RowBox[{"Map", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"i", ",", " ", "#"}], "}"}], "&"}], ",", " ", 
+              RowBox[{"ead", "[", 
+               RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}], "]"}]}], ",", "\n", 
+         "\t\t\t", 
+         RowBox[{"{", 
+          RowBox[{"i", ",", "1", ",", 
+           RowBox[{"Length", "[", "ead", "]"}]}], "}"}]}], "\n", "\t\t", 
+        "]"}], ";", 
+       RowBox[{"edgelist", "=", 
+        RowBox[{"Select", "[", 
+         RowBox[{"edgelist", ",", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"#", "[", 
+             RowBox[{"[", "1", "]"}], "]"}], "<", 
+            RowBox[{"#", "[", 
+             RowBox[{"[", "2", "]"}], "]"}]}], "&"}]}], "]"}]}], ";", "\n", 
+       "\t\t", 
+       RowBox[{"visibility", "=", 
+        RowBox[{"Flatten", "[", 
+         RowBox[{"Position", "[", 
+          RowBox[{
+           RowBox[{"PolyVisible", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"a", ",", " ", "b"}], "}"}], ",", "viewpoint"}], "]"}], 
+           ",", "True"}], "]"}], "]"}]}], ";", "\n", "\t\t", 
+       RowBox[{"visedges", "=", 
+        RowBox[{"Select", "[", 
+         RowBox[{"edgelist", ",", " ", "\n", "\t\t", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"Intersection", "[", 
+              RowBox[{"visibility", ",", 
+               RowBox[{"ecd", "[", 
+                RowBox[{"[", 
+                 RowBox[{"#", "[", 
+                  RowBox[{"[", "1", "]"}], "]"}], "]"}], "]"}], ",", 
+               RowBox[{"ecd", "[", 
+                RowBox[{"[", 
+                 RowBox[{"#", "[", 
+                  RowBox[{"[", "2", "]"}], "]"}], "]"}], "]"}]}], " ", "]"}], 
+             " ", "!=", " ", 
+             RowBox[{"{", "}"}]}], ")"}], " ", "&"}]}], "]"}]}], ";", "\n", 
+       "\t\t", 
+       RowBox[{"invisedges", "=", 
+        RowBox[{"Complement", "[", 
+         RowBox[{"edgelist", ",", "visedges"}], "]"}]}], ";", "\n", "\t\t", 
+       RowBox[{"visibles", "=", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"vertices", "[", 
+            RowBox[{"[", "#", "]"}], "]"}], "&"}], ")"}], " ", "/@", " ", 
+         "visedges"}]}], ";", "\n", "\t\t", 
+       RowBox[{"invisibles", "=", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"vertices", "[", 
+            RowBox[{"[", "#", "]"}], "]"}], "&"}], ")"}], " ", "/@", " ", 
+         "invisedges"}]}], ";", "\n", "\t\t", 
+       RowBox[{"grtemp", "=", 
+        RowBox[{"Join", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"Thickness", "[", " ", "0.0085", "]"}], "}"}], ",", "\n", 
+          "\t\t\t", 
+          RowBox[{"Line", " ", "/@", " ", "visibles"}], ",", " ", "\n", 
+          "\t\t\t", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"Thickness", "[", " ", "0.0035", "]"}], ",", " ", 
+            RowBox[{"Dashing", "[", 
+             RowBox[{"{", "}"}], "]"}]}], "}"}], ",", " ", 
+          RowBox[{"Line", " ", "/@", " ", "invisibles"}]}], "]"}]}], ";", 
+       "\n", "\t\t", "grtemp"}]}], "\n", "\t", "]"}]}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"getMmaViewPoint", "[", 
+     RowBox[{"vp_", ",", "gr_"}], "]"}], ":=", "\n", "\t", 
+    RowBox[{"ViewPointFromUser", "[", 
+     RowBox[{"vp", ",", "\n", "\t\t", 
+      RowBox[{"FullOptions", "[", 
+       RowBox[{"gr", ",", "PlotRange"}], "]"}], ",", "\n", "\t\t", 
+      RowBox[{"FullOptions", "[", 
+       RowBox[{"gr", ",", "BoxRatios"}], "]"}]}], "\n", "\t", "]"}]}], ";"}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"getUserViewPoint", "[", 
+     RowBox[{"vp_", ",", "gr_"}], "]"}], ":=", "\n", "\t", 
+    RowBox[{"ViewPointToUser", "[", 
+     RowBox[{"vp", ",", "\n", "\t\t", 
+      RowBox[{"FullOptions", "[", 
+       RowBox[{"gr", ",", "PlotRange"}], "]"}], ",", "\n", "\t\t", 
+      RowBox[{"FullOptions", "[", 
+       RowBox[{"gr", ",", "BoxRatios"}], "]"}]}], "\n", "\t", "]"}]}], ";"}], 
+  "\n", "\t"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"circle", "[", 
+    RowBox[{"alpha_", ",", " ", 
+     RowBox[{"r_:", "2"}], ",", " ", 
+     RowBox[{"h_:", "2"}]}], "]"}], ":=", "\n", "\t", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"r", "*", 
+      RowBox[{"Cos", "[", "alpha", "]"}]}], ",", " ", 
+     RowBox[{"r", "*", 
+      RowBox[{"Sin", "[", "alpha", "]"}]}], ",", " ", "h"}], "}"}]}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"end", " ", "of", " ", 
+    RowBox[{"PolytopeSkeleton", ".", "m"}]}], " ", "*)"}]}]}], "Code",Expressi\
+onUUID->"c5b1ea3d-be02-40e5-8389-bd4e24910ed0"]
+},
+WindowSize->{550, 793},
+WindowMargins->{{428, Automatic}, {66, Automatic}},
+FrontEndVersion->"11.3 for Linux x86 (64-bit) (March 6, 2018)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 11758, 304, 1373, "Code",ExpressionUUID->"8f9e47ac-0ada-4366-8530-365ba413655a"],
+Cell[12319, 326, 5511, 147, 798, "Code",ExpressionUUID->"c5b1ea3d-be02-40e5-8389-bd4e24910ed0"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

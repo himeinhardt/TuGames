@@ -1,0 +1,11 @@
+Get["TUG`coop`CooperativeGames`"];
+Get["TUG`TuGames`"];
+Get["TUG`TuGamesAux`"];
+Get["TUG`vertex`VertexEnum`"];
+Get["TUG`vertex`View3D`"]; 
+Get["TUG`IOTuGamesV6`"];
+Get["ComputationalGeometry`"];
+(*
+$ParaMode="False";
+$NotebookMode="False";
+*)

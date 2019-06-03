@@ -1,0 +1,1064 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     46245,       1056]
+NotebookOptionsPosition[     37635,        906]
+NotebookOutlinePosition[     39678,        959]
+CellTagsIndexPosition[     39593,        954]
+WindowTitle->DetUCoord - TUG`TuGames`
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[GridBox[{
+   {Cell["TUG`TUGAMES` SYMBOL", "PacletNameCell",ExpressionUUID->
+     "940d4ae2-9fbe-4a6e-b4e4-79f83346bd47"], Cell[TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"Tutorials \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Title of tutorial 1\"\>":>
+       Documentation`HelpLookup[
+        StringJoin[
+        "paclet:", "TUG", 
+         "/tutorial/tutorialName1"]], "\<\"Title of tutorial 2\"\>":>
+       Documentation`HelpLookup[
+        StringJoin["paclet:", "TUG", "/tutorial/tutorialName2"]]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0},ExpressionUUID->
+      "63e8b491-475d-4f94-89d5-75c61ce93055"],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"See Also \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Symbol1\"\>":>Documentation`HelpLookup[
+        StringJoin["paclet:", "TUG", "/ref/Symbol1"]], "\<\"Symbol2\"\>":>
+       Documentation`HelpLookup[
+        StringJoin["paclet:", "TUG", "/ref/Symbol2"]]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0},ExpressionUUID->
+      "62f9f939-5197-4501-b0d6-182f2315ae2d"],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"More About \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Guide 1\"\>":>Documentation`HelpLookup[
+        StringJoin["paclet:", "TUG", "/guide/Guide1"]], "\<\"Guide 2\"\>":>
+       Documentation`HelpLookup[
+        StringJoin["paclet:", "TUG", "/guide/Guide2"]]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0},ExpressionUUID->
+      "150a2ea6-e346-4405-ab35-0388cde32f4e"],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"URL \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Go to TUG/ref/DetUCoord URL\"\>":>
+       FrontEndExecute[{
+         NotebookLocate[{
+           URL["your.website.goes.here/documentationIfAny"], None}]}], 
+       Delimiter, "\<\"Go to wolfram URL\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+           "http://reference.wolfram.com/mathematica/guide/Mathematica.html"],
+            None}]}], "\<\"Go to authors URL\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL["your.website.goes.here"], None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0},ExpressionUUID->
+      "e7ee9fad-3668-4e5c-b72a-d8c513cb2ddb"]
+    }], "AnchorBar",ExpressionUUID->"d7677120-8c12-4cb5-a3dd-c193a4abd6e9"]}
+  }]], "AnchorBarGrid",ExpressionUUID->"e96374fa-6bc1-498d-aebf-225acff4cf37"],
+
+Cell[CellGroupData[{
+
+Cell["DetUCoord", "ObjectName",ExpressionUUID->"c0e4390e-6ca9-4011-93b5-6bb5763cf583"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{
+       ButtonBox["DetUCoord",
+        BaseStyle->"Link",
+        ButtonData->"paclet:TUG/ref/DetUCoord"], "[", 
+       StyleBox[
+        RowBox[{"coord_Size2", ",", "T"}], "TI"], "]"}]], "InlineFormula",
+      ExpressionUUID->"800fb749-3207-4070-a725-49667fe507fa"],
+     "\[LineSeparator]Determines the missing unanimity coordinates of size \
+greater than 2 to generate a TU-game."
+    }],ExpressionUUID->"0a17cd5c-46ca-4001-9a3b-0872556a27ad"]}
+  }]], "Usage",ExpressionUUID->"d7ce7c37-72a6-46fb-94a4-6631df3b3eb2"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[Cell[BoxData[
+ ButtonBox[
+  FrameBox[
+   StyleBox[
+    RowBox[{"Details", " ", " "}], "NotesFrameText"],
+   StripOnInput->False],
+  Appearance->{Automatic, None},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->
+   "Preemptive"]],ExpressionUUID->"d0ada0cd-b062-4f9b-a146-9b3962faf630"]], \
+"NotesSection",
+ CellGroupingRules->{"SectionGrouping", 50},
+ ApplicationMaker`DocumentationMaker`Private`WholeCellGroupOpener -> 
+ True,ExpressionUUID->"4fe8e79b-0102-4d6a-be53-c0e1d225bfe4"],
+
+Cell[TextData[{
+ " To use this function, you need first to load the ",
+ Cell[BoxData[
+  TemplateBox[{"\"TuGames Package\"","paclet:TUG/Tutorials/RefPageTuGames"},
+   "HyperlinkPaclet"]], "Output",
+  CellChangeTimes->{3.758020262269876*^9},ExpressionUUID->
+  "6fed2993-3fea-45c4-9d79-dfe2bbec9640"],
+ " using  ",
+ Cell[BoxData[
+  RowBox[{"Needs", "[", "\"\<TUG`\>\"", "]"}]], "Input",
+  CellChangeTimes->{{3.591550210334058*^9, 3.59155021039482*^9}, {
+   3.7571650562157373`*^9, 3.757165058109524*^9}},ExpressionUUID->
+  "253b10cc-e8cd-4e2b-b070-821bb38d9a5a"],
+ "."
+}], "Item",
+ CellChangeTimes->{{3.757944294337338*^9, 3.757944324573326*^9}, {
+  3.758019211624798*^9, 3.7580192180944633`*^9}, {3.75801931502304*^9, 
+  3.758019360837977*^9}, {3.758019416375719*^9, 3.758019426520309*^9}, {
+  3.758019510908175*^9, 3.7580195292797813`*^9}, {3.7580195609744*^9, 
+  3.758019565732933*^9}, {3.758019675473977*^9, 3.758019692531098*^9}, {
+  3.758019998278916*^9, 3.758020049766457*^9}, {3.7580200857870626`*^9, 
+  3.758020088965837*^9}, {3.75802027196126*^9, 3.7580202796637697`*^9}, {
+  3.758026372332939*^9, 
+  3.758026372333733*^9}},ExpressionUUID->"15044b24-4180-4a50-a9b0-\
+95419f9369a3"],
+
+Cell["\<\
+An unanimity game assigns to each supersets of coalition S a value of one, \
+otherwise zero. Based on the power set, this forms a game basis. From the \
+game basis, and the characteristic values of a game the unanimity coordinates \
+can be computed.  \
+\>", "Item",
+ CellChangeTimes->CompressedData["
+1:eJxTTMoPSmViYGAQB2IQXXn61J6t/187boiYdABER/wrDrwFpG+wOgeB6H17
+EuJA9NYLUikg+gkrTzaIjl8WkAOij/LfLQPRPz5rVIJoTz35WhBtULIdTF/S
+yu8G0Qf/TegF0Q/fnNgMoi+2WewC0fP0d+4D0cov5PaD6CWH/l0F0bNsv14D
+0X2G4RfvAumM6UlXQDSXSP1DEM2XbvEUREuvFWddwfjG8f60H2wgmmOXPw+I
+XidnIQyiJfwFNUG0i8NUMK3BrOwKomc/6QfTgewdMSB6S5NRKohOCttyE0Rf
+W33mPog+VJ3wHUT/q4PQdcE9D1YBaaGmiY9A9LOT296DaLU3Ez+C6FUpT7+B
+6DC3x79AtMP9g8nXgPTr7cVVIBoA2ffSoA==
+  
+  "],ExpressionUUID->"6b6f2f01-8d9f-44f3-ae4f-e9cc5e5558c8"],
+
+Cell["\<\
+This function computes from the set of non-negative unanimity coordinates of \
+coalitions of size 2 a new set of unanimity coordinates to construct a \
+derived game. The number of coalitions of size two is given by \
+binomial(|T|,2).\
+\>", "Item",
+ CellChangeTimes->{{3.757944294337338*^9, 3.757944324573326*^9}, {
+   3.758019211624798*^9, 3.7580192180944633`*^9}, {3.75801931502304*^9, 
+   3.758019360837977*^9}, {3.758019416375719*^9, 3.758019426520309*^9}, {
+   3.758019510908175*^9, 3.7580195292797813`*^9}, {3.7580195609744*^9, 
+   3.758019565732933*^9}, {3.758019675473977*^9, 3.758019692531098*^9}, {
+   3.758020336181779*^9, 3.758020377689912*^9}, {3.758027129906592*^9, 
+   3.758027130461244*^9}, {3.758028126903281*^9, 3.75802812690493*^9}, {
+   3.758028908668087*^9, 3.758028918580127*^9}, 3.7580293860872297`*^9, {
+   3.75896490518167*^9, 3.758964913485099*^9}, {3.758965082950218*^9, 
+   3.758965095321828*^9}, {3.758965171302253*^9, 3.75896518699918*^9}, {
+   3.758965568307572*^9, 3.758965578943891*^9}, {3.759323378621729*^9, 
+   3.759323418916706*^9}, {3.7593236083003883`*^9, 3.7593236091372337`*^9}, {
+   3.759326181240734*^9, 
+   3.7593262888422937`*^9}},ExpressionUUID->"bacba8bd-3aee-413f-bd2d-\
+befffa7a8c57"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["EXAMPLES",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "PrimaryExamplesSection",
+ CellTags->"PrimaryExamplesSection",
+ ApplicationMaker`DocumentationMaker`Private`WholeCellGroupOpener -> 
+ True,ExpressionUUID->"1cd55a31-2763-4419-baf7-f08a067a9429"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Basic Examples",
+ "\[NonBreakingSpace]\[NonBreakingSpace]",
+ Cell["(#)", "ExampleCount",ExpressionUUID->
+  "5964b69b-0997-4dad-906a-62fa72006d39"]
+}], "ExampleSection", "ExampleSection",
+ ApplicationMaker`DocumentationMaker`Private`WholeCellGroupOpener -> 
+ True,ExpressionUUID->"330acb2d-9d6b-4d05-9ba2-a9b32a0b56d4"],
+
+Cell["Loading the package:", "ExampleText",
+ CellChangeTimes->{{3.757944294337338*^9, 3.757944324573326*^9}, {
+  3.758020491109621*^9, 
+  3.7580205016174707`*^9}},ExpressionUUID->"159068ae-ba2f-4fd6-b14f-\
+1c4ed63ca614"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Needs", "[", "\"\<TUG`\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.591550210334058*^9, 3.59155021039482*^9}, {
+  3.7571650562157373`*^9, 3.757165058109524*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"e45dc51f-47e2-4913-bc18-b05ce328e70c"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\<\"===================================================\"\>"], \
+"Print",
+ CellChangeTimes->{3.5917842267087927`*^9, 3.59187734318215*^9, 
+  3.591878704955399*^9, 3.591879159679371*^9, 3.5918800250735607`*^9, 
+  3.591883468828413*^9, 3.5922272628203707`*^9, 3.626362280926193*^9, 
+  3.626454248250258*^9, 3.626455213872857*^9, 3.668842439678657*^9, 
+  3.7571650720393133`*^9, 3.7571652019971857`*^9, 3.758028204968257*^9, 
+  3.758029498402*^9, 3.7581025758515873`*^9, 3.758112265100265*^9, 
+  3.758964642759004*^9, 3.758965201323491*^9, 3.75896535807981*^9, 
+  3.759323665662815*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"cd2fe78e-7a1a-47f1-a7dd-62b52403ca6a"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Loading Package 'TuGames' for \"\>", 
+   "\[InvisibleSpace]", "\<\"Unix\"\>"}],
+  SequenceForm["Loading Package 'TuGames' for ", "Unix"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.5917842267087927`*^9, 3.59187734318215*^9, 
+  3.591878704955399*^9, 3.591879159679371*^9, 3.5918800250735607`*^9, 
+  3.591883468828413*^9, 3.5922272628203707`*^9, 3.626362280926193*^9, 
+  3.626454248250258*^9, 3.626455213872857*^9, 3.668842439678657*^9, 
+  3.7571650720393133`*^9, 3.7571652019971857`*^9, 3.758028204968257*^9, 
+  3.758029498402*^9, 3.7581025758515873`*^9, 3.758112265100265*^9, 
+  3.758964642759004*^9, 3.758965201323491*^9, 3.75896535807981*^9, 
+  3.7593236656648703`*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"40bbfd13-4d3d-450d-abb1-a28afd2832d3"],
+
+Cell[BoxData["\<\"===================================================\"\>"], \
+"Print",
+ CellChangeTimes->{3.5917842267087927`*^9, 3.59187734318215*^9, 
+  3.591878704955399*^9, 3.591879159679371*^9, 3.5918800250735607`*^9, 
+  3.591883468828413*^9, 3.5922272628203707`*^9, 3.626362280926193*^9, 
+  3.626454248250258*^9, 3.626455213872857*^9, 3.668842439678657*^9, 
+  3.7571650720393133`*^9, 3.7571652019971857`*^9, 3.758028204968257*^9, 
+  3.758029498402*^9, 3.7581025758515873`*^9, 3.758112265100265*^9, 
+  3.758964642759004*^9, 3.758965201323491*^9, 3.75896535807981*^9, 
+  3.759323665666358*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"d7e787c0-402a-41e2-b38e-61fc14f98b2c"],
+
+Cell[BoxData["\<\"TuGames V2.5 by Holger I. Meinhardt\"\>"], "Print",
+ CellChangeTimes->{3.5917842267087927`*^9, 3.59187734318215*^9, 
+  3.591878704955399*^9, 3.591879159679371*^9, 3.5918800250735607`*^9, 
+  3.591883468828413*^9, 3.5922272628203707`*^9, 3.626362280926193*^9, 
+  3.626454248250258*^9, 3.626455213872857*^9, 3.668842439678657*^9, 
+  3.7571650720393133`*^9, 3.7571652019971857`*^9, 3.758028204968257*^9, 
+  3.758029498402*^9, 3.7581025758515873`*^9, 3.758112265100265*^9, 
+  3.758964642759004*^9, 3.758965201323491*^9, 3.75896535807981*^9, 
+  3.759323665667395*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"580c30c1-6533-4422-9b57-37e7a47a9238"],
+
+Cell[BoxData["\<\"Release Date: 31.01.2019\"\>"], "Print",
+ CellChangeTimes->{3.5917842267087927`*^9, 3.59187734318215*^9, 
+  3.591878704955399*^9, 3.591879159679371*^9, 3.5918800250735607`*^9, 
+  3.591883468828413*^9, 3.5922272628203707`*^9, 3.626362280926193*^9, 
+  3.626454248250258*^9, 3.626455213872857*^9, 3.668842439678657*^9, 
+  3.7571650720393133`*^9, 3.7571652019971857`*^9, 3.758028204968257*^9, 
+  3.758029498402*^9, 3.7581025758515873`*^9, 3.758112265100265*^9, 
+  3.758964642759004*^9, 3.758965201323491*^9, 3.75896535807981*^9, 
+  3.759323665668447*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"336c4a92-8735-4be7-b5e6-0b72652569cc"],
+
+Cell[BoxData["\<\"Program runs under Mathematica Version 8.0 or later\"\>"], \
+"Print",
+ CellChangeTimes->{3.5917842267087927`*^9, 3.59187734318215*^9, 
+  3.591878704955399*^9, 3.591879159679371*^9, 3.5918800250735607`*^9, 
+  3.591883468828413*^9, 3.5922272628203707`*^9, 3.626362280926193*^9, 
+  3.626454248250258*^9, 3.626455213872857*^9, 3.668842439678657*^9, 
+  3.7571650720393133`*^9, 3.7571652019971857`*^9, 3.758028204968257*^9, 
+  3.758029498402*^9, 3.7581025758515873`*^9, 3.758112265100265*^9, 
+  3.758964642759004*^9, 3.758965201323491*^9, 3.75896535807981*^9, 
+  3.759323665669475*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"4f479190-3eeb-42d8-b798-594fec1de68a"],
+
+Cell[BoxData["\<\"Version 8.x or higher is recommended\"\>"], "Print",
+ CellChangeTimes->{3.5917842267087927`*^9, 3.59187734318215*^9, 
+  3.591878704955399*^9, 3.591879159679371*^9, 3.5918800250735607`*^9, 
+  3.591883468828413*^9, 3.5922272628203707`*^9, 3.626362280926193*^9, 
+  3.626454248250258*^9, 3.626455213872857*^9, 3.668842439678657*^9, 
+  3.7571650720393133`*^9, 3.7571652019971857`*^9, 3.758028204968257*^9, 
+  3.758029498402*^9, 3.7581025758515873`*^9, 3.758112265100265*^9, 
+  3.758964642759004*^9, 3.758965201323491*^9, 3.75896535807981*^9, 
+  3.759323665670463*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"92094a36-c143-4595-bf73-da0a30c71388"],
+
+Cell[BoxData["\<\"===================================================\"\>"], \
+"Print",
+ CellChangeTimes->{3.5917842267087927`*^9, 3.59187734318215*^9, 
+  3.591878704955399*^9, 3.591879159679371*^9, 3.5918800250735607`*^9, 
+  3.591883468828413*^9, 3.5922272628203707`*^9, 3.626362280926193*^9, 
+  3.626454248250258*^9, 3.626455213872857*^9, 3.668842439678657*^9, 
+  3.7571650720393133`*^9, 3.7571652019971857`*^9, 3.758028204968257*^9, 
+  3.758029498402*^9, 3.7581025758515873`*^9, 3.758112265100265*^9, 
+  3.758964642759004*^9, 3.758965201323491*^9, 3.75896535807981*^9, 
+  3.759323665671475*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"930e967c-5ee0-4e60-b517-4082c14087bb"],
+
+Cell[BoxData["\<\"===================================================\"\>"], \
+"Print",
+ CellChangeTimes->{3.5917842267087927`*^9, 3.59187734318215*^9, 
+  3.591878704955399*^9, 3.591879159679371*^9, 3.5918800250735607`*^9, 
+  3.591883468828413*^9, 3.5922272628203707`*^9, 3.626362280926193*^9, 
+  3.626454248250258*^9, 3.626455213872857*^9, 3.668842439678657*^9, 
+  3.7571650720393133`*^9, 3.7571652019971857`*^9, 3.758028204968257*^9, 
+  3.758029498402*^9, 3.7581025758515873`*^9, 3.758112265100265*^9, 
+  3.758964642759004*^9, 3.758965201323491*^9, 3.75896535807981*^9, 
+  3.7593236659116364`*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"0c3788ee-e2ff-41a2-bc38-7a6ae1b86cba"],
+
+Cell[BoxData["\<\"Package 'TuGames' loaded\"\>"], "Print",
+ CellChangeTimes->{3.5917842267087927`*^9, 3.59187734318215*^9, 
+  3.591878704955399*^9, 3.591879159679371*^9, 3.5918800250735607`*^9, 
+  3.591883468828413*^9, 3.5922272628203707`*^9, 3.626362280926193*^9, 
+  3.626454248250258*^9, 3.626455213872857*^9, 3.668842439678657*^9, 
+  3.7571650720393133`*^9, 3.7571652019971857`*^9, 3.758028204968257*^9, 
+  3.758029498402*^9, 3.7581025758515873`*^9, 3.758112265100265*^9, 
+  3.758964642759004*^9, 3.758965201323491*^9, 3.75896535807981*^9, 
+  3.75932366591267*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"3de7a4b9-5020-41d8-a131-84cbcf41f40f"],
+
+Cell[BoxData["\<\"===================================================\"\>"], \
+"Print",
+ CellChangeTimes->{3.5917842267087927`*^9, 3.59187734318215*^9, 
+  3.591878704955399*^9, 3.591879159679371*^9, 3.5918800250735607`*^9, 
+  3.591883468828413*^9, 3.5922272628203707`*^9, 3.626362280926193*^9, 
+  3.626454248250258*^9, 3.626455213872857*^9, 3.668842439678657*^9, 
+  3.7571650720393133`*^9, 3.7571652019971857`*^9, 3.758028204968257*^9, 
+  3.758029498402*^9, 3.7581025758515873`*^9, 3.758112265100265*^9, 
+  3.758964642759004*^9, 3.758965201323491*^9, 3.75896535807981*^9, 
+  3.759323665913767*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"f6672cfb-e0fd-4db2-98e1-7857db942f55"]
+}, Open  ]]
+}, Open  ]],
+
+Cell["Define the following four person game:", "ExampleText",
+ CellChangeTimes->{{3.757944294337338*^9, 
+  3.757944324573326*^9}},ExpressionUUID->"9204b22e-5e2d-4028-b4eb-\
+bc299a210048"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"T", "=", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2", ",", "3", ",", "4"}], "}"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.757944344907771*^9, 3.757944372332553*^9}},
+ CellLabel->"In[2]:=",ExpressionUUID->"e0a61a6d-78d1-4b53-9118-f893bcafeaf3"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"vec", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "17", ",", "27", ",", 
+     "0", ",", "0", ",", "35", ",", "42", ",", "0", ",", "33", ",", "0", ",", 
+     "57", ",", "90"}], "}"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.757944344907771*^9, 3.757944372332553*^9}, {
+  3.757944708736145*^9, 3.757944747817197*^9}},
+ CellLabel->"In[3]:=",ExpressionUUID->"e36afa26-39ec-4b62-9006-8c3f98be9044"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ExpGame", ":=", 
+   RowBox[{"DefineGame", "[", 
+    RowBox[{"T", ",", "vec"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.757944383748721*^9, 3.757944470747814*^9}, {
+  3.757944770475267*^9, 3.757944783774859*^9}},
+ CellLabel->"In[4]:=",ExpressionUUID->"d33b2ec6-34dd-40e0-b14d-e7a98c94a54d"],
+
+Cell["\<\
+First, let us consider the set of options with its default values that is \
+given by\
+\>", "ExampleText",
+ CellChangeTimes->{{3.757944294337338*^9, 3.757944324573326*^9}, {
+   3.7580189476201773`*^9, 3.75801895159828*^9}, {3.758019051399494*^9, 
+   3.758019064436742*^9}, {3.7580191350527487`*^9, 3.7580191381290913`*^9}, {
+   3.758027895619729*^9, 3.758027913531117*^9}, {3.758104946555011*^9, 
+   3.758104983397415*^9}, {3.758105028047125*^9, 3.758105034982411*^9}, 
+   3.7581091995756607`*^9},ExpressionUUID->"7c651ce3-4f64-4cfe-b46d-\
+3a5860c20aa8"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Options", "[", "DetUCoord", "]"}]], "Input",
+ CellChangeTimes->{{3.7580279174459*^9, 3.758027924428563*^9}, {
+  3.758028007274302*^9, 3.758028009975379*^9}, {3.758112202075802*^9, 
+  3.758112203007753*^9}, {3.758964657878934*^9, 3.7589646652908163`*^9}, {
+  3.758965369887018*^9, 3.758965381761119*^9}, {3.759323431306746*^9, 
+  3.759323436631742*^9}, {3.7593258172801247`*^9, 3.759325823838191*^9}},
+ CellLabel->"In[10]:=",ExpressionUUID->"046dea97-9a29-4986-b445-a1057977747f"],
+
+Cell[BoxData[
+ RowBox[{"{", "}"}]], "Output",
+ CellChangeTimes->{3.7580282111791773`*^9, 3.758102601871046*^9, 
+  3.7581123085070467`*^9, 3.758964666295249*^9, 3.758965210606413*^9, 
+  3.758965400912364*^9, 3.7593236760599623`*^9, 3.7593258260721903`*^9},
+ CellLabel->"Out[10]=",ExpressionUUID->"a7f93696-df2c-4cdd-a5a1-30f4a1741c3f"]
+}, Open  ]],
+
+Cell["\<\
+For a four person game the number of coalitions of size two are given by\
+\>", "ExampleText",
+ CellChangeTimes->{{3.757944294337338*^9, 3.757944324573326*^9}, {
+   3.7580189476201773`*^9, 3.75801895159828*^9}, {3.758019051399494*^9, 
+   3.758019064436742*^9}, {3.7580191350527487`*^9, 3.7580191381290913`*^9}, {
+   3.758027895619729*^9, 3.758027913531117*^9}, {3.758104946555011*^9, 
+   3.758104983397415*^9}, {3.758105028047125*^9, 3.758105034982411*^9}, 
+   3.7581091995756607`*^9, {3.759326517528283*^9, 3.759326550317947*^9}, 
+   3.759920526383683*^9},ExpressionUUID->"145f7f33-17f9-46ad-be53-\
+1718aac0a1ab"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Binomial", "[", 
+  RowBox[{
+   RowBox[{"Length", "[", "T", "]"}], ",", "2"}], "]"}]], "Input",
+ CellChangeTimes->{{3.759326463197713*^9, 3.759326480498796*^9}},
+ CellLabel->"In[22]:=",ExpressionUUID->"f334140a-6171-4e70-985e-46caee51789a"],
+
+Cell[BoxData["6"], "Output",
+ CellChangeTimes->{{3.759326476503565*^9, 3.759326480920958*^9}},
+ CellLabel->"Out[22]=",ExpressionUUID->"45a06456-4ef4-4f5d-8782-3173d8b1cd32"]
+}, Open  ]],
+
+Cell["\<\
+Then we compute the set of unanimity coordinate for each coalition size from\
+\>", "ExampleText",
+ CellChangeTimes->{{3.757944294337338*^9, 3.757944324573326*^9}, {
+   3.7580189476201773`*^9, 3.75801895159828*^9}, {3.75802944837914*^9, 
+   3.758029458352542*^9}, 3.7581123244247*^9, {3.758964684145598*^9, 
+   3.7589647267060623`*^9}, 3.758964756980646*^9, {3.759323171925592*^9, 
+   3.7593231790855494`*^9}, {3.759323451291638*^9, 3.759323478553897*^9}, {
+   3.759923156142809*^9, 
+   3.759923179389517*^9}},ExpressionUUID->"02039ae1-a8fb-4c06-ac56-\
+812bcecb0e76"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ac", "=", 
+  RowBox[{"UnanimityCoordinates", "[", "ExpGame", "]"}]}]], "Input",
+ CellChangeTimes->{{3.757944565016206*^9, 3.7579445725353117`*^9}, {
+  3.758027987447708*^9, 3.7580279926582327`*^9}, {3.758112206769005*^9, 
+  3.758112207975078*^9}, {3.758964669611856*^9, 3.758964676626327*^9}, {
+  3.758965387224649*^9, 3.758965393752844*^9}, {3.7593234400962667`*^9, 
+  3.759323445271308*^9}, {3.759325829246903*^9, 3.759325832815084*^9}},
+ CellLabel->"In[11]:=",ExpressionUUID->"4c58ee7c-f1d3-4a3f-8117-eb8fa94ee66b"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "17", ",", "27", ",", "0",
+    ",", "0", ",", "35", ",", "42", ",", 
+   RowBox[{"-", "44"}], ",", 
+   RowBox[{"-", "19"}], ",", 
+   RowBox[{"-", "69"}], ",", 
+   RowBox[{"-", "20"}], ",", "121"}], "}"}]], "Output",
+ CellChangeTimes->{3.7579445774432497`*^9, 3.757944788456929*^9, 
+  3.758028362826603*^9, 3.7581025859981813`*^9, 3.7581123289304857`*^9, 
+  3.75896467769018*^9, 3.758965212505351*^9, 3.7589654049069033`*^9, 
+  3.7593236811538267`*^9, 3.759325833862915*^9},
+ CellLabel->"Out[11]=",ExpressionUUID->"1c9d6eb8-8e81-4949-94fa-ea0ca3dc5a64"]
+}, Open  ]],
+
+Cell["\<\
+Singling out all unanimity coordinates from coalitions of size 2 \
+\>", "ExampleText",
+ CellChangeTimes->{{3.757944294337338*^9, 3.757944324573326*^9}, {
+   3.7580189476201773`*^9, 3.75801895159828*^9}, {3.75802944837914*^9, 
+   3.758029458352542*^9}, 3.7581123244247*^9, {3.758964684145598*^9, 
+   3.7589647267060623`*^9}, 3.758964756980646*^9, {3.759323171925592*^9, 
+   3.7593231790855494`*^9}, {3.759323451291638*^9, 3.759323478553897*^9}, {
+   3.759326020728711*^9, 
+   3.7593260467259703`*^9}},ExpressionUUID->"6eded95e-371a-4f8d-9c90-\
+1333dda26400"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"tk", "=", 
+  RowBox[{"Take", "[", 
+   RowBox[{"ac", ",", 
+    RowBox[{"{", 
+     RowBox[{"6", ",", "11"}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.759325857817782*^9, 3.759325877014064*^9}, {
+  3.75932592892735*^9, 3.759325929050744*^9}},
+ CellLabel->"In[14]:=",ExpressionUUID->"6acae229-6c9c-4d95-bb0e-f438e7114111"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"17", ",", "27", ",", "0", ",", "0", ",", "35", ",", "42"}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.7593258783142443`*^9, 3.7593259299011593`*^9},
+ CellLabel->"Out[14]=",ExpressionUUID->"fb75ca78-25eb-4cdc-ad6d-7f350220f320"]
+}, Open  ]],
+
+Cell["\<\
+These coordinates are used to determine a new set of unanimity coordinates\
+\>", "ExampleText",
+ CellChangeTimes->{{3.757944294337338*^9, 3.757944324573326*^9}, {
+   3.7580189476201773`*^9, 3.75801895159828*^9}, {3.75802944837914*^9, 
+   3.758029458352542*^9}, 3.7581123244247*^9, {3.758964684145598*^9, 
+   3.7589647267060623`*^9}, 3.758964756980646*^9, {3.759323171925592*^9, 
+   3.7593231790855494`*^9}, {3.759323451291638*^9, 3.759323478553897*^9}, {
+   3.759326020728711*^9, 3.7593260802951517`*^9}, {3.759923205320582*^9, 
+   3.7599232055538*^9}},ExpressionUUID->"21a7d8fa-b9b8-4d7b-a137-\
+633f64dd548d"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"dtu", "=", 
+  RowBox[{"DetUCoord", "[", 
+   RowBox[{"tk", ",", "T"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.759325884131896*^9, 3.759325902134598*^9}, {
+  3.759325962435927*^9, 3.7593259649901123`*^9}},
+ CellLabel->"In[16]:=",ExpressionUUID->"73ea4d32-dc2e-49c1-a07b-5f360bea28fc"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "17", ",", "27", ",", "0",
+    ",", "0", ",", "35", ",", "42", ",", 
+   RowBox[{"-", 
+    FractionBox["15", "2"]}], ",", 
+   RowBox[{"-", 
+    FractionBox["15", "2"]}], ",", 
+   RowBox[{"-", 
+    FractionBox["25", "2"]}], ",", 
+   RowBox[{"-", 
+    FractionBox["33", "2"]}], ",", 
+   FractionBox["41", "3"]}], "}"}]], "Output",
+ CellChangeTimes->{3.759325932139265*^9, 3.75932596637087*^9},
+ CellLabel->"Out[16]=",ExpressionUUID->"df1b6bb1-5497-4ef3-a75d-2afb98d0411d"]
+}, Open  ]],
+
+Cell["\<\
+From which a new set of characteristic values can be computed to define a new \
+game.\
+\>", "ExampleText",
+ CellChangeTimes->{{3.757944294337338*^9, 3.757944324573326*^9}, {
+   3.7580189476201773`*^9, 3.75801895159828*^9}, {3.75802944837914*^9, 
+   3.758029458352542*^9}, 3.7581123244247*^9, {3.758964684145598*^9, 
+   3.7589647267060623`*^9}, 3.758964756980646*^9, {3.759323171925592*^9, 
+   3.7593231790855494`*^9}, {3.759323451291638*^9, 3.759323478553897*^9}, {
+   3.759326020728711*^9, 3.7593261260723257`*^9}, {3.759326571502295*^9, 
+   3.759326583883003*^9}},ExpressionUUID->"4d5b8932-fe90-4c10-ba24-\
+ae2e29cce9d8"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"chv", "=", 
+  RowBox[{"CharacteristicValues", "[", 
+   RowBox[{"dtu", ",", "T"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.7593259687042103`*^9, 3.759325983836355*^9}},
+ CellLabel->"In[17]:=",ExpressionUUID->"a0207605-d505-46b5-8acd-2a3dbc592c8b"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "17", ",", "27", ",", "0",
+    ",", "0", ",", "35", ",", "42", ",", 
+   FractionBox["73", "2"], ",", 
+   FractionBox["89", "2"], ",", 
+   FractionBox["113", "2"], ",", 
+   FractionBox["121", "2"], ",", 
+   FractionBox["272", "3"]}], "}"}]], "Output",
+ CellChangeTimes->{3.75932598489507*^9},
+ CellLabel->"Out[17]=",ExpressionUUID->"fc9de8ad-7387-4808-8abe-b423649bb798"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SameQ", "[", 
+  RowBox[{"chv", ",", "vec"}], "]"}]], "Input",
+ CellChangeTimes->{{3.759325989426306*^9, 3.75932599820098*^9}},
+ CellLabel->"In[18]:=",ExpressionUUID->"dd7bd280-a142-4f1d-ba16-784a396ff0c1"],
+
+Cell[BoxData["False"], "Output",
+ CellChangeTimes->{3.759325998564739*^9},
+ CellLabel->"Out[18]=",ExpressionUUID->"f8227fa4-1671-4432-ac8f-f78835d357e3"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ExpGame2", ":=", 
+   RowBox[{"DefineGame", "[", 
+    RowBox[{"T", ",", "chv"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.757944383748721*^9, 3.757944470747814*^9}, {
+  3.757944770475267*^9, 3.757944783774859*^9}, {3.7593261445745983`*^9, 
+  3.759326150302902*^9}},
+ CellLabel->"In[19]:=",ExpressionUUID->"171bf3f7-d0f0-4eca-9873-3c9327b9867c"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ShapleyValue", "[", "ExpGame2", "]"}]], "Input",
+ CellChangeTimes->{{3.759326153982031*^9, 3.759326160900704*^9}},
+ CellLabel->"In[20]:=",ExpressionUUID->"0999be22-378f-4db5-9219-f320b8472f38"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   FractionBox["65", "4"], ",", 
+   FractionBox["227", "12"], ",", 
+   FractionBox["103", "4"], ",", 
+   FractionBox["119", "4"]}], "}"}]], "Output",
+ CellChangeTimes->{3.759326161316728*^9},
+ CellLabel->"Out[20]=",ExpressionUUID->"01463cd3-7291-4ac8-80b8-249552f80b2f"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["SEE ALSO",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "SeeAlsoSection",
+ ApplicationMaker`DocumentationMaker`Private`WholeCellGroupOpener -> 
+ True,ExpressionUUID->"f388e7f5-024e-4852-942c-afdb043c3196"],
+
+Cell[TextData[{
+ "\[NonBreakingSpace]",
+ Cell[BoxData[
+  TemplateBox[{"\"Kernel\"","paclet:TUG/ref/Kernel"},
+   "HyperlinkPaclet"]], "Output",
+  CellChangeTimes->{{3.757945412496397*^9, 3.757945431371088*^9}},
+  ExpressionUUID->"fe0bdd53-3b31-4d24-b641-9bbf12e2879a"],
+ " ",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  TemplateBox[{"\"PreNucleolus\"","paclet:TUG/ref/PreNucleolus"},
+   "HyperlinkPaclet"]], "Output",
+  CellChangeTimes->{3.757945499926458*^9},ExpressionUUID->
+  "4e1e3dd3-8fd7-407b-be18-f0ad81b0d97e"],
+ "  ",
+ StyleBox["\[FilledVerySmallSquare]\[MediumSpace]", "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  TemplateBox[{"\"PreKernelSolution\"","paclet:TUG/ref/PreKernelSolution"},
+   "HyperlinkPaclet"]], "Output",
+  CellChangeTimes->{
+   3.757945499926458*^9, 3.758018172287236*^9, 3.758018279968836*^9, 
+    3.7580183519894457`*^9, 3.758018464302322*^9, 3.758018495329204*^9, {
+    3.7580185700225*^9, 3.758018590963559*^9}, 3.758018630521126*^9, 
+    3.758028264073681*^9},ExpressionUUID->
+  "7a1d9fb8-c76f-44c2-92d3-bfad5fbdb2b6"],
+ " ",
+ StyleBox["\[FilledVerySmallSquare]\[MediumSpace]", "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  TemplateBox[{
+   "\"FindPreKernelSolution\"","paclet:TUG/ref/FindPreKernelSolution"},
+   "HyperlinkPaclet"]], "Output",
+  CellChangeTimes->{3.757945499926458*^9, 3.758018172287236*^9, 
+   3.758018279968836*^9},ExpressionUUID->
+  "5c81d6f3-175e-4522-827d-a55a7a3df540"],
+ "  ",
+ StyleBox["\[FilledVerySmallSquare] ", "InlineSeparator"],
+ Cell[BoxData[
+  TemplateBox[{"\"FindKernelSolution\"","paclet:TUG/ref/FindKernelSolution"},
+   "HyperlinkPaclet"]], "Output",
+  CellChangeTimes->{3.757945499926458*^9, 3.758018172287236*^9, 
+   3.758018279968836*^9, 3.7580183519894457`*^9},ExpressionUUID->
+  "1fc3c055-b7da-4c27-8372-9b805e18c31d"],
+ StyleBox["\[MediumSpace] \[FilledVerySmallSquare] ", "InlineSeparator"],
+ Cell[BoxData[
+  TemplateBox[{"\"KernelCalculation\"","paclet:TUG/ref/KernelCalculation"},
+   "HyperlinkPaclet"]], "Output",
+  CellChangeTimes->{3.757945499926458*^9, 3.758018172287236*^9, 
+   3.758018279968836*^9, 3.7580183519894457`*^9, 3.758018464302322*^9, 
+   3.758018495329204*^9},ExpressionUUID->
+  "963a05ac-745c-46bc-813f-66517f08e9ff"],
+ StyleBox["\[MediumSpace] \[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ Cell[BoxData[
+  TemplateBox[{"\"HarsanyiDividends\"","paclet:TUG/ref/HarsanyiDividends"},
+   "HyperlinkPaclet"]], "Output",
+  CellChangeTimes->{3.757945499926458*^9, 3.758018172287236*^9, 
+   3.758018279968836*^9, 3.7580183519894457`*^9, 3.758018464302322*^9, 
+   3.758018495329204*^9, 3.7580185700225*^9},ExpressionUUID->
+  "85d02925-33c0-43f7-9e68-34c75fc47e39"],
+ " ",
+ StyleBox["\[FilledVerySmallSquare] ", "InlineSeparator"],
+ " ",
+ Cell[BoxData[
+  TemplateBox[{
+   "\"UnanimityCoordinates\"","paclet:TUG/ref/UnanimityCoordinates"},
+   "HyperlinkPaclet"]], "Output",
+  CellChangeTimes->{
+   3.757945499926458*^9, 3.758018172287236*^9, 3.758018279968836*^9, 
+    3.7580183519894457`*^9, 3.758018464302322*^9, 3.758018495329204*^9, {
+    3.7580185700225*^9, 3.758018590963559*^9}, 3.758018630521126*^9},
+  ExpressionUUID->"1106e618-1da4-40b5-9f93-a1772e925d57"]
+}], "SeeAlso",
+ CellChangeTimes->{{3.7579451896072693`*^9, 3.757945226721162*^9}, {
+   3.7579454488433104`*^9, 3.7579454645148067`*^9}, {3.7579455124770737`*^9, 
+   3.757945517414158*^9}, {3.758018136584648*^9, 3.7580181458645897`*^9}, 
+   3.7580181910628653`*^9, {3.758018303873225*^9, 3.758018371506329*^9}, 
+   3.758018509606063*^9, 3.758018582401784*^9, {3.758018642136096*^9, 
+   3.7580186433001966`*^9}, {3.758018686106989*^9, 3.758018701246414*^9}, {
+   3.758028297119008*^9, 
+   3.758028301760194*^9}},ExpressionUUID->"cd8df321-685e-499e-9fbc-\
+63467c1219d1"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["TUTORIALS",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "TutorialsSection",
+ ApplicationMaker`DocumentationMaker`Private`WholeCellGroupOpener -> 
+ True,ExpressionUUID->"303f58f3-50a0-4f7c-bff3-d02c077c5e14"],
+
+Cell[TextData[Cell[BoxData[
+ TemplateBox[{"\"Getting Started\"","paclet:TUG/Tutorials/GettingStarted"},
+  "HyperlinkPaclet"]], "Output",
+ CellChangeTimes->{3.757506709041803*^9, 
+  3.757595526435429*^9},ExpressionUUID->"fac70733-da7b-4a94-a32a-\
+d66af056ad61"]], "Tutorials",
+ CellChangeTimes->{{3.75801773865912*^9, 
+  3.758017742544714*^9}},ExpressionUUID->"e175daa1-7638-45e1-a81e-\
+6d71139a230e"],
+
+Cell[TextData[Cell[BoxData[
+ TemplateBox[{"\"Manual TuGames\"","paclet:TUG/Guides/ManualTuGames"},
+  "HyperlinkPaclet"]], "Output",
+ CellChangeTimes->{3.757401981262487*^9, 3.757506717227169*^9, 
+  3.7575955265990143`*^9},ExpressionUUID->"ed40f8c2-027e-43f1-b2c0-\
+5d4d2553adce"]], "Tutorials",
+ CellChangeTimes->{{3.7580177555635443`*^9, 
+  3.758017773721039*^9}},ExpressionUUID->"14d572ea-73bf-4678-9d33-\
+505da3d67f66"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["MORE ABOUT",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "MoreAboutSection",
+ ApplicationMaker`DocumentationMaker`Private`WholeCellGroupOpener -> 
+ True,ExpressionUUID->"ed13cc39-c0fe-4a27-9f06-dedaae6a0b30"],
+
+Cell[TextData[Cell[BoxData[
+ TemplateBox[{"\"Graphics 2D\"","paclet:TUG/Guides/TuGamesView2dV6"},
+  "HyperlinkPaclet"]], "Output",
+ CellChangeTimes->{3.7574022631309233`*^9, 3.757506718909481*^9, 
+  3.757595526642234*^9},ExpressionUUID->"eb61e6b6-b380-4c11-bd68-\
+c2f248446626"]], "MoreAbout",
+ CellChangeTimes->{{3.758017815730578*^9, 3.758017819637436*^9}, {
+  3.758017893631386*^9, 
+  3.7580178953994102`*^9}},ExpressionUUID->"d456e1d9-38cc-40aa-a4ce-\
+33578a37e381"],
+
+Cell[TextData[Cell[BoxData[
+ TemplateBox[{"\"Graphics 3D\"","paclet:TUG/Guides/TuGamesView3dV6"},
+  "HyperlinkPaclet"]], "Output",
+ CellChangeTimes->{3.7574023365110073`*^9, 3.757506719928339*^9, 
+  3.757595526686584*^9},ExpressionUUID->"ed10a4d0-de23-441e-be02-\
+cffa2c55d086"]], "MoreAbout",
+ CellChangeTimes->{{3.758017900749037*^9, 
+  3.758017912453752*^9}},ExpressionUUID->"cb6a4130-2ae4-4b2c-b150-\
+eebc610fffde"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["RELATED LINKS",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "RelatedLinksSection",
+ ApplicationMaker`DocumentationMaker`Private`WholeCellGroupOpener -> 
+ True,ExpressionUUID->"7a890397-04e1-47b2-9e84-8737ffa231fd"],
+
+Cell[TextData[Cell[BoxData[
+ TemplateBox[{
+  "\"ParaTuGames Package\"","paclet:TUG/Tutorials/ParaExpGamePers12"},
+  "HyperlinkPaclet"]], "Output",
+ CellChangeTimes->{3.757403347293641*^9, 3.757506730860621*^9, 
+  3.7575955269698772`*^9},ExpressionUUID->"c225b0bb-bbe2-4755-8817-\
+844df1fb633c"]], "RelatedLinks",
+ CellChangeTimes->{{3.758017865357806*^9, 
+  3.758017868188446*^9}},ExpressionUUID->"de8326af-ea6e-451c-b740-\
+9df20d97c9fe"],
+
+Cell[TextData[Cell[BoxData[
+ TemplateBox[{
+  "\"MATLink Connection to MatTuGames\"","paclet:TUG/Guides/MATtug"},
+  "HyperlinkPaclet"]], "Output",
+ CellChangeTimes->{3.757402905324741*^9, 3.7574029541703053`*^9, 
+  3.757506723948392*^9, 
+  3.757595526826133*^9},ExpressionUUID->"1ff0a8c9-16c9-41f2-b8ab-\
+bcf7862e270e"]], "RelatedLinks",
+ CellChangeTimes->{{3.7580178483675537`*^9, 
+  3.758017851802814*^9}},ExpressionUUID->"224cf31a-021b-4a02-9bcb-\
+ce620708d5ce"]
+}, Open  ]],
+
+Cell["Made for Mathematica 8  |  Last modified in January 2019", "History",ExpressionUUID->"b2262cf4-5d20-46d2-95b3-518e0323ed61"],
+
+Cell[" ", "FooterCell",ExpressionUUID->"bb0a2407-3847-4b93-a5ec-de3a5ab67355"]
+},
+Saveable->False,
+WindowSize->{550, 793},
+WindowMargins->{{81, Automatic}, {4, Automatic}},
+WindowTitle->"DetUCoord - TUG`TuGames`",
+DockedCells->FEPrivate`FrontEndResource[
+ "FEExpressions", "HelpViewerToolbar"],
+PageHeaders->{{None, None, None}, {None, None, 
+   Cell[
+    TextData[{
+      Cell[
+       TextData[{""}], "PageHeader"], 
+      Cell[
+       TextData[{
+         CounterBox["Page"]}], "PageNumber"]}], 
+    CellMargins -> {{Inherited, -29}, {Inherited, Inherited}}]}},
+PageFooters->{{None, None, None}, {
+   Cell[
+    TextData[{""}], "PageFooter"], None, None}},
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "context" -> "TUG`", "keywords" -> {"detucoord", "DETUCOORD"}, "index" -> 
+    True, "label" -> "TUG`TuGames` Symbol", "language" -> "en", "paclet" -> 
+    "TUG TuGames", "status" -> "", "summary" -> 
+    "DetUCoord[coord_List,T] determines the missing unanimity coordinates of \
+size greater than 2 to \n generate a TU-game. It is required that the list of \
+unanimity coordinates which represents the  \n coordinates of size 2 has \
+non-negative input values. Thus, the input dimension of coord_List \n is \
+Binomial[|T|,2], where T is the player set. See Meinhardt (2009).", 
+    "synonyms" -> {"detucoord", "DETUCOORD"}, "title" -> "DetUCoord", 
+    "windowTitle" -> "DetUCoord", "type" -> "Symbol", "uri" -> 
+    "TUG/ref/DetUCoord", "WorkflowDockedCell" -> ""}, "SearchTextTranslated" -> 
+  "", "LinkTrails" -> "", "NewStyles" -> False},
+FrontEndVersion->"11.3 for Linux x86 (64-bit) (March 6, 2018)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "PrimaryExamplesSection"->{
+  Cell[8227, 199, 573, 14, 36, "PrimaryExamplesSection",ExpressionUUID->"1cd55a31-2763-4419-baf7-f08a067a9429",
+   CellTags->"PrimaryExamplesSection"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"PrimaryExamplesSection", 39417, 948}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[596, 21, 2881, 64, 86, "AnchorBarGrid",ExpressionUUID->"e96374fa-6bc1-498d-aebf-225acff4cf37"],
+Cell[CellGroupData[{
+Cell[3502, 89, 86, 0, 53, "ObjectName",ExpressionUUID->"c0e4390e-6ca9-4011-93b5-6bb5763cf583"],
+Cell[3591, 91, 598, 13, 134, "Usage",ExpressionUUID->"d7ce7c37-72a6-46fb-94a4-6631df3b3eb2"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4226, 109, 746, 20, 50, "NotesSection",ExpressionUUID->"4fe8e79b-0102-4d6a-be53-c0e1d225bfe4",
+ CellGroupingRules->{"SectionGrouping", 50}],
+Cell[4975, 131, 1188, 24, 49, "Item",ExpressionUUID->"15044b24-4180-4a50-a9b0-95419f9369a3"],
+Cell[6166, 157, 779, 15, 91, "Item",ExpressionUUID->"6b6f2f01-8d9f-44f3-ae4f-e9cc5e5558c8"],
+Cell[6948, 174, 1242, 20, 91, "Item",ExpressionUUID->"bacba8bd-3aee-413f-bd2d-befffa7a8c57"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8227, 199, 573, 14, 36, "PrimaryExamplesSection",ExpressionUUID->"1cd55a31-2763-4419-baf7-f08a067a9429",
+ CellTags->"PrimaryExamplesSection"],
+Cell[CellGroupData[{
+Cell[8825, 217, 336, 7, 30, "ExampleSection",ExpressionUUID->"330acb2d-9d6b-4d05-9ba2-a9b32a0b56d4"],
+Cell[9164, 226, 220, 4, 39, "ExampleText",ExpressionUUID->"159068ae-ba2f-4fd6-b14f-1c4ed63ca614"],
+Cell[CellGroupData[{
+Cell[9409, 234, 263, 4, 29, "Input",ExpressionUUID->"e45dc51f-47e2-4913-bc18-b05ce328e70c"],
+Cell[CellGroupData[{
+Cell[9697, 242, 701, 12, 25, "Print",ExpressionUUID->"cd2fe78e-7a1a-47f1-a7dd-62b52403ca6a"],
+Cell[10401, 256, 832, 16, 25, "Print",ExpressionUUID->"40bbfd13-4d3d-450d-abb1-a28afd2832d3"],
+Cell[11236, 274, 701, 12, 25, "Print",ExpressionUUID->"d7e787c0-402a-41e2-b38e-61fc14f98b2c"],
+Cell[11940, 288, 683, 11, 25, "Print",ExpressionUUID->"580c30c1-6533-4422-9b57-37e7a47a9238"],
+Cell[12626, 301, 672, 11, 25, "Print",ExpressionUUID->"336c4a92-8735-4be7-b5e6-0b72652569cc"],
+Cell[13301, 314, 701, 12, 45, "Print",ExpressionUUID->"4f479190-3eeb-42d8-b798-594fec1de68a"],
+Cell[14005, 328, 684, 11, 25, "Print",ExpressionUUID->"92094a36-c143-4595-bf73-da0a30c71388"],
+Cell[14692, 341, 701, 12, 25, "Print",ExpressionUUID->"930e967c-5ee0-4e60-b517-4082c14087bb"],
+Cell[15396, 355, 703, 12, 25, "Print",ExpressionUUID->"0c3788ee-e2ff-41a2-bc38-7a6ae1b86cba"],
+Cell[16102, 369, 671, 11, 25, "Print",ExpressionUUID->"3de7a4b9-5020-41d8-a131-84cbcf41f40f"],
+Cell[16776, 382, 701, 12, 25, "Print",ExpressionUUID->"f6672cfb-e0fd-4db2-98e1-7857db942f55"]
+}, Open  ]]
+}, Open  ]],
+Cell[17504, 398, 187, 3, 24, "ExampleText",ExpressionUUID->"9204b22e-5e2d-4028-b4eb-bc299a210048"],
+Cell[17694, 403, 280, 6, 31, "Input",ExpressionUUID->"e0a61a6d-78d1-4b53-9118-f893bcafeaf3"],
+Cell[17977, 411, 475, 10, 55, "Input",ExpressionUUID->"e36afa26-39ec-4b62-9006-8c3f98be9044"],
+Cell[18455, 423, 332, 7, 31, "Input",ExpressionUUID->"d33b2ec6-34dd-40e0-b14d-e7a98c94a54d"],
+Cell[18790, 432, 563, 10, 24, "ExampleText",ExpressionUUID->"7c651ce3-4f64-4cfe-b46d-3a5860c20aa8"],
+Cell[CellGroupData[{
+Cell[19378, 446, 503, 7, 31, "Input",ExpressionUUID->"046dea97-9a29-4986-b445-a1057977747f"],
+Cell[19884, 455, 334, 5, 35, "Output",ExpressionUUID->"a7f93696-df2c-4cdd-a5a1-30f4a1741c3f"]
+}, Open  ]],
+Cell[20233, 463, 623, 10, 24, "ExampleText",ExpressionUUID->"145f7f33-17f9-46ad-be53-1718aac0a1ab"],
+Cell[CellGroupData[{
+Cell[20881, 477, 263, 5, 31, "Input",ExpressionUUID->"f334140a-6171-4e70-985e-46caee51789a"],
+Cell[21147, 484, 173, 2, 35, "Output",ExpressionUUID->"45a06456-4ef4-4f5d-8782-3173d8b1cd32"]
+}, Open  ]],
+Cell[21335, 489, 576, 10, 24, "ExampleText",ExpressionUUID->"02039ae1-a8fb-4c06-ac56-812bcecb0e76"],
+Cell[CellGroupData[{
+Cell[21936, 503, 542, 8, 31, "Input",ExpressionUUID->"4c58ee7c-f1d3-4a3f-8117-eb8fa94ee66b"],
+Cell[22481, 513, 643, 13, 59, "Output",ExpressionUUID->"1c9d6eb8-8e81-4949-94fa-ea0ca3dc5a64"]
+}, Open  ]],
+Cell[23139, 529, 567, 10, 24, "ExampleText",ExpressionUUID->"6eded95e-371a-4f8d-9c90-1333dda26400"],
+Cell[CellGroupData[{
+Cell[23731, 543, 351, 8, 31, "Input",ExpressionUUID->"6acae229-6c9c-4d95-bb0e-f438e7114111"],
+Cell[24085, 553, 267, 5, 35, "Output",ExpressionUUID->"fb75ca78-25eb-4cdc-ad6d-7f350220f320"]
+}, Open  ]],
+Cell[24367, 561, 620, 10, 24, "ExampleText",ExpressionUUID->"21a7d8fa-b9b8-4d7b-a137-633f64dd548d"],
+Cell[CellGroupData[{
+Cell[25012, 575, 308, 6, 31, "Input",ExpressionUUID->"73ea4d32-dc2e-49c1-a07b-5f360bea28fc"],
+Cell[25323, 583, 561, 15, 83, "Output",ExpressionUUID->"df1b6bb1-5497-4ef3-a75d-2afb98d0411d"]
+}, Open  ]],
+Cell[25899, 601, 633, 11, 24, "ExampleText",ExpressionUUID->"4d5b8932-fe90-4c10-ba24-ae2e29cce9d8"],
+Cell[CellGroupData[{
+Cell[26557, 616, 271, 5, 31, "Input",ExpressionUUID->"a0207605-d505-46b5-8acd-2a3dbc592c8b"],
+Cell[26831, 623, 462, 11, 83, "Output",ExpressionUUID->"fc9de8ad-7387-4808-8abe-b423649bb798"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[27330, 639, 229, 4, 31, "Input",ExpressionUUID->"dd7bd280-a142-4f1d-ba16-784a396ff0c1"],
+Cell[27562, 645, 153, 2, 35, "Output",ExpressionUUID->"f8227fa4-1671-4432-ac8f-f78835d357e3"]
+}, Open  ]],
+Cell[27730, 650, 385, 8, 31, "Input",ExpressionUUID->"171bf3f7-d0f0-4eca-9873-3c9327b9867c"],
+Cell[CellGroupData[{
+Cell[28140, 662, 217, 3, 31, "Input",ExpressionUUID->"0999be22-378f-4db5-9219-f320b8472f38"],
+Cell[28360, 667, 310, 8, 53, "Output",ExpressionUUID->"01463cd3-7291-4ac8-80b8-249552f80b2f"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[28731, 682, 528, 13, 24, "SeeAlsoSection",ExpressionUUID->"f388e7f5-024e-4852-942c-afdb043c3196"],
+Cell[29262, 697, 3800, 84, 64, "SeeAlso",ExpressionUUID->"cd8df321-685e-499e-9fbc-63467c1219d1"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[33099, 786, 531, 13, 24, "TutorialsSection",ExpressionUUID->"303f58f3-50a0-4f7c-bff3-d02c077c5e14"],
+Cell[33633, 801, 400, 8, 26, "Tutorials",ExpressionUUID->"e175daa1-7638-45e1-a81e-6d71139a230e"],
+Cell[34036, 811, 422, 8, 26, "Tutorials",ExpressionUUID->"14d572ea-73bf-4678-9d33-505da3d67f66"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[34495, 824, 532, 13, 24, "MoreAboutSection",ExpressionUUID->"ed13cc39-c0fe-4a27-9f06-dedaae6a0b30"],
+Cell[35030, 839, 470, 9, 26, "MoreAbout",ExpressionUUID->"d456e1d9-38cc-40aa-a4ce-33578a37e381"],
+Cell[35503, 850, 419, 8, 26, "MoreAbout",ExpressionUUID->"cb6a4130-2ae4-4b2c-b150-eebc610fffde"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[35959, 863, 538, 13, 24, "RelatedLinksSection",ExpressionUUID->"7a890397-04e1-47b2-9e84-8737ffa231fd"],
+Cell[36500, 878, 438, 9, 26, "RelatedLinks",ExpressionUUID->"de8326af-ea6e-451c-b740-9df20d97c9fe"],
+Cell[36941, 889, 464, 10, 26, "RelatedLinks",ExpressionUUID->"224cf31a-021b-4a02-9bcb-ce620708d5ce"]
+}, Open  ]],
+Cell[37420, 902, 130, 0, 24, "History",ExpressionUUID->"b2262cf4-5d20-46d2-95b3-518e0323ed61"],
+Cell[37553, 904, 78, 0, 24, "FooterCell",ExpressionUUID->"bb0a2407-3847-4b93-a5ec-de3a5ab67355"]
+}
+]
+*)
+

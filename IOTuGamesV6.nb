@@ -1,0 +1,3796 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    159777,       3786]
+NotebookOptionsPosition[    157453,       3752]
+NotebookOutlinePosition[    157788,       3767]
+CellTagsIndexPosition[    157745,       3764]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", "\n", "    ", 
+   RowBox[{":", " ", "Title", " ", ":", " ", 
+    RowBox[{"IOTuGamesV6", ".", 
+     RowBox[{"m", "\n", "    ", ":", " ", 
+      RowBox[{"Release", " ", "Date"}], " ", ":", " ", 
+      RowBox[{"20.01", ".2019"}], "\n", "    ", ":", " ", 
+      RowBox[{"Version", " ", "2.5"}]}]}]}], " ", "\n", "\n", "*)"}], "\n", 
+  "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{":", "Context", ":", " ", "IOTuGamesV6`"}], " ", "*)"}], "\n", 
+  "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{":", "Summary", ":", "\n", "    ", 
+    RowBox[{
+    "This", " ", "package", " ", "provides", " ", "some", " ", "graphical", 
+     " ", "extensions", " ", "to", " ", "the", " ", "package", " ", "TuGames",
+      " ", "for", " ", "Mathematica", " ", "8.", "x", " ", "and", " ", 
+     RowBox[{"higher", "."}]}]}], "\n", "*)"}], "\n", "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{":", " ", "Author", " ", ":", "\n", "     ", 
+     RowBox[{
+     "Holger", " ", "Ingmar", " ", "Meinhardt", "\n", "     ", "Department", 
+      " ", "of", " ", "Economics"}]}], ",", " ", 
+    RowBox[{
+     RowBox[{"University", " ", "of", " ", "Karlsruhe", " ", 
+      RowBox[{"(", "KIT", ")"}], "\n", "     ", 
+      RowBox[{"Holger", ".", 
+       RowBox[{"Meinhardt", "@", "wiwi"}], ".", "uni"}]}], "-", 
+     RowBox[{"karlsruhe", ".", "de"}]}]}], "\n", "*)"}], "\n", "\n", 
+  RowBox[{"(*", "\n", "   ", 
+   RowBox[{
+    RowBox[{":", " ", 
+     RowBox[{"Mathematica", " ", "Version"}], " ", ":", " ", 
+     RowBox[{"8.", "x"}]}], ",", " ", 
+    RowBox[{"9.", "x"}], ",", " ", 
+    RowBox[{"10.", "x"}], ",", " ", 
+    RowBox[{"11.", "x"}], ",", " ", 
+    RowBox[{"12.", "x"}]}], "\n", "*)"}], "\n", 
+  RowBox[{"(*", " ", "\n", "   ", 
+   RowBox[{
+    RowBox[{":", "History", ":", "\n", "    ", ":", 
+     RowBox[{"IOTuGames", ".", "m"}], ":", "\n", "      ", 
+     RowBox[{"Version", " ", "1.1"}], ":", " ", 
+     RowBox[{
+     "Output", " ", "of", " ", "the", " ", "graphics", " ", "functions", " ", 
+      "are", " ", "not", " ", "compatible", " ", "with", " ", "JavaView", 
+      "\n", "      ", "Version", " ", "1.3"}], ":", " ", 
+     RowBox[{
+     "Output", " ", "of", " ", "the", " ", "graphics", " ", "functions", " ", 
+      "are", " ", "compatible", " ", "with", " ", "JavaView", "\n", "      ", 
+      "Version", " ", "1.5"}], ":", " ", 
+     RowBox[{"Some", " ", "minor", " ", "code", " ", 
+      RowBox[{"revision", ".", "\n", "      ", "Mathematica"}], " ", 
+      "version", " ", "5.", "x", " ", "and", " ", 
+      RowBox[{"lower", "\n", "."}]}], "\n", "    ", ":", 
+     RowBox[{"IOTuGamesV6", ".", 
+      RowBox[{"m", ":", "\n", "      ", 
+       RowBox[{"Version", " ", "2.0"}], ":", " ", 
+       RowBox[{
+       "Complete", " ", "code", " ", "revision", " ", "to", " ", "make", " ", 
+        "it", " ", "compatible", " ", "with", " ", "the", " ", "new", " ", 
+        "graphic", " ", "concept", " ", "of", " ", "\n", 
+        "                   ", "Mathematica", " ", "since", " ", "version", 
+        " ", "6.", 
+        RowBox[{"x", ".", " ", "Thus"}]}]}]}]}], ",", " ", 
+    RowBox[{
+     RowBox[{
+     "this", " ", "package", " ", "is", " ", "exclusively", " ", "dedicated", 
+      " ", "to", " ", "\n", "                   ", "Mathematica", " ", 
+      "version", " ", "6.", "x", " ", "and", " ", 
+      RowBox[{"higher", ".", " ", "\n", "      ", "\n", "      ", "Version"}],
+       " ", "2.1"}], ":", " ", 
+     RowBox[{
+     "Transcription", " ", "of", " ", "the", " ", "old", " ", "option", " ", 
+      "rules", " ", "to", " ", "the", " ", "new", " ", "ones", " ", 
+      "invented", " ", "by", " ", "Mathematica", " ", "8.", 
+      RowBox[{"x", ".", "\n", "                   ", "This"}], " ", "package",
+       " ", "is", " ", "exclusively", " ", "dedicated", " ", "to", " ", 
+      "Mathematica", " ", "version", " ", "8.", "x", " ", "and", " ", 
+      RowBox[{"higher", ".", "\n", "      ", "Version"}], " ", "2.2"}], ":", 
+     " ", 
+     RowBox[{
+     "Small", " ", "corrections", " ", "to", " ", "avoid", " ", "warning", 
+      " ", 
+      RowBox[{"like", "\n", "                   ", "'"}], 
+      RowBox[{"OptionValue", "::", 
+       RowBox[{
+       "nodef", ":", " ", 
+        "\"\<Unknown option PlotCore3dV6 for ... '\n      Version 2.3: \
+Corrects a problem with a bad viewpoint for AnimationKernelPropertyV6.\n      \
+Version 2.4: Replaces Line[] to Tube[] for the skeletons.\n                   \
+Correcting a wrong projection of the imputation set from dim 4 to dim 3. \n   \
+                The radius of the Sphere related to the Pre-Kernel, \
+Pre-Nucleolus, and Shapley value\n                   can now be adjusted, for \
+instance, through PtRadius -> 0.0061, the default is\n                   \
+PtRadius -> 0.021.\n      Version 2.5: The Thickness of the line segment of a \
+two-dimensional core is set to 0.7*PtRadius,\n                   and can \
+therefore adjusted by setting PtRadius. Similar for the line segment of a\n   \
+                two-dimensional Kernel, this is set to 0.75*PtRadius. In \
+addition, the modiclus\n                   can be drawn by invoking the \
+options ViewModiclusSol -> True. Finally, a bug\n                   w.r.t. \
+the option UseManipulate -> True has been fixed.   \n \>"}]}]}]}]}], 
+   "*)"}]}]], "Code",ExpressionUUID->"5f1a0273-539d-4071-bb69-7aa2fcebc15e"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{":", "Requirements", ":", " ", "\n", "    ", "\n", "    ", ":", 
+     RowBox[{"cddmathlink", " ", "libraries"}], ":", "\n", "     ", "http", 
+     ":"}], "//", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"www", ".", "ifor", ".", "math", ".", "ethz", ".", "ch"}], "/", 
+       RowBox[{"~", "fukuda"}]}], "/", "cdd_home"}], "/", " ", 
+     RowBox[{"(", 
+      RowBox[{"cddml", ",", " ", 
+       RowBox[{"PolytopeSkeleton", ".", "m"}]}], ")"}]}]}], "\n", "\n", 
+   "*)"}], "\n", "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{":", "Limitations", ":", "\n", "    ", 
+    RowBox[{
+     RowBox[{
+     "Not", " ", "useable", " ", "for", " ", "Mathematica", " ", "version"}], 
+     " ", "<", " ", 
+     RowBox[{
+     "8.", " ", "\n", "    ", "Four", " ", "Person", " ", "Games", " ", 
+      RowBox[{"only", "!"}]}]}]}], "\n", "*)"}], "\n", "\n"}]], "Code",Express\
+ionUUID->"b7b89c2f-5b14-4d43-b4de-f38de49ec215"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"BeginPackage", "[", "\"\<TUG`IOTuGamesV6`\>\"", "]"}], ";"}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"PlotCore3dV6", "::", "usage"}], " ", "=", "\n", 
+    "\"\<PlotCore3dV6[game, options] plots the core of the game.\>\""}], 
+   ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"SkelCore3dV6", "::", "usage"}], " ", "=", "\n", 
+    "\"\<SkelCore3dV6[game, options] depicts the skeleton of the core.\>\""}],
+    ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"SkelImputationV6", "::", "usage"}], " ", "=", "\n", 
+    "\"\<SkelImputationV6[game,options] plots the imputation set as a \
+skeleton.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"StrongEpsCore3dV6", "::", "usage"}], " ", "=", " ", "\n", 
+    "\"\<StrongEpsCore3dV6[game,options] depicts the skeleton of the strong \
+epsilon core.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"AnimationKernelPropertyV6", "::", "usage"}], " ", "=", " ", 
+    "\n", "\"\<AnimationKernelPropertyV6[game,options] visualizes the \
+relationship between the kernel solution \n and the strong epsilon \
+core.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"ShowKernelCatcherV6", "::", "usage"}], " ", "=", " ", "\n", 
+    "\"\<ShowKernelCatcherV6[game,options] plots the interlocking of the \
+imputation and lower or \n proper reasonable set as a skeleton.\>\""}], ";"}],
+   "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"SkelReasonableSetV6", "::", "usage"}], " ", "=", " ", "\n", 
+    "\"\<SkelReasonableSetV6[game,options] plots the reasonable set of a game \
+as a skeleton.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"SkelLowerSetV6", "::", "usage"}], " ", "=", " ", "\n", 
+    "\"\<SkelLowerSetV6[game,options] plots the lower set of a game as a \
+skeleton.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"CriticalValue", "::", "usage"}], " ", "=", "\n", 
+    "\"\<Is an option for the functions ShwoKernelCatcherV6[] and \
+StrongEpsCore3dV6[].\n The default value of the option can be changed by \
+CriticalValue-> integer-value.\n Admissible integer numbers are 1,2,3,4,5, \
+and 6. This selects a critical\n value for the strong epsilon core.\>\""}], 
+   ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"EpsStrValues", "::", "usage"}], " ", "=", "\n", 
+    "\"\<Sets a specific epsilon value for a strong epsilon core. This option \
+can be\n set by invoking EpsStrValues -> real-value, for instance, \
+EpsStrValues -> 0.5.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"KernelCoord", "::", "usage"}], " ", "=", " ", "\n", 
+    "\"\<Is an option of the functions \
+PlotCore3DV6[],PlotStrCore3DV6[],StrongEpsCore3dV6[]\n and \
+ShowKernelCatcherV6[]. If the variable ker holds the distribution of a kernel\
+\n element, then this option can be set by KernelCoord -> ker. Do not forget \
+to \n activate the option ViewKernelSol -> True. Similar for ShapleyCoord and \
+NucleolusCoord.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"PictureSize", "::", "usage"}], " ", "=", "\n", 
+   "\"\<An option to specify the size of the image of StrongEpsCore3dV6[]. \
+Same as ImageSize. \n Both values must coincide.\>\""}], ";"}]}], "Code",Expre\
+ssionUUID->"a768d61e-ef3d-4474-94dd-370c691f5e77"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{":", 
+    RowBox[{"Error", " ", "Messages"}], ":"}], " ", "*)"}], "\n", "\n", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"PlotCore3dV6", "::", "argerr"}], "=", 
+     "\"\<One argument was expected.\>\""}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"SkelCore3dV6", "::", "argerr"}], "=", 
+     "\"\<Four arguments were expected.\>\""}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"SkelImputationV6", "::", "argerr"}], "=", 
+     "\"\<One argument was expected.\>\""}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"StrongEpsCore3dV6", "::", "argerr"}], "=", 
+     "\"\<One argument was expected.\>\""}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"AnimationKernelPropertyV6", "::", "argerr"}], "=", 
+     "\"\<One argument was expected.\>\""}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"ShowKernelCatcherV6", "::", "argerr"}], "=", 
+     "\"\<One argument was expected.\>\""}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"SkelReasonableSetV6", "::", "argerr"}], "=", 
+     "\"\<One argument was expected.\>\""}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"SkelLowerSetV6", "::", "argerr"}], "=", 
+     "\"\<One argument was expected.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{" ", "\n", 
+                    RowBox[{
+                    "Choose", " ", "the", " ", "lighting", " ", "you", " ", 
+                    "prefer", " ", 
+                    RowBox[{"mostly", ".", "\n", "1."}]}], ")"}], "\n", 
+                   "vec1"}], "=", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", "0", ",", "1"}], "}"}], ",", "1", ",", 
+                    "1", ",", "1", ",", "0", ",", "1", ",", "1"}], "}"}]}], 
+                 ";", "\n", 
+                 RowBox[{"clv", "=", 
+                  RowBox[{"{", 
+                   RowBox[{"Red", ",", "Green", ",", "Blue"}], "}"}]}], ";", 
+                 "\n", 
+                 RowBox[{"lt", "=", 
+                  RowBox[{"Table", "[", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"\"\<Directional\>\"", ",", 
+                    RowBox[{"clv", "[", 
+                    RowBox[{"[", "t", "]"}], "]"}], ",", 
+                    RowBox[{"ImageScaled", " ", "/@", " ", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"vec1", "[", 
+                    RowBox[{"[", "t", "]"}], "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{".5", ",", ".5", ",", ".5"}], "}"}]}], "}"}]}]}], 
+                    "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"t", ",", "1", ",", "3"}], "}"}]}], "]"}]}], ";", 
+                 "\n", "2."}], ")"}], "\n", "lt"}], "=", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"{", 
+                 RowBox[{"\"\<Directional\>\"", ",", " ", 
+                  RowBox[{"RGBColor", "[", 
+                   RowBox[{".3", ",", " ", "1", ",", " ", ".1"}], "]"}], ",", 
+                  " ", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"5", ",", " ", "5", ",", " ", "4"}], "}"}], ",", 
+                    " ", 
+                    RowBox[{"{", 
+                    RowBox[{"5", ",", " ", "5", ",", " ", "0"}], "}"}]}], 
+                   "}"}]}], "}"}], "}"}], "\n", "3."}]}], ")"}], "\n", "lt"}],
+            "=", 
+           RowBox[{
+            RowBox[{"{", "Automatic", "}"}], "\n", "4."}]}], ")"}], "\n", 
+         "lt"}], "=", 
+        RowBox[{
+         RowBox[{"{", "White", "}"}], "\n", "5."}]}], ")"}], " ", "\n", 
+      "lt"}], "=", 
+     RowBox[{"{", "Neutral", "}"}]}], "\n", "*)"}], "\n", 
+   RowBox[{
+    RowBox[{"lt", "=", 
+     RowBox[{"Lighting", " ", "->", " ", 
+      RowBox[{"{", 
+       RowBox[{"{", 
+        RowBox[{"\"\<Directional\>\"", ",", " ", 
+         RowBox[{"RGBColor", "[", 
+          RowBox[{".3", ",", " ", "1", ",", " ", ".1"}], "]"}], ",", " ", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"5", ",", " ", "5", ",", " ", "4"}], "}"}], ",", " ", 
+           RowBox[{"{", 
+            RowBox[{"5", ",", " ", "5", ",", " ", "0"}], "}"}]}], "}"}]}], 
+        "}"}], "}"}]}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"Map", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"SetOptions", "[", 
+        RowBox[{"#", ",", 
+         RowBox[{"AspectRatio", " ", "->", " ", "1"}], ",", 
+         RowBox[{"Boxed", " ", "->", " ", "False"}], ",", 
+         RowBox[{"ImageSize", "->", 
+          RowBox[{"{", 
+           RowBox[{"400", ",", "434"}], "}"}]}], ",", 
+         RowBox[{"ViewPoint", " ", "->", " ", 
+          RowBox[{"{", 
+           RowBox[{"1.714", ",", " ", "2.478", ",", " ", "1.540"}], "}"}]}], 
+         ",", 
+         RowBox[{"Lighting", " ", "->", " ", "lt"}]}], "]"}], " ", "&"}], ",",
+       " ", 
+      RowBox[{"{", "Graphics3D", "}"}]}], "]"}], ";"}], "\n", "   ", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Options", "[", "PlotCore3dV6", "]"}], " ", "=", " ", 
+     RowBox[{"Sort", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"ViewSkel", " ", "->", " ", "False"}], ",", " ", 
+        RowBox[{"ViewKernelSol", " ", "->", " ", "False"}], ",", " ", 
+        RowBox[{"KernelCoord", " ", "->", " ", 
+         RowBox[{"{", "}"}]}], ",", " ", 
+        RowBox[{"ViewShapleySol", " ", "->", " ", "False"}], ",", " ", 
+        RowBox[{"ShapleyCoord", " ", "->", " ", 
+         RowBox[{"{", "}"}]}], ",", " ", 
+        RowBox[{"ViewNucleolusSol", "->", " ", "False"}], ",", " ", 
+        RowBox[{"NucleolusCoord", "->", 
+         RowBox[{"{", "}"}]}], ",", " ", 
+        RowBox[{"ViewModiclusSol", "->", " ", "False"}], ",", " ", 
+        RowBox[{"ModiclusCoord", "->", 
+         RowBox[{"{", "}"}]}], ",", " ", 
+        RowBox[{"ViewPayoffSol", " ", "->", " ", "False"}], ",", " ", 
+        RowBox[{"PayoffCoord", " ", "->", " ", 
+         RowBox[{"{", "}"}]}], ",", " ", 
+        RowBox[{"ViewLegend", " ", "->", " ", "False"}], ",", " ", 
+        RowBox[{"ShowImputationSet", " ", "->", " ", "True"}], ",", " ", 
+        RowBox[{"SyncDim", " ", "->", " ", "True"}], ",", " ", 
+        RowBox[{"Verbosely", " ", "->", " ", "True"}], ",", " ", 
+        RowBox[{"PtRadius", " ", "->", " ", "0.021"}]}], "}"}], "]"}]}], 
+    ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Options", "[", "StrongEpsCore3dV6", "]"}], " ", "=", " ", 
+     RowBox[{"Sort", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"ShowStrongEpsCore", " ", "->", " ", "True"}], ",", " ", 
+        RowBox[{"ShowCore", " ", "->", " ", "True"}], ",", " ", 
+        RowBox[{"EpsStrValues", " ", "->", " ", 
+         RowBox[{"{", "}"}]}], ",", " ", 
+        RowBox[{"PictureSize", " ", "->", " ", 
+         RowBox[{"{", 
+          RowBox[{"400", ",", "434"}], "}"}]}], ",", 
+        RowBox[{"ViewSkel", " ", "->", " ", "False"}], ",", " ", 
+        RowBox[{"ShowImputationSet", " ", "->", " ", "True"}], ",", " ", 
+        RowBox[{"ViewKernelSol", " ", "->", " ", "False"}], ",", " ", 
+        RowBox[{"KernelCoord", " ", "->", " ", 
+         RowBox[{"{", "}"}]}], ",", " ", 
+        RowBox[{"ViewShapleySol", " ", "->", " ", "False"}], ",", " ", 
+        RowBox[{"ShapleyCoord", " ", "->", " ", 
+         RowBox[{"{", "}"}]}], ",", " ", 
+        RowBox[{"ViewNucleolusSol", "->", " ", "False"}], ",", " ", 
+        RowBox[{"NucleolusCoord", "->", 
+         RowBox[{"{", "}"}]}], ",", " ", 
+        RowBox[{"ViewModiclusSol", "->", " ", "False"}], ",", " ", 
+        RowBox[{"ModiclusCoord", "->", 
+         RowBox[{"{", "}"}]}], ",", " ", 
+        RowBox[{"ViewPayoffSol", " ", "->", " ", "False"}], ",", " ", 
+        RowBox[{"PayoffCoord", " ", "->", " ", 
+         RowBox[{"{", "}"}]}], ",", " ", 
+        RowBox[{"CriticalValue", " ", "->", " ", 
+         RowBox[{"{", "1", "}"}]}], ",", " ", 
+        RowBox[{"SyncDim", " ", "->", " ", "True"}], ",", 
+        RowBox[{"PtRadius", " ", "->", " ", "0.021"}]}], "}"}], "]"}]}], 
+    ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Options", "[", "AnimationKernelPropertyV6", "]"}], " ", "=", 
+     " ", 
+     RowBox[{"Sort", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"UpperCriticalVal", " ", "->", 
+         RowBox[{"{", 
+          RowBox[{"1", "/", "2"}], "}"}]}], ",", " ", 
+        RowBox[{"LowerCriticalVal", " ", "->", " ", 
+         RowBox[{"{", "}"}]}], ",", 
+        RowBox[{"ManipulateMode", "->", "False"}], ",", 
+        RowBox[{"StepSize", " ", "->", " ", 
+         RowBox[{"{", 
+          RowBox[{"-", 
+           RowBox[{"(", 
+            RowBox[{"1", "/", "4"}], ")"}]}], "}"}]}], ",", 
+        RowBox[{"ShowStrongEpsCore", " ", "->", " ", "True"}], ",", " ", 
+        RowBox[{"ShowCore", " ", "->", " ", "True"}], ",", " ", 
+        RowBox[{"EpsStrValues", " ", "->", " ", 
+         RowBox[{"{", "}"}]}], ",", " ", 
+        RowBox[{"PictureSize", " ", "->", " ", 
+         RowBox[{"{", 
+          RowBox[{"400", ",", "434"}], "}"}]}], ",", 
+        RowBox[{"ViewSkel", " ", "->", " ", "False"}], ",", " ", 
+        RowBox[{"ShowImputationSet", " ", "->", " ", "True"}], ",", " ", 
+        RowBox[{"ViewKernelSol", " ", "->", " ", "False"}], ",", " ", 
+        RowBox[{"KernelCoord", " ", "->", " ", 
+         RowBox[{"{", "}"}]}], ",", " ", 
+        RowBox[{"ViewShapleySol", " ", "->", " ", "False"}], ",", " ", 
+        RowBox[{"ShapleyCoord", " ", "->", " ", 
+         RowBox[{"{", "}"}]}], ",", " ", 
+        RowBox[{"ViewNucleolusSol", "->", " ", "False"}], ",", " ", 
+        RowBox[{"NucleolusCoord", "->", 
+         RowBox[{"{", "}"}]}], ",", " ", 
+        RowBox[{"ViewModiclusSol", "->", " ", "False"}], ",", " ", 
+        RowBox[{"ModiclusCoord", "->", 
+         RowBox[{"{", "}"}]}], ",", " ", 
+        RowBox[{"ViewPayoffSol", " ", "->", " ", "False"}], ",", " ", 
+        RowBox[{"PayoffCoord", " ", "->", " ", 
+         RowBox[{"{", "}"}]}], ",", " ", 
+        RowBox[{"CriticalValue", " ", "->", " ", 
+         RowBox[{"{", "1", "}"}]}], ",", " ", 
+        RowBox[{"SyncDim", " ", "->", " ", "True"}], ",", 
+        RowBox[{"PtRadius", " ", "->", " ", "0.021"}]}], "}"}], "]"}]}], 
+    ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Options", "[", "ShowKernelCatcherV6", "]"}], " ", "=", " ", 
+     RowBox[{"Sort", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"ShowCore", "->", "False"}], ",", " ", 
+        RowBox[{"ShowLowerSet", "->", "False"}], ",", " ", 
+        RowBox[{"ShowUpperSet", "->", " ", "True"}], ",", " ", 
+        RowBox[{"ShowStrongEpsCore", " ", "->", " ", "False"}], ",", " ", 
+        RowBox[{"EpsStrValues", " ", "->", " ", 
+         RowBox[{"{", "}"}]}], ",", " ", 
+        RowBox[{"ViewSkel", " ", "->", " ", "False"}], ",", " ", 
+        RowBox[{"ShowImputationSet", " ", "->", " ", "True"}], ",", " ", 
+        RowBox[{"ViewKernelSol", " ", "->", " ", "False"}], ",", " ", 
+        RowBox[{"KernelCoord", " ", "->", " ", 
+         RowBox[{"{", "}"}]}], ",", " ", 
+        RowBox[{"ViewShapleySol", " ", "->", " ", "False"}], ",", " ", 
+        RowBox[{"ShapleyCoord", " ", "->", " ", 
+         RowBox[{"{", "}"}]}], ",", " ", 
+        RowBox[{"ViewNucleolusSol", "->", " ", "False"}], ",", " ", 
+        RowBox[{"NucleolusCoord", "->", 
+         RowBox[{"{", "}"}]}], ",", " ", 
+        RowBox[{"ViewModiclusSol", "->", " ", "False"}], ",", " ", 
+        RowBox[{"ModiclusCoord", "->", 
+         RowBox[{"{", "}"}]}], ",", " ", 
+        RowBox[{"ViewPayoffSol", " ", "->", " ", "False"}], ",", " ", 
+        RowBox[{"PayoffCoord", " ", "->", " ", 
+         RowBox[{"{", "}"}]}], ",", " ", 
+        RowBox[{"CriticalValue", " ", "->", " ", 
+         RowBox[{"{", "1", "}"}]}], ",", " ", 
+        RowBox[{"SyncDim", " ", "->", " ", "True"}], ",", 
+        RowBox[{"PtRadius", " ", "->", " ", "0.021"}]}], "}"}], "]"}]}], 
+    ";"}], " ", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Options", "[", "SkelImputationV6", "]"}], " ", "=", " ", 
+     RowBox[{"Sort", "[", 
+      RowBox[{"{", 
+       RowBox[{"SyncDim", " ", "->", " ", "1"}], "}"}], "]"}]}], ";"}], "\n", 
+   "\n", 
+   RowBox[{
+    RowBox[{"Begin", "[", "\"\<`Private`\>\"", "]"}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{"Needs", "[", "\"\<TUG`coop`CooperativeGames`\>\"", "]"}], ";"}], 
+   "\n", 
+   RowBox[{
+    RowBox[{"Needs", "[", "\"\<TUG`TuGames`\>\"", "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"Needs", "[", "\"\<TetGenLink`\>\"", "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"Needs", "[", "\"\<PlotLegends`\>\"", "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"Get", "[", "\"\<TUG`vertex`PolytopeSkeleton`\>\"", "]"}], ";"}], 
+   "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"PlotCore3dV6", "[", "args___", "]"}], ":=", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"Message", "[", 
+        RowBox[{"PlotCore3dV6", "::", "argerr"}], "]"}], ";", "$Failed"}], 
+      ")"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"PlotCore3dV6", "[", 
+      RowBox[{"game_", ",", 
+       RowBox[{"opts", ":", 
+        RowBox[{"OptionsPattern", "[", 
+         RowBox[{"{", 
+          RowBox[{"PlotCore3dV6", ",", "Graphics3D"}], "}"}], "]"}]}]}], 
+      "]"}], " ", ":=", "\n", "  ", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+        "vwskl", ",", "vwker", ",", "vwshv", ",", "vwnuc", ",", "vwpay", ",", 
+         "vwmnc", ",", "vwleg", ",", "mnc", ",", "rd", ",", "kerc", ",", 
+         "shc", ",", "nuc", ",", "paycoord", ",", "shimp", ",", "vrb", ",", 
+         "bx", ",", "dld4", ",", "filopts", ",", "gr", ",", "psm", ",", 
+         "crQ"}], "}"}], ",", "\n", "    ", 
+       RowBox[{
+        RowBox[{"filopts", " ", "=", " ", 
+         RowBox[{"FilterRules", "[", 
+          RowBox[{
+           RowBox[{"{", "opts", "}"}], ",", 
+           RowBox[{"Options", "[", "Graphics3D", "]"}]}], "]"}]}], ";", "\n", 
+        "    ", 
+        RowBox[{"vwskl", "=", 
+         RowBox[{"OptionValue", "[", "ViewSkel", "]"}]}], ";", "\n", "    ", 
+        RowBox[{"vwker", "=", 
+         RowBox[{"OptionValue", "[", "ViewKernelSol", "]"}]}], ";", "\n", 
+        "    ", 
+        RowBox[{"vwshv", " ", "=", " ", 
+         RowBox[{"OptionValue", "[", "ViewShapleySol", "]"}]}], ";", " ", 
+        "\n", "    ", 
+        RowBox[{"vwnuc", " ", "=", " ", 
+         RowBox[{"OptionValue", "[", "ViewNucleolusSol", "]"}]}], ";", "\n", 
+        "    ", 
+        RowBox[{"vwmnc", " ", "=", " ", 
+         RowBox[{"OptionValue", "[", "ViewModiclusSol", "]"}]}], ";", "\t ", 
+        "\n", "    ", 
+        RowBox[{"vwpay", " ", "=", " ", 
+         RowBox[{"OptionValue", "[", "ViewPayoffSol", "]"}]}], ";", "\n", 
+        "    ", 
+        RowBox[{"vwleg", " ", "=", " ", 
+         RowBox[{"OptionValue", "[", "ViewLegend", "]"}]}], ";", "\t \t ", 
+        "\n", "    ", 
+        RowBox[{"kerc", " ", "=", " ", 
+         RowBox[{"OptionValue", "[", "KernelCoord", "]"}]}], ";", "\n", 
+        "    ", 
+        RowBox[{"shc", " ", "=", " ", 
+         RowBox[{"OptionValue", "[", "ShapleyCoord", "]"}]}], ";", "\n", 
+        "    ", 
+        RowBox[{"nuc", " ", "=", " ", 
+         RowBox[{"OptionValue", "[", "NucleolusCoord", "]"}]}], ";", "\n", 
+        "    ", 
+        RowBox[{"mnc", " ", "=", " ", 
+         RowBox[{"OptionValue", "[", "ModiclusCoord", "]"}]}], ";", "\t ", 
+        "\n", "    ", 
+        RowBox[{"paycoord", " ", "=", " ", 
+         RowBox[{"OptionValue", "[", "PayoffCoord", "]"}]}], ";", "\t ", "\n",
+         "    ", 
+        RowBox[{"shimp", " ", "=", " ", 
+         RowBox[{"OptionValue", "[", "ShowImputationSet", "]"}]}], ";", "\n", 
+        "    ", 
+        RowBox[{"dld4", "=", " ", 
+         RowBox[{"OptionValue", "[", "SyncDim", "]"}]}], ";", "\n", "    ", 
+        RowBox[{"vrb", "=", " ", 
+         RowBox[{"OptionValue", "[", "Verbosely", "]"}]}], ";", "\n", "    ", 
+        
+        RowBox[{"bx", "=", " ", 
+         RowBox[{"OptionValue", "[", "Boxed", "]"}]}], ";", "\n", "    ", 
+        RowBox[{"rd", " ", "=", " ", 
+         RowBox[{"OptionValue", "[", "PtRadius", "]"}]}], ";", "\n", "    ", 
+        RowBox[{"crQ", " ", "=", " ", 
+         RowBox[{"CoreQ", "[", "game", "]"}]}], ";", "\n", "    ", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"gr", ",", "psm"}], "}"}], " ", "=", " ", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"SameQ", "[", 
+            RowBox[{"crQ", ",", "True"}], "]"}], ",", " ", 
+           RowBox[{"PlotCore3DV6", "[", 
+            RowBox[{"game", ",", 
+             RowBox[{"ViewSkel", " ", "->", " ", "vwskl"}], ",", " ", 
+             RowBox[{"ViewKernelSol", " ", "->", " ", "vwker"}], ",", " ", 
+             RowBox[{"KernelCoord", " ", "->", " ", "kerc"}], ",", " ", 
+             RowBox[{"ViewShapleySol", " ", "->", " ", "vwshv"}], ",", " ", 
+             RowBox[{"ShapleyCoord", " ", "->", " ", "shc"}], ",", " ", 
+             RowBox[{"ViewNucleolusSol", " ", "->", " ", "vwnuc"}], ",", " ", 
+             
+             RowBox[{"NucleolusCoord", " ", "->", " ", "nuc"}], ",", " ", 
+             RowBox[{"ViewModiclusSol", " ", "->", " ", "vwmnc"}], ",", " ", 
+             RowBox[{"ModiclusCoord", " ", "->", " ", "mnc"}], ",", " ", 
+             RowBox[{"ViewPayoffSol", " ", "->", " ", "vwpay"}], ",", " ", 
+             RowBox[{"PayoffCoord", " ", "->", " ", "paycoord"}], ",", " ", 
+             RowBox[{"ViewLegend", " ", "->", " ", "vwleg"}], ",", " ", 
+             RowBox[{"ShowImputationSet", " ", "->", " ", "shimp"}], ",", 
+             RowBox[{"SyncDim", " ", "->", " ", "dld4"}], ",", " ", 
+             RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", " ", 
+             RowBox[{"Boxed", "->", " ", "bx"}], ",", "filopts"}], "]"}], ",",
+            "\n", "                  ", 
+           RowBox[{
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{"SameQ", "[", 
+               RowBox[{"vrb", ",", "True"}], "]"}], ",", 
+              RowBox[{
+              "Print", "[", "\"\<Core is empty! No Core plotted.\>\"", "]"}], 
+              ",", "True"}], "]"}], ";", "\n", "                  ", 
+            RowBox[{"PlotNonCoreSol3d", "[", 
+             RowBox[{"game", ",", " ", 
+              RowBox[{"ViewKernelSol", " ", "->", " ", "vwker"}], ",", " ", 
+              RowBox[{"KernelCoord", " ", "->", " ", "kerc"}], ",", " ", 
+              RowBox[{"ViewShapleySol", " ", "->", " ", "vwshv"}], ",", " ", 
+              RowBox[{"ShapleyCoord", " ", "->", " ", "shc"}], ",", " ", 
+              RowBox[{"ViewNucleolusSol", " ", "->", " ", "vwnuc"}], ",", " ", 
+              RowBox[{"NucleolusCoord", " ", "->", " ", "nuc"}], ",", " ", 
+              RowBox[{"ViewModiclusSol", " ", "->", " ", "vwmnc"}], ",", " ", 
+              
+              RowBox[{"ModiclusCoord", " ", "->", " ", "mnc"}], ",", " ", 
+              RowBox[{"ViewPayoffSol", " ", "->", " ", "vwpay"}], ",", " ", 
+              RowBox[{"PayoffCoord", " ", "->", " ", "paycoord"}], ",", " ", 
+              RowBox[{"ViewLegend", " ", "->", " ", "vwleg"}], ",", " ", 
+              RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", 
+              RowBox[{"Boxed", "->", " ", "False"}], ",", " ", "filopts"}], 
+             "]"}]}]}], "\n", "                  ", "]"}]}], ";", "\n", 
+        "    ", 
+        RowBox[{"Return", "[", "gr", "]"}], ";"}]}], "\n", "\n", "]"}]}], 
+    ";"}], "\n"}]}]], "Code",ExpressionUUID->"6f5cbcb1-b3bd-442c-a131-\
+a94632b464e3"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"PlotCore3DV6", "[", 
+     RowBox[{"game_", ",", 
+      RowBox[{"opts", ":", 
+       RowBox[{"OptionsPattern", "[", 
+        RowBox[{"{", 
+         RowBox[{"PlotCore3dV6", ",", "Graphics3D"}], "}"}], "]"}]}]}], "]"}],
+     " ", ":=", "\n", "  ", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "vwskl", ",", "vwker", ",", "vwshv", ",", "vwnuc", ",", "vwmnc", ",", 
+        "vwpay", ",", "vwleg", ",", "kerc", ",", "rd", ",", "shc", ",", "nuc",
+         ",", "mnc", ",", "paycoord", ",", "shimp", ",", "origgame", ",", 
+        "trext", ",", "varl", ",", "minv", ",", "dld4", ",", "filopts", ",", 
+        "norm", ",", "normgame", ",", "vertlist", ",", "linearity", ",", 
+        "ecdlist", ",", " ", "eadlist", ",", " ", "icdlist", ",", " ", 
+        "iadlist", ",", "extmat", ",", "d1", ",", "d2", ",", "oldvls", ",", 
+        "dpt", ",", "dlvert", ",", "gr1", ",", "gr2", ",", "gr3", ",", "gr4", 
+        ",", "gr5", ",", "gr6", ",", "gr7", ",", "gr8", ",", "grli", ",", 
+        "gr", ",", 
+        RowBox[{"psm", "=", 
+         RowBox[{"{", "}"}]}]}], "}"}], ",", "\n", "    ", 
+      RowBox[{
+       RowBox[{"filopts", " ", "=", " ", 
+        RowBox[{"FilterRules", "[", 
+         RowBox[{
+          RowBox[{"{", "opts", "}"}], ",", 
+          RowBox[{"Options", "[", "Graphics3D", "]"}]}], "]"}]}], ";", "\n", 
+       "    ", 
+       RowBox[{"vwskl", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ViewSkel", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"vwker", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ViewKernelSol", "]"}]}], ";", "\n", 
+       "    ", 
+       RowBox[{"vwshv", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ViewShapleySol", "]"}]}], ";", "\n", 
+       "    ", 
+       RowBox[{"vwnuc", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ViewNucleolusSol", "]"}]}], ";", "\n", 
+       "    ", 
+       RowBox[{"vwmnc", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ViewModiclusSol", "]"}]}], ";", "\t ", 
+       "\n", "    ", 
+       RowBox[{"vwpay", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ViewPayoffSol", "]"}]}], ";", "\n", 
+       "    ", 
+       RowBox[{"vwleg", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ViewLegend", "]"}]}], ";", "\t ", "\n", 
+       "    ", 
+       RowBox[{"kerc", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "KernelCoord", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"shc", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ShapleyCoord", "]"}]}], ";", "\n", 
+       "    ", 
+       RowBox[{"nuc", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "NucleolusCoord", "]"}]}], ";", "\n", 
+       "    ", 
+       RowBox[{"mnc", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ModiclusCoord", "]"}]}], ";", "\t ", 
+       "\n", "    ", 
+       RowBox[{"paycoord", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "PayoffCoord", "]"}]}], ";", "\t ", "\n", 
+       "    ", 
+       RowBox[{"shimp", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ShowImputationSet", "]"}]}], ";", "\n", 
+       "    ", 
+       RowBox[{"dld4", "=", " ", 
+        RowBox[{"OptionValue", "[", "SyncDim", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"rd", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "PtRadius", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"oldvls", "=", " ", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"v", "[", "#", "]"}], " ", "&"}], " ", "/@", " ", 
+         RowBox[{"Subsets", "[", "T", "]"}]}]}], ";", "\n", "    ", 
+       RowBox[{"norm", " ", "=", " ", 
+        RowBox[{"OneNormalization", "[", "game", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"normgame", " ", "=", " ", 
+        RowBox[{"DefineGame", "[", 
+         RowBox[{"T", ",", "norm"}], "]"}]}], ";", "\n", "    ", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"vertlist", ",", "linearity"}], "}"}], ",", "ecdlist", ",",
+           "eadlist", ",", "icdlist", ",", "iadlist", ",", "extmat"}], "}"}], 
+        "=", 
+        RowBox[{"CddGmpPlotCore", "[", "normgame", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"dpt", "=", 
+        RowBox[{"Depth", "[", "vertlist", "]"}]}], ";", "\n", "    ", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"d1", ",", "d2"}], "}"}], "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"dpt", "===", "2"}], ",", 
+          RowBox[{"Flatten", "[", 
+           RowBox[{"{", 
+            RowBox[{"1", ",", 
+             RowBox[{"Dimensions", "[", "vertlist", "]"}]}], "}"}], "]"}], 
+          ",", 
+          RowBox[{"Dimensions", "[", "vertlist", "]"}]}], "]"}]}], ";", "\n", 
+       "    ", 
+       RowBox[{"dlvert", "=", 
+        RowBox[{"Which", "[", 
+         RowBox[{
+          RowBox[{"d2", "===", "4"}], ",", "\n", "            ", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"d1", "===", "1"}], ",", " ", 
+            RowBox[{"RedDimV6", "[", 
+             RowBox[{"First", "[", "vertlist", "]"}], "]"}], ",", "\n", 
+            "                 ", 
+            RowBox[{
+             RowBox[{"trext", "=", " ", 
+              RowBox[{"Transpose", "[", "vertlist", "]"}]}], ";", "\n", 
+             "                 ", 
+             RowBox[{"varl", "=", 
+              RowBox[{"N", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"Variance", "[", "#", "]"}], " ", "&"}], "/@", " ", 
+                "trext"}], "]"}]}], ";", "\n", "                 ", 
+             RowBox[{"minv", "=", 
+              RowBox[{"Min", "[", "varl", "]"}]}], ";", "\n", 
+             "                 ", 
+             RowBox[{"psm", "=", 
+              RowBox[{"Position", "[", 
+               RowBox[{"varl", ",", "minv"}], "]"}]}], ";", "\n", 
+             "                 ", 
+             RowBox[{"psm", "=", 
+              RowBox[{"First", "[", "psm", "]"}]}], ";", "\n", 
+             "                 ", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"Delete", "[", 
+                RowBox[{"#", ",", "psm"}], "]"}], " ", "&"}], "/@", " ", 
+              "vertlist"}]}]}], "\n", "              ", "]"}], ",", "\n", 
+          "          ", 
+          RowBox[{"d2", "===", "3"}], ",", " ", "vertlist", ",", "\n", 
+          "          ", "True", ",", " ", "vertlist"}], "]"}]}], ";", "\n", 
+       "    ", 
+       RowBox[{"psm", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"SameQ", "[", 
+           RowBox[{"dld4", ",", "True"}], "]"}], ",", "psm", ",", 
+          RowBox[{"{", "}"}]}], "]"}]}], ";", "\n", "    ", 
+       RowBox[{"gr1", "=", 
+        RowBox[{"Which", "[", 
+         RowBox[{
+          RowBox[{"d1", "===", "1"}], ",", " ", 
+          RowBox[{"GenCoreGraphPointV6", "[", 
+           RowBox[{"dlvert", ",", 
+            RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], 
+           "]"}], ",", "\n", "              ", 
+          RowBox[{"d1", "===", "2"}], ",", " ", 
+          RowBox[{"GenCoreGraphLineV6", "[", 
+           RowBox[{"dlvert", ",", " ", 
+            RowBox[{"SyncDim", " ", "->", " ", "psm"}], ",", 
+            RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], 
+           "]"}], ",", "\n", "              ", "True", ",", " ", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"vwskl", "===", "False"}], ",", 
+            RowBox[{"DrawCore3dV6", "[", 
+             RowBox[{"dlvert", ",", "filopts"}], "]"}], ",", 
+            RowBox[{"SkelImputationV6", "[", 
+             RowBox[{"normgame", ",", 
+              RowBox[{"SyncDim", " ", "->", " ", "psm"}], ",", "opts"}], 
+             "]"}]}], "]"}]}], "]"}]}], ";", "\n", "    ", 
+       RowBox[{"gr2", "=", 
+        RowBox[{"Which", "[", 
+         RowBox[{
+          RowBox[{"d1", "===", "1"}], ",", 
+          RowBox[{"{", "}"}], ",", " ", "\n", "              ", 
+          RowBox[{"d1", "===", "2"}], ",", 
+          RowBox[{"{", "}"}], ",", "\n", "              ", "True", ",", 
+          RowBox[{"SkelCore3dV6", "[", 
+           RowBox[{
+            RowBox[{"N", "[", "dlvert", "]"}], ",", "ecdlist", ",", "eadlist",
+             ",", "extmat", ",", "filopts"}], "]"}]}], "]"}]}], ";", "\n", 
+       "    ", 
+       RowBox[{"gr3", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"SameQ", "[", 
+           RowBox[{"shimp", ",", "True"}], "]"}], ",", " ", 
+          RowBox[{"SkelImputationV6", "[", 
+           RowBox[{"normgame", ",", 
+            RowBox[{"SyncDim", " ", "->", " ", "psm"}], ",", "opts"}], "]"}], 
+          ",", 
+          RowBox[{"{", "}"}]}], "]"}]}], ";", "\n", "    ", 
+       RowBox[{"gr4", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"SameQ", "[", 
+           RowBox[{"vwker", ",", "True"}], "]"}], ",", 
+          RowBox[{"ShowKernelV6", "[", 
+           RowBox[{"normgame", ",", " ", 
+            RowBox[{"KernelCoord", " ", "->", " ", "kerc"}], ",", 
+            RowBox[{"SyncDim", " ", "->", " ", "psm"}], ",", 
+            RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], 
+           "]"}], ",", 
+          RowBox[{"{", "}"}]}], "]"}]}], ";", "\n", "    ", 
+       RowBox[{"gr5", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"SameQ", "[", 
+           RowBox[{"vwshv", ",", "True"}], "]"}], ",", 
+          RowBox[{"ShowShapleyV6", "[", 
+           RowBox[{"normgame", ",", 
+            RowBox[{"ShapleyCoord", " ", "->", " ", "shc"}], ",", 
+            RowBox[{"SyncDim", " ", "->", " ", "psm"}], ",", 
+            RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], 
+           "]"}], ",", 
+          RowBox[{"{", "}"}]}], "]"}]}], ";", "\n", "    ", 
+       RowBox[{"gr6", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"SameQ", "[", 
+           RowBox[{"vwnuc", ",", "True"}], "]"}], ",", 
+          RowBox[{"ShowNucleolusV6", "[", 
+           RowBox[{"normgame", ",", 
+            RowBox[{"NucleolusCoord", " ", "->", " ", "nuc"}], ",", 
+            RowBox[{"SyncDim", " ", "->", " ", "psm"}], ",", 
+            RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], 
+           "]"}], ",", 
+          RowBox[{"{", "}"}]}], "]"}]}], ";", "\n", "    ", 
+       RowBox[{"gr7", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"SameQ", "[", 
+           RowBox[{"vwmnc", ",", "True"}], "]"}], ",", 
+          RowBox[{"ShowModiclusV6", "[", 
+           RowBox[{"normgame", ",", 
+            RowBox[{"ModiclusCoord", " ", "->", " ", "mnc"}], ",", 
+            RowBox[{"SyncDim", " ", "->", " ", "psm"}], ",", 
+            RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], 
+           "]"}], ",", 
+          RowBox[{"{", "}"}]}], "]"}]}], ";", "\t ", "\n", "    ", 
+       RowBox[{"gr8", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"SameQ", "[", 
+           RowBox[{"vwpay", ",", "True"}], "]"}], ",", 
+          RowBox[{"ShowPayoffV6", "[", 
+           RowBox[{"normgame", ",", 
+            RowBox[{"PayoffCoord", " ", "->", " ", "paycoord"}], ",", 
+            RowBox[{"SyncDim", " ", "->", " ", "psm"}], ",", 
+            RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], 
+           "]"}], ",", 
+          RowBox[{"{", "}"}]}], "]"}]}], ";", "\t ", "\n", "    ", 
+       RowBox[{"grli", "=", 
+        RowBox[{"Flatten", "[", 
+         RowBox[{"{", 
+          RowBox[{
+          "gr1", ",", "gr2", ",", "gr3", ",", "gr4", ",", "gr5", ",", "gr6", 
+           ",", "gr7", ",", "gr8"}], "}"}], "]"}]}], ";", "\n", "    ", 
+       RowBox[{"gr", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"SameQ", "[", 
+           RowBox[{"vwleg", ",", "False"}], "]"}], ",", 
+          RowBox[{"Show", "[", "grli", "]"}], ",", "\n", 
+          "\t                    ", 
+          RowBox[{"ShowLegend", "[", 
+           RowBox[{
+            RowBox[{"Show", "[", "grli", "]"}], ",", " ", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"Graphics", "[", 
+                   RowBox[{"{", 
+                    RowBox[{"Blue", ",", " ", 
+                    RowBox[{"Disk", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", " ", "0"}], "}"}], ",", " ", "0.005"}], 
+                    "]"}]}], "}"}], "]"}], ",", " ", 
+                  "\"\<Shapley Value\>\""}], "}"}], ",", "\n", 
+                "\t\t\t\t\t     ", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"Graphics", "[", 
+                   RowBox[{"{", 
+                    RowBox[{"Green", ",", " ", 
+                    RowBox[{"Disk", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", " ", "0"}], "}"}], ",", " ", "0.005"}], 
+                    "]"}]}], "}"}], "]"}], ",", " ", "\"\<Nucleolus\>\""}], 
+                 "}"}], ",", "\n", "\t\t\t\t\t     ", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"Graphics", "[", 
+                   RowBox[{"{", 
+                    RowBox[{"Red", ",", " ", 
+                    RowBox[{"Disk", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", " ", "0"}], "}"}], ",", " ", "0.005"}], 
+                    "]"}]}], "}"}], "]"}], ",", " ", "\"\<Kernel\>\""}], 
+                 "}"}], ",", "\n", "\t\t\t\t\t     ", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"Graphics", "[", 
+                   RowBox[{"{", 
+                    RowBox[{"Purple", ",", " ", 
+                    RowBox[{"Disk", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", " ", "0"}], "}"}], ",", " ", "0.005"}], 
+                    "]"}]}], "}"}], "]"}], ",", " ", "\"\<Modiclus\>\""}], 
+                 "}"}]}], "}"}], ",", " ", "\n", 
+              "                                              ", 
+              RowBox[{"LegendShadow", " ", "->", " ", "None"}], ",", " ", 
+              RowBox[{"LegendTextSpace", " ", "->", " ", "5"}], ",", " ", 
+              RowBox[{"LegendPosition", " ", "->", " ", 
+               RowBox[{"{", 
+                RowBox[{"1.1", ",", " ", 
+                 RowBox[{"-", ".4"}]}], "}"}]}], ",", " ", 
+              RowBox[{"LegendSize", " ", "->", " ", 
+               RowBox[{"{", 
+                RowBox[{"0.5", ",", " ", "0.25"}], "}"}]}]}], "}"}]}], 
+           "]"}]}], "]"}]}], ";", "\n", "    ", 
+       RowBox[{"origgame", "=", 
+        RowBox[{"DefineGame", "[", 
+         RowBox[{"T", ",", "oldvls"}], "]"}]}], ";", "\n", "    ", 
+       RowBox[{"Return", "[", 
+        RowBox[{"{", 
+         RowBox[{"gr", ",", "psm"}], "}"}], "]"}], ";"}]}], "\n", "]"}]}], 
+   ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"DrawCore3dV6", "[", 
+     RowBox[{"vert_List", ",", " ", 
+      RowBox[{"opts", ":", 
+       RowBox[{"OptionsPattern", "[", 
+        RowBox[{"{", 
+         RowBox[{"PlotCore3dV6", ",", "Graphics3D"}], "}"}], "]"}]}]}], "]"}],
+     " ", ":=", "\n", "  ", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"pts", ",", "surface", ",", "gr", ",", "filopts"}], "}"}], ",",
+       "\n", "    ", 
+      RowBox[{
+       RowBox[{"filopts", "=", 
+        RowBox[{"FilterRules", "[", 
+         RowBox[{
+          RowBox[{"{", "opts", "}"}], ",", 
+          RowBox[{"Options", "[", "Graphics3D", "]"}]}], "]"}]}], ";", " \t ",
+        "\n", "    ", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"pts", ",", " ", "surface"}], "}"}], " ", "=", " ", 
+        RowBox[{"TetGenConvexHull", "[", "vert", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"gr", "=", 
+        RowBox[{"Graphics3D", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"Opacity", "[", ".4", "]"}], ",", " ", "Yellow", ",", " ", 
+            RowBox[{"GraphicsComplex", "[", 
+             RowBox[{"pts", ",", 
+              RowBox[{"Polygon", "[", "surface", "]"}]}], "]"}]}], "}"}], ",",
+           "filopts"}], "]"}]}], ";", "  ", "\n", "    ", 
+       RowBox[{"Return", "[", "gr", "]"}], ";"}]}], "\n", "\n", " ", "]"}]}], 
+   ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"SkelCore3dV6", "[", "args___", "]"}], ":=", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"Message", "[", 
+      RowBox[{"SkelCore3dV6", "::", "argerr"}], "]"}], ";", "$Failed"}], 
+    ")"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"SkelCore3dV6", "[", 
+    RowBox[{
+    "vert_List", ",", " ", "ecd_List", ",", " ", "ead_List", ",", " ", 
+     "extmat_List", ",", " ", 
+     RowBox[{"opts", ":", 
+      RowBox[{"OptionsPattern", "[", 
+       RowBox[{"{", 
+        RowBox[{"PlotCore3dV6", ",", "Graphics3D"}], "}"}], "]"}]}]}], "]"}], 
+   " ", ":=", "\n", "   ", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "amat", ",", "bvec", ",", "viewpt", ",", "trext", ",", "minv", ",", 
+       "psm", ",", "dlvert", ",", "uvp1", ",", "vskl", ",", "gr", ",", 
+       "filopts"}], "}"}], ",", "\n", "    ", 
+     RowBox[{
+      RowBox[{"filopts", "=", 
+       RowBox[{"FilterRules", "[", 
+        RowBox[{
+         RowBox[{"{", "opts", "}"}], ",", 
+         RowBox[{"Options", "[", "Graphics3D", "]"}]}], "]"}]}], ";", "  ", 
+      "\n", "    ", 
+      RowBox[{"amat", "=", 
+       RowBox[{"Transpose", "[", 
+        RowBox[{"Drop", "[", 
+         RowBox[{
+          RowBox[{"Transpose", "[", "extmat", "]"}], ",", "1"}], "]"}], 
+        "]"}]}], ";", "\n", "    ", 
+      RowBox[{"amat", " ", "=", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Take", "[", 
+          RowBox[{"#", ",", 
+           RowBox[{"-", "3"}]}], "]"}], " ", "&"}], "/@", " ", "amat"}]}], 
+      ";", "\n", "    ", 
+      RowBox[{"bvec", "=", 
+       RowBox[{
+        RowBox[{"Transpose", "[", "extmat", "]"}], "[", 
+        RowBox[{"[", "1", "]"}], "]"}]}], ";", "\n", "    ", 
+      RowBox[{"uvp1", " ", "=", " ", 
+       RowBox[{"circle", "[", 
+        RowBox[{
+         RowBox[{"Pi", "/", "11"}], ",", " ", "50", ",", " ", "20"}], "]"}]}],
+       ";", "\n", "    ", 
+      RowBox[{"vskl", "=", 
+       RowBox[{"VisibleSkeleton", "[", 
+        RowBox[{"vert", ",", "ecd", ",", "ead", ",", 
+         RowBox[{"{", 
+          RowBox[{"amat", ",", " ", "bvec"}], "}"}], ",", " ", "uvp1"}], 
+        "]"}]}], ";", "\n", "    ", 
+      RowBox[{"gr", "=", 
+       RowBox[{"Graphics3D", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"Thick", ",", " ", 
+           RowBox[{"GraphicsComplex", "[", 
+            RowBox[{"vert", ",", " ", "vskl"}], "]"}]}], "}"}], ",", 
+         "filopts"}], "]"}]}], ";", "\n", "    ", 
+      RowBox[{"Return", "[", "gr", "]"}], ";"}]}], "\n", "   ", "]"}]}], 
+  ";"}]}], "Code",ExpressionUUID->"df9e75c8-f345-496a-b30d-e344c381373a"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"PlotNonCoreSol3d", "[", 
+     RowBox[{"game_", ",", " ", 
+      RowBox[{"opts", ":", 
+       RowBox[{"OptionsPattern", "[", 
+        RowBox[{"{", 
+         RowBox[{"PlotCore3dV6", ",", "Graphics3D"}], "}"}], "]"}]}]}], "]"}],
+     " ", ":=", "\n", "  ", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "vwskl", ",", "vwker", ",", "vwshv", ",", "vwnuc", ",", "vwmnc", ",", 
+        "vwpay", ",", "kerc", ",", "shc", ",", "nuc", ",", "mnc", ",", "rd", 
+        ",", "psm", ",", "origgame", ",", "paycoord", ",", "shimp", ",", 
+        "dld4", ",", "filopts", ",", "oldvls", ",", "norm", ",", "normgame", 
+        ",", "gr1", ",", "gr2", ",", "gr3", ",", "gr4", ",", "gr5", ",", 
+        "gr6", ",", "grli", ",", "gr"}], "}"}], ",", "\n", "    ", 
+      RowBox[{
+       RowBox[{"filopts", " ", "=", " ", 
+        RowBox[{"FilterRules", "[", 
+         RowBox[{
+          RowBox[{"{", "opts", "}"}], ",", 
+          RowBox[{"Options", "[", "Graphics3D", "]"}]}], "]"}]}], ";", "\n", 
+       "    ", 
+       RowBox[{"vwker", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ViewKernelSol", "]"}]}], ";", "\n", 
+       "    ", 
+       RowBox[{"vwshv", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ViewShapleySol", "]"}]}], ";", "\n", 
+       "    ", 
+       RowBox[{"vwnuc", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ViewNucleolusSol", "]"}]}], ";", "\n", 
+       "    ", 
+       RowBox[{"vwmnc", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ViewModiclusSol", "]"}]}], ";", "\t ", 
+       "\n", "    ", 
+       RowBox[{"vwpay", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ViewPayoffSol", "]"}]}], ";", "\t \t ", 
+       "\n", "    ", 
+       RowBox[{"kerc", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "KernelCoord", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"shc", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ShapleyCoord", "]"}]}], ";", "\n", 
+       "    ", 
+       RowBox[{"nuc", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "NucleolusCoord", "]"}]}], ";", "\n", 
+       "    ", 
+       RowBox[{"mnc", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ModiclusCoord", "]"}]}], ";", "\t \t ", 
+       "\n", "    ", 
+       RowBox[{"paycoord", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "PayoffCoord", "]"}]}], ";", "\t ", "\n", 
+       "    ", 
+       RowBox[{"rd", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "PtRadius", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"psm", " ", "=", " ", 
+        RowBox[{"ImpRedDimV6", "[", "game", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"oldvls", "=", " ", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"v", "[", "#", "]"}], " ", "&"}], " ", "/@", " ", 
+         RowBox[{"Subsets", "[", "T", "]"}]}]}], ";", "\n", "    ", 
+       RowBox[{"norm", " ", "=", " ", 
+        RowBox[{"OneNormalization", "[", "game", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"normgame", " ", "=", " ", 
+        RowBox[{"DefineGame", "[", 
+         RowBox[{"T", ",", "norm"}], "]"}]}], ";", "\n", "    ", 
+       RowBox[{"gr1", " ", "=", " ", 
+        RowBox[{"SkelImputationV6", "[", 
+         RowBox[{"normgame", ",", 
+          RowBox[{"SyncDim", " ", "->", " ", "psm"}], ",", "opts"}], "]"}]}], 
+       ";", "\n", "    ", 
+       RowBox[{"gr2", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"vwker", "===", "True"}], ",", 
+          RowBox[{"ShowKernelV6", "[", 
+           RowBox[{"normgame", ",", " ", 
+            RowBox[{"KernelCoord", " ", "->", " ", "kerc"}], ",", 
+            RowBox[{"SyncDim", " ", "->", " ", "psm"}], ",", 
+            RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], 
+           "]"}], ",", 
+          RowBox[{"{", "}"}]}], "]"}]}], ";", "\n", "    ", 
+       RowBox[{"gr3", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"vwshv", "===", "True"}], ",", 
+          RowBox[{"ShowShapleyV6", "[", 
+           RowBox[{"normgame", ",", 
+            RowBox[{"ShapleyCoord", " ", "->", " ", "shc"}], ",", 
+            RowBox[{"SyncDim", " ", "->", " ", "psm"}], ",", 
+            RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], 
+           "]"}], ",", 
+          RowBox[{"{", "}"}]}], "]"}]}], ";", "\n", "    ", 
+       RowBox[{"gr4", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"vwnuc", "===", "True"}], ",", 
+          RowBox[{"ShowNucleolusV6", "[", 
+           RowBox[{"normgame", ",", 
+            RowBox[{"NucleolusCoord", " ", "->", " ", "nuc"}], ",", 
+            RowBox[{"SyncDim", " ", "->", " ", "psm"}], ",", 
+            RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], 
+           "]"}], ",", 
+          RowBox[{"{", "}"}]}], "]"}]}], ";", "\n", "    ", 
+       RowBox[{"gr5", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"SameQ", "[", 
+           RowBox[{"vwmnc", ",", "True"}], "]"}], ",", 
+          RowBox[{"ShowModiclusV6", "[", 
+           RowBox[{"normgame", ",", 
+            RowBox[{"ModiclusCoord", " ", "->", " ", "mnc"}], ",", 
+            RowBox[{"SyncDim", " ", "->", " ", "psm"}], ",", 
+            RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], 
+           "]"}], ",", 
+          RowBox[{"{", "}"}]}], "]"}]}], ";", "\t \t ", "\n", "    ", 
+       RowBox[{"gr6", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"vwpay", "===", "True"}], ",", 
+          RowBox[{"ShowPayoffV6", "[", 
+           RowBox[{"normgame", ",", 
+            RowBox[{"PayoffCoord", " ", "->", " ", "paycoord"}], ",", 
+            RowBox[{"SyncDim", " ", "->", " ", "psm"}], ",", 
+            RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], 
+           "]"}], ",", 
+          RowBox[{"{", "}"}]}], "]"}]}], ";", "\t ", "\n", "    ", 
+       RowBox[{"grli", "=", 
+        RowBox[{"Flatten", "[", 
+         RowBox[{"{", 
+          RowBox[{
+          "gr1", ",", "gr2", ",", "gr3", ",", "gr4", ",", "gr5", ",", "gr6"}],
+           "}"}], "]"}]}], ";", "\n", "    ", 
+       RowBox[{"gr", "=", 
+        RowBox[{"Show", "[", "grli", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"origgame", "=", 
+        RowBox[{"DefineGame", "[", 
+         RowBox[{"T", ",", "oldvls"}], "]"}]}], ";", "\n", "    ", 
+       RowBox[{"Return", "[", 
+        RowBox[{"{", 
+         RowBox[{"gr", ",", "psm"}], "}"}], "]"}], ";"}]}], "\n", "      ", 
+     "]"}]}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"SkelImputationV6", "[", "args___", "]"}], ":=", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"Message", "[", 
+      RowBox[{"SkelImputationV6", "::", "argerr"}], "]"}], ";", "$Failed"}], 
+    ")"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"SkelImputationV6", "[", 
+     RowBox[{"game_", ",", " ", 
+      RowBox[{"opts", ":", 
+       RowBox[{"OptionsPattern", "[", 
+        RowBox[{"{", 
+         RowBox[{"SkelImputationV6", ",", "PlotCore3dV6", ",", "Graphics3D"}],
+          "}"}], "]"}]}]}], "]"}], " ", ":=", " ", "\n", "     ", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "gr", ",", "filopts", ",", "showskl", ",", " ", "impext", ",", " ", 
+        "implin", ",", " ", "impecdlist", ",", " ", "rg", ",", " ", 
+        "impeadlist", ",", " ", "impicdlist", ",", " ", "impiadlist", ",", 
+        " ", "impinedata", ",", " ", "m0", ",", " ", "d0", ",", " ", "trext", 
+        ",", " ", "varl", ",", " ", "minv", ",", " ", "psm", ",", " ", 
+        "dlvert", ",", " ", "amat", ",", " ", "bvec", ",", " ", "vp", ",", 
+        " ", "redead1", ",", " ", "redead2", ",", " ", "redead3", ",", " ", 
+        "redead4"}], "}"}], ",", "\n", "     ", 
+      RowBox[{
+       RowBox[{"filopts", " ", "=", " ", 
+        RowBox[{"FilterRules", "[", 
+         RowBox[{
+          RowBox[{"{", "opts", "}"}], ",", 
+          RowBox[{"Options", "[", "Graphics3D", "]"}]}], "]"}]}], ";", " ", 
+       "\n", "      ", 
+       RowBox[{"psm", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "SyncDim", "]"}]}], ";", "\n", "     ", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"impext", ",", " ", "implin"}], "}"}], ",", " ", 
+          "impecdlist", ",", " ", "impeadlist", ",", " ", "impicdlist", ",", 
+          " ", "impiadlist", ",", " ", "impinedata"}], "}"}], " ", "=", " ", 
+        RowBox[{"CddGmpPlotImputationSet", "[", "game", "]"}]}], ";", "\n", 
+       "      ", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"m0", ",", "d0"}], "}"}], " ", "=", " ", 
+        RowBox[{"Dimensions", "[", "impext", "]"}]}], ";", "\n", "      ", 
+       RowBox[{"dlvert", " ", "=", " ", 
+        RowBox[{"ListRedDimV6", "[", 
+         RowBox[{"impext", ",", " ", 
+          RowBox[{"SyncDim", "->", "psm"}]}], "]"}]}], ";", "\n", "      ", 
+       RowBox[{"amat", " ", "=", " ", 
+        RowBox[{"Transpose", "[", 
+         RowBox[{"Drop", "[", 
+          RowBox[{
+           RowBox[{"Transpose", "[", "impinedata", "]"}], ",", "1"}], "]"}], 
+         "]"}]}], ";", "\n", "      ", 
+       RowBox[{"amat", " ", "=", " ", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Take", "[", 
+           RowBox[{"#", ",", 
+            RowBox[{"-", "3"}]}], "]"}], " ", "&"}], "/@", " ", "amat"}]}], 
+       ";", "\n", "      ", 
+       RowBox[{"bvec", " ", "=", " ", 
+        RowBox[{
+         RowBox[{"Transpose", "[", "impinedata", "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}], ";", "\n", "      ", 
+       RowBox[{"vp", " ", "=", " ", 
+        RowBox[{"circle", "[", 
+         RowBox[{
+          RowBox[{"Pi", "/", "11"}], ",", " ", "50", ",", " ", "20"}], 
+         "]"}]}], ";", "\n", "      ", 
+       RowBox[{"redead1", " ", "=", " ", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"DeleteCases", "[", 
+           RowBox[{"#", ",", 
+            RowBox[{"m0", "+", "1"}]}], "]"}], "&"}], "/@", " ", 
+         RowBox[{"Drop", "[", 
+          RowBox[{"impeadlist", ",", 
+           RowBox[{"-", "4"}]}], "]"}]}]}], ";", "\n", "      ", 
+       RowBox[{"redead2", " ", "=", " ", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"DeleteCases", "[", 
+           RowBox[{"#", ",", 
+            RowBox[{"m0", "+", "2"}]}], "]"}], "&"}], "/@", " ", 
+         "redead1"}]}], ";", "\n", "      ", 
+       RowBox[{"redead3", " ", "=", " ", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"DeleteCases", "[", 
+           RowBox[{"#", ",", 
+            RowBox[{"m0", "+", "3"}]}], "]"}], "&"}], "/@", " ", 
+         "redead2"}]}], ";", "\n", "      ", 
+       RowBox[{"redead4", " ", "=", " ", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"DeleteCases", "[", 
+           RowBox[{"#", ",", 
+            RowBox[{"m0", "+", "4"}]}], "]"}], "&"}], "/@", " ", 
+         "redead3"}]}], ";", "\n", "      ", 
+       RowBox[{"rg", "=", 
+        RowBox[{"Range", "[", "4", "]"}]}], ";", "\n", "      ", 
+       RowBox[{"redead4", "=", 
+        RowBox[{"MapThread", "[", 
+         RowBox[{"Append", ",", 
+          RowBox[{"{", 
+           RowBox[{"redead4", ",", "rg"}], "}"}]}], "]"}]}], ";", "\n", 
+       "      ", 
+       RowBox[{"gr", "=", 
+        RowBox[{"Graphics3D", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"Thick", ",", " ", 
+            RowBox[{"GraphicsComplex", "[", 
+             RowBox[{"dlvert", ",", " ", 
+              RowBox[{"Tube", "[", "redead4", "]"}]}], "]"}]}], "}"}], ",", 
+          "filopts"}], "]"}]}], ";", " ", "\n", "      ", 
+       RowBox[{"Return", "[", "gr", "]"}], ";"}]}], "\n", "]"}]}], ";"}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"StrongEpsCore3dV6", "[", "args___", "]"}], ":=", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"Message", "[", 
+      RowBox[{"StrongEpsCore3dV6", "::", "argerr"}], "]"}], ";", "$Failed"}], 
+    ")"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"StrongEpsCore3dV6", "[", 
+    RowBox[{"game_", ",", " ", 
+     RowBox[{"opts", ":", 
+      RowBox[{"OptionsPattern", "[", 
+       RowBox[{"{", 
+        RowBox[{"StrongEpsCore3dV6", ",", "Graphics3D"}], "}"}], "]"}]}]}], 
+    "]"}], " ", ":=", "\n", "    ", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "vwskl", ",", "vwker", ",", "vwshv", ",", "vwnuc", ",", "vwmnc", ",", 
+       "vwpay", ",", "kerc", ",", "shc", ",", "nuc", ",", "mnc", ",", "epsw", 
+       ",", "paycoord", ",", "dld4", ",", "rd", ",", "fs", ",", "epsval", ",",
+        "psm", ",", "filopts", ",", "strgskl", ",", "shcr", ",", "mvplt", ",",
+        "impsetQ", ",", "critval", ",", "oldvls", ",", "origgame", ",", 
+       "norm", ",", "normgame", ",", "epsvls", ",", "crQ", ",", "newgame", 
+       ",", "gr0", ",", "gr1", ",", "gr2", ",", "gr3", ",", "grli"}], "}"}], 
+     ",", "\n", "     ", 
+     RowBox[{
+      RowBox[{"filopts", " ", "=", " ", 
+       RowBox[{"FilterRules", "[", 
+        RowBox[{
+         RowBox[{"{", "opts", "}"}], ",", 
+         RowBox[{"Options", "[", "Graphics3D", "]"}]}], "]"}]}], ";", " ", 
+      "\n", "     ", 
+      RowBox[{"vwskl", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "ViewSkel", "]"}]}], ";", "\n", "     ", 
+      RowBox[{"vwker", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "ViewKernelSol", "]"}]}], ";", "\n", 
+      "     ", 
+      RowBox[{"vwshv", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "ViewShapleySol", "]"}]}], ";", "\n", 
+      "     ", 
+      RowBox[{"vwnuc", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "ViewNucleolusSol", "]"}]}], ";", "\n", 
+      "     ", 
+      RowBox[{"vwmnc", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "ViewModiclusSol", "]"}]}], ";", "\t   ", 
+      "\n", "     ", 
+      RowBox[{"vwpay", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "ViewPayoffSol", "]"}]}], ";", "\t \t   ", 
+      "\n", "     ", 
+      RowBox[{"kerc", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "KernelCoord", "]"}]}], ";", "\n", "     ", 
+      RowBox[{"shc", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "ShapleyCoord", "]"}]}], ";", "\n", 
+      "     ", 
+      RowBox[{"nuc", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "NucleolusCoord", "]"}]}], ";", "\n", 
+      "     ", 
+      RowBox[{"mnc", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "ModiclusCoord", "]"}]}], ";", "\t   ", 
+      "\n", "     ", 
+      RowBox[{"paycoord", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "PayoffCoord", "]"}]}], ";", "\t   ", "\n",
+       "     ", 
+      RowBox[{"impsetQ", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "ShowImputationSet", "]"}]}], ";", "\n", 
+      "     ", 
+      RowBox[{"strgskl", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "ShowStrongEpsCore", "]"}]}], ";", "\n", 
+      "     ", 
+      RowBox[{"shcr", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "ShowCore", "]"}]}], ";", "\n", "     ", 
+      RowBox[{"epsw", " ", "=", "  ", 
+       RowBox[{"OptionValue", "[", "EpsStrValues", "]"}]}], ";", "\n", 
+      "     ", 
+      RowBox[{"critval", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "CriticalValue", "]"}]}], ";", "\n", 
+      "     ", 
+      RowBox[{"dld4", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "SyncDim", "]"}]}], ";", "\n", "     ", 
+      RowBox[{"rd", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "PtRadius", "]"}]}], ";", "\n", "     ", 
+      RowBox[{"fs", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "PictureSize", "]"}]}], ";", "\n", "     ", 
+      RowBox[{"shcr", " ", "=", " ", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"SameQ", "[", 
+          RowBox[{"shcr", ",", "True"}], "]"}], ",", 
+         RowBox[{"CoreQ", "[", "game", "]"}], ",", "shcr"}], "]"}]}], ";", 
+      "\n", "     ", 
+      RowBox[{"oldvls", "=", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"v", "[", "#", "]"}], " ", "&"}], " ", "/@", " ", 
+        RowBox[{"Subsets", "[", "T", "]"}]}]}], ";", "\n", "     ", 
+      RowBox[{"norm", " ", "=", " ", 
+       RowBox[{"OneNormalization", "[", "game", "]"}]}], ";", "\n", "     ", 
+      RowBox[{"normgame", " ", "=", " ", 
+       RowBox[{"DefineGame", "[", 
+        RowBox[{"T", ",", "norm"}], "]"}]}], ";", "\n", "     ", 
+      RowBox[{"epsval", " ", "=", " ", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"SameQ", "[", 
+          RowBox[{"epsw", ",", 
+           RowBox[{"{", "}"}]}], "]"}], ",", " ", 
+         RowBox[{"SelectCritical", "[", 
+          RowBox[{"normgame", ",", "critval"}], "]"}], ",", "epsw"}], "]"}]}],
+       ";", "\n", 
+      RowBox[{"(*", "\n", "     ", 
+       RowBox[{
+        RowBox[{"gr0", "=", 
+         RowBox[{"Which", "[", 
+          RowBox[{
+           RowBox[{"SameQ", "[", 
+            RowBox[{"shcr", ",", "False"}], "]"}], ",", " ", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{"impsetQ", "===", "True"}], ",", 
+             RowBox[{"SkelImputationV6", "[", 
+              RowBox[{"normgame", ",", 
+               RowBox[{"Boxed", "->", "False"}], ",", "filopts"}], "]"}], ",", 
+             RowBox[{"{", "}"}]}], "]"}], ",", "\n", "               ", 
+           "True", ",", 
+           RowBox[{"SkelImputationV6", "[", 
+            RowBox[{"normgame", ",", 
+             RowBox[{"Boxed", "->", "False"}], ",", "filopts"}], "]"}]}], 
+          "]"}]}], ";"}], "\n", "*)"}], "\n", "     ", 
+      RowBox[{"gr0", "=", 
+       RowBox[{"Which", "[", 
+        RowBox[{
+         RowBox[{"SameQ", "[", 
+          RowBox[{"shcr", ",", "False"}], "]"}], ",", " ", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"impsetQ", "===", "True"}], ",", 
+           RowBox[{"SkelImputationV6", "[", 
+            RowBox[{"normgame", ",", 
+             RowBox[{"Boxed", "->", "False"}], ",", "filopts"}], "]"}], ",", 
+           RowBox[{"{", "}"}]}], "]"}], ",", "\n", "               ", "True", 
+         ",", 
+         RowBox[{"{", "}"}]}], "]"}]}], ";", "\n", "     ", 
+      RowBox[{"origgame", "=", 
+       RowBox[{"DefineGame", "[", 
+        RowBox[{"T", ",", "oldvls"}], "]"}]}], ";", "\n", "     ", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"gr1", ",", "psm"}], "}"}], " ", "=", " ", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"SameQ", "[", 
+          RowBox[{"shcr", ",", "True"}], "]"}], ",", 
+         RowBox[{"PlotCore3DV6", "[", 
+          RowBox[{"origgame", ",", 
+           RowBox[{"ViewSkel", " ", "->", " ", "vwskl"}], ",", " ", 
+           RowBox[{"ShowImputationSet", " ", "->", " ", "impsetQ"}], ",", 
+           RowBox[{"SyncDim", " ", "->", " ", "dld4"}], ",", 
+           RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], 
+          "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"gr0", ",", 
+           RowBox[{"{", "}"}]}], "}"}]}], "]"}]}], ";", "\n", "     ", 
+      RowBox[{"psm", "=", 
+       RowBox[{"Which", "[", 
+        RowBox[{
+         RowBox[{"SameQ", "[", 
+          RowBox[{"psm", ",", 
+           RowBox[{"{", "}"}]}], "]"}], ",", 
+         RowBox[{"MultRedDimV6", "[", "origgame", "]"}], ",", "\n", 
+         "               ", "True", ",", "psm"}], "]"}]}], ";", "\n", "     ", 
+      RowBox[{"epsvls", " ", "=", " ", 
+       RowBox[{"EpsValue", "[", 
+        RowBox[{"origgame", ",", " ", "epsval"}], "]"}]}], ";", "\n", "     ", 
+      RowBox[{"epsvls", " ", "=", " ", 
+       RowBox[{"Prepend", "[", 
+        RowBox[{"epsvls", ",", "0"}], "]"}]}], ";", "\n", "     ", 
+      RowBox[{"epsvls", " ", "=", " ", 
+       RowBox[{"Append", "[", 
+        RowBox[{"epsvls", ",", 
+         RowBox[{"Last", "[", "oldvls", "]"}]}], "]"}]}], ";", "\n", "     ", 
+      
+      RowBox[{"newgame", "=", " ", 
+       RowBox[{"DefineGame", "[", 
+        RowBox[{"T", ",", "epsvls"}], "]"}]}], ";", "\n", "     ", 
+      RowBox[{"gr2", "=", 
+       RowBox[{"PlotStrCore3DV6", "[", 
+        RowBox[{"newgame", ",", 
+         RowBox[{"ViewSkel", " ", "->", " ", "True"}], ",", " ", 
+         RowBox[{"ViewKernelSol", " ", "->", " ", "vwker"}], ",", " ", 
+         RowBox[{"KernelCoord", " ", "->", " ", "kerc"}], ",", " ", 
+         RowBox[{"ViewShapleySol", " ", "->", " ", "vwshv"}], ",", " ", 
+         RowBox[{"ShapleyCoord", " ", "->", " ", "shc"}], ",", " ", 
+         RowBox[{"ViewNucleolusSol", " ", "->", " ", "vwnuc"}], ",", " ", 
+         RowBox[{"NucleolusCoord", "->", " ", "nuc"}], ",", " ", 
+         RowBox[{"ViewModiclusSol", " ", "->", " ", "vwmnc"}], ",", " ", 
+         RowBox[{"ModiclusCoord", " ", "->", " ", "mnc"}], ",", " ", 
+         RowBox[{"ViewPayoffSol", " ", "->", " ", "vwpay"}], ",", " ", 
+         RowBox[{"PayoffCoord", " ", "->", " ", "paycoord"}], ",", " ", 
+         RowBox[{"SyncDim", " ", "->", " ", "psm"}], ",", 
+         RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", 
+         RowBox[{"Boxed", "->", "False"}], ",", "filopts"}], "]"}]}], ";", 
+      "\n", "     ", 
+      RowBox[{"origgame", "=", 
+       RowBox[{"DefineGame", "[", 
+        RowBox[{"T", ",", "oldvls"}], "]"}]}], ";", "\n", "     ", 
+      RowBox[{"grli", "=", 
+       RowBox[{"Flatten", "[", 
+        RowBox[{"{", 
+         RowBox[{"gr2", ",", "gr1"}], "}"}], "]"}]}], ";", "\n", "     ", 
+      RowBox[{"gr3", "=", 
+       RowBox[{"Show", "[", 
+        RowBox[{"grli", ",", 
+         RowBox[{"ImageSize", " ", "->", " ", "fs"}], ",", " ", 
+         RowBox[{"PlotLabel", " ", "->", " ", 
+          RowBox[{"StringJoin", "[", 
+           RowBox[{"\"\<eps=\>\"", ",", 
+            RowBox[{"ToString", "[", 
+             RowBox[{"N", "[", "epsval", "]"}], "]"}]}], "]"}]}]}], "]"}]}], 
+      ";", " ", "\n", "     ", 
+      RowBox[{"Return", "[", "gr3", "]"}], ";"}]}], "\n", "     ", "\n", 
+    "]"}]}], ";"}]}], "Code",ExpressionUUID->"9a45f789-b6db-47cf-a7f3-\
+c4473175b9d7"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"SelectCritical", "[", 
+    RowBox[{"game_", ",", "critval_List"}], "]"}], ":=", "\n", " ", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "epsval", "}"}], ",", "\n", "  ", 
+     RowBox[{
+      RowBox[{"epsval", "=", 
+       RowBox[{"Which", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"First", "[", "critval", "]"}], " ", "===", " ", "1"}], ",",
+          " ", 
+         RowBox[{"FifthCriticalVal", "[", "game", "]"}], ",", "\n", 
+         "               ", 
+         RowBox[{
+          RowBox[{"First", "[", "critval", "]"}], " ", "===", " ", "2"}], ",",
+          " ", 
+         RowBox[{"SecondCriticalVal", "[", "game", "]"}], ",", "\n", 
+         "               ", 
+         RowBox[{
+          RowBox[{"First", "[", "critval", "]"}], " ", "===", " ", "3"}], ",",
+          " ", 
+         RowBox[{"ThirdCriticalVal", "[", "game", "]"}], ",", "\n", 
+         "               ", 
+         RowBox[{
+          RowBox[{"First", "[", "critval", "]"}], " ", "===", " ", "4"}], ",",
+          " ", 
+         RowBox[{"StarCriticalVal", "[", "game", "]"}], ",", "\n", 
+         "               ", 
+         RowBox[{
+          RowBox[{"First", "[", "critval", "]"}], " ", "===", " ", "5"}], ",",
+          " ", 
+         RowBox[{"SecondStarCriticalVal", "[", "game", "]"}], ",", "\n", 
+         "               ", 
+         RowBox[{
+          RowBox[{"First", "[", "critval", "]"}], " ", "===", " ", "6"}], ",",
+          " ", 
+         RowBox[{"ThirdStarCriticalVal", "[", "game", "]"}], ",", "\n", 
+         "               ", "True", ",", " ", 
+         RowBox[{"FifthCriticalVal", "[", "game", "]"}]}], "]"}]}], ";", "\n",
+       "  ", 
+      RowBox[{"epsval", " ", "=", " ", 
+       RowBox[{
+        RowBox[{"epsval", "[", 
+         RowBox[{"[", 
+          RowBox[{"1", ",", "1"}], "]"}], "]"}], " ", "/.", " ", "epsval"}]}],
+       ";", "\n", "  ", 
+      RowBox[{"epsval", " ", "=", " ", 
+       RowBox[{"Max", "[", 
+        RowBox[{"epsval", ",", "1"}], "]"}]}], ";", "\n", "  ", 
+      RowBox[{"Return", "[", "epsval", "]"}], ";"}]}], "\n", "]"}]}], 
+  ";"}]], "Code",ExpressionUUID->"5d6136d4-8ce8-4c41-a526-0ca3d468b66f"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"PlotStrCore3DV6", "[", 
+     RowBox[{"game_", ",", 
+      RowBox[{"opts", ":", 
+       RowBox[{"OptionsPattern", "[", 
+        RowBox[{"{", 
+         RowBox[{"StrongEpsCore3dV6", ",", "Graphics3D"}], "}"}], "]"}]}]}], 
+     "]"}], " ", ":=", "\n", "  ", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "vwskl", ",", "vwker", ",", "vwshv", ",", "vwnuc", ",", "vwmnc", ",", 
+        "vwpay", ",", "kerc", ",", "shc", ",", "nuc", ",", "mnc", ",", "rd", 
+        ",", "psm", ",", "dlvert", ",", "paycoord", ",", "shrc", ",", "dld4", 
+        ",", "filopts", ",", "norm", ",", "normgame", ",", "vertlist", ",", 
+        "linearity", ",", "ecdlist", ",", "eadlist", ",", "icdlist", ",", 
+        "iadlist", ",", "extmat", ",", "gr1", ",", "gr2", ",", "gr4", ",", 
+        "gr5", ",", "gr6", ",", "gr7", ",", "gr8", ",", "grli", ",", "gr"}], 
+       "}"}], ",", "\n", "    ", 
+      RowBox[{
+       RowBox[{"filopts", " ", "=", " ", 
+        RowBox[{"FilterRules", "[", 
+         RowBox[{
+          RowBox[{"{", "opts", "}"}], ",", 
+          RowBox[{"Options", "[", "Graphics3D", "]"}]}], "]"}]}], ";", "\n", 
+       "    ", 
+       RowBox[{"vwskl", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ViewSkel", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"vwker", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ViewKernelSol", "]"}]}], ";", "\n", 
+       "    ", 
+       RowBox[{"vwshv", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ViewShapleySol", "]"}]}], ";", "\n", 
+       "    ", 
+       RowBox[{"vwnuc", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ViewNucleolusSol", "]"}]}], ";", "\n", 
+       "    ", 
+       RowBox[{"vwmnc", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ViewModiclusSol", "]"}]}], ";", "\t ", 
+       "\n", "    ", 
+       RowBox[{"vwpay", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ViewPayoffSol", "]"}]}], ";", "\t ", 
+       "\n", "    ", 
+       RowBox[{"kerc", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "KernelCoord", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"shc", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ShapleyCoord", "]"}]}], ";", "\n", 
+       "    ", 
+       RowBox[{"nuc", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "NucleolusCoord", "]"}]}], ";", "\n", 
+       "    ", 
+       RowBox[{"mnc", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ModiclusCoord", "]"}]}], ";", "\t \t ", 
+       "\n", "    ", 
+       RowBox[{"paycoord", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "PayoffCoord", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"dld4", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "SyncDim", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"rd", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "PtRadius", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"norm", " ", "=", " ", 
+        RowBox[{"OneNormalization", "[", "game", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"normgame", " ", "=", " ", 
+        RowBox[{"DefineGame", "[", 
+         RowBox[{"T", ",", "norm"}], "]"}]}], ";", "\n", "    ", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"vertlist", ",", "linearity"}], "}"}], ",", "ecdlist", ",",
+           "eadlist", ",", "icdlist", ",", "iadlist", ",", "extmat"}], "}"}], 
+        "=", 
+        RowBox[{"CddGmpPlotCore", "[", "normgame", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"psm", "=", 
+        RowBox[{"Which", "[", 
+         RowBox[{
+          RowBox[{"SameQ", "[", 
+           RowBox[{"dld4", ",", "True"}], "]"}], ",", 
+          RowBox[{"MultRedDimV6", "[", "normgame", "]"}], ",", "\n", 
+          "              ", "True", ",", "dld4"}], "]"}]}], ";", "\n", "    ", 
+       RowBox[{"dld4", "=", "psm"}], ";", "\n", "    ", 
+       RowBox[{"dlvert", "=", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Delete", "[", 
+           RowBox[{"#", ",", "psm"}], "]"}], " ", "&"}], "/@", " ", 
+         "vertlist"}]}], ";", "\n", "    ", 
+       RowBox[{"gr1", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"SameQ", "[", 
+           RowBox[{"vwskl", ",", "False"}], "]"}], ",", 
+          RowBox[{"DrawCore3dV6", "[", 
+           RowBox[{"dlvert", ",", "filopts"}], "]"}], ",", 
+          RowBox[{"{", "}"}]}], "]"}]}], ";", "\n", "    ", 
+       RowBox[{"gr2", "=", 
+        RowBox[{"SkelCore3dV6", "[", 
+         RowBox[{
+          RowBox[{"N", "[", "dlvert", "]"}], ",", "ecdlist", ",", "eadlist", 
+          ",", "extmat", ",", "filopts"}], "]"}]}], ";", "\n", "    ", 
+       RowBox[{"gr4", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"SameQ", "[", 
+           RowBox[{"vwker", ",", "True"}], "]"}], ",", 
+          RowBox[{"ShowKernelV6", "[", 
+           RowBox[{"normgame", ",", " ", 
+            RowBox[{"KernelCoord", " ", "->", " ", "kerc"}], ",", " ", 
+            RowBox[{"SyncDim", " ", "->", " ", "dld4"}], ",", 
+            RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], 
+           "]"}], ",", 
+          RowBox[{"{", "}"}]}], "]"}]}], ";", "\n", "    ", 
+       RowBox[{"gr5", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"SameQ", "[", 
+           RowBox[{"vwshv", ",", "True"}], "]"}], ",", 
+          RowBox[{"ShowShapleyV6", "[", 
+           RowBox[{"normgame", ",", 
+            RowBox[{"ShapleyCoord", " ", "->", " ", "shc"}], ",", " ", 
+            RowBox[{"SyncDim", " ", "->", " ", "dld4"}], ",", 
+            RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], 
+           "]"}], ",", 
+          RowBox[{"{", "}"}]}], "]"}]}], ";", "\n", "    ", 
+       RowBox[{"gr6", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"SameQ", "[", 
+           RowBox[{"vwnuc", ",", "True"}], "]"}], ",", 
+          RowBox[{"ShowNucleolusV6", "[", 
+           RowBox[{"normgame", ",", 
+            RowBox[{"NucleolusCoord", " ", "->", " ", "nuc"}], ",", " ", 
+            RowBox[{"SyncDim", " ", "->", " ", "dld4"}], ",", 
+            RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], 
+           "]"}], ",", 
+          RowBox[{"{", "}"}]}], "]"}]}], ";", "\n", "    ", 
+       RowBox[{"gr7", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"SameQ", "[", 
+           RowBox[{"vwmnc", ",", "True"}], "]"}], ",", 
+          RowBox[{"ShowModiclusV6", "[", 
+           RowBox[{"normgame", ",", 
+            RowBox[{"ModiclusCoord", " ", "->", " ", "mnc"}], ",", 
+            RowBox[{"SyncDim", " ", "->", " ", "psm"}], ",", 
+            RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], 
+           "]"}], ",", 
+          RowBox[{"{", "}"}]}], "]"}]}], ";", "\t \t ", "\n", "    ", 
+       RowBox[{"gr8", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"SameQ", "[", 
+           RowBox[{"vwpay", ",", "True"}], "]"}], ",", 
+          RowBox[{"ShowPayoffV6", "[", 
+           RowBox[{"normgame", ",", 
+            RowBox[{"PayoffCoord", " ", "->", " ", "paycoord"}], ",", 
+            RowBox[{"SyncDim", " ", "->", " ", "psm"}], ",", 
+            RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], 
+           "]"}], ",", 
+          RowBox[{"{", "}"}]}], "]"}]}], ";", "\n", "    ", 
+       RowBox[{"gr", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"SameQ", "[", 
+           RowBox[{"vwskl", ",", "False"}], "]"}], ",", 
+          RowBox[{
+           RowBox[{"grli", "=", 
+            RowBox[{"Flatten", "[", 
+             RowBox[{"{", 
+              RowBox[{
+              "gr1", ",", "gr2", ",", "gr4", ",", "gr5", ",", "gr6", ",", 
+               "gr7", ",", "gr8"}], "}"}], "]"}]}], ";", 
+           RowBox[{"Show", "[", "grli", "]"}]}], ",", 
+          RowBox[{
+           RowBox[{"grli", "=", 
+            RowBox[{"Flatten", "[", 
+             RowBox[{"{", 
+              RowBox[{
+              "gr2", ",", "gr4", ",", "gr5", ",", "gr6", ",", "gr7", ",", 
+               "gr8"}], "}"}], "]"}]}], ";", 
+           RowBox[{"Show", "[", "grli", "]"}]}]}], "]"}]}], ";", "\n", "    ", 
+       RowBox[{"Return", "[", "gr", "]"}], ";"}]}], "\n", "]"}]}], ";"}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"AnimationKernelPropertyV6", "[", "args___", "]"}], ":=", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"Message", "[", 
+      RowBox[{"AnimationKernelPropertyV6", "::", "argerr"}], "]"}], ";", 
+     "$Failed"}], ")"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"AnimationKernelPropertyV6", "[", 
+    RowBox[{"game_", ",", " ", 
+     RowBox[{"opts", ":", 
+      RowBox[{"OptionsPattern", "[", 
+       RowBox[{"{", 
+        RowBox[{"AnimationKernelPropertyV6", ",", "Graphics3D"}], "}"}], 
+       "]"}]}]}], "]"}], " ", ":=", "\n", "  ", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "shcr", ",", " ", "imps", ",", " ", "crv", ",", " ", "vwker", ",", " ", 
+       "kcoord", ",", " ", "vwsh", ",", " ", "shc", ",", " ", "vwnuc", ",", 
+       "nuc", ",", " ", "rd", ",", " ", "vwmnc", ",", " ", "mnc", ",", " ", 
+       "vwpay", ",", " ", "paycoord", ",", "filopts", ",", "epsw", ",", " ", 
+       "uppval", ",", " ", "lowval", ",", " ", "stpsize", ",", "manip", ",", 
+       " ", "vpt", ",", "dld4", ",", "detlow"}], "}"}], ",", "\n", "    ", 
+     RowBox[{
+      RowBox[{"filopts", " ", "=", " ", 
+       RowBox[{"FilterRules", "[", 
+        RowBox[{
+         RowBox[{"{", "opts", "}"}], ",", 
+         RowBox[{"Options", "[", "Graphics3D", "]"}]}], "]"}]}], ";", "\n", 
+      "    ", 
+      RowBox[{"shcr", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "ShowCore", "]"}]}], ";", "\n", "    ", 
+      RowBox[{"imps", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "ShowImputationSet", "]"}]}], ";", "\n", 
+      "    ", 
+      RowBox[{"crv", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "CriticalValue", "]"}]}], ";", "\n", 
+      "    ", 
+      RowBox[{"vwker", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "ViewKernelSol", "]"}]}], ";", "\n", 
+      "    ", 
+      RowBox[{"kcoord", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "KernelCoord", "]"}]}], ";", "\n", "    ", 
+      
+      RowBox[{"vwsh", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "ViewShapleySol", "]"}]}], ";", "\n", 
+      "    ", 
+      RowBox[{"shc", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "ShapleyCoord", "]"}]}], ";", "\n", "    ", 
+      RowBox[{"vwnuc", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "ViewNucleolusSol", "]"}]}], ";", "\n", 
+      "    ", 
+      RowBox[{"nuc", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "NucleolusCoord", "]"}]}], ";", "\n", 
+      "    ", 
+      RowBox[{"vwmnc", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "ViewModiclusSol", "]"}]}], ";", "\n", 
+      "    ", 
+      RowBox[{"mnc", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "ModiclusCoord", "]"}]}], ";", "\t  \t ", 
+      "\n", "    ", 
+      RowBox[{"vwpay", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "ViewPayoffSol", "]"}]}], ";", "\n", 
+      "    ", 
+      RowBox[{"paycoord", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "PayoffCoord", "]"}]}], ";", "\t ", "\n", 
+      "    ", 
+      RowBox[{"epsw", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "EpsStrValues", "]"}]}], ";", "\n", "    ", 
+      RowBox[{"uppval", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "UpperCriticalVal", "]"}]}], ";", "\n", 
+      "    ", 
+      RowBox[{"lowval", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "LowerCriticalVal", "]"}]}], ";", "\n", 
+      "    ", 
+      RowBox[{"stpsize", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "StepSize", "]"}]}], ";", "\n", "    ", 
+      RowBox[{"manip", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "ManipulateMode", "]"}]}], ";", "\n", 
+      "    ", 
+      RowBox[{"vpt", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "ViewPoint", "]"}]}], ";", "\n", "    ", 
+      RowBox[{"dld4", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "SyncDim", "]"}]}], ";", "\n", "    ", 
+      RowBox[{"rd", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "PtRadius", "]"}]}], ";", "\n", "    ", 
+      RowBox[{"detlow", " ", "=", " ", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"lowval", "==", 
+          RowBox[{"{", "}"}]}], ",", 
+         RowBox[{"First", "[", 
+          RowBox[{"EpsCore", "[", "game", "]"}], "]"}], ",", " ", 
+         RowBox[{"lowval", "[", 
+          RowBox[{"[", "1", "]"}], "]"}]}], "]"}]}], ";", "\n", "    ", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"SameQ", "[", 
+         RowBox[{"manip", ",", "False"}], "]"}], ",", "\n", "        ", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"StrongEpsCore3dV6", "[", 
+           RowBox[{"game", ",", 
+            RowBox[{"EpsStrValues", " ", "->", " ", "t"}], ",", " ", 
+            RowBox[{"ViewKernelSol", " ", "->", " ", "vwker"}], ",", " ", 
+            RowBox[{"KernelCoord", " ", "->", " ", "kcoord"}], ",", " ", 
+            RowBox[{"ViewNucleolusSol", " ", "->", " ", "vwnuc"}], ",", " ", 
+            RowBox[{"NucleolusCoord", " ", "->", " ", "nuc"}], ",", " ", 
+            RowBox[{"ViewShapleySol", " ", "->", " ", "vwsh"}], ",", " ", 
+            RowBox[{"ShapleyCoord", " ", "->", " ", "shc"}], ",", " ", 
+            RowBox[{"ViewModiclusSol", " ", "->", " ", "vwmnc"}], ",", " ", 
+            RowBox[{"ModiclusCoord", " ", "->", " ", "mnc"}], ",", " ", 
+            RowBox[{"ViewPayoffSol", " ", "->", " ", "vwpay"}], ",", " ", 
+            RowBox[{"PayoffCoord", " ", "->", " ", "paycoord"}], ",", " ", 
+            RowBox[{"ShowCore", "->", "shcr"}], ",", " ", 
+            RowBox[{"ShowImputationSet", " ", "->", " ", "imps"}], ",", 
+            RowBox[{"SyncDim", " ", "->", " ", "True"}], ",", 
+            RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", 
+            RowBox[{"ViewPoint", " ", "->", "vpt"}]}], "]"}], ",", " ", 
+          RowBox[{"{", 
+           RowBox[{"t", ",", " ", 
+            RowBox[{"uppval", "[", 
+             RowBox[{"[", "1", "]"}], "]"}], ",", " ", "detlow", ",", " ", 
+            RowBox[{"stpsize", "[", 
+             RowBox[{"[", "1", "]"}], "]"}]}], "}"}]}], "]"}], ",", "\n", 
+        "        ", 
+        RowBox[{"Manipulate", "[", 
+         RowBox[{
+          RowBox[{"StrongEpsCore3dV6", "[", 
+           RowBox[{"game", ",", 
+            RowBox[{"EpsStrValues", " ", "->", " ", "t"}], ",", " ", 
+            RowBox[{"ViewKernelSol", " ", "->", " ", "vwker"}], ",", " ", 
+            RowBox[{"KernelCoord", " ", "->", " ", "kcoord"}], ",", " ", 
+            RowBox[{"ViewNucleolusSol", " ", "->", " ", "vwnuc"}], ",", " ", 
+            RowBox[{"NucleolusCoord", " ", "->", " ", "nuc"}], ",", " ", 
+            RowBox[{"ViewShapleySol", " ", "->", " ", "vwsh"}], ",", " ", 
+            RowBox[{"ShapleyCoord", " ", "->", " ", "shc"}], ",", " ", 
+            RowBox[{"ShowCore", "->", "shcr"}], ",", " ", 
+            RowBox[{"ViewPayoffSol", " ", "->", " ", "vwpay"}], ",", " ", 
+            RowBox[{"ViewModiclusSol", " ", "->", " ", "vwmnc"}], ",", " ", 
+            RowBox[{"ModiclusCoord", " ", "->", " ", "mnc"}], ",", " ", 
+            RowBox[{"PayoffCoord", " ", "->", " ", "paycoord"}], ",", " ", 
+            RowBox[{"ShowImputationSet", " ", "->", " ", "imps"}], ",", 
+            RowBox[{"SyncDim", " ", "->", " ", "True"}], ",", 
+            RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", 
+            RowBox[{"ViewPoint", " ", "->", " ", 
+             RowBox[{"Dynamic", "[", 
+              RowBox[{"{", 
+               RowBox[{"v1", ",", "v2", ",", "v3"}], "}"}], "]"}]}]}], "]"}], 
+          ",", " ", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"t", ",", " ", 
+              RowBox[{"uppval", "[", 
+               RowBox[{"[", "1", "]"}], "]"}], ",", "\"\<Epsilon\>\""}], " ", 
+             "}"}], ",", "detlow", ",", " ", 
+            RowBox[{"uppval", "[", 
+             RowBox[{"[", "1", "]"}], "]"}], ",", " ", 
+            RowBox[{"stpsize", "[", 
+             RowBox[{"[", "1", "]"}], "]"}]}], "}"}], ",", " ", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"v1", ",", " ", "1.714", ",", "\"\<x-coordinate\>\""}], 
+             "}"}], ",", " ", "4"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"v2", ",", " ", "2", ",", "\"\<y-coordinate\>\""}], 
+             "}"}], ",", " ", "4"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"v3", ",", " ", "1.54", ",", "\"\<z-coordinate\>\""}], 
+             "}"}], ",", " ", "4"}], "}"}]}], "]"}]}], "]"}]}]}], " ", "\n", 
+    "    ", "]"}]}], ";"}]}], "Code",ExpressionUUID->"f75ba8a0-95f9-4cbf-9cfb-\
+243360848c72"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"ShowKernelV6", "[", 
+    RowBox[{"game_", ",", 
+     RowBox[{"opts", ":", 
+      RowBox[{"OptionsPattern", "[", 
+       RowBox[{"{", 
+        RowBox[{"PlotCore3dV6", ",", "Graphics3D"}], "}"}], "]"}]}]}], "]"}], 
+   " ", ":=", "\n", " ", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "kercoord", ",", "dld4", ",", "rd", ",", "filopts", ",", "kemQ", ",", 
+       "kersol", ",", "dpk", ",", "d1", ",", "d2", ",", "normQ", ",", "gr"}], 
+      "}"}], ",", "\n", "    ", 
+     RowBox[{
+      RowBox[{"kercoord", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "KernelCoord", "]"}]}], ";", "\n", "    ", 
+      
+      RowBox[{"dld4", "=", " ", 
+       RowBox[{"OptionValue", "[", "SyncDim", "]"}]}], ";", "\n", "    ", 
+      RowBox[{"rd", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "PtRadius", "]"}]}], ";", "\n", "    ", 
+      RowBox[{"filopts", " ", "=", " ", 
+       RowBox[{"FilterRules", "[", 
+        RowBox[{
+         RowBox[{"{", "opts", "}"}], ",", 
+         RowBox[{"Options", "[", "Graphics3D", "]"}]}], "]"}]}], ";", " ", 
+      "\n", "    ", 
+      RowBox[{"kemQ", "=", 
+       RowBox[{"Length", "[", "kercoord", "]"}]}], ";", "\n", "    ", 
+      RowBox[{"kersol", "=", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"kemQ", "==", "0"}], " ", ",", 
+         RowBox[{"KernelVertices", "[", "game", "]"}], ",", "kercoord"}], 
+        "]"}]}], ";", "\n", "    ", 
+      RowBox[{"dpk", "=", 
+       RowBox[{"Depth", "[", "kersol", "]"}]}], ";", "    ", "\n", "    ", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"d1", ",", "d2"}], "}"}], "=", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"dpk", "==", "2"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "4"}], "}"}], " ", ",", 
+         RowBox[{"Dimensions", "[", "kersol", "]"}]}], "]"}]}], ";", "\n", 
+      "    ", 
+      RowBox[{"kersol", "=", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"dpk", " ", "==", " ", "3"}], " ", "&&", " ", 
+          RowBox[{"d1", " ", "==", " ", "1"}]}], ",", 
+         RowBox[{"First", "[", "kersol", "]"}], ",", " ", "kersol"}], "]"}]}],
+       ";", "\n", "    ", 
+      RowBox[{"normQ", " ", "=", " ", 
+       RowBox[{"Which", "[", 
+        RowBox[{
+         RowBox[{"d1", " ", "===", " ", "1"}], ",", " ", 
+         RowBox[{"Apply", "[", 
+          RowBox[{"Plus", ",", "kersol"}], "]"}], ",", "\n", 
+         "                  ", 
+         RowBox[{"d1", " ", "===", " ", "2"}], ",", " ", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Apply", "[", 
+            RowBox[{"Plus", ",", "#"}], "]"}], "&"}], "/@", "kersol"}], ",", 
+         "\n", "                ", "True", ",", "1"}], "]"}]}], ";", "\n", 
+      "    ", 
+      RowBox[{"kercoord", " ", "=", " ", 
+       RowBox[{"Which", "[", 
+        RowBox[{
+         RowBox[{"d1", " ", "===", " ", "1"}], ",", "\n", 
+         "                       ", 
+         RowBox[{"Which", "[", 
+          RowBox[{
+           RowBox[{"normQ", " ", "==", " ", "1"}], ",", " ", "kersol", ",", 
+           "\n", "                         ", "True", ",", " ", 
+           RowBox[{"kersol", "/", "normQ"}]}], "]"}], ",", "\n", 
+         "                     ", 
+         RowBox[{"d1", " ", "===", " ", "2"}], ",", "\n", 
+         "                       ", 
+         RowBox[{"Which", "[", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"normQ", "[", 
+               RowBox[{"[", "1", "]"}], "]"}], " ", "==", " ", "1"}], " ", "&&",
+              " ", 
+             RowBox[{
+              RowBox[{"normQ", "[", 
+               RowBox[{"[", "2", "]"}], "]"}], " ", "==", " ", "1"}]}], ")"}],
+            ",", "kersol", ",", "\n", "                         ", "True", 
+           ",", 
+           RowBox[{"kersol", "/", 
+            RowBox[{"normQ", "[", 
+             RowBox[{"[", "1", "]"}], "]"}]}]}], "]"}], ",", "\n", 
+         "               ", "True", ",", " ", "kersol"}], "]"}]}], ";", "\n", 
+      "    ", 
+      RowBox[{"gr", "=", 
+       RowBox[{"Which", "[", 
+        RowBox[{
+         RowBox[{"d1", "==", "1"}], ",", " ", 
+         RowBox[{"GenKernelGraphPointV6", "[", 
+          RowBox[{"kercoord", ",", 
+           RowBox[{"SyncDim", " ", "->", "dld4"}], ",", 
+           RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], 
+          "]"}], ",", "\n", "             ", 
+         RowBox[{"d1", "==", "2"}], ",", " ", 
+         RowBox[{"GenKernelGraphLineV6", "[", 
+          RowBox[{"kercoord", ",", 
+           RowBox[{"SyncDim", " ", "->", "dld4"}], ",", 
+           RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], 
+          "]"}], ",", "\n", "             ", "True", ",", " ", 
+         RowBox[{
+          RowBox[{"kersol", "=", 
+           RowBox[{"Kernel", "[", "game", "]"}]}], ";", 
+          RowBox[{"GenKernelGraphPointV6", "[", 
+           RowBox[{"kersol", ",", 
+            RowBox[{"SyncDim", " ", "->", "dld4"}], ",", 
+            RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], 
+           "]"}]}]}], "\n", "    ", "]"}]}], ";", "\n", "    ", 
+      RowBox[{"Return", "[", "gr", "]"}], ";"}]}], "\n", "]"}]}], 
+  ";"}]], "Code",ExpressionUUID->"f733c44e-ea24-487a-a0e7-14863e065620"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"ShowNucleolusV6", "[", 
+    RowBox[{"game_", ",", 
+     RowBox[{"opts", ":", 
+      RowBox[{"OptionsPattern", "[", 
+       RowBox[{"{", 
+        RowBox[{"PlotCore3dV6", ",", "Graphics3D"}], "}"}], "]"}]}]}], "]"}], 
+   " ", ":=", "\n", "    ", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "nuccoord", ",", "dld4", ",", "rd", ",", "filopts", ",", "normQ", ",", 
+       "nucsol", ",", "l1"}], "}"}], ",", "\n", "    ", 
+     RowBox[{
+      RowBox[{"nuccoord", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "NucleolusCoord", "]"}]}], ";", "\n", 
+      "    ", 
+      RowBox[{"dld4", "=", " ", 
+       RowBox[{"OptionValue", "[", "SyncDim", "]"}]}], ";", "\n", "    ", 
+      RowBox[{"rd", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "PtRadius", "]"}]}], ";", "\n", "    ", 
+      RowBox[{"filopts", " ", "=", " ", 
+       RowBox[{"FilterRules", "[", 
+        RowBox[{
+         RowBox[{"{", "opts", "}"}], ",", 
+         RowBox[{"Options", "[", "Graphics3D", "]"}]}], "]"}]}], ";", " ", 
+      "\n", "    ", 
+      RowBox[{"normQ", " ", "=", " ", 
+       RowBox[{"Which", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Length", "[", "nuccoord", "]"}], " ", "!=", " ", "0"}], 
+         ",", " ", 
+         RowBox[{"Apply", "[", 
+          RowBox[{"Plus", ",", " ", "nuccoord"}], "]"}], ",", " ", "True", 
+         ",", " ", "1"}], "]"}]}], ";", "\n", "    ", 
+      RowBox[{"nuccoord", " ", "=", " ", 
+       RowBox[{"Which", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Length", "[", "nuccoord", "]"}], " ", "!=", " ", "0"}], 
+         ",", " ", 
+         RowBox[{"Which", "[", 
+          RowBox[{
+           RowBox[{"normQ", " ", "==", " ", "1"}], ",", " ", "nuccoord", ",", 
+           " ", "True", ",", " ", 
+           RowBox[{"nuccoord", "/", "normQ"}]}], "]"}], ",", " ", "True", ",",
+          " ", "nuccoord"}], "]"}]}], ";", "\n", "    ", 
+      RowBox[{"l1", " ", "=", " ", 
+       RowBox[{"Depth", "[", "nuccoord", "]"}]}], ";", "\n", "    ", 
+      RowBox[{"Which", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"Length", "[", "nuccoord", "]"}], "!=", "0"}], " ", "&&", 
+           " ", 
+           RowBox[{"l1", "==", "2"}]}], ")"}], "==", "True"}], ",", 
+        RowBox[{"GenNucleolusGraphPointV6", "[", 
+         RowBox[{"nuccoord", ",", 
+          RowBox[{"SyncDim", " ", "->", "dld4"}], ",", 
+          RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], "]"}],
+         ",", "\n", "    ", "True", ",", 
+        RowBox[{
+         RowBox[{"nucsol", " ", "=", " ", 
+          RowBox[{"ModifiedNucleolus", "[", "game", "]"}]}], ";", 
+         RowBox[{"GenNucleolusGraphPointV6", "[", 
+          RowBox[{"nucsol", ",", 
+           RowBox[{"SyncDim", " ", "->", "dld4"}], ",", 
+           RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], 
+          "]"}]}]}], "]"}]}]}], "\n", "]"}]}], ";"}]], "Code",ExpressionUUID->\
+"776def38-dbf3-4def-bec9-2d1500f7ac17"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"ShowModiclusV6", "[", 
+     RowBox[{"game_", ",", 
+      RowBox[{"opts", ":", 
+       RowBox[{"OptionsPattern", "[", 
+        RowBox[{"{", 
+         RowBox[{"PlotCore3dV6", ",", "Graphics3D"}], "}"}], "]"}]}]}], "]"}],
+     " ", ":=", "\n", "    ", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "mnccoord", ",", "dld4", ",", "rd", ",", "filopts", ",", "normQ", ",", 
+        "mncsol", ",", "l1"}], "}"}], ",", "\n", "    ", 
+      RowBox[{
+       RowBox[{"mnccoord", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ModiclusCoord", "]"}]}], ";", "\n", 
+       "    ", 
+       RowBox[{"dld4", "=", " ", 
+        RowBox[{"OptionValue", "[", "SyncDim", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"rd", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "PtRadius", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"filopts", " ", "=", " ", 
+        RowBox[{"FilterRules", "[", 
+         RowBox[{
+          RowBox[{"{", "opts", "}"}], ",", 
+          RowBox[{"Options", "[", "Graphics3D", "]"}]}], "]"}]}], ";", " ", 
+       "\n", "    ", 
+       RowBox[{"normQ", " ", "=", " ", 
+        RowBox[{"Which", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Length", "[", "mnccoord", "]"}], " ", "!=", " ", "0"}], 
+          ",", " ", 
+          RowBox[{"Apply", "[", 
+           RowBox[{"Plus", ",", " ", "mnccoord"}], "]"}], ",", " ", "True", 
+          ",", " ", "1"}], "]"}]}], ";", "\n", "    ", 
+       RowBox[{"mnccoord", " ", "=", " ", 
+        RowBox[{"Which", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Length", "[", "mnccoord", "]"}], " ", "!=", " ", "0"}], 
+          ",", " ", 
+          RowBox[{"Which", "[", 
+           RowBox[{
+            RowBox[{"normQ", " ", "==", " ", "1"}], ",", " ", "mnccoord", ",",
+             " ", "True", ",", " ", 
+            RowBox[{"mnccoord", "/", "normQ"}]}], "]"}], ",", " ", "True", 
+          ",", " ", "mnccoord"}], "]"}]}], ";", "\n", "    ", 
+       RowBox[{"l1", " ", "=", " ", 
+        RowBox[{"Depth", "[", "mnccoord", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"Which", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"Length", "[", "mnccoord", "]"}], "!=", "0"}], " ", "&&",
+             " ", 
+            RowBox[{"l1", "==", "2"}]}], ")"}], "==", "True"}], ",", 
+         RowBox[{"GenModiclusGraphPointV6", "[", 
+          RowBox[{"mnccoord", ",", 
+           RowBox[{"SyncDim", " ", "->", "dld4"}], ",", 
+           RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], 
+          "]"}], ",", "\n", "    ", "True", ",", 
+         RowBox[{
+          RowBox[{"mncsol", " ", "=", " ", 
+           RowBox[{"Modiclus", "[", "game", "]"}]}], ";", 
+          RowBox[{"GenModiclusGraphPointV6", "[", 
+           RowBox[{"mncsol", ",", 
+            RowBox[{"SyncDim", " ", "->", "dld4"}], ",", 
+            RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], 
+           "]"}]}]}], "]"}]}]}], "\n", "]"}]}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ShowShapleyV6", "[", 
+    RowBox[{"game_", ",", 
+     RowBox[{"opts", ":", 
+      RowBox[{"OptionsPattern", "[", 
+       RowBox[{"{", 
+        RowBox[{"PlotCore3dV6", ",", "Graphics3D"}], "}"}], "]"}]}]}], "]"}], 
+   " ", ":=", "\n", "    ", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "shapcoord", ",", "dld4", ",", "rd", ",", "filopts", ",", "normQ", ",", 
+       "shapsol", ",", "l1", ",", "retval"}], "}"}], ",", "\n", "    ", 
+     RowBox[{
+      RowBox[{"shapcoord", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "ShapleyCoord", "]"}]}], ";", "\n", "    ", 
+      RowBox[{"dld4", "=", " ", 
+       RowBox[{"OptionValue", "[", "SyncDim", "]"}]}], ";", "\n", "    ", 
+      RowBox[{"rd", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "PtRadius", "]"}]}], ";", "\n", "    ", 
+      RowBox[{"filopts", " ", "=", " ", 
+       RowBox[{"FilterRules", "[", 
+        RowBox[{
+         RowBox[{"{", "opts", "}"}], ",", 
+         RowBox[{"Options", "[", "Graphics3D", "]"}]}], "]"}]}], ";", " ", 
+      "\n", "    ", 
+      RowBox[{"normQ", " ", "=", " ", 
+       RowBox[{"Which", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Length", "[", "shapcoord", "]"}], " ", "!=", " ", "0"}], 
+         ",", " ", 
+         RowBox[{"Apply", "[", 
+          RowBox[{"Plus", ",", "shapcoord"}], "]"}], ",", "True", ",", "1"}], 
+        "]"}]}], ";", "\n", "    ", 
+      RowBox[{"shapcoord", " ", "=", " ", 
+       RowBox[{"Which", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Length", "[", "shapcoord", "]"}], " ", "!=", " ", "0"}], 
+         ",", " ", 
+         RowBox[{"Which", "[", 
+          RowBox[{
+           RowBox[{"normQ", " ", "==", " ", "1"}], ",", " ", "shapcoord", ",",
+            " ", "True", ",", " ", 
+           RowBox[{"shapcoord", "/", "normQ"}]}], "]"}], ",", " ", "True", 
+         ",", " ", "shapcoord"}], "]"}]}], ";", "\n", "    ", 
+      RowBox[{"l1", " ", "=", " ", 
+       RowBox[{"Depth", "[", "shapcoord", "]"}]}], ";", "\n", "    ", 
+      RowBox[{"retval", "=", 
+       RowBox[{"Which", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"Length", "[", "shapcoord", "]"}], "!=", "0"}], " ", "&&",
+             " ", 
+            RowBox[{"l1", "==", "2"}]}], ")"}], "==", "True"}], ",", 
+         RowBox[{"GenShapleyGraphPointV6", "[", 
+          RowBox[{"shapcoord", ",", 
+           RowBox[{"SyncDim", " ", "->", "dld4"}], ",", 
+           RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], 
+          "]"}], ",", "\n", "    ", "True", ",", 
+         RowBox[{
+          RowBox[{"shapsol", " ", "=", " ", 
+           RowBox[{"NewShapley", "[", "game", "]"}]}], ";", 
+          RowBox[{"GenShapleyGraphPointV6", "[", 
+           RowBox[{"shapsol", ",", 
+            RowBox[{"SyncDim", " ", "->", "dld4"}], ",", 
+            RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], 
+           "]"}]}]}], "]"}]}], ";", "\n", "    ", 
+      RowBox[{"Return", "[", "retval", "]"}]}]}], "\n", "]"}]}], 
+  ";"}], "\n"}], "Code",ExpressionUUID->"5d79112a-b633-42d8-8001-\
+206fc05f7ea9"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"GenKernelGraphPointV6", "[", 
+    RowBox[{"payoff_", ",", 
+     RowBox[{"opts", ":", 
+      RowBox[{"OptionsPattern", "[", 
+       RowBox[{"{", 
+        RowBox[{"PlotCore3dV6", ",", "Graphics3D"}], "}"}], "]"}]}]}], "]"}], 
+   ":=", "\n", "   ", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "dld4", ",", "rd", ",", "filopts", ",", "reddim", ",", "sph", ",", 
+       "gr"}], "}"}], ",", "\n", "    ", 
+     RowBox[{
+      RowBox[{"dld4", "=", " ", 
+       RowBox[{"OptionValue", "[", "SyncDim", "]"}]}], ";", "\n", "    ", 
+      RowBox[{"rd", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "PtRadius", "]"}]}], ";", "\n", "    ", 
+      RowBox[{"filopts", " ", "=", " ", 
+       RowBox[{"FilterRules", "[", 
+        RowBox[{
+         RowBox[{"{", "opts", "}"}], ",", 
+         RowBox[{"Options", "[", "Graphics3D", "]"}]}], "]"}]}], ";", " ", 
+      "\n", "    ", 
+      RowBox[{"reddim", "=", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Length", "[", "payoff", "]"}], "==", "4"}], ",", "\n", 
+         "             ", 
+         RowBox[{"Which", "[", 
+          RowBox[{
+           RowBox[{"SameQ", "[", 
+            RowBox[{"dld4", ",", 
+             RowBox[{"{", "}"}]}], "]"}], ",", 
+           RowBox[{"RedDimV6", "[", "payoff", "]"}], ",", "\n", 
+           "                   ", "True", ",", 
+           RowBox[{"Delete", "[", 
+            RowBox[{"payoff", ",", "dld4"}], "]"}]}], "]"}], ",", "payoff"}], 
+        "]"}]}], ";", "\n", "    ", 
+      RowBox[{"sph", " ", "=", " ", 
+       RowBox[{"Sphere", "[", 
+        RowBox[{"reddim", ",", "rd"}], "]"}]}], ";", "\n", "    ", 
+      RowBox[{"gr", "=", 
+       RowBox[{"Graphics3D", "[", 
+        RowBox[{
+         RowBox[{"{", " ", 
+          RowBox[{
+           RowBox[{"RGBColor", "[", 
+            RowBox[{"1", ",", "0", ",", "0"}], "]"}], ",", " ", "sph"}], " ", 
+          "}"}], ",", "filopts"}], "]"}]}], ";", "\n", "    ", 
+      RowBox[{"Return", "[", "gr", "]"}], ";"}]}], "\n", "]"}]}], 
+  ";"}]], "Code",ExpressionUUID->"86ff7ee3-eacf-470a-92d4-d38cd1896df1"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"ShowPayoffV6", "[", 
+     RowBox[{"game_", ",", 
+      RowBox[{"opts", ":", 
+       RowBox[{"OptionsPattern", "[", 
+        RowBox[{"{", 
+         RowBox[{"PlotCore3dV6", ",", "Graphics3D"}], "}"}], "]"}]}]}], "]"}],
+     " ", ":=", "\n", "    ", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "paycoord", ",", "dld4", ",", "rd", ",", "filopts", ",", "normQ", ",", 
+        "paysol", ",", "l1"}], "}"}], ",", "\n", "    ", 
+      RowBox[{
+       RowBox[{"paycoord", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "PayoffCoord", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"dld4", "=", " ", 
+        RowBox[{"OptionValue", "[", "SyncDim", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"rd", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "PtRadius", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"filopts", " ", "=", " ", 
+        RowBox[{"FilterRules", "[", 
+         RowBox[{
+          RowBox[{"{", "opts", "}"}], ",", 
+          RowBox[{"Options", "[", "Graphics3D", "]"}]}], "]"}]}], ";", "\n", 
+       "    ", 
+       RowBox[{"normQ", " ", "=", " ", 
+        RowBox[{"Which", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Depth", "[", "paycoord", "]"}], " ", "==", " ", "2"}], 
+          ",", " ", 
+          RowBox[{"Apply", "[", 
+           RowBox[{"Plus", ",", "paycoord"}], "]"}], ",", "\n", "\t\t  ", 
+          RowBox[{
+           RowBox[{"Depth", "[", "paycoord", "]"}], " ", "==", " ", "3"}], 
+          ",", " ", 
+          RowBox[{"Apply", "[", 
+           RowBox[{"Plus", ",", 
+            RowBox[{"First", "[", "paycoord", "]"}]}], "]"}], ",", "\n", 
+          "\t\t  ", "True", ",", "1"}], "]"}]}], ";", "\n", "    ", 
+       RowBox[{"paycoord", "=", " ", 
+        RowBox[{"Which", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Depth", "[", "paycoord", "]"}], " ", "==", " ", "2"}], 
+          ",", " ", 
+          RowBox[{"List", "[", "paycoord", "]"}], ",", "True", ",", 
+          "paycoord"}], "]"}]}], ";", "\t   ", "\n", "    ", 
+       RowBox[{"paycoord", " ", "=", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Which", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"Length", "[", "#", "]"}], " ", "!=", " ", "0"}], ",", 
+            " ", 
+            RowBox[{"Which", "[", 
+             RowBox[{
+              RowBox[{"normQ", " ", "==", " ", "1"}], ",", " ", "#", ",", " ",
+               "True", ",", " ", 
+              RowBox[{"#", "/", "normQ"}]}], "]"}], ",", " ", "True", ",", 
+            " ", "#"}], "]"}], " ", "&"}], "/@", " ", "paycoord"}]}], ";", 
+       "\n", "    ", 
+       RowBox[{"l1", " ", "=", " ", 
+        RowBox[{"Depth", "[", "paycoord", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"Which", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"Length", "[", "paycoord", "]"}], "!=", "0"}], " ", "&&",
+             " ", 
+            RowBox[{"l1", "<=", "3"}]}], ")"}], "==", "True"}], ",", 
+         RowBox[{"GenGraphPointV6", "[", 
+          RowBox[{"paycoord", ",", 
+           RowBox[{"SyncDim", " ", "->", "dld4"}], ",", 
+           RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], 
+          "]"}], ",", "\n", "    ", "True", ",", 
+         RowBox[{
+          RowBox[{"paysol", " ", "=", " ", 
+           RowBox[{"Table", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"v", "[", "T", "]"}], "/", 
+              RowBox[{"Length", "[", "T", "]"}]}], ",", " ", 
+             RowBox[{"{", 
+              RowBox[{"i", ",", " ", "1", ",", " ", 
+               RowBox[{"Length", "[", "T", "]"}]}], "}"}]}], "]"}]}], ";", 
+          RowBox[{"GenGraphPointV6", "[", 
+           RowBox[{"paysol", ",", 
+            RowBox[{"SyncDim", " ", "->", "dld4"}], ",", 
+            RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], 
+           "]"}]}]}], "]"}]}]}], "\n", "]"}]}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"RedDimV6", "[", "pay_List", "]"}], ":=", "\n", "  ", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"mcoor", ",", "psmc"}], "}"}], ",", "\n", "    ", 
+      RowBox[{
+       RowBox[{"mcoord", "=", 
+        RowBox[{"Min", "[", "pay", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"psmc", "=", 
+        RowBox[{"Position", "[", 
+         RowBox[{"pay", ",", "mcoord"}], "]"}]}], ";", "\n", "    ", 
+       RowBox[{"psmc", "=", 
+        RowBox[{"First", "[", "psmc", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"Delete", "[", 
+        RowBox[{"pay", ",", "psmc"}], "]"}]}]}], "\n", "]"}]}], ";"}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"MultRedDimV6", "[", "game_", "]"}], " ", ":=", " ", "\n", "  ", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "crQ", ",", "vertlist", ",", "trext", ",", "varl", ",", "minv", ",", 
+        "psm"}], "}"}], ",", "\n", "    ", 
+      RowBox[{
+       RowBox[{"crQ", "=", 
+        RowBox[{"CoreQ", "[", "game", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"vertlist", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"SameQ", "[", 
+           RowBox[{"crQ", ",", "True"}], "]"}], ",", 
+          RowBox[{"CddGmpVerticesCore", "[", "game", "]"}], ",", 
+          RowBox[{"CddVerticesImputationSet", "[", "game", "]"}]}], "]"}]}], 
+       ";", "\n", "    ", 
+       RowBox[{"trext", " ", "=", " ", 
+        RowBox[{"Transpose", "[", "vertlist", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"varl", "=", 
+        RowBox[{"N", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Variance", "[", "#", "]"}], " ", "&"}], "/@", " ", 
+          "trext"}], "]"}]}], ";", "\n", "    ", 
+       RowBox[{"minv", "=", 
+        RowBox[{"Min", "[", "varl", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"psm", "=", 
+        RowBox[{"Position", "[", 
+         RowBox[{"varl", ",", "minv"}], "]"}]}], ";", "\n", "    ", 
+       RowBox[{"First", "[", "psm", "]"}]}]}], "\n", "]"}]}], ";"}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"ListRedDimV6", "[", 
+     RowBox[{"vertlist_", ",", 
+      RowBox[{"opts", ":", 
+       RowBox[{"OptionsPattern", "[", 
+        RowBox[{"{", 
+         RowBox[{"PlotCore3dV6", ",", "Graphics3D"}], "}"}], "]"}]}]}], "]"}],
+     " ", ":=", " ", "\n", "  ", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"trext", ",", "varl", ",", "minv", ",", "psm"}], "}"}], ",", 
+      "\n", "    ", 
+      RowBox[{
+       RowBox[{"dld4", "=", " ", 
+        RowBox[{"OptionValue", "[", "SyncDim", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"trext", " ", "=", " ", 
+        RowBox[{"Transpose", "[", "vertlist", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"varl", "=", 
+        RowBox[{"N", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Variance", "[", "#", "]"}], " ", "&"}], "/@", " ", 
+          "trext"}], "]"}]}], ";", "\n", "    ", 
+       RowBox[{"minv", "=", 
+        RowBox[{"Min", "[", "varl", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"psm", "=", 
+        RowBox[{"Position", "[", 
+         RowBox[{"varl", ",", "minv"}], "]"}]}], ";", "\n", "    ", 
+       RowBox[{"psm", " ", "=", " ", 
+        RowBox[{"First", "[", "psm", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"psm", " ", "=", " ", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"SameQ", "[", 
+           RowBox[{"dld4", ",", 
+            RowBox[{"{", "}"}]}], "]"}], ",", "psm", ",", "dld4"}], "]"}]}], 
+       ";", "\n", "    ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Delete", "[", 
+          RowBox[{"#", ",", "psm"}], "]"}], " ", "&"}], "/@", " ", 
+        "vertlist"}]}]}], "\n", "]"}]}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ImpRedDimV6", "[", "game_", "]"}], " ", ":=", " ", "\n", "  ", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "vertlist", ",", "trext", ",", "varl", ",", "minv", ",", "psm"}], "}"}],
+      ",", "\n", "    ", 
+     RowBox[{
+      RowBox[{"vertlist", " ", "=", " ", 
+       RowBox[{"CddVerticesImputationSet", "[", "game", "]"}]}], ";", "\n", 
+      "    ", 
+      RowBox[{"trext", " ", "=", " ", 
+       RowBox[{"Transpose", "[", "vertlist", "]"}]}], ";", "\n", "    ", 
+      RowBox[{"varl", "=", 
+       RowBox[{"N", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Variance", "[", "#", "]"}], " ", "&"}], "/@", " ", 
+         "trext"}], "]"}]}], ";", "\n", "    ", 
+      RowBox[{"minv", "=", 
+       RowBox[{"Min", "[", "varl", "]"}]}], ";", "\n", "    ", 
+      RowBox[{"psm", "=", 
+       RowBox[{"Position", "[", 
+        RowBox[{"varl", ",", "minv"}], "]"}]}], ";", "\n", "    ", 
+      RowBox[{"First", "[", "psm", "]"}]}]}], "\n", "]"}]}], ";"}]}], "Code",E\
+xpressionUUID->"f9036ac9-cdc7-4b84-b9b6-4d2d08edb508"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"GenNucleolusGraphPointV6", "[", 
+    RowBox[{"payoff_", ",", 
+     RowBox[{"opts", ":", 
+      RowBox[{"OptionsPattern", "[", 
+       RowBox[{"{", 
+        RowBox[{"PlotCore3dV6", ",", "Graphics3D"}], "}"}], "]"}]}]}], "]"}], 
+   ":=", "\n", "   ", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "dld4", ",", "rd", ",", "filopts", ",", "reddim", ",", "sph", ",", 
+       "gr"}], "}"}], ",", "\n", "    ", 
+     RowBox[{
+      RowBox[{"dld4", "=", " ", 
+       RowBox[{"OptionValue", "[", "SyncDim", "]"}]}], ";", "\n", "    ", 
+      RowBox[{"rd", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "PtRadius", "]"}]}], ";", "\n", "    ", 
+      RowBox[{"filopts", " ", "=", " ", 
+       RowBox[{"FilterRules", "[", 
+        RowBox[{
+         RowBox[{"{", "opts", "}"}], ",", 
+         RowBox[{"Options", "[", "Graphics3D", "]"}]}], "]"}]}], ";", "\n", 
+      "    ", 
+      RowBox[{"reddim", "=", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Length", "[", "payoff", "]"}], "==", "4"}], ",", "\n", 
+         "             ", 
+         RowBox[{"Which", "[", 
+          RowBox[{
+           RowBox[{"SameQ", "[", 
+            RowBox[{"dld4", ",", 
+             RowBox[{"{", "}"}]}], "]"}], ",", 
+           RowBox[{"RedDimV6", "[", "payoff", "]"}], ",", "\n", 
+           "                   ", "True", ",", 
+           RowBox[{"Delete", "[", 
+            RowBox[{"payoff", ",", "dld4"}], "]"}]}], "]"}], ",", "payoff"}], 
+        "]"}]}], ";", "\n", "    ", 
+      RowBox[{"sph", " ", "=", " ", 
+       RowBox[{"Sphere", "[", 
+        RowBox[{"reddim", ",", "rd"}], "]"}]}], ";", "\n", "    ", 
+      RowBox[{"gr", " ", "=", " ", 
+       RowBox[{"Graphics3D", "[", 
+        RowBox[{
+         RowBox[{"{", " ", 
+          RowBox[{"Green", ",", " ", "sph"}], " ", "}"}], ",", "filopts"}], 
+        "]"}]}], ";", "\n", "    ", 
+      RowBox[{"Return", "[", "gr", "]"}], ";"}]}], "\n", "]"}]}], 
+  ";"}]], "Code",ExpressionUUID->"29a1141e-1848-411f-9d70-64db230b31c6"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"GenModiclusGraphPointV6", "[", 
+    RowBox[{"payoff_", ",", 
+     RowBox[{"opts", ":", 
+      RowBox[{"OptionsPattern", "[", 
+       RowBox[{"{", 
+        RowBox[{"PlotCore3dV6", ",", "Graphics3D"}], "}"}], "]"}]}]}], "]"}], 
+   ":=", "\n", "   ", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "dld4", ",", "rd", ",", "filopts", ",", "reddim", ",", "sph", ",", 
+       "gr"}], "}"}], ",", "\n", "    ", 
+     RowBox[{
+      RowBox[{"dld4", "=", " ", 
+       RowBox[{"OptionValue", "[", "SyncDim", "]"}]}], ";", "\n", "    ", 
+      RowBox[{"rd", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "PtRadius", "]"}]}], ";", "\n", "    ", 
+      RowBox[{"filopts", " ", "=", " ", 
+       RowBox[{"FilterRules", "[", 
+        RowBox[{
+         RowBox[{"{", "opts", "}"}], ",", 
+         RowBox[{"Options", "[", "Graphics3D", "]"}]}], "]"}]}], ";", "\n", 
+      "    ", 
+      RowBox[{"reddim", "=", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Length", "[", "payoff", "]"}], "==", "4"}], ",", "\n", 
+         "             ", 
+         RowBox[{"Which", "[", 
+          RowBox[{
+           RowBox[{"SameQ", "[", 
+            RowBox[{"dld4", ",", 
+             RowBox[{"{", "}"}]}], "]"}], ",", 
+           RowBox[{"RedDimV6", "[", "payoff", "]"}], ",", "\n", 
+           "                   ", "True", ",", 
+           RowBox[{"Delete", "[", 
+            RowBox[{"payoff", ",", "dld4"}], "]"}]}], "]"}], ",", "payoff"}], 
+        "]"}]}], ";", "\n", "    ", 
+      RowBox[{"sph", " ", "=", " ", 
+       RowBox[{"Sphere", "[", 
+        RowBox[{"reddim", ",", "rd"}], "]"}]}], ";", "\n", "    ", 
+      RowBox[{"gr", " ", "=", " ", 
+       RowBox[{"Graphics3D", "[", 
+        RowBox[{
+         RowBox[{"{", " ", 
+          RowBox[{"Purple", ",", " ", "sph"}], " ", "}"}], ",", "filopts"}], 
+        "]"}]}], ";", "\n", "    ", 
+      RowBox[{"Return", "[", "gr", "]"}], ";"}]}], "\n", "]"}]}], 
+  ";"}]], "Code",ExpressionUUID->"57bea743-a65f-4947-bf33-e0e20913f262"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"GenShapleyGraphPointV6", "[", 
+    RowBox[{"payoff_", ",", 
+     RowBox[{"opts", ":", 
+      RowBox[{"OptionsPattern", "[", 
+       RowBox[{"{", 
+        RowBox[{"PlotCore3dV6", ",", "Graphics3D"}], "}"}], "]"}]}]}], "]"}], 
+   ":=", "\n", "   ", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "dld4", ",", "rd", ",", "filopts", ",", "reddim", ",", "sph", ",", 
+       "gr"}], "}"}], ",", "\n", "    ", 
+     RowBox[{
+      RowBox[{"dld4", "=", " ", 
+       RowBox[{"OptionValue", "[", "SyncDim", "]"}]}], ";", "\n", "    ", 
+      RowBox[{"rd", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "PtRadius", "]"}]}], ";", "\n", "    ", 
+      RowBox[{"filopts", " ", "=", " ", 
+       RowBox[{"FilterRules", "[", 
+        RowBox[{
+         RowBox[{"{", "opts", "}"}], ",", 
+         RowBox[{"Options", "[", "Graphics3D", "]"}]}], "]"}]}], ";", " ", 
+      "\n", "    ", 
+      RowBox[{"reddim", "=", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Length", "[", "payoff", "]"}], "==", "4"}], ",", "\n", 
+         "             ", 
+         RowBox[{"Which", "[", 
+          RowBox[{
+           RowBox[{"SameQ", "[", 
+            RowBox[{"dld4", ",", 
+             RowBox[{"{", "}"}]}], "]"}], ",", 
+           RowBox[{"RedDimV6", "[", "payoff", "]"}], ",", "\n", 
+           "                   ", "True", ",", 
+           RowBox[{"Delete", "[", 
+            RowBox[{"payoff", ",", "dld4"}], "]"}]}], "]"}], ",", "payoff"}], 
+        "]"}]}], ";", "\n", "    ", 
+      RowBox[{"sph", " ", "=", " ", 
+       RowBox[{"Sphere", "[", 
+        RowBox[{"reddim", ",", "rd"}], "]"}]}], ";", "\n", "    ", 
+      RowBox[{"gr", "=", 
+       RowBox[{"Graphics3D", "[", 
+        RowBox[{
+         RowBox[{"{", " ", 
+          RowBox[{
+           RowBox[{"RGBColor", "[", 
+            RowBox[{"0", ",", "0", ",", "1"}], "]"}], ",", " ", "sph"}], " ", 
+          "}"}], ",", "filopts"}], "]"}]}], ";", "\n", "    ", 
+      RowBox[{"Return", "[", "gr", "]"}], ";"}]}], "\n", "]"}]}], 
+  ";"}]], "Code",ExpressionUUID->"3c581eb3-98da-443b-bd63-8809412618dc"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"GenGraphPointV6", "[", 
+     RowBox[{"payoff_List", ",", 
+      RowBox[{"opts", ":", 
+       RowBox[{"OptionsPattern", "[", 
+        RowBox[{"{", 
+         RowBox[{"PlotCore3dV6", ",", "Graphics3D"}], "}"}], "]"}]}]}], "]"}],
+     ":=", "\n", "   ", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "dld4", ",", "rd", ",", "filopts", ",", "py", ",", "reddim", ",", "l1",
+         ",", "sph", ",", "gr"}], "}"}], ",", "\n", "    ", 
+      RowBox[{
+       RowBox[{"dld4", "=", " ", 
+        RowBox[{"OptionValue", "[", "SyncDim", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"rd", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "PtRadius", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"filopts", " ", "=", " ", 
+        RowBox[{"FilterRules", "[", 
+         RowBox[{
+          RowBox[{"{", "opts", "}"}], ",", 
+          RowBox[{"Options", "[", "Graphics3D", "]"}]}], "]"}]}], ";", "\n", 
+       "    ", 
+       RowBox[{"py", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Depth", "[", "payoff", "]"}], "==", "2"}], ",", 
+          RowBox[{"{", "payoff", "}"}], ",", "payoff"}], "]"}]}], ";", "\n", 
+       "    ", 
+       RowBox[{"reddim", "=", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"Length", "[", "#", "]"}], "==", "4"}], ",", "\n", 
+            "             ", 
+            RowBox[{"Which", "[", 
+             RowBox[{
+              RowBox[{"SameQ", "[", 
+               RowBox[{"dld4", ",", 
+                RowBox[{"{", "}"}]}], "]"}], ",", 
+              RowBox[{"RedDimV6", "[", "#", "]"}], ",", "\n", 
+              "                   ", "True", ",", 
+              RowBox[{"Delete", "[", 
+               RowBox[{"#", ",", "dld4"}], "]"}]}], "]"}], ",", "py"}], "]"}],
+           " ", "&"}], " ", "/@", " ", "py"}]}], ";", "\n", "    ", 
+       RowBox[{"l1", " ", "=", " ", 
+        RowBox[{"Depth", "[", "reddim", "]"}]}], ";", "\t  ", "\n", "    ", 
+       RowBox[{"sph", " ", "=", " ", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"l1", "==", "2"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"RGBColor", "[", 
+             RowBox[{"1", ",", 
+              RowBox[{"1", "/", "2"}], ",", "0"}], "]"}], ",", " ", 
+            RowBox[{"Sphere", "[", 
+             RowBox[{"reddim", ",", "rd"}], "]"}]}], " ", "}"}], ",", " ", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"RGBColor", "[", "#", "]"}], " ", ",", " ", 
+              RowBox[{"Sphere", "[", 
+               RowBox[{"#", ",", "rd"}], "]"}]}], "}"}], " ", "&"}], " ", "/@",
+            " ", "reddim"}]}], "]"}]}], ";", "\n", "    ", 
+       RowBox[{"gr", " ", "=", " ", 
+        RowBox[{"Graphics3D", "[", 
+         RowBox[{"sph", " ", ",", "filopts"}], "]"}]}], ";", "\n", "    ", 
+       RowBox[{"Return", "[", "gr", "]"}], ";"}]}], "\n", "   ", "]"}]}], 
+   ";"}], "\n"}]], "Code",ExpressionUUID->"a89983bf-cb0f-4219-9673-\
+b1c4b1873a1d"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"GenCoreGraphPointV6", "[", 
+    RowBox[{"payoff_", ",", 
+     RowBox[{"opts", ":", 
+      RowBox[{"OptionsPattern", "[", 
+       RowBox[{"{", 
+        RowBox[{"PlotCore3dV6", ",", "Graphics3D"}], "}"}], "]"}]}]}], "]"}], 
+   ":=", "\n", "   ", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "dld4", ",", "rd", ",", "filopts", ",", "pr", ",", "pay1", ",", 
+       "reddim", ",", "sph", ",", "gr"}], "}"}], ",", "\n", "    ", 
+     RowBox[{
+      RowBox[{"dld4", "=", " ", 
+       RowBox[{"OptionValue", "[", "SyncDim", "]"}]}], ";", "\n", "    ", 
+      RowBox[{"rd", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "PtRadius", "]"}]}], ";", "\t  ", "\n", 
+      "    ", 
+      RowBox[{"filopts", " ", "=", " ", 
+       RowBox[{"FilterRules", "[", 
+        RowBox[{
+         RowBox[{"{", "opts", "}"}], ",", 
+         RowBox[{"Options", "[", "Graphics3D", "]"}]}], "]"}]}], ";", " ", 
+      "\n", "    ", 
+      RowBox[{"pr", "=", 
+       RowBox[{"Apply", "[", 
+        RowBox[{"Plus", ",", "payoff"}], "]"}]}], ";", "\n", "    ", 
+      RowBox[{"pay1", "=", 
+       RowBox[{"payoff", "/", "pr"}]}], ";", "\n", "    ", 
+      RowBox[{"reddim", "=", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Length", "[", "pay1", "]"}], "==", "4"}], ",", "\n", 
+         "             ", 
+         RowBox[{"Which", "[", 
+          RowBox[{
+           RowBox[{"SameQ", "[", 
+            RowBox[{"dld4", ",", 
+             RowBox[{"{", "}"}]}], "]"}], ",", 
+           RowBox[{"RedDimV6", "[", "pay1", "]"}], ",", "\n", 
+           "                   ", "True", ",", 
+           RowBox[{"Delete", "[", 
+            RowBox[{"pay1", ",", "dld4"}], "]"}]}], "]"}], ",", "pay1"}], 
+        "]"}]}], ";", "\n", "    ", 
+      RowBox[{"sph", " ", "=", " ", 
+       RowBox[{"Sphere", "[", 
+        RowBox[{"reddim", ",", 
+         RowBox[{"1.1", "*", "rd"}]}], "]"}]}], ";", "\n", "    ", 
+      RowBox[{"gr", "=", 
+       RowBox[{"Graphics3D", "[", 
+        RowBox[{
+         RowBox[{"{", " ", 
+          RowBox[{
+           RowBox[{"RGBColor", "[", 
+            RowBox[{"0", ",", "1", ",", "0"}], "]"}], ",", " ", "sph"}], " ", 
+          "}"}], ",", "filopts"}], "]"}]}], ";", "\n", "    ", 
+      RowBox[{"Return", "[", "gr", "]"}], ";"}]}], "\n", "]"}]}], 
+  ";"}]], "Code",ExpressionUUID->"34a1f610-b156-4059-8b0d-f38e33c366b2"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"GenCoreGraphLineV6", "[", 
+    RowBox[{"payoff_List", ",", 
+     RowBox[{"opts", ":", 
+      RowBox[{"OptionsPattern", "[", 
+       RowBox[{"{", 
+        RowBox[{"PlotCore3dV6", ",", "Graphics3D"}], "}"}], "]"}]}]}], "]"}], 
+   ":=", " ", "\n", "   ", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "filopts", ",", "dld4", ",", "rd", ",", "py1", ",", "reddim", ",", 
+       "crseg", ",", "gr"}], "}"}], ",", "\n", "      ", 
+     RowBox[{
+      RowBox[{"filopts", " ", "=", " ", 
+       RowBox[{"FilterRules", "[", 
+        RowBox[{
+         RowBox[{"{", "opts", "}"}], ",", 
+         RowBox[{"Options", "[", "Graphics3D", "]"}]}], "]"}]}], ";", " ", 
+      "\n", "      ", 
+      RowBox[{"dld4", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "SyncDim", "]"}]}], ";", "\n", "      ", 
+      RowBox[{"rd", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "PtRadius", "]"}]}], ";", "\n", "      ", 
+      RowBox[{"py1", "=", 
+       RowBox[{"First", "[", "payoff", "]"}]}], ";", "\n", "      ", 
+      RowBox[{"reddim", " ", "=", " ", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"SameQ", "[", 
+          RowBox[{"py1", ",", "4"}], "]"}], ",", 
+         RowBox[{"ListRedDimV6", "[", 
+          RowBox[{"payoff", ",", 
+           RowBox[{"SyncDim", " ", "->", " ", "dld4"}]}], "]"}], ",", "\n", 
+         "                  ", "payoff"}], "]"}]}], ";", "\n", "      ", 
+      RowBox[{"crseg", " ", "=", " ", 
+       RowBox[{"Tube", "[", 
+        RowBox[{"reddim", ",", 
+         RowBox[{"0.7", "*", "rd"}]}], "]"}]}], ";", " ", 
+      RowBox[{"(*", " ", 
+       RowBox[{"kerseg", " ", "=", " ", 
+        RowBox[{"Line", "[", "reddim", "]"}]}], " ", "*)"}], "\n", "      ", 
+      RowBox[{"gr", "=", 
+       RowBox[{"Graphics3D", "[", 
+        RowBox[{
+         RowBox[{"{", " ", 
+          RowBox[{"Yellow", ",", " ", "crseg"}], " ", "}"}], ",", "filopts"}],
+         "]"}]}], ";", "\n", "      ", 
+      RowBox[{"Return", "[", "gr", "]"}], ";"}]}], "\n", "]"}]}], 
+  ";"}]], "Code",ExpressionUUID->"1ac7fb60-5236-4925-8703-7f5d8bf8632a"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"GenKernelGraphLineV6", "[", 
+     RowBox[{"payoff_List", ",", 
+      RowBox[{"opts", ":", 
+       RowBox[{"OptionsPattern", "[", 
+        RowBox[{"{", 
+         RowBox[{"PlotCore3dV6", ",", "Graphics3D"}], "}"}], "]"}]}]}], "]"}],
+     ":=", "\n", "   ", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "filopts", ",", "dld4", ",", "rd", ",", "trpy", ",", "varl", ",", 
+        "minv", ",", "psm", ",", "reddim", ",", "kerseg", ",", "gr"}], "}"}], 
+      ",", "\n", "      ", 
+      RowBox[{
+       RowBox[{"filopts", " ", "=", " ", 
+        RowBox[{"FilterRules", "[", 
+         RowBox[{
+          RowBox[{"{", "opts", "}"}], ",", 
+          RowBox[{"Options", "[", "Graphics3D", "]"}]}], "]"}]}], ";", " ", 
+       "\n", "      ", 
+       RowBox[{"dld4", "=", " ", 
+        RowBox[{"OptionValue", "[", "SyncDim", "]"}]}], ";", "\n", "      ", 
+       RowBox[{"rd", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "PtRadius", "]"}]}], ";", "\t  ", "\n", 
+       "      ", 
+       RowBox[{"trpy", "=", " ", 
+        RowBox[{"Transpose", "[", "payoff", "]"}]}], ";", "\n", "      ", 
+       RowBox[{"varl", "=", 
+        RowBox[{"N", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Variance", "[", "#", "]"}], " ", "&"}], "/@", " ", 
+          "trpy"}], "]"}]}], ";", "\n", "      ", 
+       RowBox[{"minv", "=", 
+        RowBox[{"Min", "[", "varl", "]"}]}], ";", "\n", "      ", 
+       RowBox[{"psm", "=", 
+        RowBox[{"Position", "[", 
+         RowBox[{"varl", ",", "minv"}], "]"}]}], ";", "\n", "      ", 
+       RowBox[{"psm", "=", 
+        RowBox[{"First", "[", "psm", "]"}]}], ";", "\n", "      ", 
+       RowBox[{"psm", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"SameQ", "[", 
+           RowBox[{"dld4", ",", 
+            RowBox[{"{", "}"}]}], "]"}], ",", "psm", ",", "dld4"}], "]"}]}], 
+       ";", "\n", "      ", 
+       RowBox[{"reddim", "=", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Delete", "[", 
+           RowBox[{"#", ",", "psm"}], "]"}], " ", "&"}], "/@", " ", 
+         "payoff"}]}], ";", "\n", "      ", 
+       RowBox[{"kerseg", " ", "=", " ", 
+        RowBox[{"Tube", "[", 
+         RowBox[{"reddim", ",", 
+          RowBox[{"0.75", "*", "rd"}]}], "]"}]}], ";", " ", 
+       RowBox[{"(*", " ", 
+        RowBox[{"kerseg", " ", "=", " ", 
+         RowBox[{"Line", "[", "reddim", "]"}]}], " ", "*)"}], "\n", "      ", 
+       
+       RowBox[{"gr", "=", 
+        RowBox[{"Graphics3D", "[", 
+         RowBox[{
+          RowBox[{"{", " ", 
+           RowBox[{
+            RowBox[{"RGBColor", "[", 
+             RowBox[{"1", ",", "0", ",", "0"}], "]"}], ",", " ", "kerseg"}], 
+           " ", "}"}], ",", "filopts"}], "]"}]}], ";", "\n", "      ", 
+       RowBox[{"Return", "[", "gr", "]"}]}]}], "\n", "]"}]}], ";"}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ShowKernelCatcherV6", "[", "args___", "]"}], ":=", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"Message", "[", 
+      RowBox[{"ShowKernelCatcherV6", "::", "argerr"}], "]"}], ";", 
+     "$Failed"}], ")"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"ShowKernelCatcherV6", "[", 
+     RowBox[{"game_", ",", " ", 
+      RowBox[{"opts", ":", 
+       RowBox[{"OptionsPattern", "[", 
+        RowBox[{"{", 
+         RowBox[{"ShowKernelCatcherV6", ",", "Graphics3D"}], "}"}], "]"}]}]}],
+      "]"}], " ", ":=", "\n", "    ", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "vwskl", ",", "vwker", ",", "vwshv", ",", "vwnuc", ",", "vwmnc", ",", 
+        "vwpay", ",", "kerc", ",", "shc", ",", "nuc", ",", "mnc", ",", 
+        "paycoord", ",", "rd", ",", "epsval", ",", "psm", ",", "shups", ",", 
+        "shcr", ",", "strCr", ",", "epsw", ",", "shlws", ",", "critval", ",", 
+        "dld4", ",", "filopts", ",", "oldvls", ",", "norm", ",", "normgame", 
+        ",", "gr0", ",", "origgame", ",", "gr1", ",", "epsvls", ",", 
+        "newgame", ",", "crQ", ",", "gr2", ",", "gr3", ",", "gr4", ",", "gr5",
+         ",", "gr6", ",", "gr7", ",", "gr8", ",", "gr9", ",", "grli", ",", 
+        "gr"}], "}"}], ",", "\n", "        ", 
+      RowBox[{
+       RowBox[{"filopts", " ", "=", " ", 
+        RowBox[{"FilterRules", "[", 
+         RowBox[{
+          RowBox[{"{", "opts", "}"}], ",", 
+          RowBox[{"Options", "[", "Graphics3D", "]"}]}], "]"}]}], ";", "\n", 
+       "        ", 
+       RowBox[{"vwskl", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ViewSkel", "]"}]}], ";", "\n", 
+       "        ", 
+       RowBox[{"vwker", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ViewKernelSol", "]"}]}], ";", "\n", 
+       "        ", 
+       RowBox[{"vwshv", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ViewShapleySol", "]"}]}], ";", "\n", 
+       "        ", 
+       RowBox[{"vwnuc", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ViewNucleolusSol", "]"}]}], ";", "\n", 
+       "        ", 
+       RowBox[{"vwmnc", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ViewModiclusSol", "]"}]}], ";", "\t   ", 
+       "\n", "        ", 
+       RowBox[{"vwpay", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ViewPayoffSol", "]"}]}], ";", "\t \t   ",
+        "\n", "        ", 
+       RowBox[{"kerc", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "KernelCoord", "]"}]}], ";", "\n", 
+       "        ", 
+       RowBox[{"shc", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ShapleyCoord", "]"}]}], ";", "\n", 
+       "        ", 
+       RowBox[{"nuc", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "NucleolusCoord", "]"}]}], ";", "\n", 
+       "        ", 
+       RowBox[{"mnc", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ModiclusCoord", "]"}]}], ";", "\t \t   ",
+        "\n", "        ", 
+       RowBox[{"paycoord", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "PayoffCoord", "]"}]}], ";", "\t   ", 
+       "\n", "        ", 
+       RowBox[{"shups", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ShowUpperSet", "]"}]}], ";", "\n", 
+       "        ", 
+       RowBox[{"shcr", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ShowCore", "]"}]}], ";", "\n", 
+       "        ", 
+       RowBox[{"strCr", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ShowStrongEpsCore", "]"}]}], ";", "\n", 
+       "        ", 
+       RowBox[{"epsw", " ", "=", "  ", 
+        RowBox[{"OptionValue", "[", "EpsStrValues", "]"}]}], ";", "\n", 
+       "        ", 
+       RowBox[{"shlws", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "ShowLowerSet", "]"}]}], ";", "\n", 
+       "        ", 
+       RowBox[{"critval", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "CriticalValue", "]"}]}], ";", "\n", 
+       "        ", 
+       RowBox[{"rd", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "PtRadius", "]"}]}], ";", "\n", 
+       "        ", 
+       RowBox[{"dld4", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "SyncDim", "]"}]}], ";", "\n", "        ", 
+       RowBox[{"dld4", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"SameQ", "[", 
+           RowBox[{"dld4", ",", "False"}], "]"}], ",", 
+          RowBox[{"{", "}"}], ",", 
+          RowBox[{"First", "[", 
+           RowBox[{"DetDim2Del", "[", "game", "]"}], "]"}]}], "]"}]}], ";", 
+       "\n", "        ", 
+       RowBox[{"shcr", " ", "=", " ", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"SameQ", "[", 
+           RowBox[{"shcr", ",", "True"}], "]"}], ",", "\n", 
+          "                ", 
+          RowBox[{
+           RowBox[{"crQ", "=", 
+            RowBox[{"CoreQ", "[", "game", "]"}]}], ";", "\n", 
+           "                ", 
+           RowBox[{"Print", "[", 
+            RowBox[{"\"\<Is core nonempty? \>\"", ",", " ", "crQ"}], "]"}], 
+           ";", "\n", "                ", "crQ"}], ",", "\n", 
+          "               ", "shcr"}], "]"}]}], ";", "\n", "        ", 
+       RowBox[{"oldvls", "=", " ", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"v", "[", "#", "]"}], " ", "&"}], " ", "/@", " ", 
+         RowBox[{"Subsets", "[", "T", "]"}]}]}], ";", "\n", "        ", 
+       RowBox[{"norm", " ", "=", " ", 
+        RowBox[{"OneNormalization", "[", "game", "]"}]}], ";", "\n", 
+       "        ", 
+       RowBox[{"normgame", " ", "=", " ", 
+        RowBox[{"DefineGame", "[", 
+         RowBox[{"T", ",", "norm"}], "]"}]}], ";", "\n", "        ", 
+       RowBox[{"gr0", "=", 
+        RowBox[{"SkelImputationV6", "[", 
+         RowBox[{"normgame", ",", 
+          RowBox[{"Boxed", "->", "False"}], ",", 
+          RowBox[{"SyncDim", " ", "->", " ", "dld4"}], ",", "filopts"}], 
+         "]"}]}], ";", "\n", "        ", 
+       RowBox[{"origgame", "=", 
+        RowBox[{"DefineGame", "[", 
+         RowBox[{"T", ",", "oldvls"}], "]"}]}], ";", "\n", "        ", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"gr1", ",", "psm"}], "}"}], " ", "=", " ", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"shcr", "===", "True"}], ",", 
+          RowBox[{"PlotCore3DV6", "[", 
+           RowBox[{"origgame", ",", 
+            RowBox[{"ViewSkel", " ", "->", " ", "vwskl"}], ",", " ", 
+            RowBox[{"ShowImputationSet", " ", "->", " ", "False"}], ",", 
+            RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", 
+            RowBox[{"Boxed", "->", "False"}], ",", "filopts"}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"gr0", ",", 
+            RowBox[{"MultRedDimV6", "[", "normgame", "]"}]}], "}"}]}], 
+         "]"}]}], ";", "\n", "        ", 
+       RowBox[{"epsval", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"epsw", "===", 
+           RowBox[{"{", "}"}]}], ",", 
+          RowBox[{"SelectCritical", "[", 
+           RowBox[{"normgame", ",", "critval"}], "]"}], ",", "epsw"}], 
+         "]"}]}], ";", "\n", "        ", 
+       RowBox[{"origgame", "=", 
+        RowBox[{"DefineGame", "[", 
+         RowBox[{"T", ",", "oldvls"}], "]"}]}], ";", "\n", "        ", 
+       RowBox[{"epsvls", " ", "=", " ", 
+        RowBox[{"EpsValue", "[", 
+         RowBox[{"origgame", ",", " ", "epsval"}], "]"}]}], ";", "\n", 
+       "        ", 
+       RowBox[{"epsvls", " ", "=", " ", 
+        RowBox[{"Prepend", "[", 
+         RowBox[{"epsvls", ",", "0"}], "]"}]}], ";", "\n", "        ", 
+       RowBox[{"epsvls", " ", "=", " ", 
+        RowBox[{"Append", "[", 
+         RowBox[{"epsvls", ",", 
+          RowBox[{"Last", "[", "oldvls", "]"}]}], "]"}]}], ";", "\n", 
+       "        ", 
+       RowBox[{"newgame", "=", " ", 
+        RowBox[{"DefineGame", "[", 
+         RowBox[{"T", ",", "epsvls"}], "]"}]}], ";", "\n", "        ", 
+       RowBox[{"gr2", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"strCr", "==", "True"}], ",", " ", 
+          RowBox[{"PlotStrCore3DV6", "[", 
+           RowBox[{"newgame", ",", 
+            RowBox[{"ViewSkel", " ", "->", " ", "True"}], ",", 
+            RowBox[{"Boxed", "->", "False"}], ",", 
+            RowBox[{"SyncDim", " ", "->", " ", "psm"}], ",", 
+            RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], 
+           "]"}], ",", 
+          RowBox[{"{", "}"}]}], "]"}]}], ";", "\n", "        ", 
+       RowBox[{"gr3", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"shups", "===", "True"}], ",", 
+          RowBox[{"SkelReasonableSetV6", "[", 
+           RowBox[{"normgame", ",", "filopts"}], "]"}], ",", 
+          RowBox[{"{", "}"}]}], "]"}]}], ";", "\n", "        ", 
+       RowBox[{"gr4", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"shlws", "===", "True"}], ",", 
+          RowBox[{"SkelLowerSetV6", "[", 
+           RowBox[{"normgame", ",", "opts"}], "]"}], ",", 
+          RowBox[{"{", "}"}]}], "]"}]}], ";", "\n", "        ", 
+       RowBox[{"gr5", "=", 
+        RowBox[{"ShowKernelV6", "[", 
+         RowBox[{"origgame", ",", " ", 
+          RowBox[{"KernelCoord", " ", "->", " ", "kerc"}], ",", " ", 
+          RowBox[{"SyncDim", " ", "->", " ", "dld4"}], ",", 
+          RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], 
+         "]"}]}], ";", "\n", "        ", 
+       RowBox[{"gr6", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"vwshv", "===", "True"}], ",", 
+          RowBox[{"ShowShapleyV6", "[", 
+           RowBox[{"origgame", ",", 
+            RowBox[{"ShapleyCoord", " ", "->", " ", "shc"}], ",", 
+            RowBox[{"SyncDim", " ", "->", " ", "dld4"}], ",", 
+            RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], 
+           "]"}], ",", 
+          RowBox[{"{", "}"}]}], "]"}]}], ";", "\n", "        ", 
+       RowBox[{"gr7", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"vwnuc", "===", "True"}], ",", 
+          RowBox[{"ShowNucleolusV6", "[", 
+           RowBox[{"origgame", ",", 
+            RowBox[{"NucleolusCoord", " ", "->", " ", "nuc"}], ",", 
+            RowBox[{"SyncDim", " ", "->", " ", "dld4"}], ",", 
+            RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], 
+           "]"}], ",", 
+          RowBox[{"{", "}"}]}], "]"}]}], ";", "\n", "        ", 
+       RowBox[{"gr8", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"SameQ", "[", 
+           RowBox[{"vwmnc", ",", "True"}], "]"}], ",", 
+          RowBox[{"ShowModiclusV6", "[", 
+           RowBox[{"origgame", ",", 
+            RowBox[{"ModiclusCoord", " ", "->", " ", "mnc"}], ",", 
+            RowBox[{"SyncDim", " ", "->", " ", "psm"}], ",", 
+            RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], 
+           "]"}], ",", 
+          RowBox[{"{", "}"}]}], "]"}]}], ";", "\t \t   ", "\n", "        ", 
+       RowBox[{"gr9", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"vwpay", "===", "True"}], ",", 
+          RowBox[{"ShowPayoffV6", "[", 
+           RowBox[{"origgame", ",", 
+            RowBox[{"PayoffCoord", " ", "->", " ", "paycoord"}], ",", 
+            RowBox[{"SyncDim", " ", "->", " ", "psm"}], ",", 
+            RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], 
+           "]"}], ",", 
+          RowBox[{"{", "}"}]}], "]"}]}], ";", "\t   ", "\n", "        ", 
+       RowBox[{"origgame", "=", 
+        RowBox[{"DefineGame", "[", 
+         RowBox[{"T", ",", "oldvls"}], "]"}]}], ";", "\n", "        ", 
+       RowBox[{"grli", "=", 
+        RowBox[{"Flatten", "[", 
+         RowBox[{"{", 
+          RowBox[{
+          "gr0", ",", "gr1", ",", "gr2", ",", "gr3", ",", "gr4", ",", "gr5", 
+           ",", "gr6", ",", "gr7", ",", "gr8", ",", "gr9"}], "}"}], "]"}]}], 
+       ";", "\n", "        ", 
+       RowBox[{"gr", "=", 
+        RowBox[{"Show", "[", 
+         RowBox[{"grli", ",", 
+          RowBox[{"PlotLabel", " ", "->", " ", 
+           RowBox[{"StringJoin", "[", 
+            RowBox[{"\"\<eps=\>\"", ",", 
+             RowBox[{"ToString", "[", 
+              RowBox[{"N", "[", "epsval", "]"}], "]"}]}], "]"}]}]}], "]"}]}], 
+       ";", "\n", "        ", 
+       RowBox[{"Return", "[", "gr", "]"}], ";"}]}], "\n", "]"}]}], ";"}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"DetDim2Del", "[", 
+     RowBox[{"game_", ",", 
+      RowBox[{"vert_:", 
+       RowBox[{"{", "}"}]}]}], "]"}], ":=", " ", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"crQ", ",", "trext", ",", "varl", ",", "minv", ",", "psm"}], 
+       "}"}], ",", "\n", "     ", 
+      RowBox[{
+       RowBox[{"crQ", "=", 
+        RowBox[{"CoreQ", "[", "game", "]"}]}], ";", "\n", "     ", 
+       RowBox[{"extlist", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"SameQ", "[", 
+           RowBox[{"vert", ",", 
+            RowBox[{"{", "}"}]}], "]"}], ",", "\n", "                ", 
+          RowBox[{"Which", "[", 
+           RowBox[{
+            RowBox[{"SameQ", "[", 
+             RowBox[{"crQ", ",", "True"}], "]"}], ",", 
+            RowBox[{"CddGmpVerticesCore", "[", "game", "]"}], ",", "\n", 
+            "                     ", "True", ",", 
+            RowBox[{"CddVerticesImputationSet", "[", "game", "]"}]}], "]"}], 
+          ",", "vert"}], "]"}]}], ";", "\n", "     ", 
+       RowBox[{"trext", "=", " ", 
+        RowBox[{"Transpose", "[", "extlist", "]"}]}], ";", "\n", "     ", 
+       RowBox[{"varl", "=", 
+        RowBox[{"N", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Variance", "[", "#", "]"}], " ", "&"}], "/@", " ", 
+          "trext"}], "]"}]}], ";", "\n", "     ", 
+       RowBox[{"minv", "=", 
+        RowBox[{"Min", "[", "varl", "]"}]}], ";", "\n", "     ", 
+       RowBox[{"psm", "=", 
+        RowBox[{"Position", "[", 
+         RowBox[{"varl", ",", "minv"}], "]"}]}], ";", "\n", "     ", 
+       RowBox[{"psm", "=", 
+        RowBox[{"First", "[", "psm", "]"}]}]}]}], "\n", "]"}]}], ";"}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"SkelReasonableSetV6", "[", "args___", "]"}], ":=", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"Message", "[", 
+      RowBox[{"SkelReasonableSetV6", "::", "argerr"}], "]"}], ";", 
+     "$Failed"}], ")"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"SkelReasonableSetV6", "[", 
+    RowBox[{"game_", ",", " ", 
+     RowBox[{"opts", ":", 
+      RowBox[{"OptionsPattern", "[", "Graphics3D", "]"}]}]}], "]"}], " ", ":=",
+    "\n", "   ", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "filopts", ",", "norm", ",", "normgame", ",", "extlist", ",", 
+       "linearity", ",", "ecdlist", ",", "eadlist", ",", "icdlist", ",", 
+       "iadlist", ",", "inedata", ",", "dlvert", ",", "amat", ",", "bvec", 
+       ",", "vlist0", ",", "uvp1", ",", "m0", ",", "d0", ",", "lgt", ",", 
+       "mlg", ",", "redead", ",", "rg", ",", "vskl", ",", "gr"}], "}"}], ",", 
+     "\n", "      ", 
+     RowBox[{
+      RowBox[{"filopts", " ", "=", " ", 
+       RowBox[{"FilterRules", "[", 
+        RowBox[{
+         RowBox[{"{", "opts", "}"}], ",", 
+         RowBox[{"Options", "[", "Graphics3D", "]"}]}], "]"}]}], ";", " ", 
+      "\n", "      ", 
+      RowBox[{"norm", " ", "=", " ", 
+       RowBox[{"OneNormalization", "[", "game", "]"}]}], ";", "\n", "      ", 
+      
+      RowBox[{"normgame", " ", "=", " ", 
+       RowBox[{"DefineGame", "[", 
+        RowBox[{"T", ",", "norm"}], "]"}]}], ";", "\n", "      ", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"extlist", ",", " ", "linearity"}], "}"}], ",", " ", 
+         "ecdlist", ",", " ", "eadlist", ",", " ", "icdlist", ",", " ", 
+         "iadlist", ",", " ", "inedata"}], "}"}], " ", "=", " ", 
+       RowBox[{"CddGmpPlotReasonableSet", "[", 
+        RowBox[{"normgame", ",", " ", 
+         RowBox[{"ProperContribution", " ", "->", " ", "True"}]}], "]"}]}], 
+      ";", "\n", "      ", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"m0", ",", "d0"}], "}"}], "=", " ", 
+       RowBox[{"Dimensions", "[", "extlist", "]"}]}], ";", "\n", "      ", 
+      RowBox[{"dlvert", " ", "=", " ", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"SameQ", "[", 
+          RowBox[{"m0", ",", "1"}], "]"}], ",", 
+         RowBox[{"RedDimV6", "[", "extlist", "]"}], ",", 
+         RowBox[{"ListRedDimV6", "[", 
+          RowBox[{"extlist", ",", " ", 
+           RowBox[{"SyncDim", "->", 
+            RowBox[{"{", "}"}]}]}], "]"}]}], "]"}]}], ";", "\n", "      ", 
+      RowBox[{"amat", "=", " ", 
+       RowBox[{"-", 
+        RowBox[{"Transpose", "[", 
+         RowBox[{"Drop", "[", 
+          RowBox[{
+           RowBox[{"Transpose", "[", "inedata", "]"}], ",", "1"}], "]"}], 
+         "]"}]}]}], ";", "\n", "      ", 
+      RowBox[{"amat", " ", "=", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Take", "[", 
+          RowBox[{"#", ",", 
+           RowBox[{"-", "3"}]}], "]"}], " ", "&"}], "/@", " ", "amat"}]}], 
+      ";", "\n", "      ", 
+      RowBox[{"bvec", "=", 
+       RowBox[{
+        RowBox[{"Transpose", "[", "inedata", "]"}], "[", 
+        RowBox[{"[", "1", "]"}], "]"}]}], ";", "\n", "      ", 
+      RowBox[{"uvp1", " ", "=", " ", 
+       RowBox[{"circle", "[", 
+        RowBox[{
+         RowBox[{"Pi", "/", "11"}], ",", " ", "50", ",", " ", "20"}], "]"}]}],
+       ";", "\n", "      ", 
+      RowBox[{"redead", "=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Delete", "[", 
+          RowBox[{"T", ",", "#"}], "]"}], " ", "&"}], "/@", " ", "T"}]}], ";",
+       "\n", "      ", 
+      RowBox[{"rg", "=", 
+       RowBox[{"Range", "[", "4", "]"}]}], ";", "\n", "      ", 
+      RowBox[{"redead", "=", 
+       RowBox[{"MapThread", "[", 
+        RowBox[{"Append", ",", 
+         RowBox[{"{", 
+          RowBox[{"redead", ",", "rg"}], "}"}]}], "]"}]}], ";", "\n", 
+      "      ", 
+      RowBox[{"gr", "=", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"SameQ", "[", 
+          RowBox[{"m0", ",", "1"}], "]"}], ",", "     ", "\n", 
+         "               ", 
+         RowBox[{
+          RowBox[{"sph", " ", "=", " ", 
+           RowBox[{"Sphere", "[", 
+            RowBox[{"dlvert", ",", "0.02"}], "]"}]}], ";", "\n", 
+          "               ", 
+          RowBox[{
+          "Print", "[", "\"\<Upper Point is plotted as a magenta point!\>\"", 
+           "]"}], ";", "\n", "               ", 
+          RowBox[{
+          "Print", "[", "\"\<Might coincide with the Nucleolus!\>\"", "]"}], 
+          ";", "\n", "               ", 
+          RowBox[{"Graphics3D", "[", 
+           RowBox[{
+            RowBox[{"{", " ", 
+             RowBox[{"Magenta", ",", " ", "sph"}], " ", "}"}], ",", 
+            "filopts"}], "]"}]}], ",", "\n", "            ", 
+         RowBox[{"Graphics3D", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"Thick", ",", " ", 
+             RowBox[{"GraphicsComplex", "[", 
+              RowBox[{"dlvert", ",", " ", 
+               RowBox[{"Tube", "[", "redead", "]"}]}], "]"}]}], "}"}], ",", 
+           "filopts"}], "]"}]}], "]"}]}], ";", "\n", "      ", 
+      RowBox[{"Return", "[", "gr", "]"}], ";"}]}], "\n", "]"}]}], 
+  ";"}], "\n"}], "Code",ExpressionUUID->"e74a0636-cb4a-433b-97dd-\
+cb0e2d8d4818"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"SkelLowerSetV6", "[", "args___", "]"}], ":=", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"Message", "[", 
+      RowBox[{"SkelLowerSetV6", "::", "argerr"}], "]"}], ";", "$Failed"}], 
+    ")"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"SkelLowerSetV6", "[", 
+     RowBox[{"game_", ",", " ", 
+      RowBox[{"opts", ":", 
+       RowBox[{"OptionsPattern", "[", "]"}]}]}], "]"}], " ", ":=", "\n", 
+    "   ", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "filopts", ",", "norm", ",", "normgame", ",", "extlist", ",", 
+        "linearity", ",", "ecdlist", ",", "eadlist", ",", "icdlist", ",", 
+        "iadlist", ",", "inedata", ",", "dlvert", ",", "amat", ",", "bvec", 
+        ",", "vlist0", ",", "uvp1", ",", "m0", ",", "d0", ",", "pt", ",", 
+        "sph", ",", "redead", ",", "rg", ",", "gr"}], "}"}], ",", "\n", 
+      "      ", 
+      RowBox[{
+       RowBox[{"filopts", " ", "=", " ", 
+        RowBox[{"FilterRules", "[", 
+         RowBox[{
+          RowBox[{"{", "opts", "}"}], ",", 
+          RowBox[{"Options", "[", "Graphics3D", "]"}]}], "]"}]}], ";", " ", 
+       "\n", "      ", 
+       RowBox[{"norm", " ", "=", " ", 
+        RowBox[{"OneNormalization", "[", "game", "]"}]}], ";", "\n", "      ", 
+       RowBox[{"normgame", " ", "=", " ", 
+        RowBox[{"DefineGame", "[", 
+         RowBox[{"T", ",", "norm"}], "]"}]}], ";", "\n", "      ", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"extlist", ",", " ", "linearity"}], "}"}], ",", " ", 
+          "ecdlist", ",", " ", "eadlist", ",", " ", "icdlist", ",", " ", 
+          "iadlist", ",", " ", "inedata"}], "}"}], " ", "=", "  ", 
+        RowBox[{"CddGmpPlotLowerSet", "[", "normgame", "]"}]}], ";", "\n", 
+       "      ", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"m0", ",", "d0"}], "}"}], "=", 
+        RowBox[{"Dimensions", "[", "extlist", "]"}]}], ";", "\n", "      ", 
+       RowBox[{"dlvert", " ", "=", " ", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"SameQ", "[", 
+           RowBox[{"m0", ",", "1"}], "]"}], ",", 
+          RowBox[{"RedDimV6", "[", "extlist", "]"}], ",", 
+          RowBox[{"ListRedDimV6", "[", 
+           RowBox[{"extlist", ",", " ", 
+            RowBox[{"SyncDim", "->", 
+             RowBox[{"{", "}"}]}]}], "]"}]}], "]"}]}], ";", "  ", "\n", 
+       "      ", 
+       RowBox[{"amat", "=", " ", 
+        RowBox[{"Transpose", "[", 
+         RowBox[{"Drop", "[", 
+          RowBox[{
+           RowBox[{"Transpose", "[", "inedata", "]"}], ",", "1"}], "]"}], 
+         "]"}]}], ";", "\n", "      ", 
+       RowBox[{"amat", " ", "=", " ", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Take", "[", 
+           RowBox[{"#", ",", 
+            RowBox[{"-", "3"}]}], "]"}], " ", "&"}], "/@", " ", "amat"}]}], 
+       ";", "\n", "      ", 
+       RowBox[{"bvec", "=", 
+        RowBox[{
+         RowBox[{"Transpose", "[", "inedata", "]"}], "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}], ";", "\n", "      ", 
+       RowBox[{"uvp1", " ", "=", " ", 
+        RowBox[{"circle", "[", 
+         RowBox[{
+          RowBox[{"Pi", "/", "11"}], ",", " ", "50", ",", " ", "20"}], 
+         "]"}]}], ";", "\n", "      ", 
+       RowBox[{"redead", "=", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Delete", "[", 
+           RowBox[{"T", ",", "#"}], "]"}], " ", "&"}], "/@", " ", "T"}]}], 
+       ";", "\n", "      ", 
+       RowBox[{"rg", "=", 
+        RowBox[{"Range", "[", "4", "]"}]}], ";", "\n", "      ", 
+       RowBox[{"redead", "=", 
+        RowBox[{"MapThread", "[", 
+         RowBox[{"Append", ",", 
+          RowBox[{"{", 
+           RowBox[{"redead", ",", "rg"}], "}"}]}], "]"}]}], ";", "\n", 
+       "      ", 
+       RowBox[{"gr", "=", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"SameQ", "[", 
+           RowBox[{"m0", ",", "1"}], "]"}], ",", "     ", "\n", 
+          "               ", 
+          RowBox[{
+           RowBox[{"sph", " ", "=", " ", 
+            RowBox[{"Sphere", "[", 
+             RowBox[{
+              RowBox[{"dlvert", "[", 
+               RowBox[{"[", "1", "]"}], "]"}], ",", "0.02"}], "]"}]}], ";", 
+           "\n", "               ", 
+           RowBox[{
+           "Print", "[", "\"\<Lower Point is plotted as a orange point!\>\"", 
+            "]"}], ";", "\n", "               ", 
+           RowBox[{"Graphics3D", "[", 
+            RowBox[{
+             RowBox[{"{", " ", 
+              RowBox[{"Orange", ",", " ", "sph"}], " ", "}"}], ",", 
+             "filopts"}], "]"}]}], ",", "\n", "             ", 
+          RowBox[{"Graphics3D", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"Thick", ",", " ", 
+              RowBox[{"GraphicsComplex", "[", 
+               RowBox[{"dlvert", ",", " ", 
+                RowBox[{"Tube", "[", "redead", "]"}]}], "]"}]}], "}"}], ",", 
+            "filopts"}], "]"}]}], "\n", "           ", "]"}]}], ";", "\n", 
+       "      ", 
+       RowBox[{"Return", "[", "gr", "]"}], ";"}]}], "\n", "]"}]}], ";"}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{"End", "[", "]"}], ";"}]}], "Code",ExpressionUUID->"1924c6c0-e304-\
+42c1-bc23-c44c9bc9fbc3"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"EndPackage", "[", "]"}], "\n"}]], "Code",ExpressionUUID->"8f0a1f23-0644-46cb-9054-61f464d3c40c"]
+},
+WindowSize->{630, 827},
+WindowMargins->{{278, Automatic}, {Automatic, 82}},
+FrontEndVersion->"11.3 for Linux x86 (64-bit) (March 6, 2018)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 5356, 105, 1189, "Code",ExpressionUUID->"5f1a0273-539d-4071-bb69-7aa2fcebc15e"],
+Cell[5917, 127, 982, 25, 315, "Code",ExpressionUUID->"b7b89c2f-5b14-4d43-b4de-f38de49ec215"],
+Cell[6902, 154, 3458, 86, 1097, "Code",ExpressionUUID->"a768d61e-ef3d-4474-94dd-370c691f5e77"],
+Cell[10363, 242, 19875, 446, 70, "Code",ExpressionUUID->"6f5cbcb1-b3bd-442c-a131-a94632b464e3"],
+Cell[30241, 690, 19020, 449, 70, "Code",ExpressionUUID->"df9e75c8-f345-496a-b30d-e344c381373a"],
+Cell[49264, 1141, 21710, 499, 70, "Code",ExpressionUUID->"9a45f789-b6db-47cf-a7f3-c4473175b9d7"],
+Cell[70977, 1642, 2200, 54, 70, "Code",ExpressionUUID->"5d6136d4-8ce8-4c41-a526-0ca3d468b66f"],
+Cell[73180, 1698, 16878, 368, 70, "Code",ExpressionUUID->"f75ba8a0-95f9-4cbf-9cfb-243360848c72"],
+Cell[90061, 2068, 5337, 128, 70, "Code",ExpressionUUID->"f733c44e-ea24-487a-a0e7-14863e065620"],
+Cell[95401, 2198, 3087, 75, 70, "Code",ExpressionUUID->"776def38-dbf3-4def-bec9-2d1500f7ac17"],
+Cell[98491, 2275, 6306, 152, 70, "Code",ExpressionUUID->"5d79112a-b633-42d8-8001-206fc05f7ea9"],
+Cell[104800, 2429, 2157, 55, 70, "Code",ExpressionUUID->"86ff7ee3-eacf-470a-92d4-d38cd1896df1"],
+Cell[106960, 2486, 8915, 226, 70, "Code",ExpressionUUID->"f9036ac9-cdc7-4b84-b9b6-4d2d08edb508"],
+Cell[115878, 2714, 2080, 53, 70, "Code",ExpressionUUID->"29a1141e-1848-411f-9d70-64db230b31c6"],
+Cell[117961, 2769, 2080, 53, 70, "Code",ExpressionUUID->"57bea743-a65f-4947-bf33-e0e20913f262"],
+Cell[120044, 2824, 2158, 55, 70, "Code",ExpressionUUID->"3c581eb3-98da-443b-bd63-8809412618dc"],
+Cell[122205, 2881, 3155, 79, 70, "Code",ExpressionUUID->"a89983bf-cb0f-4219-9673-b1c4b1873a1d"],
+Cell[125363, 2962, 2432, 62, 70, "Code",ExpressionUUID->"34a1f610-b156-4059-8b0d-f38e33c366b2"],
+Cell[127798, 3026, 2140, 52, 70, "Code",ExpressionUUID->"1ac7fb60-5236-4925-8703-7f5d8bf8632a"],
+Cell[129941, 3080, 22121, 531, 70, "Code",ExpressionUUID->"e74a0636-cb4a-433b-97dd-cb0e2d8d4818"],
+Cell[152065, 3613, 5250, 133, 70, "Code",ExpressionUUID->"1924c6c0-e304-42c1-bc23-c44c9bc9fbc3"],
+Cell[157318, 3748, 131, 2, 70, "Code",ExpressionUUID->"8f0a1f23-0644-46cb-9054-61f464d3c40c"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

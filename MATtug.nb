@@ -1,0 +1,1863 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     72290,       1853]
+NotebookOptionsPosition[     71334,       1833]
+NotebookOutlinePosition[     71669,       1848]
+CellTagsIndexPosition[     71626,       1845]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", "  ", "\n", "    ", 
+   RowBox[{":", " ", "Title", " ", ":", " ", "MATtug", "\n", "    ", ":", " ", 
+    RowBox[{"Release", " ", "Date"}], " ", ":", " ", 
+    RowBox[{"12.05", ".2019"}], "      ", "\n", "    ", ":", " ", 
+    RowBox[{"Preliminary", " ", "version"}], ":", "\n", "      ", 
+    RowBox[{
+    "Function", " ", "names", " ", "could", " ", "be", " ", "changed", " ", 
+     "in", " ", "a", " ", "future", " ", 
+     RowBox[{"version", ".", " ", "For"}], " ", "testing", " ", 
+     RowBox[{"only", "."}]}]}], " ", "\n", "*)"}], "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{":", "Summary", ":", "\t", "\n", "    ", 
+    RowBox[{
+    "This", " ", "package", " ", "provides", " ", "Mathematica", " ", 
+     "interfaces", " ", "to", " ", "the", " ", "Matlab", " ", "toolbox", " ", 
+     "MatTuGames", " ", "using", " ", 
+     RowBox[{"MATLink", "."}]}]}], "\n", "*)"}], "\t\t", "\n", "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{":", " ", "Author", " ", ":", " ", "\n", "     ", 
+    RowBox[{
+     RowBox[{
+     "Holger", " ", "Ingmar", " ", "Meinhardt", "\n", "     ", "Institute", 
+      " ", "of", " ", "Operations", " ", "Research", "\n", "     ", 
+      "Karlsruhe", " ", "Institute", " ", "of", " ", "Technology", " ", 
+      RowBox[{"(", "KIT", ")"}], "\n", "     ", 
+      RowBox[{"Holger", ".", 
+       RowBox[{"Meinhardt", "@", "wiwi"}], ".", "uni"}]}], "-", 
+     RowBox[{"karlsruhe", ".", "de"}]}]}], "\n", "*)"}], "\n", 
+  RowBox[{"(*", "\n", "  ", 
+   RowBox[{
+    RowBox[{":", " ", 
+     RowBox[{"Mathematica", " ", "Version"}], " ", ":", " ", 
+     RowBox[{"8.", "x"}]}], ",", " ", 
+    RowBox[{"9.", "x"}], ",", " ", 
+    RowBox[{"10.", "x"}], ",", " ", 
+    RowBox[{"11.", "x"}], ",", " ", 
+    RowBox[{"12.", "x"}]}], "\n", "*)"}], "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{":", "Summary", ":", "\t", "\n", "    ", 
+    RowBox[{
+    "This", " ", "package", " ", "provides", " ", "Mathematica", " ", 
+     "interfaces", " ", "to", " ", "the", " ", "Matlab", " ", "toolbox", " ", 
+     "MatTuGames", " ", "using", " ", 
+     RowBox[{"MATLink", "."}]}]}], "\n", "\n", "*)"}], "\t\t\t", "\n", 
+  RowBox[{"(*", "  ", 
+   RowBox[{":", "Sources", ":"}], "\n", "\n", "\n", "*)"}], "\n", "\n", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+     ":", "Requirements", ":", " ", "\n", "   ", "\n", "    ", "MATLink", ":",
+       " ", 
+      RowBox[{
+       RowBox[{
+       "A", " ", "Mathematica", " ", "application", " ", "for", " ", 
+        "seamless", " ", "two"}], "-", 
+       RowBox[{
+       "way", " ", "communication", " ", "and", " ", "data", " ", "transfer", 
+        " ", "with", " ", 
+        RowBox[{"MATLAB", ".", "\n", "    ", "http"}]}]}], ":"}], "//", 
+     RowBox[{
+      RowBox[{"matlink", ".", "org"}], "\n", "\n", "    ", "The", " ", 
+      "Matlab", " ", "toolbox", " ", "MatTuGames", " ", "from", "\n", "    ", 
+      
+      RowBox[{"http", ":"}]}]}], "//", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"www", ".", "mathworks", ".", "de"}], "/", "matlabcentral"}], 
+       "/", "fileexchange"}], "/", "35933"}], "-", "mattugames"}]}], "\n", 
+   "*)"}]}]], "Code",ExpressionUUID->"3f930259-609c-4559-87c6-a5ae77d90233"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", "\n", "   ", 
+   RowBox[{
+    RowBox[{":", "Comments", ":", "\n", "   ", 
+     RowBox[{"Argument", " ", 
+      RowBox[{"game", " ", "~"}]}]}], "=", " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"v", ".", " ", "Argument"}], " ", "v", " ", "is", " ", "an", 
+      " ", "array", " ", 
+      RowBox[{"(", 
+       RowBox[{"Mathematica", " ", "list"}], ")"}], " ", "of", " ", "length", 
+      " ", 
+      RowBox[{"2", "^", "n"}]}], "-", 
+     RowBox[{
+     "1.", "\n", "   ", "Argument", " ", "payoff", " ", "is", " ", "a", " ", 
+      "vector", " ", 
+      RowBox[{"(", 
+       RowBox[{"Mathematica", " ", "list"}], ")"}], " ", "of", " ", "length", 
+      " ", "n", " ", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"in", " ", "most", " ", "cases", " ", "optional"}], ")"}], 
+       ".", "\n", "   ", "Argument"}], " ", "tol", " ", "is", " ", "a", " ", 
+      "tolerance", " ", "value", " ", 
+      RowBox[{
+       RowBox[{"(", "optional", ")"}], ".", "\n", "   ", "Argument"}], " ", 
+      "apu", " ", "is", " ", "a", " ", "list", " ", "of", " ", "a", " ", 
+      "priori", " ", "unions", " ", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"required", " ", "input"}], ")"}], ".", "\n", "   ", 
+       "Argument"}], " ", "cs", " ", "is", " ", "a", " ", "communication", 
+      " ", "situation", " ", "or", " ", "a", " ", "hypergraph", " ", "system",
+       " ", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"Mathematica", " ", "list"}], ",", " ", "required"}], ")"}], 
+       "."}]}]}]}], " ", "\n", "\n", "*)"}], "   "}]], "Code",ExpressionUUID->\
+"7a615f09-4b45-4dc1-aac0-46bbc58ce2c6"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", "\n", 
+   RowBox[{
+    RowBox[{"BeginPackage", "[", "\"\<TUG`MATtug`\>\"", "]"}], ";"}], "\n", 
+   "*)"}], "\n", "\n", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"GameToMatlab", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<GameToMatlab[game] converts a Tu game under Mathematica into \
+Matlab.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Usage", " ", "of", " ", "the", " ", 
+     RowBox[{"interfaces", "."}]}], " ", "*)"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Madv", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Madv[v,apu] computes the Aumann-Dreze value of game v using the \
+Matlab toolbox MatTuGames.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mamc", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<mamc[v] computes all marginal contributions of a Tu game v.\>\""}], 
+    ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Masg", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<masg[v] computes all subgames of game v.\>\""}], ";"}], "\n", "\n", 
+   
+   RowBox[{
+    RowBox[{
+     RowBox[{"Macrp", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Macrp[v] plots the anti-core of game v.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Macrv", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Macrv[v,'method',tol] evaluates the vertices of the \
+anti-core.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"MacrQ", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<MarcQ[v,tol] checks the existence for the anti core of the game \
+v.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Makr", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Makr[v,payoff] computes an anti-kernel point of a Tu game.\>\""}], 
+    ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"MakrQ", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<MakrQ[v,payoff] checks if an imputation is an anti kernel point of \
+game v.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Maprk", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Maprk[v,payoff] computes an anti-prekernel point of Tu game \
+v.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"MaprkQ", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<MaprkQ[v,payoff] checks if an imputation is an anti prekernel point \
+of Tu game v.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Maddg", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Maddg[payoff] creates an additive game from a payoff \
+vector/imputation.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mapex", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mapex[k,n] creates an apex game. Where k is the main player and n \
+is the number of players involved.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Maslv", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Maslv[v,apu] determines the solidarity value w.r.t. a priori unions \
+(apu).\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Massignmentg", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Massignmentg[sl_vec,prof_mat] creates an assignment game.\>\""}], 
+    ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"MacvQ", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<MacvQ[v,tol] checks the Tu game v on average convexity.\>\""}], 
+    ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mbank", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mbank[Est,dvec] determines a bankruptcy game using the Matlab \
+toolbox MatTuGames. Here Est is the estate value and dvec is the claims \
+vector of length n.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mbzhv", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mbzhv[v] computes the Banzhaf value of Tu game v using the Matlab \
+toolbox MatTuGames.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mbcoord", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mbcoord[v] determines the basis coordinates of a Tu game v.\>\""}], 
+    ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mbg", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mbg[n] determines bases games.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"MbtacQ", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<MbtacQ[v,payoff,'method',tol] checks if a payoff vector belongs to \
+the anti-core of a Tu game v.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"MbtcQ", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<MbtcQ[v,payoff] checks if a payoff vector belongs to the core of a \
+Tu game v.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mbcl", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mbcl[v,payoff,smc] computes the set of most effective coalitions. \
+The value smc is either 1 (smallest) or 0 (largest).\>\""}], ";"}], "\n", 
+   "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mcardg", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mcardg[n,k]  assigns zero to a coalition of size<=k<n, otherwise \
+its cardinality.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mcddacrp", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mcddacrp[v,string,imp_set] plots the anti-core of a game using \
+cddmex. Admissible strings are 'all,none,prk,prn,shap'. However, permissible \
+values for imp_set are 0 (false ) either 1 (true).\>\""}], ";"}], "\n", "\n", 
+   
+   RowBox[{
+    RowBox[{
+     RowBox[{"McddacrQ", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<McddacrQ[v,tol] checks if the anti-core exists of Tu game v using \
+cddmex.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mcddacrv", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mcddacrv[v,tol] computes the vertices of the anti-core of a Tu game \
+v using cddmex.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mcddcrp", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mcddcrp[v,string,imp_set] plots the core of a game v using cddmex. \
+Admissible strings are 'all,none,prk,prn,shap'. However, permissible values \
+for imp_set are 0 (false ) either 1 (true).\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"McddcrQ", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<McddcrQ[v,tol] checks if the core exists using cddmex.\>\""}], 
+    ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mcddcrv", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mcddcrv[v,tol] computes the vertices of the core of game v using \
+cddmex.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mcddipv", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mcddipv[v] computes the vertices of the imputation set of game v \
+using cddmex.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mcddlcr", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mcddlcr[v] computes the least core of game v using cddmex.\>\""}], 
+    ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mcddnc", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mcddnc[v,tol] computes the nucleolus of game v using the CDD solver \
+(cddmex).\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mcddprk", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mcddprk[v,payoff] computes a pre-kernel element of game v using \
+cddmex.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mcddprn", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mcddprn[v,tol] computes the prenucleolus of game v using the CDD \
+solver (cddmex).\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mcddmnc", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mcddmnc[v,tol] computes the modiclus of game v using the CDD solver \
+(cddmex).\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mclpkr", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mclpkr[v,payoff] computes a kernel point of game v using the CLP \
+solver.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mclskr", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mclskr[v,payoff] computes a kernel point of game v using the CLS \
+solver.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mclm", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mclm[cl] computes the unique integer representation of \
+coalitions.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mcslv", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mcslv[v,apu] determines the coalition solidarity value of game v \
+w.r.t. apu.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mcflb", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mcflb[v] determines the coefficients (dividends) of a linear basis \
+from a TU game v.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"MCRGPQ", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<MCRGPQ[v,payoff,string,tol] checks if an imputation satisfies the \
+CRGP. Permissible string values are 'PRK,PRN,SHAP'.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"McvQ", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<McvQ[v,tol] checks the convexity of a Tu game v.\>\""}], ";"}], 
+   "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mcrp", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mcrp[v,method,add_sol,imp_set,tol] plots the core of Tu game v. \
+Permissible methods are: 'float,gmp'. Permissible add_sol are \
+'none,prk,prn,shap,none'. The input argument imp_set can be set to 0 (false) \
+or 1 (true).\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"McrQ", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<McrQ[v,tol] checks the non-emptiness of the core of game v.\>\""}], 
+    ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mcplexkr", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mcplexkr[v,payoff] computes a kernel point of game v using the \
+CPLEX solver.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mcplexnc", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mcplexnc[v,tol] computes the nucleolus of game v using the CPLEX \
+solver.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mcplexprk", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mcplexprk[v,payoff] computes a pre-kernel element using the Matlab \
+toolbox MatTuGames and CPLEX.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mcplexprn", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mcplexprn[v,tol] computes the pre-nucleolus using the Matlab \
+toolbox MatTuGames and CPLEX.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mcplexmnc", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mcplexmnc[v,tol] computes the modiclus using the Matlab toolbox \
+MatTuGames and CPLEX.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mcritval1", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mcritval1[v] computes the biggest gain of any group of \
+players.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mcritval2", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mcritval2[v] computes a critical value w.r.t. the strong \
+epsilon-core.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mcritvals", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mcritvals[v] computes a critical value which contains the \
+intersection of the imputation and reasonable set.\>\""}], ";"}], "\n", "\n", 
+   
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mcvxkr", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mcvxkr[v,payoff] computes a kernel point of game v using the CVX \
+solver.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mcvxprk", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mcvxprk[v,payoff] computes a prekernel point of game v using the \
+CVX solver.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mdmrg", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mdmrg[v,payoff] computes all Davis-Maschler reduced games.\>\""}], 
+    ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mdualg", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mdualg[v] creates the dual of a Tu game v.\>\""}], ";"}], "\n", 
+   "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mexc", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mexc[v,payoff] determines the excesses of a payoff vector.\>\""}], 
+    ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mgb", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mgb[n] computes a game basis for n, the number of players involved.\
+\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mgspc", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mgspc[v,payoff,scl,smc] computes the game space which replicates a \
+payoff as a pre-kernel element. Input argument scl is a scaling factor \
+(natural number), whereas smc is either 0 (largest card of effective \
+coalitions) or 1 (smallest card of effective coalitions).\>\""}], ";"}], "\n",
+    "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"MgToMama", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<MgToMama[v] converts a TU game v into Mathematica representation.\>\
+\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"MgToMatlab", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<MgToMatlab[w] converts a Tu game w into Matlab \
+representation.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mgap", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mgap[v] determines the gap function.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mgus", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mgus[cs] creates a union stable system from coalition structure cs.\
+\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mgetg", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mgetg[uc,n] creates a Tu-game from the unanimity coordinates \
+uc.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mglpkkr", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mglpkkr[v,payoff] computes a kernel point of game v using the GLPK \
+solver.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mglpknc", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mglpknc[v,tol] computes the nucleolus of game v using the GLPK \
+solver.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mglpkprk", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mglpkprk[v,payoff] Computes a prekernel point of game v using the \
+GLPK solver.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mglpkprn", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mglpkprn[v,tol] computes the pre-nucleolus of game v using the GLPK \
+solver.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mglpkmnc", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mglpkmnc[v,tol] computes the modiclus of game v using the GLPK \
+solver.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mgreedyb", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mgreedyb[Est,dvec] creates the greedy bankruptcy game from the \
+estate value Est and claims vector dvec.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mgurobikr", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mgurobikr[v,payoff] computes a kernel point of game v using the \
+GUROBI solver.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mgurobinc", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mgurobinc[v,tol] computes the nucleolus of game v using the GUROBI \
+solver.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mgurobiprk", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mgurobiprk[v,payoff] computes a pre-kernel element using the Matlab \
+toolbox MatTuGames and GUROBI.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mgurobiprn", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mgurobiprn[v,tol] computes the pre-nucleolus using the Matlab \
+toolbox MatTuGames and GUROBI.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mgurobimnc", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mgurobimnc[v,tol] computes the modiclus using the Matlab toolbox \
+MatTuGames and GUROBI.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mharsdivd", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mharsdivd[v] determines the the unanimity coordinates.\>\""}], 
+    ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mhmsrdg", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mhmsrdg[v,payoff,S] creates a Hart/Mas-Colell reduced games.\>\""}],
+     ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"MhmsReducedg", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<MhmsReducedg[v,payoff,string] creates all Hart/Mas-Colell reduced \
+games. Permissible string data are 'PRN,PRK,SHAP'.\>\""}], ";"}], "\n", "\n", 
+   
+   RowBox[{
+    RowBox[{
+     RowBox[{"MhrQ", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<MhrQ[th,wghs] checks if the weighted majority game possesses a \
+homogeneous representation. Input argument th is the threshold to pass a bill \
+and wghs is the weights vector.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mhslprk", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mhslprk[v,payoff] computes a prekernel point of game v using HSL \
+solvers. \>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"MhgQ", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<MhgQ[cs,n] checks whether the coalition structure cs is a \
+hypergraph.\>\""}], ";"}], "\n", "    ", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mimpvr", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mimpvr[v,method] computes the vertices of the imputation set. Input \
+argument method is a string. Permissible methods are 'gmp,float'\>\""}], 
+    ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mintsts", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mintsts[S,hs,n] determines a system of interaction sets. Input S is \
+a coalition, hs a hypergraph communication situation and n is the number of \
+players involved.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mipoptkr", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mipoptkr[v,payoff] computes a kernel point of game v using the \
+IPOPT solver. \>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mipoptprk", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mipoptprk[v,payoff] computes a prekernel point of game v using the \
+IPOPT solver.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"MkCRGPQ", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<MkCRGPQ[v,payoff,k,str,tol] checks if an imputation satisfies the \
+k-CRGP. The input argument must be an integer s.t. 1<=k<=n. Permissible \
+values for str are 'PRK,PRN,SHAP'.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"MkcvQ", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<MkcvQ[v] checks k-convexity of the Tu game v.\>\""}], ";"}], "\n", 
+   "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mkcover", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mkcover[v,k] determines from the Tu game v the corresponding \
+k-game. The input argument must be an integer s.t. 1<=k<=n.\>\""}], ";"}], 
+   "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Mkr", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<Mkr[v,payoff] computes a kernel point of game v using optimization \
+toolbox.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"MkrQ", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<MkrQ[v,payoff,tol] checks if an imputation is a kernel point of \
+game v.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"MkRCPQ", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<MkRCPQ[v,payoff,K,str,tol] checks the k-RCP. The input argument \
+must be an integer s.t. 1<=k<=n. Admissible values for str are \
+'PRK,PRN,SHAP,HMS_PK,HMS_PN'.\>\""}], ";"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"MkRGPQ", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+     "\"\<MkRGPQ[v,payoff,K,str,tol] checks the k-RGP. The input argument \
+must be an integer s.t. 1<=k<=n. Admissible values for str are \
+'PRK,PRN,SHAP,HMS_PK,HMS_PN'.\>\""}], ";"}]}]}]], "Code",ExpressionUUID->\
+"7835c580-1fb8-43b0-b7d5-ede603fd277e"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"MkSCRGPQ", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<MkSCRGPQ[v,payoff,K,str,tol] checks the strong k-CRGP. The input \
+argument must be an integer s.t. 1<=k<=n. Admissible values for str are \
+'PRK,PRN,SHAP'.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mlcr", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mlcr[v,tol] computes the least core using optimization \
+toolbox.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Mlb", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+   "\"\<Mlb[n] determines the linear basis of a TU game v.\>\""}], 
+  ";"}]}], "Code",ExpressionUUID->"2ffc7b37-947d-4c32-a09f-38516a72c106"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mlprk", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mlprk[v,payoff] computes a pre-kernel point of game v using \
+optimization toolbox.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mlsnc", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mlsnc[v] computes the least square nucleolus of a game. v\>\""}], 
+   ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mlsprn", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mlsprn[v] computes the least square pre-nucleolus of a game \
+v.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mmyv", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mmyv[v,cs,string] computes the Myerson value using the Matlab \
+toolbox MatTuGames. Permissible string values are 'cs,us', that is, a \
+communication situation or union stable system.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mmarketg", "::", "usage"}], " ", "=", "\n", "    ", 
+    "\"\<Mmarketg[P,Q,n,scl] determines from two disjoint sets a market game. \
+An integer P to specify the set of producers. An integer Q to specify the set \
+of buyers s.t. P and Q partition N. The input n is the cardinality of the \
+player set N. The input scl is a scaling factor, default is 1.\>\""}], ";"}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mmwg", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mmwg[th,wghs] computes the minimal winning coalitions. Input \
+argument th is the threshold to pass a bill (positive number). The input wghs \
+is the vector of weights.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"MmgQ", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<MmgQ[v,tol] checks monotonicity of the TU game v.\>\""}], ";"}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mmcov", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mmcov[v] determines the monotonic cover from a TU game v.\>\""}], 
+   ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mmskkr", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mmskkr[v,payoff] computes a kernel point of game v using the MOSEK \
+solver.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mmsknc", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mmsknc[v,tol] computes the nucleolus of game v using the MOSEK \
+solver.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mmskprk", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mmskprk[v,payoff] computes a pre-kernel element using the Matlab \
+toolbox MatTuGames and MOSEK.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mmskprn", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mmskprn[v,tol] computes the pre-nucleolus using the Matlab toolbox \
+MatTuGames and MOSEK.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mmskmnc", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mmskmnc[v,tol] computes the modiclus using the Matlab toolbox \
+MatTuGames and MOSEK.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mnc", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mnc[v,tol] computes the nucleolus of game v using optimization \
+toolbox.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"MncQ", "::", "usage"}], " ", "=", "\n", "    ", 
+    "\"\<MncQ[v,payoff,tol] applies a Kolberg criterion on payoff using the \
+Matlab toolbox MatTuGames. A return value of True indicates that we have \
+found the nucleolus. \>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mowv", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mowv[v,apu] computes the Owen value using the Matlab toolbox \
+MatTuGames.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Moaseskr", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Moaseskr[v,payoff] computes a kernel point of game v using the OASES \
+solver.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Moasesprk", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Moasesprk[v,payoff] computes a prekernel point of game v using the \
+OASES solver.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Molsprk", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Molsprk[v,payoff] Computes a prekernel point using optimization \
+toolbox.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"MpartSA", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<MpartSA[S,hs,n] computes a partition of S w.r.t. a hypergraph \
+communication situation cs. Input n is the cardinality of the player set N.\>\
+\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"MpartSL", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<MpartSL[S,cs,n] computes a partition of S w.r.t. a communication \
+situation cs. Input n is the cardinality of the player set N.\>\""}], ";"}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mpsv", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mpsv[v,cs,string] computes the Position value using the Matlab \
+toolbox MatTuGames. Admissible strings are 'us,hs', for union stable or \
+hypergraph system.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mpwset", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mpwset[A] computes all subsets from a set representation, like A=[2 \
+3 4].\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mprk", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mprk[v,payoff] computes a pre-kernel element using the Matlab \
+toolbox MatTuGames.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"MprkQ", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<MprkQ[v,payoff] verifies if payoff is a pre-kernel element.\>\""}], 
+   ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mprn", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mprn[v,tol] computes the pre-nucleolus using the Matlab toolbox \
+MatTuGames.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mprn2", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mprn[v,payoff,tol] computes the pre-nucleolus using the Matlab \
+toolbox MatTuGames.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"MprnQ", "::", "usage"}], " ", "=", "\n", "    ", 
+    "\"\<MprnQ[v,payoff,tol] applies a Kolberg criterion on payoff using the \
+Matlab toolbox MatTuGames. A retrun value of True indicates that we have \
+found the pre-nucleolus. \>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mmnc", "::", "usage"}], " ", "=", "\n", "    ", 
+    "\"\<Mmnc[v,tol] computes the modiclus using the Matlab toolbox \
+MatTuGames.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"MmncQ", "::", "usage"}], " ", "=", "\n", "    ", 
+    "\"\<MmncQ[v,payoff, tol] verifies if payoff is the modiclus.\>\""}], 
+   ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mmodprk", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mmodprk[v,payoff] computes a modified pre-kernel element using the \
+Matlab toolbox MatTuGames.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"MmodprkQ", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<MmodprkQ[v,payoff] verifies if payoff is a modified pre-kernel \
+element.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mpmodprk", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mpmodprk[v,payoff] computes a proper modified pre-kernel element \
+using the Matlab toolbox MatTuGames.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"MpmodprkQ", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<MpmodprkQ[v,payoff] verifies if payoff is a proper modified \
+pre-kernel element.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mprodg", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mprodg[n,k] determines a linear production game with 1<=k<=n.\>\""}],
+    ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mprodg2", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mprodg2[n,k] determines a quadratic production game with \
+1<=k<=n.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mpfmat", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mpfmat[valbuy,valsel] creates the profit matrix of an assignment \
+game. Input valbuy is buyers valuation and valsel is the sellers valuation.\>\
+\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mpureoh", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mpureoh[n] creates the matrix of pure overhead games.\>\""}], ";"}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"MqpBBkr", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<MqpBBkr[v,payoff] computes a kernel point of game v using the QPBB \
+solver.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mqpckr", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mqpckr[v,payoff] computes a kernel point of game v using the QPC \
+solver.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mqpcprk", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mqpcprk[v,payoff] computes a prekernel point of game v using the QPC \
+solver.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mquotas", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mquotas[v] determines the quotas of a game v.\>\""}], ";"}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mroutc", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mroutc[v] determines the reasonable outcome of game v.\>\""}], ";"}],
+   "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"MRCPQ", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<MRCPQ[v,payoff,str,tol] checks the RCP. Admissible values for str \
+are 'PRK,PRN,SHAP,HMS_PK,HMS_PN'.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mredg", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mredg[v,payoff,S] creates a Davis-Maschler reduced game vS on S at x \
+for game v.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"MRGPQ", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<MRGPQ[v,payoff,str,tol] checks the RGP. Admissible values for str \
+are 'PRK,PRN,SHAP,HMS_PK,HMS_PN'.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mrepprk", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mrepprk[v,payoff,scl,smc] replicates a pre-kernel solution as a \
+pre-kernel of a game space. Input scl is a scaling factor. Whereas smc \
+selecting from the set of effective coalitions the smallest/largest \
+cardinality (optional). Value 1 or 0.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mrepshv", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mrepshv[v,scl,tol] replicates the Shapley value for a game space. \
+Input scl is a scaling factor.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Msavg", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Msavg[cv] creates a saving game from a cost game cv.\>\""}], ";"}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mselpt", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mselpt[v] selects a starting point for the pre-kernel computation.\>\
+\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"MscvQ", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<MscvQ[v] checks semi-convexity.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Msca", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Msca[cv,str] computes the separable cost allocation of the cost game \
+cv. Input str has permissible strings given by 'ENSC,ACA,SCRB', that is, \
+egalitarian non-separable cost method, alternate cost avoided method, and \
+separable costs remaining benefits method.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mshv", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mshv[v] computes the Shapley value using the Matlab toolbox \
+MatTuGames.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"MshvLB", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<MshvLB[v] computes the Shapley value from the linear basis.\>\""}], 
+   ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"MshvM", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<MshvM[v] computes the Shapley value while relying on all marginal \
+contributions.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Msg", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Msg[wcl,n] creates a simple game. Input argument wcl is the set of \
+winning coalitions, and n the cardinality of the player set N.\>\""}], ";"}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mslshv", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mslslv[v,apu] computes the Solidarity Shapley value using the Matlab \
+toolbox MatTuGames.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mslv", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mslv[v] computes the Solidarity value using the Matlab toolbox \
+MatTuGames.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Msortmg", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Msortmg[pws,n] sorts a sub/power set w.r.t. its cardinality.\>\""}], 
+   ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Msortsts", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Msortsts[pws,n] sorts a sub/power set w.r.t. its cardinality.\>\""}],
+    ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mstdsol", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mstdsol[v] determines the standard solution of 2-person game \
+v.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"MSCRGPQ", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<MSCRGPQ[v,payoff,str,tol] checks the strong RGP. Admissible values \
+for str are 'PRK,PRN,SHAP,HMS_PK,HMS_PN'.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mstrevls", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mstrevls[v,t] determines the strong epsilon-game.\>\""}], ";"}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Msubdual", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Msubdual[v,cl] determines the dual of a subgame.\>\""}], ";"}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Msubg", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Msubg[v,S] creates a subgame.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Msubsts", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Msubsts[S,n] creates all subsets of super set S. The input argument \
+n is the cardinality of the player set N.\>\""}], ";"}], "\n", " "}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Msmcs", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Msmcs[v,S,n,tol] returns 1 whenever for a coalition the sum of \
+marginal contributions is positive. A super-set S, which is a positive \
+number. The third input argument is the number of players involved in game v.\
+\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"MsaddQ", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<MsaddQ[v] checks the Tu-game v on super additivity.\>\""}], ";"}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mtrl", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mtrl[Est,dvec] computes the Talmudic rule for a generalized \
+bankruptcy situation (Est,dvec).\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mtauv", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mtauv[v] computes the Tau value using the Matlab toolbox MatTuGames.\
+\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Munag", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Munag[v] computes the unanimity coordinates for game v.\>\""}], 
+   ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"MusQ", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<MusQ[cs] checks whether the coalition structure cs is union \
+stable.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mvclm", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mvclm[clm,vlm]  computes a Tu-game and the corresponding unique \
+integer representation of coalitions. Here clm is cell or matrix, which \
+contains the coalition information in generic power set representation (e.g. \
+Mathematica format). The input vlm is the valuation vector of coalitions in \
+the order as presented by the cell input clm.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mvetopls", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mvetopls[v] determines the veto players of a simple game v. \>\""}], 
+   ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"MwsaddQ", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<MwsaddQ[v] checks the Tu game v on weakly super additivity.\>\""}], 
+   ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mwmg", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mwmg[th,wghs] determines a weighted majority game.\>\""}], ";"}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mwowv", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mwowv[v,apu] computes the weighted Owen value w.r.t. apu.\>\""}], 
+   ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mwshv", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mwshv[v,wghs] computes the weighted Shapley value of game v. Here \
+wghs is a vector of positive weights. No zeros are allowed.\>\""}], ";"}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mwslv", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mwslv[v,wghs] computes the weighted solidarity value w.r.t. wghs. \
+The input wghs is a vector of positive weights.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mwcl", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<Mwcl[mW] determines the whole set of winning coalitions. The input \
+argument mW is the pre-defined list/vector of winning coalitions, and n is \
+the cardinality of the player set N.\>\""}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"MzmQ", "::", "usage"}], " ", "=", " ", "\n", "    ", 
+    "\"\<MzmQ[v] checks zero monotonicity for game v\>\""}], ";"}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mzn", "::", "usage"}], " ", "=", "\n", "    ", 
+    "\"\<Mzn[v] creates a zero normalized game from game v.\>\""}], ";"}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Mzon", "::", "usage"}], " ", "=", "\n", "    ", 
+   "\"\<Mzon[v] creates a zero-one normalized game from game v.\>\""}], 
+  ";"}], "\n"}], "Code",ExpressionUUID->"3074911e-0b8e-4f72-a084-\
+dee0eb096a2c"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Needs", "[", "\"\<MATLink`\>\"", "]"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"OpenMATLAB", "[", "]"}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"Defining", " ", "the", " ", "interfaces", " ", "starts"}], " ", 
+   "*)"}]}]}], "Code",ExpressionUUID->"e55b09a8-8820-4f8d-9a74-af4902bfdf26"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Madv", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<ADvalue\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mamc", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<AllMarginalContributions\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Masg", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<AllSubGames\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Macrp", " ", "=", " ", 
+    RowBox[{"MFunction", "[", "\"\<m_AntiCorePlot\>\"", "]"}]}], ";"}], 
+  "    "}], "\n", 
+ RowBox[{
+  RowBox[{"Macrv", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<AntiCoreVertices\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MacrQ", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<anti_coreQ\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Makr", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<Anti_Kernel\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MakrQ", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<Anti_kernelQ\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Maprk", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<Anti_PreKernel\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MaprkQ", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<Anti_PrekernelQ\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Maddg", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<additive_game\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mapex", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<m_apex_game\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Maslv", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<apu_SolidarityValue\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Massignmentg", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<assignment_game\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MacvQ", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<average_convexQ\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mbank", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<bankruptcy_game\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mbzhv", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<banzhaf\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mbcoord", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<basis_coordinates\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mbg", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<basis_game\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MbtacQ", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<belongToAntiCoreQ\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MbtcQ", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<belongToCoreQ\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mbcl", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<BestCoalitions\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mcardg", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<cardinality_game\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mcddacrp", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<m_CddAntiCorePlot\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"McddacrQ", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<CddAntiCoreQ\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mcddacrv", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<CddAntiCoreVertices\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mcddcrp", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<m_CddCorePlot\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"McddcrQ", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<CddCoreQ\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mcddcrv", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<CddCoreVertices\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mcddipv", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<CddImputationVertices\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mcddlcr", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<CddLeastCore\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mcddnc", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<CddNucl\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mcddprk", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<CddPreKernel\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mcddprn", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<CddPrenucl\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mcddmnc", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<CddModiclus\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mclpkr", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<clp_kernel\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mclskr", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<cls_kernel\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mclm", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<clToMatlab\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mcslv", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<CoalitionSolidarity\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mcflb", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<coeff_linearbasis\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MCRGPQ", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<Converse_RGP_Q\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"McvQ", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<convex_gameQ\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mcrp", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<m_CorePlot\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"McrQ", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<coreQ\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mcrv", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<CoreVertices\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mcplexkr", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<cplex_kernel\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mcplexnc", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<cplex_nucl\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mcplexprk", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<cplex_prekernel\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mcplexprn", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<cplex_prenucl\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mcplexmnc", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<cplex_modiclus\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mcritval1", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<critical_value1\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mcritval2", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<critical_value2\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mcritvals", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<critical_value_star\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mcvxkr", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<cvx_kernel\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mcvxprk", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<cvx_prekernel\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mdmrg", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<DM_Reduced_game\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mdualg", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<dual_game\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mexc", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<excess\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mgb", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<game_basis\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mgspc", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<game_space\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MgToMama", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<gameToMama\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MgToMatlab", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<gameToMatlab\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mgap", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<Gap\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mgus", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<genUnionStable\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mgetg", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<getgame\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mglpkkr", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<glpk_kernel\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mglpknc", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<glpk_nucl\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mglpkprk", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<glpk_prekernel\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mglpkprn", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<glpk_prenucl\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mglpkmnc", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<glpk_modiclus\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mgreedyb", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<greedy_bankruptcy\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mgurobikr", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<gurobi_kernel\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mgurobinc", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<gurobi_nucl\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mgurobiprk", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<gurobi_prekernel\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mgurobiprn", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<gurobi_prenucl\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mgurobimnc", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<gurobi_modiclus\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mharsdivd", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<harsanyi_dividends\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mhmsrdg", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<HMS_RedGame\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MhmsReducedg", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<HMS_Reduced_game\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MhrQ", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<homogeneous_representationQ\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mhslprk", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<hsl_prekernel\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MhgQ", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<hypergraphQ\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mimpvr", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<ImputationVertices\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mintsts", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<InteractionSets\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mipoptkr", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<ipopt_kernel\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mipoptprk", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<ipopt_prekernel\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MkCRGPQ", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<k_Converse_RGP_Q\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MkcvQ", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<k_convexQ\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mkcover", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<k_cover\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mkr", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<Kernel\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MkrQ", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<kernelQ\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MkRCPQ", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<k_Reconfirmation_propertyQ\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MkRGPQ", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<k_Reduced_game_propertyQ\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MkSCRGPQ", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<k_StrConverse_RGP_Q\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mlcr", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<LeastCore\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mlb", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<linear_basis\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mlprk", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<lin_prekernel\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mlsnc", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<LS_Nucl\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mlsprn", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<LS_PreNucl\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mmyv", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<MyersonValue\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mmarketg", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<market_game\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mmwg", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<minimal_winning\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MmgQ", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<monotone_gameQ\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mmcov", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<monotonic_cover\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mmskkr", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<msk_kernel\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mmsknc", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<msk_nucl\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mmskprk", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<msk_prekernel\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Mmskprn", " ", "=", " ", 
+    RowBox[{"MFunction", "[", "\"\<msk_prenucl\>\"", "]"}]}], ";"}], 
+  " "}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Mmskmnc", " ", "=", " ", 
+    RowBox[{"MFunction", "[", "\"\<msk_modiclus\>\"", "]"}]}], ";"}], 
+  " "}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Mnc", " ", "=", " ", 
+    RowBox[{"MFunction", "[", "\"\<nucl\>\"", "]"}]}], ";"}], "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"MncQ", " ", "=", " ", 
+     RowBox[{"MFunction", "[", "\"\<B0_balancedCollectionQ\>\"", "]"}]}], 
+    ";"}], " ", "*)"}]}], "\n", 
+ RowBox[{
+  RowBox[{"Mowv", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<OwenValue\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Moaseskr", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<oases_kernel\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Moasesprk", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<oases_prekernel\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Molsprk", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<ols_prekernel\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MpartSA", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<PartitionSA\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MpartSL", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<PartitionSL\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mpsv", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<PositionValue\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mpwset", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<PowerSet\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Mprk", " ", "=", " ", 
+    RowBox[{"MFunction", "[", "\"\<PreKernel\>\"", "]"}]}], ";"}], 
+  " "}], "\n", 
+ RowBox[{
+  RowBox[{"MprkQ", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<PrekernelQ\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mprn", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<PreNucl\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mprn2", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<PreNucl2\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MprnQ", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<balancedCollectionQ\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mmnc", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<Modiclus\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MmncQ", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<modiclusQ\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Mmodprk", " ", "=", " ", 
+    RowBox[{"MFunction", "[", "\"\<ModPreKernel\>\"", "]"}]}], ";"}], 
+  " "}], "\n", 
+ RowBox[{
+  RowBox[{"MmodprkQ", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<ModPrekernelQ\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Mpmodprk", " ", "=", " ", 
+    RowBox[{"MFunction", "[", "\"\<PModPreKernel\>\"", "]"}]}], ";"}], 
+  " "}], "\n", 
+ RowBox[{
+  RowBox[{"MpmodprkQ", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<PModPrekernelQ\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mprodg", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<production_game\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mprodg2", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<production_game_sq\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mpfmat", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<profit_matrix\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mpureoh", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<pure_overhead\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MqpBBkr", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<qpBB_kernel\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mqpckr", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<qpc_kernel\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mqpcprk", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<qpc_prekernel\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mquotas", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<quotas\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mroutc", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<reasonable_outcome\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MRCPQ", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<Reconfirmation_propertyQ\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mredg", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<RedGame\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MRGPQ", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<Reduced_game_propertyQ\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mrepprk", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<replicate_prk\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mrepshv", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<replicate_Shapley\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Msavg", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<savings_game\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mselpt", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<select_starting_pt\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MscvQ", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<semi_convexQ\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Msca", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<separable_cost_allocation\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mshv", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<ShapleyValue\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MshvLB", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<ShapleyValueLB\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MshvM", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<ShapleyValueM\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Msg", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<m_simple_game\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mslshv", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<SolidarityShapleyValue\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mslv", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<SolidarityValue\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Msortmg", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<SortMg\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Msortsts", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<sortsets\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mstdsol", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<StandardSolution\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MSCRGPQ", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<StrConverse_RGP_Q\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mstrevls", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<streps_value\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Msubdual", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<SubDual\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Msubg", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<SubGame\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Msubsts", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<SubSets\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Msmcs", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<Sum_Marg_Contributions\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MsaddQ", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<super_additiveQ\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mtrl", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<Talmudic_Rule\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mtauv", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<TauValue\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Munag", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<unanimity_games\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MusQ", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<union_stableQ\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mvclm", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<vclToMatlab\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mvetopls", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<veto_players\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MwsaddQ", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<weakly_super_additiveQ\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mwmg", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<m_weighted_majority\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mwowv", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<weightedOwen\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mwshv", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<weightedShapley\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mwslv", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<weightedSolidarity\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mwcl", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<winning_coalitions\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"MzmQ", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<zero_monotonicQ\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Mzn", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<zero_normalization\>\"", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Mzon", " ", "=", " ", 
+    RowBox[{"MFunction", "[", "\"\<ZeroOne_Normalization\>\"", "]"}]}], ";"}],
+   "\n", "\n", 
+  RowBox[{"(*", "\n", 
+   RowBox[{
+    RowBox[{"M", " ", "=", " ", 
+     RowBox[{"MFunction", "[", "\"\<\>\"", "]"}]}], ";", "\n", 
+    RowBox[{"M", " ", "=", " ", 
+     RowBox[{"MFunction", "[", "\"\<\>\"", "]"}]}], ";", "\n", 
+    RowBox[{"M", " ", "=", " ", 
+     RowBox[{"MFunction", "[", "\"\<\>\"", "]"}]}], ";", "\n", 
+    RowBox[{"M", " ", "=", " ", 
+     RowBox[{"MFunction", "[", "\"\<\>\"", "]"}]}], ";", "\n", 
+    RowBox[{"M", " ", "=", " ", 
+     RowBox[{"MFunction", "[", "\"\<\>\"", "]"}]}], ";"}], "\n", "*)"}], "\n",
+   "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Defining", " ", "the", " ", "interfaces", " ", "ends"}], " ", 
+   "*)"}]}], "\n", 
+ RowBox[{
+  RowBox[{"GameToMatlab", "[", "game_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"pws", ",", "vcl"}], "}"}], ",", "\n", "    ", 
+    RowBox[{
+     RowBox[{"pws", "=", 
+      RowBox[{"Subsets", "[", "T", "]"}]}], ";", "\n", "    ", 
+     RowBox[{"vcl", "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"v", "[", "#", "]"}], " ", "&"}], "/@", " ", "pws"}]}], ";", 
+     "\n", "    ", 
+     RowBox[{"vcl", "=", 
+      RowBox[{"Delete", "[", 
+       RowBox[{"vcl", ",", "1"}], "]"}]}], ";", "\n", "    ", 
+     RowBox[{"MgToMatlab", "[", "vcl", "]"}]}]}], "\n", "\t\t     ", 
+   "]"}]}]}], "Code",ExpressionUUID->"b8ef52bd-14f6-4e58-8b34-b36ad941ba4f"],
+
+Cell[BoxData[
+ RowBox[{"(*", "\n", 
+  RowBox[{"EndPackage", "[", "]"}], "\n", "*)"}]], "Code",ExpressionUUID->\
+"a795053c-dfc9-4b51-9d56-0dcf07fee0e9"]
+},
+WindowSize->{630, 827},
+WindowMargins->{{278, Automatic}, {Automatic, 82}},
+FrontEndVersion->"11.3 for Linux x86 (64-bit) (March 6, 2018)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 3223, 73, 844, "Code",ExpressionUUID->"3f930259-609c-4559-87c6-a5ae77d90233"],
+Cell[3784, 95, 1665, 41, 223, "Code",ExpressionUUID->"7a615f09-4b45-4dc1-aac0-46bbc58ce2c6"],
+Cell[5452, 138, 21099, 491, 6548, "Code",ExpressionUUID->"7835c580-1fb8-43b0-b7d5-ede603fd277e"],
+Cell[26554, 631, 747, 18, 70, "Code",ExpressionUUID->"2ffc7b37-947d-4c32-a09f-38516a72c106"],
+Cell[27304, 651, 19689, 519, 70, "Code",ExpressionUUID->"3074911e-0b8e-4f72-a084-dee0eb096a2c"],
+Cell[46996, 1172, 356, 9, 70, "Code",ExpressionUUID->"e55b09a8-8820-4f8d-9a74-af4902bfdf26"],
+Cell[47355, 1183, 23821, 643, 70, "Code",ExpressionUUID->"b8ef52bd-14f6-4e58-8b34-b36ad941ba4f"],
+Cell[71179, 1828, 151, 3, 70, "Code",ExpressionUUID->"a795053c-dfc9-4b51-9d56-0dcf07fee0e9"]
+}
+]
+*)
+
+(* End of internal cache information *)
+
