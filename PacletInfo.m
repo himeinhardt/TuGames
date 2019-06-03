@@ -4,7 +4,7 @@ Paclet[
         MathematicaVersion -> "10+",
         Description -> "A Mathematica Package for Cooperative Game Theory",
         Creator -> "Holger Ingmar Meinhardt <holger.meinhardt@partner.kit.edu>",
-        URL -> "http://library.wolfram.com/infocenter/MathSource/5709/",
+        URL -> "https://github.com/himeinhardt/TuGames",
         Thumbnail -> "TUGLogo.png",
         Extensions -> {
                 {
