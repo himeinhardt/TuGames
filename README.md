@@ -1,4 +1,4 @@
-# *Mathematica* Package *TuGames* Version 2.5.4
+# *Mathematica* Package: *TuGames* Version 2.5.4
 
 ```
 Contents:
@@ -455,5 +455,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) f
 ** Holger I. Meinhardt **
 Institute of Operations Research
 University of Karlsruhe (KIT) 
-E-mail: Holger.Meinhardt@wiwi.uni-karlsruhe.de
-        holger.meinhardt@partner.kit.edu
+E-mail: Holger.Meinhardt ät wiwi.uni-karlsruhe.de
