@@ -222,7 +222,7 @@
 
 
 ###    Version 2.6.0:
-       Adding functions to compute the EPSD-Value, Chi-Value, PD-Value and the nucleolus by the Leng and Parlar (2010) formulae for three person
+       Adding functions to compute the Chi-Value, EPSD-Value, Gately-Value, PD-Value, and the nucleolus by the Leng and Parlar (2010) formulae for three person
        zero-normalized and super-additive games. Changing the package extension from *.m to *.wl.
 
        Performing some code maintenance and minor bug fixes.
