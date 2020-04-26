@@ -219,3 +219,10 @@
         satisfies a balanced inequality of a TU-game. Notice that if all balanced systems satisfying this property
         non-emptiness of the core is guaranteed. Recall that for n=4 we need to check 9 equivalence classes, however,
         for n=6 we have to check 158 classes.
+
+
+###    Version 2.6.0:
+       Adding functions to compute the EPSD-Value, Chi-Value, PD-Value and the nucleolus by the Leng and Parlar (2010) formulae for three person
+       zero-normalized and super-additive games. Changing the package extension from *.m to *.wl.
+
+       Performing some code maintenance and minor bug fixes.

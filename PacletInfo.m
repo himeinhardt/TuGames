@@ -1,11 +1,11 @@
 Paclet[ 
         Name -> "TUG",
-        Version -> "2.5.4",
+        Version -> "2.6.0",
         MathematicaVersion -> "10+",
         Description -> "A Mathematica Package for Cooperative Game Theory",
         Creator -> "Holger Ingmar Meinhardt <holger.meinhardt@partner.kit.edu>",
         URL -> "https://github.com/himeinhardt/TuGames",
-        Thumbnail -> "TUGLogo.png",
+        Thumbnail -> "TUGLogo.png","Icon" -> "TUGLogo.png",
         Extensions -> {
                 {
                         "Kernel", Root -> ".",

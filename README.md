@@ -1,4 +1,4 @@
-# *Mathematica* Package: *TuGames* Version 2.5.4
+# *Mathematica* Package: *TuGames* Version 2.6.0
 
 ```
 Contents:
@@ -23,7 +23,7 @@ game properties of transferable utility games. It provides more
 than 200 different functions to calculate, for instance, (pre-)kernel 
 elements, the (pre-)nucleolus, the modiclus, the modified and proper modified
 pre-kernel, the Shapley value, Lorenz solution, Dutta-Ray solution,
-excess payoffs, the tau-value, the vertices of a core, and much more.
+excess payoffs, the tau-value, chi-value, Gately point, the vertices of a core, and much more.
 Moreover, it verifies if the game is convex, average-convex or superadditive
 just to mention some interesting game properties. It can be used in serial
 as well as in parallel mode, and in conjunction with *MATLink* to build up a *Matlab* 
@@ -116,23 +116,54 @@ We have provided some executables for *RHEL 7.5* and *MacOSX*. Unfortunately, we
 experienced enough under *Windows* to provide any for those. Thus, we invite the community
 to fill that gap and to provide some.
 
-In order check the paths where you have to install the Cddmathlink library call
+In order check for *Mathematica* versions smaller than 12.1 the paths where you have to install the Cddmathlink library call
 the command
 
 ```
 In[1]:= PacletInformation["TUG"]
 
-Out[1]= {Name -> TUG, Version -> 2.5.4, BuildNumber -> , Qualifier -> , WolframVersion -> 10+,
+Out[1]= {Name -> TUG, Version -> 2.6.0, BuildNumber -> , Qualifier -> , WolframVersion -> 10+,
          SystemID -> All, Description -> A Mathematica Package for Cooperative Game Theory,
 	 Category -> , Creator -> Holger Ingmar Meinhardt <holger.meinhardt@partner.kit.edu>,
-	 Publisher -> , Support -> , Internal -> False, Location -> /home/kit/xxx/xxxx/.Mathematica/Paclets/Repository/TUG-2.5.4
+	 Publisher -> , Support -> , Internal -> False, Location -> /home/kit/xxx/xxxx/.Mathematica/Paclets/Repository/TUG-2.6.0
 	 Context -> {TUG`coop`, TUG`vertex`, TUG`}, Enabled -> True, Loading -> Manual}
 ```
 
-Then open the directory.
+To get the same information and beyond that under *Mathematica* version 12.1, it is required to execute
+
+```
+In[1]:= PacletObject["TUG"][All]
+```
+```
+Out[1]=  {"Name" -> "TUG", "Version" -> "2.6.0", "WolframVersion" -> "10+", 
+          "Qualifier" -> "", "SystemID" -> All, "Description" -> "A Mathematica Package for Cooperative Game Theory",
+          "Category" -> Missing["NotAvailable"], "Keywords" -> Missing["NotAvailable"], 
+          "UUID" -> Missing["NotAvailable"], 
+          "Creator" -> 
+          "Holger Ingmar Meinhardt <holger.meinhardt@partner.kit.edu>", 
+          "URL" -> "https://github.com/himeinhardt/TuGames", 
+          "Internal" -> False, 
+          "Context" -> {"TUG`coop`", "TUG`vertex`", "TUG`"}, 
+          "Loading" -> Manual, "AutoUpdating" -> False, "Enabled" -> True, 
+          "Location" -> "/home/kit/xxx/xxxx/.Mathematica/Paclets/Repository/TUG-2.6.0"}
+```
+or alternatively
+
+```
+Information[PacletObject["TUG"]]
+```
+
+
+Then open the directory for *Mathematica* versions smaller than 12.1 by
 
 ```
 SystemOpen@Lookup[PacletInformation["TUG"], "Location"]
+```
+
+or for *Mathematica* version 12.1 one opens the directory via  
+
+```
+SystemOpen@Lookup[PacletObject["TUG"][All], "Location"]
 ```
 
 This returns the root directory of `TUG`, and shows you the three folders
@@ -157,22 +188,38 @@ operating system that can be found from the Mathematica documentation.
 Start Mathematica, open a notebook, and execute therein
 
 ```
-PacletInstall["/full/Path/to/TUG-2.5.4.paclet"] 
+PacletInstall["/full/Path/to/TUG-2.6.0.paclet"] 
 ```
 
 that should return the value 
 
 ```
-Paclet[TUG, 2.5.4, <>] 
+Paclet[TUG, 2.6.0, <>] 
 ```
 
 to indicate a successful installation. Notice that 
 
 ```
-"/full/Path/to/TUG-2.5.4.paclet"
+"/full/Path/to/TUG-2.6.0.paclet"
 ```
 
-indicates the directory where the `TUG-2.5.4.paclet` is located at your hard-disk. 
+indicates the directory where the `TUG-2.6.0.paclet` is located at your hard-disk. 
+
+Alternatively, one can directly install the package from GitHub with the help of the *Mathematica-Tools* from 
+
+[Mma Tools](https://github.com/b3m2a1/mathematica-tools)
+
+For doing so, install first the package paclet generator and installer while executing within a running *Mathematica* session the command
+
+```
+Get["https://raw.githubusercontent.com/b3m2a1/mathematica-tools/master/PackageDataPacletInstall.m"]
+```
+After that, the current version of TuGames can be installed while calling from your notebook
+
+```
+PDInstallPaclet["https://github.com/himeinhardt/TuGames"]
+```
+
 
 In order to use the graphical features of the package, it is recommended to install the Cddmathlink executables
 in pre-defined folders as described in Section 1. This C-library must be compiled by yourself if the shipped
@@ -213,8 +260,8 @@ In[2]:=  Needs["TUG`"]
 ===================================================
 Loading Package 'TuGames' for Unix
 ===================================================
-TuGames V2.5.4 by Holger I. Meinhardt
-Release Date: 26.05.2019
+TuGames V2.6.0 by Holger I. Meinhardt
+Release Date: 22.04.2020
 Program runs under Mathematica Version 8.0 or later
 Version 8.x or higher is recommended
 ===================================================
@@ -452,7 +499,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) f
 
 ## Author
 
-*Holger I. Meinhardt*
+** Holger I. Meinhardt **
 Institute of Operations Research
 University of Karlsruhe (KIT) 
 E-mail: Holger.Meinhardt ät wiwi.uni-karlsruhe.de
+        holger.meinhardt ät partner.kit.edu

@@ -1,8 +1,11 @@
+(* ::Package:: *)
+
 (* :Title: ParaTuGames.m
-    : Release Date : 28.05.2019
+    : Release Date : 21.04.2020
     : Preliminary version:
       For testing only.
 *)
+Off[Needs::nocont]
 (* :Context: TUG`ParaTuGames` *)
 
 (* :Summary:	
@@ -18,7 +21,7 @@
     holger.meinhardt@wiwi.uni-karlsruhe.de
 *)
 
-(* :Package Version: 0.4 *)
+(* :Package Version: 0.5 *)
 
 (* 
    :Mathematica Version: 8.x, 9.x, 10.x, 11.x, 12.x
@@ -343,7 +346,7 @@ Block[{sil, smc, optst, meff, matE, mopt,matQ, matP, varpay, mex, submex, setpay
   submex = ParallelMap[{1, -1}.# &, mex];    
   varpay = x[#] & /@ T;
   setpay = MapThread[Rule, {varpay, payoff}];
-  grmex = v[T] - Apply[Plus, x[#] & /@ T] /. setpay;
+  grmex = v[T] - Total[x[#] & /@ T] /. setpay;
   PrependTo[submex, grmex];
   If[SameQ[sil,False], Print["submex=", submex],True];
   If[SameQ[pinv,False],
@@ -764,10 +767,10 @@ ParaPreKernelQ[game_, payoff_List] :=Block[{tolv,graval,dimpay},
        dimpay = Dimensions[payoff];
        tolv=1.5*10^(-8);
     Which[Length[dimpay] === 2,
-                                 Which[ (Last[dimpay]===Length[T] && Depth[payoff] ===3),MapThread[And,{(Abs[Apply[Plus, #] - graval]<=tolv) & /@ payoff,ParaMaxExcessBalanced[game, payoff]}],
+                                 Which[ (Last[dimpay]===Length[T] && Depth[payoff] ===3),MapThread[And,{(Abs[Total[#] - graval]<=tolv) & /@ payoff,ParaMaxExcessBalanced[game, payoff]}],
                                                True, ParaPrintRemark[payoff]],
                    Length[dimpay] === 1,
-                              Which[(First[dimpay]===Length[T] && Depth[payoff] === 2 ), MapThread[And,{{Abs[Apply[Plus, payoff] - graval]<=tolv},{ParaMaxExcessBalanced[game, payoff]}}], 
+                              Which[(First[dimpay]===Length[T] && Depth[payoff] === 2 ), MapThread[And,{{Abs[Total[payoff] - graval]<=tolv},{ParaMaxExcessBalanced[game, payoff]}}], 
                                             True, ParaPrintRemark[payoff]],
       True, ParaPrintRemark[payoff]
             ]
@@ -780,10 +783,10 @@ ParaAntiPreKernelQ[game_, payoff_List] :=Block[{tolv,graval,dimpay},
        dimpay = Dimensions[payoff];
        tolv=1.5*10^(-7);
     Which[Length[dimpay] === 2,
-                               Which[ (Last[dimpay]===Length[T] && Depth[payoff] ===3), MapThread[And,{(Abs[Apply[Plus, #] - graval]<= tolv) & /@ payoff,ParaMinExcessBalanced[game, payoff]}],
+                               Which[ (Last[dimpay]===Length[T] && Depth[payoff] ===3), MapThread[And,{(Abs[Total[#] - graval]<= tolv) & /@ payoff,ParaMinExcessBalanced[game, payoff]}],
                                                True, ParaPrintRemark[payoff]],
                    Length[dimpay] === 1,
-                              Which[(First[dimpay]===Length[T] && Depth[payoff] === 2 ), MapThread[And,{{Abs[Apply[Plus, payoff] - graval]<=tolv},{ParaMinExcessBalanced[game, payoff]}}], 
+                              Which[(First[dimpay]===Length[T] && Depth[payoff] === 2 ), MapThread[And,{{Abs[Total[payoff] - graval]<=tolv},{ParaMinExcessBalanced[game, payoff]}}], 
                                             True, ParaPrintRemark[payoff]],
       True, ParaPrintRemark[payoff]
             ]
@@ -936,7 +939,7 @@ ParaSumMargContribution[superset_List, teilmg_List] :=
     delisp = DeleteCases[superset, #] & /@ teilmg;
     delitlm = DeleteCases[teilmg, #] & /@ teilmg;
     sumtmg = MapThread[(v[superset] - v[#1] - v[teilmg] + v[#2]) &, {delisp, delitlm}];
-    add = Apply[Plus, sumtmg] // Simplify;
+    add = Total[sumtmg] // Simplify;
     NonNegative[add]
 ];
 

@@ -1,6 +1,8 @@
+(* ::Package:: *)
+
 (* :Title: TuGamesAux.m *)
-(* Release Date: 31.05.2019 *)
-(* Version: 2.5.4 *)
+(* Release Date: 22.04.2020 *)
+(* Version: 2.6.0 *)
 
 (* :Context: TuGamesAux` *)
 
@@ -15,7 +17,7 @@
     E-Mail: Holger.Meinhardt@wiwi.uni-karlsruhe.de
 *)
 
-(* :Package Version: 2.5.4 *)
+(* :Package Version: 2.6.0 *)
 
 (* 
    :Mathematica Version: 8.x, 9.x, 10.x, 11.x, 12.x
@@ -87,6 +89,9 @@
        of sets is balanced. However, use it with care, it returns for n=>4 incorrect results probably due to 
        a bug within the DualLinearProgramming. For an example see ChangeLog.
 
+
+    Version 2.6.0:
+       Performing some code maintenance.
 *)
 
 BeginPackage["TUG`TuGamesAux`"];
@@ -175,7 +180,7 @@ NearRingQ::usage =
 "NearRingQ[list,T] checks if the collection of sets is a near ring.";
 
 LieBracket::usage = 
-"LieBracket[mat01,mat02} computes the commutator of the (nXn)-matrices mat01 and mat02.";
+"LieBracket[mat01,mat02] computes the commutator of the (nXn)-matrices mat01 and mat02.";
 
 Coal2Dec::usage =
 "Coal2Dec[n_Integer] converts the set of proper coalitions to its unique integer representations.";
@@ -350,7 +355,7 @@ ComplementaryMarket[T_List,P_List,Q_List,opts:OptionsPattern[ComplementaryMarket
     Which[Length[em] != 0, Print["The sets P and Q are not disjoint."]; Return[],
           True, 
               param = OptionValue[MarketParameter];  
-              coal = teilm[T];
+              coal = Subsets[T];
               val = Min[Length[Intersection[#, P]], a Length[Intersection[#, Q]]] & /@ coal;
               val /. a -> param
           ]
@@ -365,7 +370,7 @@ ModestBankruptcy[E_?NumberQ,claims_List]:= Module[{lc,T,asscl,compset,vecval},
     lc=Length[claims];
     T=Range[lc];
     asscl = MapThread[Rule,{x /@ T,claims}];
-    compset = Complement[T,#] &/@ teilm[T];
+    compset = Reverse[Subsets[T]];
     vecval = Max[0, E -  x[#]] &/@ compset; 
     vecval /.asscl
 ];
@@ -375,7 +380,7 @@ GreedyBankruptcy[E_?NumberQ,claims_List]:= Module[{lc,T,asscl,vecval},
     lc=Length[claims];
     T=Range[lc];
     asscl = MapThread[Rule,{x /@ T,claims}];
-    vecval = Min[E, x[#]] &/@ teilm[T];
+    vecval = Min[E, x[#]] &/@ Subsets[T];
     vecval /.asscl
 ];
 
@@ -397,14 +402,14 @@ TalmudicRule[args___]:=(Message[TalmudicRule::argerr];$Failed);
 TalmudicRule[Estate_?NumberQ, Claims_List] := 
   Module[{clvar, sumcl, param, eqsys, nclsum,sol, sol01},
     clvar = Map[x[#] &, Range[Length[Claims]]];
-    sumcl = Apply[Plus, clvar];
+    sumcl = Total[ clvar];
     param = MapThread[Rule, {clvar, Claims}];
     nclsum = sumcl /. param;
     eqsys = 
       If[Greater[(1/2)*nclsum, Estate], 
         Min[\[Lambda], (1/2)*#] & /@ Claims, 
         Max[(# - \[Lambda]), (1/2)*#] & /@ Claims];
-    sol = Reduce[Apply[Plus, eqsys] == Estate, \[Lambda]];
+    sol = Reduce[Total[ eqsys] == Estate, \[Lambda]];
     sol01 = MapThread[Rule, {{\[Lambda]}, {sol[[2]]}}];
     eqsys /. sol01
     ];
@@ -596,9 +601,9 @@ MaxProfit[matchli_List, assmat_List, bplayer_List, splayer_List, opts:OptionsPat
                                     Depth[matchli] === 5, Table[Table[Global`beta[#] & /@ matchli[[j, i]], {i, Length[matchli[[j]]]}], {j, Length[matchli]}],
                                     True, Table[Global`beta[#] & /@ matchli[[i]], {i, Length[matchli]}]];
     If[SameQ[vrb,True], Print["prfli=", profitli];, True];
-    Which[Depth[matchli] <= 3, Max[Apply[Plus, profitli]], 
-                 Depth[matchli] === 5, Max[Table[Apply[Plus, #] & /@ profitli[[i]], {i, Length[profitli]}]], 
-                 True, Max[Apply[Plus, #] & /@ profitli]]
+    Which[Depth[matchli] <= 3, Max[Total[ profitli]], 
+                 Depth[matchli] === 5, Max[Table[Total[ #] & /@ profitli[[i]], {i, Length[profitli]}]], 
+                 True, Max[Total[ #] & /@ profitli]]
     ];
 
 (* Euclidean Distance, Spelling Euclidian is not protected! *)
@@ -609,7 +614,7 @@ EuclidianDistance[liste_,refliste_]:=
                 Depth[liste] == 2, EuclidianDist[liste, refliste],
                 True,DisplayEuk[liste]];
 
-EuclidianDist[liste_, refliste_] := N[Power[Apply[Plus, MapThread[Power[#1 - #2, 2] &, {liste, refliste}]], (1/2)]];
+EuclidianDist[liste_, refliste_] := N[Power[Total[ MapThread[Power[#1 - #2, 2] &, {liste, refliste}]], (1/2)]];
 
 DisplayEuk[liste_]:=(
        Print["Depth is equal to ",Depth[liste]];
@@ -641,7 +646,7 @@ Coal2Dec[n_Integer]:=Module[{T,ps,prs,xp,sxp},
    prs=Delete[ps,1];
    xp=prs-1;
    sxp=(2^#)&/@xp;
-   Apply[Plus,#]&/@ sxp
+   Total[#]&/@ sxp
 ];
 
 
@@ -649,7 +654,7 @@ Sets2Dec[args___]:=(Message[Sets2Dec::argerr];$Failed);
 Sets2Dec[sets_List]:=Module[{T,ps,prs,xp,sxp},
    xp=sets-1;
    sxp=(2^#)&/@xp;
-   Apply[Plus,#]&/@ sxp
+   Total[#]&/@ sxp
 ];
 
 
@@ -783,7 +788,7 @@ AssValToCoal4[i_Integer,j_Integer,k_Integer,l_Integer,val_Integer,S1_List,S2_Lis
 (* Lie Groups *)
 
 LieBracket[args___]:=(Message[LieBracket::argerr];$Failed);
-LieBracket[mat01_List,mat02_List]:= mat01.mat02 - mat02.mat01;
+LieBracket[mat01_?ListQ,mat02_?ListQ]:= mat01.mat02 - mat02.mat01;
 
 (* Linear Algebra *)
 

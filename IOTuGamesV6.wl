@@ -1,7 +1,9 @@
+(* ::Package:: *)
+
 (*
     : Title : IOTuGamesV6.m
-    : Release Date : 20.01.2019
-    : Version 2.5 
+    : Release Date : 22.04.2020
+    : Version 2.6.0 
 
 *)
 
@@ -47,7 +49,9 @@
                    and can therefore adjusted by setting PtRadius. Similar for the line segment of a
                    two-dimensional Kernel, this is set to 0.75*PtRadius. In addition, the modiclus
                    can be drawn by invoking the options ViewModiclusSol -> True. Finally, a bug
-                   w.r.t. the option UseManipulate -> True has been fixed.   
+                   w.r.t. the option UseManipulate -> True has been fixed.
+      Version 2.6.0:
+                   Performing some code maintenance.   
  *)
 
 
@@ -467,8 +471,8 @@ ShowKernelV6[game_,opts:OptionsPattern[{PlotCore3dV6,Graphics3D}]] :=
     dpk=Depth[kersol];    
     {d1,d2}=If[dpk==2,{1,4} ,Dimensions[kersol]];
     kersol=If[dpk == 3 && d1 == 1,First[kersol], kersol];
-    normQ = Which[d1 === 1, Apply[Plus,kersol],
-                  d1 === 2, Apply[Plus,#]&/@kersol,
+    normQ = Which[d1 === 1, Total[kersol],
+                  d1 === 2, Total[#]&/@kersol,
                 True,1];
     kercoord = Which[d1 === 1,
                        Which[normQ == 1, kersol,
@@ -491,7 +495,7 @@ ShowNucleolusV6[game_,opts:OptionsPattern[{PlotCore3dV6,Graphics3D}]] :=
     dld4= OptionValue[SyncDim];
     rd = OptionValue[PtRadius];
     filopts = FilterRules[{opts},Options[Graphics3D]]; 
-    normQ = Which[Length[nuccoord] != 0, Apply[Plus, nuccoord], True, 1];
+    normQ = Which[Length[nuccoord] != 0, Total[ nuccoord], True, 1];
     nuccoord = Which[Length[nuccoord] != 0, Which[normQ == 1, nuccoord, True, nuccoord/normQ], True, nuccoord];
     l1 = Depth[nuccoord];
     Which[(Length[nuccoord]!=0 && l1==2)==True,GenNucleolusGraphPointV6[nuccoord,SyncDim ->dld4,PtRadius -> rd,filopts],
@@ -505,7 +509,7 @@ ShowModiclusV6[game_,opts:OptionsPattern[{PlotCore3dV6,Graphics3D}]] :=
     dld4= OptionValue[SyncDim];
     rd = OptionValue[PtRadius];
     filopts = FilterRules[{opts},Options[Graphics3D]]; 
-    normQ = Which[Length[mnccoord] != 0, Apply[Plus, mnccoord], True, 1];
+    normQ = Which[Length[mnccoord] != 0, Total[ mnccoord], True, 1];
     mnccoord = Which[Length[mnccoord] != 0, Which[normQ == 1, mnccoord, True, mnccoord/normQ], True, mnccoord];
     l1 = Depth[mnccoord];
     Which[(Length[mnccoord]!=0 && l1==2)==True,GenModiclusGraphPointV6[mnccoord,SyncDim ->dld4,PtRadius -> rd,filopts],
@@ -518,7 +522,7 @@ ShowShapleyV6[game_,opts:OptionsPattern[{PlotCore3dV6,Graphics3D}]] :=
     dld4= OptionValue[SyncDim];
     rd = OptionValue[PtRadius];
     filopts = FilterRules[{opts},Options[Graphics3D]]; 
-    normQ = Which[Length[shapcoord] != 0, Apply[Plus,shapcoord],True,1];
+    normQ = Which[Length[shapcoord] != 0, Total[shapcoord],True,1];
     shapcoord = Which[Length[shapcoord] != 0, Which[normQ == 1, shapcoord, True, shapcoord/normQ], True, shapcoord];
     l1 = Depth[shapcoord];
     retval=Which[(Length[shapcoord]!=0 && l1==2)==True,GenShapleyGraphPointV6[shapcoord,SyncDim ->dld4,PtRadius -> rd,filopts],
@@ -548,8 +552,8 @@ ShowPayoffV6[game_,opts:OptionsPattern[{PlotCore3dV6,Graphics3D}]] :=
     dld4= OptionValue[SyncDim];
     rd = OptionValue[PtRadius];
     filopts = FilterRules[{opts},Options[Graphics3D]];
-    normQ = Which[Depth[paycoord] == 2, Apply[Plus,paycoord],
-		  Depth[paycoord] == 3, Apply[Plus,First[paycoord]],
+    normQ = Which[Depth[paycoord] == 2, Total[paycoord],
+		  Depth[paycoord] == 3, Total[First[paycoord]],
 		  True,1];
     paycoord= Which[Depth[paycoord] == 2, List[paycoord],True,paycoord];	   
     paycoord =Which[Length[#] != 0, Which[normQ == 1, #, True, #/normQ], True, #] &/@ paycoord;
@@ -664,7 +668,7 @@ GenCoreGraphPointV6[payoff_,opts:OptionsPattern[{PlotCore3dV6,Graphics3D}]]:=
     dld4= OptionValue[SyncDim];
     rd = OptionValue[PtRadius];	  
     filopts = FilterRules[{opts},Options[Graphics3D]]; 
-    pr=Apply[Plus,payoff];
+    pr=Total[payoff];
     pay1=payoff/pr;
     reddim=If[Length[pay1]==4,
              Which[SameQ[dld4,{}],RedDimV6[pay1],
