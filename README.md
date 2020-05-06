@@ -1,4 +1,6 @@
-# *Mathematica* Package: *TuGames* Version 2.6.0
+[![GitHub (pre-)release](https://img.shields.io/github/release/himeinhardt/TuGames/all.svg)](https://github.com/himeinhardt/TuGames/releases)
+
+# *Mathematica* Package: *TuGames* Version 2.6.1
 
 ```
 Contents:
@@ -122,10 +124,10 @@ the command
 ```
 In[1]:= PacletInformation["TUG"]
 
-Out[1]= {Name -> TUG, Version -> 2.6.0, BuildNumber -> , Qualifier -> , WolframVersion -> 10+,
+Out[1]= {Name -> TUG, Version -> 2.6.1, BuildNumber -> , Qualifier -> , WolframVersion -> 10+,
          SystemID -> All, Description -> A Mathematica Package for Cooperative Game Theory,
 	 Category -> , Creator -> Holger Ingmar Meinhardt <holger.meinhardt@partner.kit.edu>,
-	 Publisher -> , Support -> , Internal -> False, Location -> /home/kit/xxx/xxxx/.Mathematica/Paclets/Repository/TUG-2.6.0
+	 Publisher -> , Support -> , Internal -> False, Location -> /home/kit/xxx/xxxx/.Mathematica/Paclets/Repository/TUG-2.6.1
 	 Context -> {TUG`coop`, TUG`vertex`, TUG`}, Enabled -> True, Loading -> Manual}
 ```
 
@@ -135,7 +137,7 @@ To get the same information and beyond that under *Mathematica* version 12.1, it
 In[1]:= PacletObject["TUG"][All]
 ```
 ```
-Out[1]=  {"Name" -> "TUG", "Version" -> "2.6.0", "WolframVersion" -> "10+", 
+Out[1]=  {"Name" -> "TUG", "Version" -> "2.6.1", "WolframVersion" -> "10+", 
           "Qualifier" -> "", "SystemID" -> All, "Description" -> "A Mathematica Package for Cooperative Game Theory",
           "Category" -> Missing["NotAvailable"], "Keywords" -> Missing["NotAvailable"], 
           "UUID" -> Missing["NotAvailable"], 
@@ -145,7 +147,7 @@ Out[1]=  {"Name" -> "TUG", "Version" -> "2.6.0", "WolframVersion" -> "10+",
           "Internal" -> False, 
           "Context" -> {"TUG`coop`", "TUG`vertex`", "TUG`"}, 
           "Loading" -> Manual, "AutoUpdating" -> False, "Enabled" -> True, 
-          "Location" -> "/home/kit/xxx/xxxx/.Mathematica/Paclets/Repository/TUG-2.6.0"}
+          "Location" -> "/home/kit/xxx/xxxx/.Mathematica/Paclets/Repository/TUG-2.6.1"}
 ```
 or alternatively
 
@@ -188,22 +190,22 @@ operating system that can be found from the Mathematica documentation.
 Start Mathematica, open a notebook, and execute therein
 
 ```
-PacletInstall["/full/Path/to/TUG-2.6.0.paclet"] 
+PacletInstall["/full/Path/to/TUG-2.6.1.paclet"] 
 ```
 
 that should return the value 
 
 ```
-Paclet[TUG, 2.6.0, <>] 
+Paclet[TUG, 2.6.1, <>] 
 ```
 
 to indicate a successful installation. Notice that 
 
 ```
-"/full/Path/to/TUG-2.6.0.paclet"
+"/full/Path/to/TUG-2.6.1.paclet"
 ```
 
-indicates the directory where the `TUG-2.6.0.paclet` is located at your hard-disk. 
+indicates the directory where the `TUG-2.6.1.paclet` is located at your hard-disk. 
 
 Alternatively, one can directly install the package from GitHub with the help of the *Mathematica-Tools* from 
 
@@ -271,8 +273,8 @@ In[2]:=  Needs["TUG`"]
 ===================================================
 Loading Package 'TuGames' for Unix
 ===================================================
-TuGames V2.6.0 by Holger I. Meinhardt
-Release Date: 22.04.2020
+TuGames V2.6.1 by Holger I. Meinhardt
+Release Date: 05.05.2020
 Program runs under Mathematica Version 8.0 or later
 Version 8.x or higher is recommended
 ===================================================

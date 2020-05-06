@@ -1,7 +1,7 @@
 (* ::Package:: *)
 
 (* :Title: ParaTuGames.m
-    : Release Date : 21.04.2020
+    : Release Date : 05.05.2020
     : Preliminary version:
       For testing only.
 *)
@@ -21,7 +21,7 @@ Off[Needs::nocont]
     holger.meinhardt@wiwi.uni-karlsruhe.de
 *)
 
-(* :Package Version: 0.5 *)
+(* :Package Version: 0.6 *)
 
 (* 
    :Mathematica Version: 8.x, 9.x, 10.x, 11.x, 12.x
@@ -245,7 +245,7 @@ ParaSetsToVec::argerr="Two arguments were expected.";
 
 (* :Four Arguments: *)
 ParaMaxSurplus::argerr="Four arguments were expected.";
-
+ParaAntiSurplus::argerr="Four arguments were expected.";
 
 
 
@@ -262,7 +262,7 @@ ParaPreKernel[game_,opts:OptionsPattern[ParaPreKernel]] :=
 
 ParaPreKernel[game_, payoff_List, opts:OptionsPattern[ParaPreKernel]] := Block[{dimpay,rclim}, 
       dimpay = Dimensions[payoff]; 
-      rclim=If[Length[T] > 11,256,156];
+      rclim=If[Length[T] > 11,1024,256];
       Which[Length[dimpay]===2, 
                        Which[(Last[dimpay]===Length[T] && Depth[payoff] ===3), Block[{$RecursionLimit = rclim}, ParaPreKernelAlg2[game,#, opts]&/@ payoff //Union],
                                      True, ParaPrintRemark[payoff]],
@@ -302,7 +302,7 @@ ParaPreKernelElement[game_,opts:OptionsPattern[ParaPreKernelElement]] :=
 
 ParaPreKernelElement[game_, payoff_List, opts:OptionsPattern[ParaPreKernelElement]] := Block[{dimpay,rclim}, 
       dimpay = Dimensions[payoff]; 
-      rclim=If[Length[T] > 11,256,156];
+      rclim=If[Length[T] > 11,1024,256];
       Which[Length[dimpay]===2, 
                        Which[(Last[dimpay]===Length[T] && Depth[payoff] ===3), Block[{$RecursionLimit = rclim}, ParaPreKernelAlg3[game,#, opts]&/@ payoff //Union],
                                      True, ParaPrintRemark[payoff]],
@@ -335,13 +335,13 @@ Block[{sil, smc, optst, doi, optstep, itpay,tol,brc,pinv},
 
 ParaDirectionOfImprovement[args___]:=(Message[ParaDirectionOfImprovement::argerr];$Failed);
 ParaDirectionOfImprovement[game_, payoff_List, opts:OptionsPattern[ParaDirectionOfImprovement]] := 
-Block[{sil, smc, optst, meff, matE, mopt,matQ, matP, varpay, mex, submex, setpay, grmex, doi, optstep,pinv},
+Module[{sil, smc, optst, meff, matE, mopt,matQ, matP, varpay, mex, submex, setpay, grmex, doi, optstep,pinv},
   sil = OptionValue[Silent];
   smc = OptionValue[SmallestCardinality];
   optst = OptionValue[CalcStepSize];
   pinv = OptionValue[PseudoInv];
   mopt= OptionValue[MaximumSurpluses];
-  {meff, mex} = ParaBestCoalitions[game, payoff, MaximumSurpluses -> True, SmallestCardinality -> smc]; 
+  {meff, mex} = ParaBestCoalitions[game, payoff, AntiPreKernel -> False, MaximumSurpluses -> True, SmallestCardinality -> smc];
   matE = -ParaSetsToVec[meff, T, EffVector -> True];
   submex = ParallelMap[{1, -1}.# &, mex];    
   varpay = x[#] & /@ T;
@@ -355,6 +355,8 @@ Block[{sil, smc, optst, meff, matE, mopt,matQ, matP, varpay, mex, submex, setpay
   optstep = If[SameQ[optst,True], ParaDelStar[doi, matE, submex], 1];
   If[SameQ[mopt,False],{optstep,doi},{optstep,doi,mex}]
   ];
+
+
 
 ParaDelStar[doi_List, matE_List, smex_List]:= 
   Block[{edvec,nrsq,tol},
@@ -376,7 +378,7 @@ ParaAntiPreKernel[game_,opts:OptionsPattern[ParaPreKernel]] :=
 
 ParaAntiPreKernel[game_, payoff_List, opts:OptionsPattern[ParaPreKernel]] := Block[{dimpay,rclim}, 
       dimpay = Dimensions[payoff]; 
-      rclim=If[Length[T] > 11,256,156];
+      rclim=If[Length[T] > 11,1024,256];
       Which[Length[dimpay]===2, 
                        Which[(Last[dimpay]===Length[T] && Depth[payoff] ===3), Block[{$RecursionLimit = rclim}, ParaAntiPreKernelAlg2[game,#, opts]&/@ payoff //Union],
                                      True, ParaPrintRemark[payoff]],
@@ -407,7 +409,7 @@ Block[{sil, smc, meff, matE, vlis, alpv,err},
 (* Section Modiclus, Modified and Proper Modified Pre-Kernel *)
 
 ParaModiclus[args___]:=(Message[ParaModiclus::argerr];$Failed);
-ParaModiclus[game_] := Module[{ovls, dcvals, lt, t0, t1, DCGame, mdnc},
+ParaModiclus[game_] := Block[{ovls, dcvals, lt, t0, t1, DCGame, mdnc},
   ovls = v[#] & /@ Coalitions; (* Storing original game values. *)
   t0 = T; (* Storing original game values. *)
   dcvals = ParaDualCover[game];
@@ -421,7 +423,7 @@ ParaModiclus[game_] := Module[{ovls, dcvals, lt, t0, t1, DCGame, mdnc},
 
 ParaIsModiclusQ[args___]:=(Message[ParaIsModiclusQ::argerr];$Failed);
 
-ParaIsModiclusQ[game_,payoff_List] := Module[{ovls, dcvals, lt, t0, t1, dpay, DCGame, bcQ},
+ParaIsModiclusQ[game_,payoff_List] := Block[{ovls, dcvals, lt, t0, t1, dpay, DCGame, bcQ},
   ovls = v[#] & /@ Coalitions; (* Storing original game values. *)
   t0 = T; (* Storing original game values. *)
   dcvals = ParaDualCover[game];
@@ -499,7 +501,7 @@ ParaECCoverGame[game_, payoff_] :=
 
 
 ParaProperModPreKernel[args___]:=(Message[ParaProperModPreKernel::argerr];$Failed);
-ParaProperModPreKernel[game_,opts:OptionsPattern[ParaProperModPreKernel]] := Module[{ovls, dcvals, lt, t0, t1, DCGame, mdnc},
+ParaProperModPreKernel[game_,opts:OptionsPattern[ParaProperModPreKernel]] := Block[{ovls, dcvals, lt, t0, t1, DCGame, mdnc},
   ovls = v[#] & /@ Coalitions; (* Storing original game values. *)
   t0 = T; (* Storing original game values. *)
   dcvals = DualCover[game];
@@ -513,7 +515,7 @@ ParaProperModPreKernel[game_,opts:OptionsPattern[ParaProperModPreKernel]] := Mod
 ];
 
 
-ParaProperModPreKernel[game_,payoff_List,opts:OptionsPattern[ParaProperModPreKernel]] := Module[{ovls, dcvals, lt, t0, t1, DCGame, mdnc,dcpay},
+ParaProperModPreKernel[game_,payoff_List,opts:OptionsPattern[ParaProperModPreKernel]] := Block[{ovls, dcvals, lt, t0, t1, DCGame, mdnc,dcpay},
   ovls = v[#] & /@ Coalitions; (* Storing original game values. *)
   t0 = T; (* Storing original game values. *)
   dcvals = ParaDualCover[game];
@@ -530,7 +532,7 @@ ParaProperModPreKernel[game_,payoff_List,opts:OptionsPattern[ParaProperModPreKer
 
 ParaIsModPreKernelQ[args___]:=(Message[ParaIsModPreKernelQ::argerr];$Failed);
 ParaIsModPreKernelQ[game_, payoff_List] :=
-    Module[{ovls, dcvals, lt, t0, t1, DCGame, pmpkQ},
+    Block[{ovls, dcvals, lt, t0, t1, DCGame, pmpkQ},
       ovls = v[#] & /@ Coalitions;(*Storing original game values.*)
       t0 = T;(*Storing original game values.*)
       dcvals = ParaECCoverGame[game, payoff];
@@ -540,7 +542,7 @@ ParaIsModPreKernelQ[game_, payoff_List] :=
       Return[pmpkQ]];
 
 ParaIsProperModPreKernelQ[args___]:=(Message[ParaIsProperModPreKernelQ::argerr];$Failed);
-ParaIsProperModPreKernelQ[game_,payoff_List] := Module[{ovls, dcvals, lt, t0, t1, dpay, DCGame, pmpkQ},
+ParaIsProperModPreKernelQ[game_,payoff_List] := Block[{ovls, dcvals, lt, t0, t1, dpay, DCGame, pmpkQ},
   ovls = v[#] & /@ Coalitions; (* Storing original game values. *)
   t0 = T; (* Storing original game values. *)
   dcvals = ParaDualCover[game];
@@ -554,7 +556,7 @@ ParaIsProperModPreKernelQ[game_,payoff_List] := Module[{ovls, dcvals, lt, t0, t1
 ];
 
 (* Dual Extension of the primal game *)
-ParaDualExtension[game_] := Module[{lt, T1, cls, cl1, clset, vlset, dlext,vals},
+ParaDualExtension[game_] := Block[{lt, T1, cls, cl1, clset, vlset, dlext,vals},
   lt = Length[T];
   cls=Subsets[T];
   T1 = Range[lt + 1, 2*lt];
@@ -571,7 +573,7 @@ ParaDualExtension[game_] := Module[{lt, T1, cls, cl1, clset, vlset, dlext,vals},
 
 (* Primal Extension of the dual game *)
 ParaPrimalExtension[game_] :=
-    Module[{lt, T1, cl1, cls,clset, vlset, plext,vals},
+    Block[{lt, T1, cl1, cls,clset, vlset, plext,vals},
       cls=Subsets[T];
       lt = Length[T];
       T1 = Range[lt + 1, 2*lt];
@@ -586,7 +588,7 @@ ParaPrimalExtension[game_] :=
     ];
 
 
-ParaDualCover[game_] := Module[{dvals, dexts, pvals, pexts},
+ParaDualCover[game_] := Block[{dvals, dexts, pvals, pexts},
   {dvals, dexts} = ParaDualExtension[game];
   {pvals, pexts} = ParaPrimalExtension[game];
   MapThread[Max[#1, #2] &, {dvals, pvals}]
@@ -597,7 +599,7 @@ ParaDualCover[game_] := Module[{dvals, dexts, pvals, pexts},
 
 
 ParaSMPreKernel[args___]:=(Message[ParaSMPreKernel::argerr];$Failed);
-ParaSMPreKernel[game_] := Module[{ovls, dv, av, AVGame, smpk},
+ParaSMPreKernel[game_] := Block[{ovls, dv, av, AVGame, smpk},
   ovls = v[#] & /@ Coalitions;(*Storing original game values.*)
   dv = DualGame[game];
   av = (ovls + dv)/2;
@@ -608,7 +610,7 @@ ParaSMPreKernel[game_] := Module[{ovls, dv, av, AVGame, smpk},
   ];
 
 ParaIsSMPreKernelQ[args___]:=(Message[ParaIsSMPreKernelQ::argerr];$Failed);
-ParaIsSMPreKernelQ[game_, payoff_] := Module[{ovls, dv, av, AVGame, smpkQ},
+ParaIsSMPreKernelQ[game_, payoff_] := Block[{ovls, dv, av, AVGame, smpkQ},
   ovls = v[#] & /@ Coalitions;(*Storing original game values.*)
   dv = DualGame[game];
   av = (ovls + dv)/2;
@@ -643,33 +645,39 @@ paralistIJ[T_List]:=Flatten[ParallelTable[Table[{i, j}, {j, i + 1, Length[T]}], 
 
 
 ParaBestcoalij01[game_, payoff_List,opts:OptionsPattern[ParaBestCoalitions]] :=
-  Block[{anti, maxsurp, allc, plvec,sijcol,sjicol,amax,ramax,exc,exvec,intcoal,selcij,selcji,sigcoal},
+  Block[{anti, maxsurp, allc, plvec,sij,sji,plj,pli,payass,amax,ramax,exc,exvec,intcoal,selcij,selcji,sigcoal},
     anti = OptionValue[AntiPreKernel];
     allc = OptionValue[AllCoalitions];
     maxsurp = OptionValue[MaximumSurpluses];
     plvec = Partition[paralistIJ[T],2];
-    sijcol = Partition[#,1] &/@ plvec;
-    amax = If[anti===False,ParaMaxSurpluses[game, payoff,plvec],ParaAntiSurpluses[game, payoff,plvec]];	
+    Parallelize[pli = Map[First[#] &, plvec];
+                plj = Map[#[[2]] &,plvec];
+                sij=MapThread[ParaTIJsets[#1,#2] &,{pli,plj}];
+                sji=MapThread[ParaTIJsets[#1,#2] &,{plj,pli}];
+                payass = MapThread[Rule,{x /@ T,payoff}],Method -> "CoarsestGrained",DistributedContexts -> True];
+    If[anti===False,
+       amax = ParallelTable[ParaMaxSijSurpluses[game,sij[[i]],sji[[i]],payass],{i,Length[sij]},Method -> "CoarsestGrained",DistributedContexts -> True],
+       amax = ParallelTable[ParaAntiSijSurpluses[game,sij[[i]],sji[[i]],payass],{i,Length[sij]},Method -> "CoarsestGrained",DistributedContexts -> True]
+    ];
     exc = ParaExcessPayoff[game, payoff][[1]];
     exvec = Drop[Drop[exc, 1], -1];
     intcoal = Drop[Drop[Subsets[T], 1], -1];
-    sjicol = Map[Reverse[#] &, sijcol];
     ramax =  Map[Reverse[#] &, amax];
-    selcij = ParallelTable[ParaSelCoal[sijcol[[i]], intcoal, exvec, amax[[i]]],{i,Length[amax]},Method -> "CoarsestGrained"];
-    selcji = ParallelTable[ParaSelCoal[sjicol[[i]], intcoal, exvec, ramax[[i]]],{i,Length[ramax]},Method -> "CoarsestGrained"];
+    selcij = ParallelTable[ParaSelCoal[sij[[i]], intcoal, exvec, amax[[i]]],{i,Length[amax]},Method -> "CoarsestGrained"];
+    selcji = ParallelTable[ParaSelCoal[sji[[i]], intcoal, exvec, ramax[[i]]],{i,Length[ramax]},Method -> "CoarsestGrained"];
     sigcoal = MapThread[{Flatten[#1], Flatten[#2]} &,{selcij, selcji}];
     If[maxsurp === False, sigcoal,{sigcoal,amax}]
     ];
+ 
 
 
 
-ParaSelCoal[sij_List, coal_List, redexc_List, maxexc_List, opts:OptionsPattern[ParaBestCoalitions]] := 
-  Block[{allc, smc, setsij, detpos, extval, poscoal, extcoal},
+ParaSelCoal[setsij_List, coal_List, redexc_List, maxexc_List, opts:OptionsPattern[ParaBestCoalitions]] := 
+  Block[{allc, smc, detpos, extval, poscoal, extcoal},
     allc = OptionValue[AllCoalitions];
     smc = OptionValue[SmallestCardinality];
-    setsij = MapThread[ParaTIJsets[#1, #2] &, sij][[1]];
-    detpos = Outer[List, Position[coal, #] & /@ setsij // Flatten];
-    extval = Extract[redexc, detpos];
+    detpos=MapThread[List,{coal,redexc}];
+    extval = Last[#] &/@ Cases[detpos,{#,___}] &/@ setsij // Flatten;
     poscoal = Position[extval, First[maxexc]];
     extcoal = Extract[setsij, poscoal];
 (*  Taking the coalition with smallest/largest (First/Last) cardinality if extcoal > 1 *)
@@ -686,7 +694,7 @@ ParaSetsToVec[mg_List, T_List, opts:OptionsPattern[ParaSetsToVec]] :=
     Block[{effvec, zrv, pscoal, replzr,coasts, onesoft},
     effvec = OptionValue[EffVector];
     zrv = Table[0, {i, Length[T]}];
-    pscoal = ParallelMap[Outer[List, #] &, mg];
+    pscoal = Map[Outer[List, #] &, mg];
     replzr = Parallelize[Map[ReplacePart[zrv, 1, #] &, #] &/@ pscoal];
     coasts = Parallelize[MapThread[Subtract[#1, #2] &, #] &/@ replzr];
     onesoft = Table[1,{i,Length[T]}];
@@ -703,6 +711,15 @@ ParaMaxSurpluses[game_, payoff_List,dir_List] :=
                   MapThread[List,{maxpi,maxpj}],Method -> "CoarsestGrained",DistributedContexts -> None]
     ];
 
+ 
+(* We refrain from overloading due to its negative effect on the performance of the (Anti-)Pre-Kernel computation!!!   *)
+ParaMaxSijSurpluses[game_, sij_List, sji_List,payoff_List] := 
+	Block[{maxpi,maxpj},
+           maxpi = ParaMaxSijSurplus[game,sij,payoff];
+           maxpj = ParaMaxSijSurplus[game,sji,payoff];
+          Return[{maxpi,maxpj}]
+	];
+
 ParaAntiSurpluses[game_, payoff_List,dir_List] := 
     Block[{pli,plj,minpi,minpj,res}, 
       Parallelize[pli = First[#] &/@ dir;
@@ -711,6 +728,15 @@ ParaAntiSurpluses[game_, payoff_List,dir_List] :=
                   minpj = MapThread[ParaAntiSurplus[game,#1,#2,payoff]&,{plj,pli}];
                   MapThread[List,{minpi,minpj}],Method -> "CoarsestGrained",DistributedContexts -> None]
      ];
+
+
+ParaAntiSijSurpluses[game_, sij_List, sji_List,payoff_List] := 
+	Block[{minpi,minpj},
+           minpi = ParaAntiSijSurplus[game,sij,payoff];
+           minpj = ParaAntiSijSurplus[game,sji,payoff];
+          Return[{minpi,minpj}]
+	];
+
 
 
 ParaMaxSurplus[args___]:=(Message[ParaMaxSurplus::argerr];$Failed);
@@ -723,8 +749,15 @@ ParaMaxSurplus[game_, pi_, pj_, payoff_List] :=
             Depth[payass] == 4,Max[ReplaceAll[(v[#] - x[#]) & /@ ParaTIJsets[pi,pj],payass]],
             True, Print["Wrong data format."];Return[]]
       ];
+ 
 
 
+ParaMaxSijSurplus[game_,sij_List, payass_List] := 
+	Block[{},
+          Max[ReplaceAll[Map[v[#] - x[#] &, sij],payass]]
+      ];
+
+ParaAntiSurplus[args___]:=(Message[ParaMaxSurplus::argerr];$Failed);
 ParaAntiSurplus[game_, pi_, pj_, payoff_List] := 
     Block[{payass}, 
       payass = Which[Depth[payoff]==3, MapThread[Rule,{x /@ T,#}]& /@ payoff, 
@@ -733,6 +766,11 @@ ParaAntiSurplus[game_, pi_, pj_, payoff_List] :=
       Which[Depth[payass] == 5,Min[ReplaceAll[(v[#] - x[#]) & /@ ParaTIJsets[pi,pj],#]] &/@ payass,
             Depth[payass] == 4,Min[ReplaceAll[(v[#] - x[#]) & /@ ParaTIJsets[pi,pj],payass]],
             True, Print["Wrong data format."];Return[]]
+      ];
+
+ParaAntiSijSurplus[game_,sij_List, payass_List] := 
+	Block[{},
+          Min[ReplaceAll[Map[v[#] - x[#] &, sij],payass]]
       ];
 
 ParaTIJsets[i_Integer, j_Integer]:=DeleteCases[Cases[ProperCoalitions,{___,i,___}],{___,j,___}];
@@ -808,7 +846,7 @@ ParaMaxExcessBalanced[game_, payoff_List]:= Block[{dimpay},
 ParaMaxExcessBalCheck[game_,payoff_List]:= 
  Block[{plpr,rvpr,asspay,sij,sji,msrplij,msrplji,msrij,msrji,lthij,tolvec,sysij,sysji,eqQ},
     plpr = Partition[paralistIJ[T],2];
-    rvpr = Reverse[#] & /@ plpr;
+    rvpr = Map[Reverse[#] &, plpr];
     asspay = ParaAssgPay[payoff];
     Parallelize[
     sij = ParaTIJsets[#[[1]], #[[2]]] & /@ plpr;
@@ -840,7 +878,7 @@ ParaMinExcessBalanced[game_, payoff_List]:= Block[{dimpay},
 ParaMinExcessBalCheck[game_,payoff_List]:= 
  Block[{plpr, rvpr, asspay,sij,sji,msrplij,msrplji,msrij, msrji,lthij,tolvec,sysij,sysji,eqQ},
     plpr = Partition[paralistIJ[T],2];
-    rvpr = Reverse[#] & /@ plpr;
+    rvpr = Map[Reverse[#] &,plpr];
     asspay = ParaAssgPay[payoff];
     Parallelize[
       sij = ParaTIJsets[#[[1]], #[[2]]] & /@ plpr;
