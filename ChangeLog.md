@@ -246,4 +246,4 @@
 
 1. Revision:
 
-    * Code revision and optimization. The (anti-)pre-kernel computation is now faster up to a factor 3 in serial as well as parallel.
+    * Code revision and optimization. The (anti-)pre-kernel computation is now faster up to a factor 3 in serial as well as in parallel.
