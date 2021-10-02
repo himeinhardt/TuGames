@@ -70,7 +70,7 @@ and click then on hyperlink ` "ParaTuGames Package" ` to open the file
 Finally, this package does not require the configuration procedure as under `Section 4`.
 
 A modified version of the package *CooperativeGames* that has been developed 
-by *M.Carter* to run properly with Mathematica 10.x and higher is enclosed. 
+by *M.Carter* to run properly with Mathematica 12.x and higher is enclosed. 
 It must be mentioned in this place that some commands of TuGames require 
 routines that have been provided by the package CooperativeGames. A description
 of the package CooperativeGames can be found in 
