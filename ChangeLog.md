@@ -247,3 +247,18 @@
 1. Revision:
 
     * Code revision and optimization. The (anti-)pre-kernel computation is now faster up to a factor 3 in serial as well as in parallel.
+
+###    Version 2.6.2
+
+       Adding functions:
+            *  AlmostConvexQ[] to check if the game is almost convex.
+            *  AlmostConcaveQ[] to check if the game is almost concave.
+            *  ADMCGameQ[] to check the property if the game satisfies almost diminishing marginal contributions.
+            *  AIMCGameQ[] to check the property if the game satisfies almost increasing marginal contributions.
+            *  kConvexity[] to check if the game is k-convex.
+            *  EANSCValue[] to compute the Equal Allocation of Non-Separable Contribution/Cost value.
+
+       Revised the functions:
+              ConvexQ[], ConcaveQ[], Nuc1convex[].
+
+       Minor Bug fixes and code revision.

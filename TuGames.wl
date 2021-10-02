@@ -18,7 +18,7 @@ Off[General::obspkg];
     holger.meinhardt@wiwi.uni-karlsruhe.de
 *)
 
-(* :Package Version: 2.6.1 *)
+(* :Package Version: 2.6.2 *)
 
 (* 
    :Mathematica Version: 8.x, 9.x, 10.x, 11.x, 12.x
@@ -87,6 +87,10 @@ Off[General::obspkg];
    for Bankruptcy Game, The Waseda Journal of Political Science and Economics,
    Waseda, Japan, 2006.
 
+   J. Getán, J. M. Izquierdo, J. Montes, C. Rafels. The bargaining set and the kernel for almost-convex
+   games, (2012). mimeo.
+
+
    I. Katsev and E. Yanovskaya, Between the Prekernel and the Prenucleolus, mimeo, 2009. 
 
    K. Kido. A nonlinear Approximation of the Nucleolus. In W. Takahashi and T. Tanaka,
@@ -102,6 +106,9 @@ Off[General::obspkg];
    M. Leng and M. Parlar. Analytic solution for the nucleolus of a three-player cooperative
    game. Naval Research Logistics (NRL), 57(7):667\[Dash]672, 2010. doi: 10.1002/nav.20429.
    URL https://onlinelibrary.wiley.com/doi/abs/10.1002/nav.20429.
+
+   M. Leng, Ch. Luo, L. Liang. Multi-Player Allocations in the Presence of Diminishing Marginal Contributions:
+   Cooperative Game Analysis and Applications in Management Science, 2020, to appear in Management Science
 
    SC. Littlechild and KG. Vaidya, The propensity to disrupt and the disruption nucleolus
    of a characteristic function game. International Journal of Game Theory 5(2):151-161,
@@ -273,10 +280,24 @@ Off[General::obspkg];
 
     Version 2.6.1
 
-       Code revision and optimization. The (anti-)pre-kernel computation is now faster up to a factor 3 in serial as well as parallel.
- 
-*)
+       Code revision and optimization. The (anti-)pre-kernel computation is now faster up to a factor 3 in serial as well as in parallel.
 
+    Version 2.6.2
+
+       Adding functions:
+            -  AlmostConvexQ[] to check if the game is almost convex. 
+            -  AlmostConcaveQ[] to check if the game is almost concave.
+            -  ADMCGameQ[] to check the property if the game satisfies almost diminishing marginal contributions.
+            -  AIMCGameQ[] to check the property if the game satisfies almost increasing marginal contributions.
+            -  kConvexity[] to check if the game is k-convex. 
+            -  EANSCValue[] to compute the Equal Allocation of Non-Separable Contribution/Cost value.
+
+       Revised the functions:
+              ConvexQ[], ConcaveQ[], Nuc1convex[].
+
+       Minor Bug fixes and code revision.
+*)
+ 
 
 (* 
     :Limitations: 
@@ -323,8 +344,8 @@ If[SameQ[Global`$ParaMode,"False"],
 Print["==================================================="];
 Print["Loading Package 'TuGames' for ", $OperatingSystem];
 Print["==================================================="];
-Print["TuGames V2.6.1 by Holger I. Meinhardt"];
-Print["Release Date: 05.05.2020"];
+Print["TuGames V2.6.2 by Holger I. Meinhardt"];
+Print["Release Date: 06.06.2020"];
 Print["Program runs under Mathematica Version 8.0 or later"];
 Print["Version 8.x or higher is recommended"];
 Print["==================================================="];,
@@ -372,7 +393,17 @@ ConvCheck::usage =
  the marginal contributions are increasing for each player.";
 
 ConvexQ::usage = 
-"ConvexQ[game] checks if the Tu-game is convex. It returns the value 'True' or 'False'.";
+"ConvexQ[game] checks if the Tu-game is convex (super-modular). It returns the value 'True' or 'False'.";
+
+AlmostConvexQ::usage = 
+"AlmostConvexQ[game] checks if the Tu-game is almost convex (super-modular). It returns the value 'True' or 'False'.";
+
+
+AlmostConcaveQ::usage = 
+"AlmostConcaveQ[game] checks if the Tu-game is almost concave (super-modular). It returns the value 'True' or 'False'.";
+
+ConcaveQ::usage = 
+"ConcaveQ[game] checks if the Tu-game is concave (sub-modular). It returns the value 'True' or 'False'.";
 
 StrIncreasMargContrib::usage = 
 "StrIncreasMargContrib[game,i] checks if the marginal contributions of player i is 
@@ -397,6 +428,11 @@ AvConvexQ::usage =
  It returns 'True' or 'False'. Now same as AverageConvexQ[]. 
  For more details see also the description of AverageConvexQ[].";  
 
+ADMCGameQ::usage = 
+"ADMCGameQ[game] checks if the TU-game satisfies the property of almost diminishing marginal contributions. It returns 'True' or 'False'.";
+
+AIMCGameQ::usage = 
+"AIMCGameQ[game] checks if the TU-game satisfies the property of almost increasing marginal contributions. It returns 'True' or 'False'.";
 
 GameMonotoneQ::usage = 
 "GameMonotoneQ[game] verifies if the game is monotone.";
@@ -922,6 +958,9 @@ Vec4DToSimplex::usage =
 Nuc1convex::usage = 
 "Nuc1convex[game] can be only used to calculate the nucleolus for 1-convex games.";
 
+EANSCValue::usage = 
+"EANSCValue[game] computes the Equal Allocation of Non-Separable Contribution/Cost value.";
+
 NewShapley::usage = 
 "NewShapley[game] calculates the Shapley Value of the game based on the marginal contributions of players. Function not very efficient!";
 
@@ -1005,6 +1044,9 @@ MargValue::usage =
 
 kCover::usage = 
 "kCover[game,k] determines the k-cover of the game. k is a natural number.";
+
+kConvexity::usage = 
+"kConvexity[game] determines whether the TU-game is k-convex. Return value is a list of natural numbers to indicate which kind of k-convexity is fulfilled. In case that the game is not k-convex, a list of zeors will be returned."; 
 
 CoreElementsQ::usage = 
 "CoreElementsQ[game,payoff] checks if a list of payoffs contain core allocations."; 
@@ -1282,7 +1324,11 @@ True,
 (* :One Argument: *)
 
 AdjustedEffUpperVectors::argerr="One argument was expected.";
+ADMCGameQ::argerr="One argument was expected.";
+AIMCGameQ::argerr="One argument was expected.";
 AllConstraints::argerr="One argument was expected.";
+AlmostConcaveQ::argerr="One argument was expected.";
+AlmostConvexQ::argerr="One argument was expected.";
 AntiPreKernelSolution::argerr="One argument was expected.";
 AvConvexQ::argerr="One argument was expected.";
 AverageConvexQ::argerr="One argument was expected.";
@@ -1298,6 +1344,7 @@ CddVerticesImputationSet::argerr="One argument was expected.";
 CddVerticesLowerSet::argerr="One argument was expected.";
 CddVerticesReasonableSet::argerr="One argument was expected.";
 ChiValue::argerr="One argument was expected.";
+ConcaveQ::argerr="One argument was expected.";
 Concession::argerr="One argument was expected.";
 ConvCheck::argerr="One argument was expected.";
 ConvexQ::argerr="One argument was expected.";
@@ -1311,6 +1358,7 @@ DualCover::argerr="One argument was expected.";
 DualExtension::argerr="One argument was expected.";
 DualGame::argerr="One argument was expected.";
 DuttaRay::argerr="One argument was expected.";
+EANSCValue::argerr="One argument was expected.";
 EpsCore::argerr="One argument was expected.";
 EPSDValue::argerr="One argument was expected.";
 EvalSumMinCoord::argerr="One argument was expected.";
@@ -1334,6 +1382,7 @@ IntersectionUpperLowerSetQ::argerr="One argument was expected.";
 KernelCalculation::argerr="One argument was expected.";
 Kernel::argerr="One argument was expected.";
 KernelVertices::argerr="One argument was expected.";
+kConvexity::argerr="One argument was expected.";
 LargestAmount::argerr="One argument was expected."
 LexiCenter::argerr="One argument was expected.";
 LorenzSolution::argerr="One argument was expected.";
@@ -1536,7 +1585,7 @@ Off[ConstrainedMax::deprec];
 DefineGame[args___]:=(Message[DefineGame::argerr];$Failed);
 DefineGame[R_List, values_List, opts:OptionsPattern[DefineGame]] := (Clear[T]; T = R; Clear[v];
     approxrat = OptionValue[RationalApproximate];
-    If[SameQ[2^Length[T],Length[values]],True,Print["Game is not consistent defined!"];Return[]];
+    If[SameQ[2^Length[T],Length[values]],True,Print["Game is not consistently defined!"];Return[]];
     If[(approxrat && $VersionNumber >= 5.) == True, 
       MapThread[Set[v[#1], #2] &, {Coalitions, Rationalize[values, 5^(-12)]}];, 
       MapThread[Set[v[#1], #2] &, {Coalitions, values}];]);
@@ -1624,27 +1673,6 @@ WeightedMajMain[T_,weight_List] := Block[{outersets,coalweights,sumweights,thres
 
 
 
-(*
-WeightedMajority[T_,weight_List] := Block[{outersets,coalweights,sumweights,threshold,boolval,un,trq,pos},
-       Off[Part::partd];
-       outersets = Outer[List, Subsets[T]];
-       coalweights = Which[Depth[weight] === 3, 
-                         Extract[Flatten[Drop[weight,1]], #] & /@ outersets, 
-                       Depth[weight] === 2,Extract[Drop[weight,1], #] & /@ outersets];
-       sumweights = Total[#] & /@ coalweights;
-       threshold = Which[Depth[weight] == 3, 
-                          un = Union[Flatten[{First[weight][[1]],First[weight]}]];
-                                Which[Length[un] === 0, un, 
-                                      True, trq = NumberQ[#] &/@ un;
-                                            pos = Position[trq,True];
-                                            Extract[un,Flatten[pos]]
-                                               ], 
-                         Depth[weight] == 2, First[weight]];
-       On[Part::partd];
-       boolval = GreaterEqual[#, threshold] & /@ sumweights;
-       boolval /. True -> 1 /. False -> 0
-];
-*)
 
 StandardSolution[args___]:=(Message[StandardSolution::argerr];$Failed);
 StandardSolution[game_]:=Block[{dmQ},
@@ -1663,31 +1691,99 @@ IncreasMargContributions[game_,i_Integer ,values_List]:=
 	Do[Print[(v[#]-v[DeleteCases[#,i]] <= 
          v[Union[Flatten[{#,j}]]] - v[DeleteCases[ 
           Union[Flatten[{#,j}]],i]])& /@ Take[W[i],Length[W[i]]-1]/.Assign[values]],
-           {j,1,Length[T]}];
+           {j,DeleteCases[T,1]}];
 
 IncreasingMargContributions[game_,i_Integer]:=
 	Table[(v[#]-v[DeleteCases[#,i]] <= 
           v[Union[Flatten[{#,j}]]] - v[DeleteCases[ 
             Union[Flatten[{#,j}]],i]])& /@ Take[W[i],Length[W[i]]-1] ,
-              {j,1,Length[T]}];
+              {j,DeleteCases[T,1]}];
 
 ConvCheck[args___]:=(Message[ConvCheck::argerr];$Failed);
 ConvCheck[game_]:= IncreasingMargContributions[game,#] & /@ T;
 
 ConvexQ[args___]:=(Message[ConvexQ::argerr];$Failed);
-
 ConvexQ[game_]:= 
 Block[{liste}, 
     liste = Flatten[IncreasingMargContributions[game,#] & /@ T,1];
     Apply[And,Apply[And,liste,1]]
 	];
 
+AlmostConvexQ[args___]:=(Message[AlmostConvexQ::argerr];$Failed);
+AlmostConvexQ[game_]:= 
+Block[{liste}, 
+      liste = Flatten[QuasiIncreasingMargContributions[game,#] & /@ T,1];
+      Apply[And,Apply[And,liste,1]]
+	];
+delT[i_Integer,j_Integer]:= DeleteCases[Take[W[i],Length[W[i]]-1],DeleteCases[T,j]];
+
+
+QuasiIncreasingMargContributions[game_,i_Integer]:=
+	Table[(v[#]-v[DeleteCases[#,i]] <= 
+          v[Union[Flatten[{#,j}]]] - v[DeleteCases[ 
+		  Union[Flatten[{#,j}]],i]]) & /@ delT[i,j] ,
+              {j,DeleteCases[T,i]}];
+
+ADMCGameQ[args___]:=(Message[ADMCGameQ::argerr];$Failed);
+ADMCGameQ[game_]:= 
+Block[{liste}, 
+    liste = Flatten[AlmostDiminishingMargContributions[game,#] & /@ T,1];
+    Apply[And,Apply[And,liste,1]]
+	];
+
+AlmostDiminishingMargContributions[game_,i_Integer]:=
+	Table[(v[#]-v[DeleteCases[#,i]] >= 
+          v[Union[Flatten[{#,j}]]] - v[DeleteCases[ 
+		  Union[Flatten[{#,j}]],i]] >= v[{i}])& /@ Drop[Take[W[i],Length[W[i]]-1],1] ,
+              {j,DeleteCases[T,1]}];
+
+AIMCGameQ[args___]:=(Message[AIMCGameQ::argerr];$Failed);
+AIMCGameQ[game_]:= 
+Block[{liste}, 
+    liste = Flatten[AlmostIncreasingMargContributions[game,#] & /@ T,1];
+    Apply[And,Apply[And,liste,1]]
+	];
+
+AlmostIncreasingMargContributions[game_,i_Integer]:=
+	Table[(v[#]-v[DeleteCases[#,i]] <= 
+          v[Union[Flatten[{#,j}]]] - v[DeleteCases[ 
+		  Union[Flatten[{#,j}]],i]] <= v[{i}])& /@ Drop[Take[W[i],Length[W[i]]-1],1] ,
+              {j,DeleteCases[T,1]}];
+
+AlmostConcaveQ[args___]:=(Message[AlmostConcaveQ::argerr];$Failed);
+AlmostConcaveQ[game_]:= 
+Block[{liste}, 
+      liste = Flatten[QuasiDiminishingMargContributions[game,#] & /@ T,1];
+      Apply[And,Apply[And,liste,1]]
+	];
+
+QuasiDiminishingMargContributions[game_,i_Integer]:=
+	Table[(v[#]-v[DeleteCases[#,i]] >= 
+          v[Union[Flatten[{#,j}]]] - v[DeleteCases[ 
+		  Union[Flatten[{#,j}]],i]]) & /@ delT[i,j] ,
+              {j,DeleteCases[T,i]}];
+
+
+ConcaveQ[args___]:=(Message[ConcaveQ::argerr];$Failed);
+ConcaveQ[game_]:= 
+Block[{liste}, 
+    liste = Flatten[DiminishingMargContributions[game,#] & /@ T,1];
+    Apply[And,Apply[And,liste,1]]
+	];
+
+DiminishingMargContributions[game_,i_Integer]:=
+	Table[(v[#]-v[DeleteCases[#,i]] >= 
+          v[Union[Flatten[{#,j}]]] - v[DeleteCases[ 
+            Union[Flatten[{#,j}]],i]])& /@ Take[W[i],Length[W[i]]-1] ,
+              {j,DeleteCases[T,1]}];
+
+
 StrIncreasMargContrib[args___]:=(Message[StrIncreasMargContrib::argerr];$Failed);
 StrIncreasMargContrib[game_, i_Integer]:=
 	Table[(Rationalize[v[#] - v[DeleteCases[#,i]]] < 
           Rationalize[v[Union[Flatten[{#,j}]]] - v[DeleteCases[ 
              Union[Flatten[{#,j}]],i]]])& /@ Take[W[i],Length[W[i]]-1] ,
-              {j,1,Length[T]}];
+              {j,DeleteCases[T,1]}];
 
 ConvStrQ[args___]:=(Message[ConvStrQ::argerr];$Failed);
 ConvStrQ[game_]:= StrIncreasMargContrib[game,#] & /@ T;
@@ -2318,7 +2414,7 @@ EssentialQ[game_]:=Block[{indrat,sumirat,zeroess},
 
 NucleolusThreePerson[args___]:=(Message[NucleolusThreePerson::argerr];$Failed);
 NucleolusThreePerson[game_] := 
-  Block[{dmQ,cl2,ci,cdi,xd3,cd1,pcd1,ptk,cd4a,cd4b,cd4,pcd4,pcd4b,tk,tkl,tk2,ch,cd2,cd2a,cd2b,tc,cd3a,cd3b,cd3,ccik,pstrQ,cik,ext,sl1,sl2,rl1,rl2,rl3,its,cmp,pk,svl,cl},
+  Block[{dmQ,cl2,ci,cdi,xd3,cd1,pcd1,ptk,cd4a,cd4b,cd4,pcd4,pcd4b,tkl,tk2,ch,cd2,cd2a,cd2b,tc,cd3a,cd3b,cd3,ccik,pstrQ,cik,ext,sl1,sl2,rl1,rl2,rl3,its,cmp,pk,svl,cl},
     dmQ=SameQ[2^Length[T],2^3];
     If[dmQ,True,Print["Game has incorrect dimension!"];Return[]];
     cl2=Drop[Take[Subsets[T],-4],-1];
@@ -2439,7 +2535,7 @@ SeqLP[obf_, cmat_List, bvect_List,bds_List,bA_:{}] :=
 
 
 SeqLP2[game_,obf_, cmat_List, bvect_List,bds_List,bA_:{}] :=
-      Block[{cmat1,dl1,dl2,dl3,dl4,pkQ,const01,const02,const,gr,ps,al1,psal1,ov,ps1,zv,rl,bA1,lb,bA2,ons,wghs,mr,pw,pwQ,extb,bvect1,twv,ps2,rl3,zQ},
+      Block[{cmat1,dl1,dl2,dl3,dl4,pkQ,const01,const02,const,gr,ps,al1,psal1,ov,rl2,res,ps1,zv,rl,bA1,lb,bA2,ons,wghs,mr,pw,pwQ,extb,bvect1,twv,ps2,rl3,zQ},
     cmat1=SparseArray[cmat];
     {dl1,dl2,dl3,dl4}=DualLinearProgramming[obf,cmat1,bvect,bds];
     res=Take[dl1,-Length[T]];
@@ -2503,7 +2599,7 @@ LSPreNuc[game_]:=Block[{av,lt,pd,sS,Si,Sni,vi,vni,lci,lcni,pdi,pdni,sm1,sm2,sd1}
 		 ];
 
 LSNuc[args___]:=(Message[LSNuc::argerr];$Failed);
-LSNuc[game_]:=Block[{lt,av,sV,sN,sS,Si,vi,lci,nV,py,ngQ,mM},
+LSNuc[game_]:=Block[{lt,av,sV,sN,sS,Si,vi,lci,nV,py,ngQ,cM,mM},
                  lt=Length[T];
                  av=v[T]/lt;
 		 sN=2^(lt-2);
@@ -2527,7 +2623,7 @@ LSNuc[game_]:=Block[{lt,av,sV,sN,sS,Si,vi,lci,nV,py,ngQ,mM},
 
 fLSnc[pyf_List,cmpM_List,stM_List,n_]:=Block[{M0,xm,lm,zv,cpM,pyM,tpy,cmpPy,rlcmp,rlp,py,pcM,ngQ,mM,nM,cM},
           M0=stM;
-          py=If[SameQ[SameQ[cmp,{}],False],
+          py=If[SameQ[SameQ[cmpM,{}],False],
 	     pyM=Extract[pyf,Partition[stM,1]];	
 	     xm=Plus @@ pyM;
 	     lm=Length[stM];
@@ -4121,7 +4217,7 @@ KernelImputationQ[game_, payoff_List] := Block[{dimpay},
 ];
 
 KernelImputQ[game_, payoff_List] := 
-  Block[{ub,lb,plpr,rvpr,asspay,sij,sji,msrplij,msrplji,msrij,msrji,conj,coni,intvij,intvji,npij,npji,orij,orji,ntmj,ntmi,neq},
+  Block[{ub,lb,plpr,rvpr,asspay,sij,sji,tmij,tmji,msrplij,msrplji,msrij,msrji,conj,coni,intvij,intvji,npij,npji,orij,orji,ntmj,ntmi,neq},
     ub=4*10^(-7);
     lb=-ub;
     plpr = PlayerPairs[T];
@@ -4895,7 +4991,7 @@ listIJ[T_List]:=Flatten[Table[Table[{i, j}, {j, i + 1, Length[T]}], {i, 1, Lengt
 listJI[T_List]:=Flatten[Table[Table[{i, j}, {i, j + 1, Length[T]}], {j, 1, Length[T]}]];
 
 Bestcoalij01[game_, payoff_List,opts:OptionsPattern[BestCoalitions]] :=  
-  Block[{anti, maxsurp, allc,plvec,sij,sji,plj,pli,amax,ramax,exc,exvec,intcoal,selcij,selcji,sigcoal},
+  Block[{anti, maxsurp, allc,plvec,sij,sji,plj,pli,amax,ramax,exc,exvec,intcoal,payass,selcij,selcji,sigcoal},
     anti = OptionValue[AntiPreKernel];
     allc = OptionValue[AllCoalitions];
     maxsurp = OptionValue[MaximumSurpluses];
@@ -5731,7 +5827,16 @@ DeltaJSet[list_, k_Integer] := Block[{genlist = {}, pos, retval},
 
 
 Nuc1convex[args___]:=(Message[Nuc1convex::argerr];$Failed);
-Nuc1convex[game_]:= UtopiaVector[game] - Extract[Gap[game],-1] / Length[T];
+Nuc1convex[game_ /; OneConvexQ[game]]:= UpperVector[game] - Extract[Gap[game],-1] / Length[T];
+
+OneConvexQ[game_]:=Block[{},
+			 If[SameQ[First[kConvexity[game]],1],Return[True],
+			    Print["Game is not 1-convex! No solution can be retrieved!"];Return[False]];
+
+		 ];
+
+EANSCValue[args___]:=(Message[EANSCValue::argerr];$Failed);
+EANSCValue[game_]:= UpperVector[game] - Extract[Gap[game],-1] / Length[T]; 
 
 
 UtopiaPayoff[args___]:=(Message[UtopiaPayoff::argerr];$Failed);
@@ -5795,6 +5900,17 @@ kCover[game_,k_Integer]:= If[Depth[k]==1,
        DisplayRem[k]
   ];
 
+kConvexity[args___]:=(Message[kConvexity::argerr];$Failed);
+kConvexity[game_]:=
+	Block[{kcov,clv,grQ,cvQ},
+	  kcov=kCover[ExpGame,#] &/@ T;
+	  clv=v[#] &/@ Subsets[T];
+	  grQ=Apply[And ,#] &/@ (MapThread[GreaterEqual,{#,clv}] &/@ kcov);
+	  cvQ=ConvexQ[DefineGame[T,#]] &/@ kcov;
+	  DefineGame[T, clv];(*Redefine the original game.*)
+	  T*MapThread[And,{cvQ,grQ}] /. True -> 1 /. False -> 0
+  ];
+
 AdjustedEffVector[args___]:=(Message[AdjustedEffVector::argerr];$Failed);
 
 AdjustedEffVector[game_,i_Integer]:= UpperVector[game] - Last[Gap[game]] Extract[Permutations[
@@ -5854,7 +5970,7 @@ GatelyValue[game_]:=Block[{dess,d,uv,vi},
                           d=(Plus  @@ UpperPayoff /@ T -v[T])/dess;
 			  uv=UpperPayoff[#] & /@ T;
 			  If[SameQ[EssentialQ[game],True],
-			     If[d==1,{},(uv+d*vi)/(d+1)],
+			     If[SameQ[d,-1],Print["Divison by Zero! No Gately Point can be retrieved!"];{},(uv+d*vi)/(d+1)],
 			     Print["Game is not essential, Gately Point does not exist!"];{}]
 		    ];
 

@@ -1,4 +1,4 @@
-Mathematica Package: TuGames Version 2.5.4
+Mathematica Package: TuGames Version 3.0.0
 ==============================
 Contents:
  1. Introduction
@@ -25,10 +25,15 @@ Moreover, it verifies if the game is convex, average-convex or superadditive
 just to mention some interesting game properties. It can be used in serial
 as well as in parallel mode, and in conjunction with MATLink to build up a Matlab 
 connection to invoke the toolbox MatTuGames. This package is exclusively 
-dedicated to Mathematica version 8.x and higher. In this respect, the graphical 
-features should run on all platforms. As a highlight, a fast algorithm 
-to seek for a pre-kernel element is implemented in the updated package. This 
-algorithm is described in the book
+dedicated to Mathematica version 12.x and higher, because `TUG-3.0.0` is the first
+version that is transcribed to the new collection of algorithms for solving convex problems
+introduced in version 12. For Mathematica versions smaller than 12.0 one should use `TUG-2.6.2`.
+This version remains compatible with the most recent Mathematica version as long as
+ConstrainedMax/ConstrainedMin and LinearProgramming/DualLinearProgramming are supported by Wolfram Research,
+otherwise one has to to switch to `TUG-3.0.0` or later. In this respect, the graphical
+features should run on all platforms. As a highlight, a fast algorithm  to seek for a
+pre-kernel element is implemented in the updated package. This algorithm is described
+in the book 
 
 The Pre-Kernel as a Tractable Solution for Cooperative Games
 An Exercise in Algorithmic Game Theory
@@ -110,10 +115,10 @@ the command
 
 In[1]:= PacletInformation["TUG"]
 
-Out[1]= {Name -> TUG, Version -> 2.6.1, BuildNumber -> , Qualifier -> , WolframVersion -> 10+,
+Out[1]= {Name -> TUG, Version -> 3.0.0, BuildNumber -> , Qualifier -> , WolframVersion -> 12+,
          SystemID -> All, Description -> A Mathematica Package for Cooperative Game Theory,
 	 Category -> , Creator -> Holger Ingmar Meinhardt <holger.meinhardt@partner.kit.edu>,
-	 Publisher -> , Support -> , Internal -> False, Location -> /home/kit/xxx/xxxx/.Mathematica/Paclets/Repository/TUG-2.6.1
+	 Publisher -> , Support -> , Internal -> False, Location -> /home/kit/xxx/xxxx/.Mathematica/Paclets/Repository/TUG-3.0.0
 	 Context -> {TUG`coop`, TUG`vertex`, TUG`}, Enabled -> True, Loading -> Manual}
 
 
@@ -123,7 +128,7 @@ To get the same information and beyond that under Mathematica version 12.1, it i
 In[1]:= PacletObject["TUG"][All]
 
 
-Out[1]=  {"Name" -> "TUG", "Version" -> "2.6.1", "WolframVersion" -> "10+", 
+Out[1]=  {"Name" -> "TUG", "Version" -> "3.0.0", "WolframVersion" -> "12+", 
           "Qualifier" -> "", "SystemID" -> All, "Description" -> "A Mathematica Package for Cooperative Game Theory",
           "Category" -> Missing["NotAvailable"], "Keywords" -> Missing["NotAvailable"], 
           "UUID" -> Missing["NotAvailable"], 
@@ -133,7 +138,7 @@ Out[1]=  {"Name" -> "TUG", "Version" -> "2.6.1", "WolframVersion" -> "10+",
           "Internal" -> False, 
           "Context" -> {"TUG`coop`", "TUG`vertex`", "TUG`"}, 
           "Loading" -> Manual, "AutoUpdating" -> False, "Enabled" -> True, 
-          "Location" -> "/home/kit/xxx/xxxx/.Mathematica/Paclets/Repository/TUG-2.6.1"}
+          "Location" -> "/home/kit/xxx/xxxx/.Mathematica/Paclets/Repository/TUG-3.0.0"}
 
 or alternatively
 
@@ -168,27 +173,32 @@ version should not be smaller than 10. For Mathematica versions smaller than Ver
 installation is requested. In that case one has to follow the guidelines related to the associated
 operating system that can be found from the Mathematica documentation.
 
-The most simplest method is to install the `Paclet` directly from GitHub under Mathematica V11.3 or later
+Notice that `TUG-2.6.2` is the lasted version that is compatible with Mathematica versions smaller than 12.0,
+and will remain compatible with the most recent Mathematica version as long as ConstrainedMax/ConstrainedMin and
+LinearProgramming/DualLinearProgramming are supported by Wolfram Research, otherwise one has to update
+to `TUG-3.0.0` or later. 
+
+The most simplest method is to install the `Paclet` directly from GitHub under Mathematica V12.0 or later
 while executing   
 
-```
+
 ResourceFunction["GitHubInstall"]["himeinhardt", "TuGames"]
-```
-
-For smaller versions than 11.3 start Mathematica, open a notebook, and execute therein 
 
 
-PacletInstall["/full/Path/to/TUG-2.6.1.paclet"] 
+For smaller versions than 12.0 start Mathematica, open a notebook, and execute therein
 
-that should return the value 
 
-Paclet[TUG, 2.6.1, <>] 
+PacletInstall["/full/Path/to/TUG-2.6.2.paclet"] 
+
+to install TUG-2.6.2 the last version compatible with a Mathematica version smaller than 12.0. That should return the value 
+
+Paclet[TUG, 2.6.2, <>] 
 
 to indicate a successful installation. Notice that 
 
-"/full/Path/to/TUG-2.6.1.paclet"
+"/full/Path/to/TUG-2.6.2.paclet"
 
-indicates the directory where the TUG-2.6.1.paclet is located at your hard-disk. 
+indicates the directory where the TUG-2.6.2.paclet is located at your hard-disk. 
 
 Alternatively, one can directly install the package from GitHub with the help of the Mathematica-Tools from 
 
@@ -251,10 +261,10 @@ In[2]:=  Needs["TUG`"]
 ===================================================
 Loading Package 'TuGames' for Unix
 ===================================================
-TuGames V2.6.1 by Holger I. Meinhardt
-Release Date: 05.05.2020
-Program runs under Mathematica Version 8.0 or later
-Version 8.x or higher is recommended
+TuGames V3.0.0 by Holger I. Meinhardt
+Release Date: 01.10.2021
+Program runs under Mathematica Version 12.0 or later
+Version 12.x or higher is recommended
 ===================================================
 ===================================================
 Package 'TuGames' loaded
