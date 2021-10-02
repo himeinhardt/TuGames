@@ -1,8 +1,8 @@
 (* ::Package:: *)
 
 (* :Title: TuGamesAux.m *)
-(* Release Date: 22.04.2020 *)
-(* Version: 2.6.0 *)
+(* Release Date: 28.09.2021 *)
+(* Version: 3.0.0 *)
 
 (* :Context: TuGamesAux` *)
 
@@ -17,10 +17,10 @@
     E-Mail: Holger.Meinhardt@wiwi.uni-karlsruhe.de
 *)
 
-(* :Package Version: 2.6.0 *)
+(* :Package Version: 3.0.0 *)
 
 (* 
-   :Mathematica Version: 8.x, 9.x, 10.x, 11.x, 12.x
+   :Mathematica Version: 12.x
 
 *)
 
@@ -92,6 +92,10 @@
 
     Version 2.6.0:
        Performing some code maintenance.
+
+    Version 3.0.0:
+       Not anymore backward compatible to Mathemaitca versions smaller than 12 due to the port
+       to the new collection of algorithms for solving convex problems introduced in version 12.
 *)
 
 BeginPackage["TUG`TuGamesAux`"];
@@ -107,6 +111,10 @@ BalancedSystemQ::usage =
 "{bcQ,cfs}=BalancedSystemQ[coll,T] checks whether the collection of sets 'coll' is balanced.
  It returns a True or False on the first return value, at the second position the weights of
  the balanced collection are returned." ;
+
+WeaklyBalancedSystemQ::usage =
+"bcQ=WeaklyBalancedSystemQ[coll,b0,T] checks whether the collection of sets 'coll' in connection with 
+ a set of single coalitions b0 -- could be empty -- is weakly balanced. It returns a True or False." ;
 
 GenProfitMatrix::usage = 
 "GenProfitMatrix[valuation_buyers,valuation_sellers] generates a profit matrix for an assignment 
@@ -193,8 +201,10 @@ RStirlingNumber::usage=
 
 (* :Options: *)
 
-Options[ComplementaryMarket] := {MarketParameter -> (1/2)};
 Options[AssignmentProblem] := {Verbose -> False};
+Options[BalancedSystemQ] := {Method-> RevisedSimplex};
+Options[ComplementaryMarket] := {MarketParameter -> (1/2)};
+Options[WeaklyBalancedSystemQ] := {Method-> RevisedSimplex};
 
 (* :Error Messages: *)
 
@@ -229,7 +239,7 @@ SymGameSizeK::argerr="Three arguments were expected.";
 SymGameType2::argerr="Three arguments were expected.";
 SymGameType3::argerr="Three arguments were expected.";
 SymGameType4::argerr="Three arguments were expected.";
-
+WeaklyBalancedSystemQ::argerr="Three arguments were expected.";
 
 Begin["`Private`"];
 Which[$OperatingSystem === "Unix", Needs["TUG`vertex`VertexEnum`"],
@@ -282,31 +292,32 @@ LPtoMatrix[obf_, const_List, var_List]:=
 
 
 SolvePrimal[args___]:=(Message[SolvePrimal::argerr];$Failed);
-SolvePrimal[zf_,eq_List,var_List, bd_:{}, opts:OptionsPattern[LinearProgramming]] := 
+SolvePrimal[zf_,eq_List,var_List, bd_:{}, opts:OptionsPattern[LinearOptimization]] := 
   Module[{obf, cmat, bvect, res, nzf, rl},
     {obf, cmat, bvect} = LPtoMatrix[zf, eq, var];
     cmat = SparseArray[cmat];
-    res = LinearProgramming[obf, cmat, bvect, bd,opts];
-    nzf = obf.res;
+(*    res = LinearProgramming[obf, cmat, bvect, bd,opts]; *) (*second solution??? *)
+    bv=-First[#] &/@ bvect;
+    eqm=cmat[[1]];
+    beq=bv[[1]];
+    {res,nzf}=LinearOptimization[obf,{cmat,bv},{{eqm},{beq}},{"PrimalMinimizer", "PrimalMinimumValue"},Method->"RevisedSimplex"];
     rl = MapThread[Rule, {var, res}];
     Prepend[{rl}, nzf]
     ];
 
 
 SolveDual[args___]:=(Message[SolveDual::argerr];$Failed);
-SolveDual[zf_, eq_List, var_List, bd_:{},opts:OptionsPattern[LinearProgramming]]:=
- Module[{obf, cmat, bvect, tobf, tmat, tbv, res, nzf, yvar, zv, dim,rl},
+SolveDual[zf_, eq_List, var_List, bd_:{},opts:OptionsPattern[LinearOptimization]]:=
+ Module[{obf, cmat, bvect, tobf, eqm, beq, res, nzf, yvar, dim,rl},
    {obf, cmat, bvect} = LPtoMatrix[zf,eq, var];
    tobf = First[#] & /@ bvect;
-   tmat = Transpose[cmat];
-   zv = Array[-1 &,Length[obf]];
-   tbv = MapThread[List, {obf,zv}];
-   tmat = SparseArray[tmat];
-   res = LinearProgramming[-tobf, tmat, tbv, opts];
-   dim = Dimensions[tmat];
-   yvar = Global`y[#] & /@ Table[i, {i, Last[dim]}];
-   nzf = tobf.res;
-   rl = MapThread[Rule, {yvar, res}];
+   eqm=cmat[[1]];
+   beq=tobf[[1]];
+   cmat = SparseArray[cmat];
+   {res,nzf}=LinearOptimization[obf,{cmat,-tobf},{{eqm},{-beq}},{"DualMaximizer", "DualMaximumValue"},Method->"RevisedSimplex"];
+   dim = Dimensions[cmat];
+   yvar = Global`y[#] & /@ Table[i, {i, First[dim]}];
+   rl = MapThread[Rule, {yvar, First[res]}];
    Prepend[{rl}, nzf]
   ];
 
@@ -657,15 +668,10 @@ Sets2Dec[sets_List]:=Module[{T,ps,prs,xp,sxp},
    Total[#]&/@ sxp
 ];
 
-
-(*
- DualLinearProgramming and LinearProgramming returning wrong results!!!
- Is this a bug???
-*)
 BalancedSystemQ[args___]:=(Message[BalancedSystemQ::argerr];$Failed);
-BalancedSystemQ[coll_List, T_List] := 
-  Module[{zvec, ovec, pos, mat, tmat, smat, d1, d2, veco, zf, bv, am, 
-    tbv, slx, sly, slz, slw, cf, rs, bq, bcQ},
+BalancedSystemQ[coll_List, T_List, opts:OptionsPattern[BalancedSystemQ]] :=
+  Module[{mthd,zvec, ovec, pos, mat, tmat, smat, d1, d2, veco, zf, bv, am, tbv, yineq, yeq, cf, rs, bq, bcQ},
+   mthd=OptionValue[Method];   
    zvec = Array[0 &, Length[T]];
    ovec = Array[1 &, Length[T]];
    pos = Outer[List, #] & /@ coll;
@@ -677,19 +683,45 @@ BalancedSystemQ[coll_List, T_List] :=
    zf = -tmat.veco;
    AppendTo[mat, ovec];
    bv = Array[0 &, d2 + 1];
-   am = Array[1 &, d2];
-   AppendTo[am, 0];
-   tbv = MapThread[List, {bv, am}];
    smat = SparseArray[mat];
-    {slx, sly, slz, slw} = DualLinearProgramming[zf, smat, tbv, Method -> "RevisedSimplex"];
-   If[!FreeQ[slx,Indeterminate],Return[{False, Array[Indeterminate &, Length[T]]}],True];
-   cf = (Delete[sly, -1] + 1);
+   {{yineq,yeq},res}=LinearOptimization[zf,{smat,bv},{{ovec},{0}},{"ConstraintSensitivity","PrimalMinimizer"},Method->mthd];
+   cf = (Delete[-yineq, -1] + 1);
    rs = tmat.cf;
-   bq = rs + ovec*Last[sly];
-   bq = Round[bq];
-   bcQ = FreeQ[bq, _?Positive] && FreeQ[bq, _?Negative];
-   If[SameQ[bcQ, True], {bcQ, cf/First[rs]}, 
-      {bcQ, Array[Indeterminate &, Length[T]]}]];
+   bq = Round[res]; 
+(*
+   Print["bq=",bq];
+   Print["cf=",cf/First[rs]];
+*)
+   bcQ = FreeQ[bq, _?Positive] && FreeQ[bq, _?Negative] && Apply[And, NumberQ[#] & /@ bq];
+   If[SameQ[bcQ, True], {bcQ, cf/First[rs]},
+      {bcQ, Array[Indeterminate &, Length[T]]}]
+];
+
+WeaklyBalancedSystemQ[args___]:=(Message[WeaklyBalancedSystemQ::argerr];$Failed);
+WeaklyBalancedSystemQ[coll_List, b0_List,T_List, opts:OptionsPattern[BalancedSystemQ]] :=
+  Module[{mthd,zvec, ovec, coll0,pos0, pos, mat, tmat0,tmat, smat, d1, d2, veco, zf, bv, am, tbv, yineq, yeq, cf, rs, bq},
+   mthd=OptionValue[Method];
+   zvec = Array[0 &, Length[T]];
+   ovec = Array[1 &, Length[T]];
+   coll0=Complement[coll,b0];
+   pos0 = Outer[List, #] & /@ coll0;
+   mat0 = ReplacePart[zvec, 1, #] & /@ pos0;
+   tmat = Transpose[mat0];
+   {d1, d2} = Dimensions[tmat];
+   veco = Table[1, {i, d2}];
+   (*max Problem*)
+   zf = -tmat.veco;
+   pos = Outer[List, #] & /@ coll;
+   mat = ReplacePart[zvec, 1, #] & /@ pos;
+   AppendTo[mat, ovec];
+   tmat = Transpose[mat];
+   {d1, d2} = Dimensions[tmat];
+   bv = Array[0 &, d2];
+   smat = SparseArray[mat];
+   {{yineq,yeq},res}=LinearOptimization[zf,{smat,bv},{{ovec},{0}},{"ConstraintSensitivity","PrimalMinimizer"},Method->mthd];
+   bq = Round[res];
+   FreeQ[bq, _?Positive] && FreeQ[bq, _?Negative] && Apply[And, NumberQ[#] & /@ bq]
+];
 
 
 GetCardinalityGame[args___]:=(Message[GetCardinalityGame::argerr];$Failed);

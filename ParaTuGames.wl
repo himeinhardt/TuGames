@@ -1,9 +1,9 @@
 (* ::Package:: *)
 
 (* :Title: ParaTuGames.m
-    : Release Date : 05.05.2020
-    : Preliminary version:
-      For testing only.
+    : Release Date : 01.10.2021
+
+
 *)
 Off[Needs::nocont]
 (* :Context: TUG`ParaTuGames` *)
@@ -21,10 +21,10 @@ Off[Needs::nocont]
     holger.meinhardt@wiwi.uni-karlsruhe.de
 *)
 
-(* :Package Version: 0.6 *)
+(* :Package Version: 1.0.0 *)
 
 (* 
-   :Mathematica Version: 8.x, 9.x, 10.x, 11.x, 12.x
+   :Mathematica Version: 12.x
 
 *)
 (*:Keywords:
@@ -118,7 +118,7 @@ ParaPreKernelElement::usage =
  direction of improvement is equal to the null vector. (cf. Algorithm 8.3.1 of Meinhardt (2013)).";
 
 ParaModiclus::usage = 
-"Modiclus[game] computes the modiclus as the projection of the pre-nucleolus from the
+"Modiclus[game,opts] computes the modiclus as the projection of the pre-nucleolus from the
  dual cover game onto the player set T of the original game. Do not confound this command
  with the function ModfiedNucleolus[]. The algorithm is based on a method by Peleg to translate
  the definition of the Nucleolus into a sequence of linear programs on the pre-imputation set.
@@ -126,7 +126,7 @@ ParaModiclus::usage =
 
 
 ParaIsModiclusQ::usage = 
-"IsModiclusQ[game,payoff] checks whether the provided payoff vector is the modiclus of the game.";
+"IsModiclusQ[game,payoff,opts] checks whether the provided payoff vector is the modiclus of the game.";
 
 
 ParaModPreKernel::usage =
@@ -194,6 +194,8 @@ Options[ParaPreKernel] = Sort[Options[PreKernel]];
 Options[ParaExcessPayoff] = Sort[Options[ExcessPayoff]];
 Options[ParaModPreKernel] = Sort[Options[ModPreKernel]];
 Options[ParaProperModPreKernel] = Sort[Options[ProperModPreKernel]];
+Options[ParaModiclus] = Sort[Options[Modiclus]];
+Options[ParaIsModiclusQ] = Sort[Options[IsModiclusQ]];
 
 DistributeDefinitions[Options[ParaPreKernel] = Sort[Options[PreKernel]]];
 (* DistributeDefinitions[Options[ParaAvConvexQ] = Options[AverageConvexQ]]; *)
@@ -329,7 +331,7 @@ Block[{sil, smc, optst, doi, optstep, itpay,tol,brc,pinv},
     If[Depth[itpay]!=2,Return[payoff],True];
     tol=Table[1.5*10^(-7),{Length[T]}];
     brc=Apply[And,MapThread[LessEqual[#1,#2] &,{Abs[doi],tol}]];
-    If[SameQ[brc,True], itpay, ParaPreKernelAlg3[game, itpay, CalcStepSize -> optst, Silent -> sil, SmallestCardinality -> smc]] 
+    If[SameQ[brc,True], Rationalize[itpay,10^(-9)], ParaPreKernelAlg3[game, Rationalize[itpay,10^(-9)], CalcStepSize -> optst, Silent -> sil, SmallestCardinality -> smc]] 
 ];
 
 
@@ -409,21 +411,26 @@ Block[{sil, smc, meff, matE, vlis, alpv,err},
 (* Section Modiclus, Modified and Proper Modified Pre-Kernel *)
 
 ParaModiclus[args___]:=(Message[ParaModiclus::argerr];$Failed);
-ParaModiclus[game_] := Block[{ovls, dcvals, lt, t0, t1, DCGame, mdnc},
+ParaModiclus[game_,opts:OptionsPattern[ParaModiclus]] := 
+ Block[{mthd,ovls, dcvals, lt, t0, t1, DCGame, mdnc},
+  mthd=OptionValue[Method];
   ovls = v[#] & /@ Coalitions; (* Storing original game values. *)
   t0 = T; (* Storing original game values. *)
   dcvals = ParaDualCover[game];
   lt = Length[T];
   t1 = Range[2*lt];
   DCGame = DefineGame[t1, dcvals];
-  mdnc = PreNucleolus[DCGame];
+  mdnc = PreNucleolus[DCGame,Method->mthd];
   DefineGame[t0, ovls]; (* Redefine the original game. *)
   Take[mdnc, lt]
   ];
 
 ParaIsModiclusQ[args___]:=(Message[ParaIsModiclusQ::argerr];$Failed);
 
-ParaIsModiclusQ[game_,payoff_List] := Block[{ovls, dcvals, lt, t0, t1, dpay, DCGame, bcQ},
+ParaIsModiclusQ[game_,payoff_List,opts:OptionsPattern[ParaIsModiclusQ]] := 
+ Block[{ovls, dcvals, lt, t0, t1, dpay, DCGame, bcQ},
+  mthd=OptionValue[Method];
+  If[SameQ[Total[payoff] - v[T], 0] && Apply[And,NumericQ[#] &/@ payoff], True, Return[False]];
   ovls = v[#] & /@ Coalitions; (* Storing original game values. *)
   t0 = T; (* Storing original game values. *)
   dcvals = ParaDualCover[game];
@@ -431,7 +438,7 @@ ParaIsModiclusQ[game_,payoff_List] := Block[{ovls, dcvals, lt, t0, t1, dpay, DCG
   t1 = Range[2*lt];
   DCGame = DefineGame[t1, dcvals];
   dpay= Flatten[{payoff,payoff}];
-  bcQ = BalancedSelectionQ[DCGame,dpay,Tight->True];
+  bcQ = BalancedCollectionQ[DCGame,dpay,Method->mthd];
   DefineGame[t0, ovls]; (* Redefine the original game. *)
   Return[bcQ]
   ]
