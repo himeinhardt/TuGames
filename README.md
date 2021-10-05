@@ -410,7 +410,7 @@ Out[19]= {---, ---, ---}
 
 ```
 
-Admissible methods for the presented commands `CoreQ, Kernel, Nucleolus` and `PreNucleolus` are: `RevisedSimplex, CLP, GUROBI, MOSEK`, or `Automatic`. The default setting is `Automatic`. This option must be used in connection with `CallMaximize->False`. One can even try `Method->{InteriorPoint, Tolerance->10^-7}` to get a more precise result whenever one encounters numerical issues. In contrast, admissible methods for the function PreKernelSolution are: `Automatic, Newton, ConjugateGradient, PrincipalAxis` or `IPOPT`. Here, one has in addition to set `SolutionExact->False` to change to the non-default setting. 
+Admissible methods for the presented commands `CoreQ, Kernel, Nucleolus` and `PreNucleolus` are: `RevisedSimplex, CLP, GUROBI, MOSEK`, or `Automatic`. The default setting is `Automatic`. This option must be used in connection with `CallMaximize->False`. One can even try `Method->{InteriorPoint, Tolerance->10^-7}` to get a more precise result whenever one encounters numerical issues. In contrast, admissible methods for the function `PreKernelSolution` are: `Automatic, Newton, ConjugateGradient, PrincipalAxis` or `IPOPT`. Here, one has in addition to set `SolutionExact->False` to change to the non-default setting. 
  
 For more information see `TUG/Tutorials/GettingStarted` from the Documentation Center `(cf. Section 6)`.
 
