@@ -2,13 +2,15 @@
 [![Mathematica 12.0 - 12.3.1](https://img.shields.io/badge/Mathematica-12.0_--_12.3.1-brightgreen.svg)](#compatibility)
 [![license MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/himeinhardt/TuGames/blob/master/LICENSE.md)
 
-# *Mathematica* Package: *TuGames* Version 3.0.0
+# *Mathematica* Package: *TuGames* Version 3.0.1
 
 ```
 Contents:
  1.  Introduction
  2.  Custom Installation
  3.  Getting Started
+ 3.1 Basic Example
+ 3.2  Using a different Solver
  4.  Running the Package in Parallel
  4.1  General Procedure
  4.2  Running the Cddmathlink libraries in Parallel
@@ -131,10 +133,10 @@ the command
 ```
 In[1]:= PacletInformation["TUG"]
 
-Out[1]= {Name -> TUG, Version -> 3.0.0, BuildNumber -> , Qualifier -> , WolframVersion -> 12+,
+Out[1]= {Name -> TUG, Version -> 3.0.1, BuildNumber -> , Qualifier -> , WolframVersion -> 12+,
          SystemID -> All, Description -> A Mathematica Package for Cooperative Game Theory,
 	 Category -> , Creator -> Holger Ingmar Meinhardt <holger.meinhardt@partner.kit.edu>,
-	 Publisher -> , Support -> , Internal -> False, Location -> /home/kit/xxx/xxxx/.Mathematica/Paclets/Repository/TUG-3.0.0
+	 Publisher -> , Support -> , Internal -> False, Location -> /home/kit/xxx/xxxx/.Mathematica/Paclets/Repository/TUG-3.0.1
 	 Context -> {TUG`coop`, TUG`vertex`, TUG`}, Enabled -> True, Loading -> Manual}
 ```
 
@@ -144,7 +146,7 @@ To get the same information and beyond that under *Mathematica* version 12.1, it
 In[1]:= PacletObject["TUG"][All]
 ```
 ```
-Out[1]=  {"Name" -> "TUG", "Version" -> "3.0.0", "WolframVersion" -> "12+", 
+Out[1]=  {"Name" -> "TUG", "Version" -> "3.0.1", "WolframVersion" -> "12+", 
           "Qualifier" -> "", "SystemID" -> All, "Description" -> "A Mathematica Package for Cooperative Game Theory",
           "Category" -> Missing["NotAvailable"], "Keywords" -> Missing["NotAvailable"], 
           "UUID" -> Missing["NotAvailable"], 
@@ -154,7 +156,7 @@ Out[1]=  {"Name" -> "TUG", "Version" -> "3.0.0", "WolframVersion" -> "12+",
           "Internal" -> False, 
           "Context" -> {"TUG`coop`", "TUG`vertex`", "TUG`"}, 
           "Loading" -> Manual, "AutoUpdating" -> False, "Enabled" -> True, 
-          "Location" -> "/home/kit/xxx/xxxx/.Mathematica/Paclets/Repository/TUG-3.0.0"}
+          "Location" -> "/home/kit/xxx/xxxx/.Mathematica/Paclets/Repository/TUG-3.0.1"}
 ```
 or alternatively
 
@@ -279,21 +281,22 @@ Finally, in order to see how to open the documentation and to run some example w
 
 
 
-## Getting Started
+## 3. Getting Started
 
 The forthcoming discussion assume that you have properly installed the 
-files mentioned above on your computer. To start with the calculation, 
-we have to load some packages in a first step. This can be done by the 
-following commands. 
+files mentioned above on your computer. 
 
+### 3.1 Basic Example
+
+To start with the calculation, we have to load some packages in a first step. This can be done by the following commands. 
 
 ```
-In[2]:=  Needs["TUG`"]
+In[1]:=  Needs["TUG`"]
 ===================================================
 Loading Package 'TuGames' for Unix
 ===================================================
-TuGames V3.0.0 by Holger I. Meinhardt
-Release Date: 01.10.2021
+TuGames V3.0.1 by Holger I. Meinhardt
+Release Date: 04.10.2021
 Program runs under Mathematica Version 12.0 or later
 Version 12.x or higher is recommended
 ===================================================
@@ -353,11 +356,65 @@ In[12]:= prn=PreNucleolus[ExpGame]
           170  230  260
 Out[12]= {---, ---, ---}
            3    3    3
+
+In[13]:= prk=PreKernelSolution[ExpGame]
+
+          170  230  260
+Out[13]= {---, ---, ---}
+           3    3    3
+
+
+```
+### 3.2 Using a different Solver
+
+Alternatively, one can also supply a different method to check the existence of the core or to find a (pre-)kernel element or the (pre-)nucleolus. This may be useful when one encounters numerical issues, the evaluation lasts too long or with the need to determine an additional (pre-)kernel element. Although, the latter case is not relevant for a three person game, we nevertheless demonstrate its usage for the above example.  
+
+
 ```
 
+In[14]:= CoreQ[ExpGame,Method->RevisedSimplex]
+
+Out[14]= True
+
+
+In[15]:= ker=Kernel[ExpGame,CallMaximize->False,Method->CLP]
+
+         170  230  260
+Out[15]= {---, ---, ---}
+          3    3    3
+
+In[16]:= nc=Nucleolus[ExpGame,CallMaximize->False,Method->RevisedSimplex]
+
+          170  230  260
+Out[16]= {---, ---, ---}
+           3    3    3
+
+
+In[17]:= prn=PreNucleolus[ExpGame,CallMaximize->False,Method->{InteriorPoint, Tolerance->10^-8}]
+
+          1065164637  695287163  1514771007
+Out[17]= {----------, ---------, ----------}
+           18797023    9068963    17478127
+
+In[18]:= prn=PreNucleolus[ExpGame,CallMaximize->False,Method->{InteriorPoint, Tolerance->10^-9}]
+
+          170  230  260
+Out[18]= {---, ---, ---}
+           3    3    3
+
+In[19]:= prk=PreKernelSolution[ExpGame,SolutionExcat->False,Method->IPOPT]
+
+          170  230  260
+Out[19]= {---, ---, ---}
+           3    3    3
+
+```
+
+Admissible methods for the presented commands `CoreQ, Kernel, Nucleolus` and `PreNucleolus` are: `RevisedSimplex, CLP, GUROBI, MOSEK`, or `Automatic`. The default setting is `Automatic`. This option must be used in connection with `CallMaximize->False`. One can even try Method->{InteriorPoint, Tolerance->10^-7} to get a more precise result whenever one encounters numerical issues. In contrast, admissible methods for the function PreKernelSolution are: `Automatic, Newton, ConjugateGradient, PrincipalAxis` or `IPOPT`. Here, one has in addition to set `SolutionExact->False` to change to the non-default setting. 
+ 
 For more information see `TUG/Tutorials/GettingStarted` from the Documentation Center `(cf. Section 6)`.
 
-
+ 
 ## 4. Running the Package in Parallel
 
 ### 4.1 General Procedure
@@ -531,7 +588,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) f
 
 ## Author
 
-** Holger I. Meinhardt **
+**Holger I. Meinhardt**
 Institute of Operations Research
 University of Karlsruhe (KIT) 
 E-mail: Holger.Meinhardt ät wiwi.uni-karlsruhe.de

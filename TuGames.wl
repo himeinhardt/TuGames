@@ -18,17 +18,17 @@ Off[General::obspkg];
     holger.meinhardt@wiwi.uni-karlsruhe.de
 *)
 
-(* :Package Version: 3.0.0 *)
+(* :Package Version: 3.0.1 *)
 
 (* 
    :Mathematica Version: 12.x
 
-   The function ConstrainedMax/ConstrainedMin or Linear/DualLinearProgramming have been depricated 
+   The function ConstrainedMax/ConstrainedMin or Linear/DualLinearProgramming have been deprecated
    in Version 3 and are replaced by LinearOptimization. Thus, this version is not anymore compatible
    with Mathematica versions smaller than 12. This replacement allows to supply the Method options
    of LinearOptimization. In this context, we strongly recommend to apply for a MOSEK license, which   
    is in according to our experience up to 50 times faster than the other methods. To change the method 
-   one needs just to set Method -> MOSEK. For changing the solver, one has to set CallMinimze -> True
+   one needs just to set Method -> MOSEK. For changing the solver, one has to set CallMinimize -> True
    or CallMaximize -> True, for instance. One shall check first with Options[command] if the solver
    is available. 
 
@@ -305,9 +305,9 @@ Off[General::obspkg];
        Modiclus                   -- Part of TuGames.
        IsModiclusQ                -- Part of TuGames.
        Kernel                     -- Part of TuGames.
-       KernelCalculations         -- Part of TuGames.
+       KernelCalculation          -- Part of TuGames.
        BalancedInequalityQ        -- Part of TuGames.
-       BalancedCollcetionQ        -- Part of TuGames.
+       BalancedCollectionQ        -- Part of TuGames.
        EpsCore                    -- Part of TuGames.
        FirstCriticalVal           -- Part of TuGames.
        DeltaLP                    -- Part of TuGames.
@@ -320,11 +320,17 @@ Off[General::obspkg];
        ParaIsModiclus             -- Part of ParaTuGames.
        
       New added functions are:
-      WeaklyBalancedCollcetionQ   -- Part of TuGames.
+      WeaklyBalancedCollectionQ   -- Part of TuGames.
       WeaklyBalancedSystemQ       -- Part of TuGamesAux.       
 
 
-     The function WeaklyBalancedCollcetionQ replaces WeaklyBalancedSelectionQ, the latter will be deprecated in a future version.
+     The function WeaklyBalancedCollectionQ replaces WeaklyBalancedSelectionQ, the latter will be deprecated in a future version.
+
+     Version 3.0.1
+
+     Improved exception handling for functions using LinearOptimization. Performance improving of revised functions in Version 3.
+
+     Some minor bug fixes.
 *)
  
 
@@ -373,8 +379,8 @@ If[SameQ[Global`$ParaMode,"False"],
 Print["==================================================="];
 Print["Loading Package 'TuGames' for ", $OperatingSystem];
 Print["==================================================="];
-Print["TuGames V3.0.0 by Holger I. Meinhardt"];
-Print["Release Date: 02.10.2021"];
+Print["TuGames V3.0.1 by Holger I. Meinhardt"];
+Print["Release Date: 04.10.2021"];
 Print["Program runs under Mathematica Version 12.0 or later"];
 Print["Version 12.x or higher is recommended"];
 Print["==================================================="];,
@@ -485,7 +491,7 @@ SmallestContributionVector::usage =
 "SmallestContribution[game] calculates the vector of the smallest contributions.";
 
 SmallestContribution::usage = 
-"SamllestContribution[game,i] calculates the smallest contribution of player i.";
+"SmallestContribution[game,i] calculates the smallest contribution of player i.";
 
 Scrb::usage = 
 "Scrb[game,i] calculates the separable cost-remaining benefits for player i. See Funaki (1986).";
@@ -516,7 +522,7 @@ MaxExcessSets::usage =
 "MaxExcessSets[game,payoff] computes the set of proper coalitions having largest excesses.";
 
 IntersectionOfMaxExcessSets::usage = 
-"IntersecionOfMaxExcessSets[game, payoff] determines if the set of proper coalitions having 
+"IntersectionOfMaxExcessSets[game, payoff] determines if the set of proper coalitions having
  largest excesses has an empty intersection.";
 
 KernelCalculation::usage = 
@@ -535,7 +541,11 @@ KernelCalculation::usage =
  KernelImputationQ[], KernelImputationListQ[], PreKernelQ[], or MaxExcessBalanced[]. To 
  search for a kernel solution of an non zero-monotonic game set the last variable to 
  'True', but in this case the function need not to terminate properly. For its default value 
- 'False' the function Kernel[game] will be invoked to avoid infinite loops.";
+ 'False' the function Kernel[game] will be invoked to avoid infinite loops. To increases the 
+ computational reliability in cases of numerical issues the following methods can be used: 
+ RevisedSimplex, CLP, GUROBI, MOSEK, or Automatic. Default setting is Automatic. This option
+ must be used in connection with CallMaximize->False. For getting more precise results one 
+ can even set Method->{InteriorPoint, Tolerance->10^-10}.";
 
 Kernel::usage = 
 "Kernel[game,options] computes a kernel point of the game from one LP. Options are:
@@ -544,10 +554,18 @@ Kernel::usage =
  set of the final LP, the complete variable set, and all bi-symmetrical transfers. In 
  this case invoke the function by {solker,obj,const,var,tra}=Kernel[game]. The option 
  EpsilonValue is a critical value to change the strong epsilon-core. This value can be 
- calculated, for instance, by the function FirstCriticalVal[game].";
+ calculated, for instance, by the function FirstCriticalVal[game]. To increases the computational 
+ reliability in cases of numerical issues the following methods can be used: RevisedSimplex, CLP,
+ GUROBI, MOSEK, or Automatic. Default setting is Automatic. This option must be used in 
+ connection with CallMaximize->False. For getting more precise results one can even set 
+ Method->{InteriorPoint, Tolerance->10^-10}.";
 
 KernelVertices::usage =
-"KernelVertices[game,options] computes the vertices of the Kernel solution from an LP.";
+"KernelVertices[game,options] computes the vertices of the Kernel solution from an LP. To 
+ increases the computational reliability in cases of numerical issues the following methods 
+ can be used: RevisedSimplex, CLP, GUROBI, MOSEK, or Automatic. Default setting is Automatic. 
+ This option must be used in connection with CallMaximize->False. For getting more precise 
+ results one can even set Method->{InteriorPoint, Tolerance->10^-10}.";
 
 ModifiedKernel::usage = 
 "ModifiedKernel[game,options] computes a kernel point from the least core.
@@ -556,7 +574,8 @@ ModifiedKernel::usage =
  on a method by Peleg to translate the definition of the Nucleolus into 
  a sequence of linear programs. To increases the computational reliability in 
  cases of numerical issues the following methods can be used: RevisedSimplex, CLP, 
- MOSEK, or Automatic. Default setting is Automatic. For getting more precise results 
+ GUROBI, MOSEK, or Automatic. Default setting is Automatic. This option must be used 
+ in connection with CallMaximize->False. For getting more precise results 
  one can even set Method->{InteriorPoint, Tolerance->10^-10}.";
 
 
@@ -566,7 +585,8 @@ ModifiedNucleolus::usage =
  Nucleolus into a sequence of linear programs. The recursion stops, if the set
  of new equal constraints is empty. To increases the computational reliability in 
  cases of numerical issues the following methods can be used: RevisedSimplex, CLP, 
- MOSEK, or Automatic. Default setting is Automatic. For getting more precise results 
+ GUROBI, MOSEK, or Automatic. Default setting is Automatic. This option must be used 
+ in connection with CallMaximize->False. For getting more precise results 
  one can even set Method->{InteriorPoint, Tolerance->10^-10}.";
 
 
@@ -608,31 +628,33 @@ PreNucleolus::usage =
 "PreNucleolus[game,options] computes the pre-nucleolus from the set of pre-imputations.
  The algorithm is based on a method by Peleg to translate the definition of the Nucleolus into 
  a sequence of linear programs on the pre-imputation set. To increases the computational reliability 
- in cases of numerical issues the following methods can be used: RevisedSimplex, CLP, MOSEK, or Automatic. 
- Default setting is Automatic. For getting more precise results, one can even set 
- Method->{InteriorPoint, Tolerance->10^-10}.";
+ in cases of numerical issues the following methods can be used: RevisedSimplex, CLP, GUROBI, MOSEK, 
+ or Automatic. Default setting is Automatic. This option must be used in connection with CallMaximize->False. 
+ For getting more precise results, one can even set  Method->{InteriorPoint, Tolerance->10^-10}.";
 
 Modiclus::usage = 
 "Modiclus[game,opts] computes the modiclus as the projection of the pre-nucleolus from the
  dual cover game onto the player set T of the original game. Do not confound this command
- with the function ModfiedNucleolus[]. The algorithm is based on a method by Peleg to translate
+ with the function ModifiedNucleolus[]. The algorithm is based on a method by Peleg to translate
  the definition of the Nucleolus into a sequence of linear programs on the pre-imputation set.
  To increases the computational reliability in cases of numerical issues the following methods
- can be used: RevisedSimplex, CLP, MOSEK, or Automatic. Default setting is Automatic. For getting
- more precise results one can even set Method->{InteriorPoint, Tolerance->10^-10}.";
+ can be used: RevisedSimplex, CLP, GUROBI, MOSEK, or Automatic. Default setting is Automatic. This option
+ must be used in connection with CallMaximize->False. For getting more precise results one can even set 
+ Method->{InteriorPoint, Tolerance->10^-10}.";
 
 
 IsModiclusQ::usage = 
 "IsModiclusQ[game,payoff,opts] checks whether the provided payoff vector is the modiclus of the game.
  To increases the computational reliability in cases of numerical issues the following methods
- can be used: RevisedSimplex, CLP, MOSEK, or Automatic. Default setting is Automatic. For getting
- more precise results one can even set Method->{InteriorPoint, Tolerance->10^-10}";
+ can be used: RevisedSimplex, CLP, GUROBI, MOSEK, or Automatic. Default setting is Automatic. This option
+ must be used in connection with CallMaximize->False. For getting more precise results one can even set 
+ Method->{InteriorPoint, Tolerance->10^-10}";
 
 
 ModPreKernel::usage = 
 "ModPreKernel[game] computes a modified pre-kernel element as the solution
  of the pre-kernel from the excess comparability cover game.
- Do not confound this command with the function ModfiedKernel[].";
+ Do not confound this command with the function ModifiedKernel[].";
 
 IsModPreKernelQ::usage = 
 "IsModPreKernelQ[game,payoff] checks whether the provided payoff vector is a modified
@@ -641,7 +663,7 @@ IsModPreKernelQ::usage =
 ProperModPreKernel::usage = 
 "ProperModPreKernel[game] computes a proper modified pre-kernel element as the projection
  of the pre-kernel from the dual cover game onto the player set T of the original game.
- Do not confound this command with the function ModfiedKernel[].";
+ Do not confound this command with the function ModifiedKernel[].";
 
 IsProperModPreKernelQ::usage = 
 "IsProperModPreKernelQ[game,payoff] checks whether the provided payoff vector is a proper modified
@@ -672,10 +694,10 @@ IsSMPrenucleolusQ::usage =
 "IsSMPrenucleolusQ[game,payoff] checks if payoff is the simplified modified pre-nucleolus of the game.";
 
 DuttaRay::usage = 
-"DuttaRay[game] comptes the Dutta-Ray solution for convex games.";
+"DuttaRay[game] computes the Dutta-Ray solution for convex games.";
 
 LorenzSolution::usage = 
-"LorenzSolution[game] comptes the Lorenz solution whenever the core exits.";
+"LorenzSolution[game] computes the Lorenz solution whenever the core exits.";
 
 CollectionOfDecreasingExcess::usage =
 "CollectionOfDecreasingExcess[game,payoff] determines the collection of coalitions with highest up 
@@ -684,13 +706,21 @@ CollectionOfDecreasingExcess::usage =
 BalancedCollectionQ::usage =
 "BalancedCollectionQ[game,payoff,options] determines whether the induced collections
  are balanced w.r.t. all excess levels.  Implements Kohlberg's Theorem. The return value must
- be 'True' for the prenucleolus, otherwise 'False'.";
+ be 'True' for the prenucleolus, otherwise 'False'. For its default value 'False' the function 
+ Kernel[game] will be invoked to avoid infinite loops. To increases the computational reliability 
+ in cases of numerical issues the following methods can be used: RevisedSimplex, CLP, GUROBI, MOSEK, 
+ or Automatic. Default setting is RevisedSimplex. This option must be used in connection with CallMaximize->False. 
+ For getting more precise results one can even set Method->{InteriorPoint, Tolerance->10^-10}.";
 
 
 WeaklyBalancedCollectionQ::usage =
 "WeaklyBalancedCollectionQ[game,payoff,options] determines whether the induced collections
  are weakly balanced w.r.t. all excess levels.  Implements Kohlberg's Theorem. The return value must
- be 'True' for the nucleolus, otherwise 'False'.";
+ be 'True' for the nucleolus, otherwise 'False'. For its default value 'False' the function Kernel[game] 
+ will be invoked to avoid infinite loops. To increases the computational reliability in cases of numerical issues 
+ the following methods can be used: RevisedSimplex, CLP, GUROBI, MOSEK, or Automatic. Default setting is RevisedSimplex. 
+ This option must be used in connection with CallMaximize->False. For getting more precise results one
+ can even set Method->{InteriorPoint, Tolerance->10^-10}.";
 
 kBalancednessQ::usage =
 "kBalancednessQ[collect_List, coalOfsize_k, options] determines whether the coalition collection
@@ -712,7 +742,7 @@ WeaklyBalancedSelectionQ::usage =
 
 SelectionKBalancedQ::usage =
 "SelectionKBalancedQ[game, payoff,k options] or SelectionKBalancedQ[coalstruct,k options] 
- determines whether a coalition collection or its induced from an imputation 'payoff'is 
+ determines whether a coalition collection or its induced from an imputation 'payoff' is
  k-balanced. The value k must be an integer between 2 and n. Experimental, not stable!";
 
 PreKernel::usage =
@@ -728,7 +758,7 @@ PreKernelSolution::usage =
 "PreKernelSolution[game,payoff,options] computes a pre-kernel solution by relying on 
  Algorithm 8.1.1 and 8.2.1 of Meinhardt (2013). Default solver is SolutionExact -> True in order to call
 FindMinimum set SolutionExact->False. If the solution is still not correct or to search for a
-different pre-kernel element change the Method of FindMinimum, addmissible values are: Method -> Automatic 
+different pre-kernel element change the Method of FindMinimum, admissible values are: Method -> Automatic
 either to: Method -> Newton, Method -> ConjugateGradient, Method -> PrincipalAxis or Method -> IPOPT. 
 By setting the  option AntiPreKernel -> True,  an anti-pre-kernel of the game can be computed. In order to look for 
 further solutions, invoke   {prk,cvfunc,grad} = PreKernelSolution[game,payoff, ConjugateFunction -> True, 
@@ -879,13 +909,13 @@ SecondCriticalVal::usage =
  than the sec-critical-val. See Maschler, Peleg and Shapley (1979) on page 306 for more details.";
                          
 ThirdCriticalVal::usage = 
-"ThridCriticalVal[game] calculates another critical value for epsilon to generalize the
+"ThirdCriticalVal[game] calculates another critical value for epsilon to generalize the
  bisection property w.r.t. the strong epsilon-core. The epsilon-core is included in the 
  reasonable set iff epsilon is greater or equal than the third critical value.";
                             
 
 FourthCriticalVal::usage = 
-"FourthCriticalVal[game] returns the minimum of the SecCriticalVal[] and the ThirdCrititcalVal[].";
+"FourthCriticalVal[game] returns the minimum of the SecCriticalVal[] and the ThirdCriticalVal[].";
 
 FifthCriticalVal::usage = 
 "The Union of the lower set and the core is included in the strong epsilon-core iff 
@@ -1280,10 +1310,10 @@ Which[$OperatingSystem === "Unix",
   Options[IsModiclusQ] = {Method -> Automatic};
   Options[ModPreKernel] := {CalcStepSize -> True, PseudoInv->True,Silent -> True, SmallestCardinality -> True};       
   Options[DirectionOfImprovement] := {CalcStepSize -> True, MaximumSurpluses -> False, PseudoInv->True,Silent -> True, SmallestCardinality -> True};
-  Options[Kernel] = {CallMaximize -> False, DisplayAllResults -> False, EpsilonValue -> 0};
-  Options[KernelCalculation] = {CallMaximize -> True, ChangeInternalEps -> False, DisplayAllResults -> False, EpsilonValue -> 0, SetGameToNonZeroMonotonic -> False};
+  Options[Kernel] = {CallMaximize -> False, Method -> Automatic, DisplayAllResults -> False, EpsilonValue -> 0};
+  Options[KernelCalculation] = {CallMaximize -> True, Method -> Automatic, ChangeInternalEps -> False, DisplayAllResults -> False, EpsilonValue -> 0, SetGameToNonZeroMonotonic -> False};
   Options[ModifiedKernel] = {Method -> Automatic};
-  Options[KernelVertices] = {CallMaximize -> True, EpsilonValue -> 0, Silent -> True};
+  Options[KernelVertices] = {CallMaximize -> True, Method -> Automatic, EpsilonValue -> 0, Silent -> True};
   Options[ModifiedNucleolus] = {Method -> Automatic};
   Options[LexiCenter] = {Method -> Automatic};
   Options[PreNucleolus] = {Method -> Automatic};
@@ -1337,10 +1367,10 @@ True,
   Options[ModPreKernel] := {CalcStepSize -> True, PseudoInv->True,Silent -> True, SmallestCardinality -> True};
   Options[ProperModPreKernel] = {AntiPreKernel -> False, ConjugateFunction -> False,  DigitPrecision -> 6, Method -> Automatic, ShowObjectiveFunction -> False, RationalTol -> 10^(-9),  Silent -> True, SmallestCardinality -> True, SolutionExact -> False};
   Options[DirectionOfImprovement] := {CalcStepSize -> True, MaximumSurpluses -> False, PseudoInv->True, Silent -> True, SmallestCardinality -> True};
-  Options[Kernel] = {CallMaximize -> False, DisplayAllResults -> False, EpsilonValue -> 0}; 
-  Options[KernelCalculation] = {CallMaximize -> True, ChangeInternalEps -> False, DisplayAllResults -> False, EpsilonValue -> 0, SetGameToNonZeroMonotonic -> False};
+  Options[Kernel] = {CallMaximize -> False, Method -> Automatic, DisplayAllResults -> False, EpsilonValue -> 0}; 
+  Options[KernelCalculation] = {CallMaximize -> True, Method -> Automatic, ChangeInternalEps -> False, DisplayAllResults -> False, EpsilonValue -> 0, SetGameToNonZeroMonotonic -> False};
   Options[ModifiedKernel] = {Method -> Automatic}; 
-  Options[KernelVertices] = {CallMaximize -> True, EpsilonValue -> 0, Silent -> True}; 
+  Options[KernelVertices] = {CallMaximize -> True, Method -> Automatic, EpsilonValue -> 0, Silent -> True}; 
   Options[ModifiedNucleolus] = {Method -> Automatic}; 
   Options[LexiCenter] = {Method -> Automatic}; 
   Options[PreNucleolus] = {Method -> Automatic};
@@ -2004,7 +2034,7 @@ NewRelax[ineq_, epsilon_] := ineq /. lhs_ >= rhs_ -> lhs >= rhs - epsilon;
 EpsCore[args___]:=(Message[EpsCore::argerr];$Failed);
 EpsCore[game_] := Block[{zf,res},
         {zf,res}=LinearOptimization[Global`e - f,Append[NewRelax[CoalitionalRationality,Global`e - f], ParetoOptimality],
-                   Join[PayoffVector, {Global`e, f}],{"PrimalMinimumValue","PrimalMinimizer"},Method->"RevisedSimplex"];
+                   Join[PayoffVector, {Global`e, f}],{"PrimalMinimumValue","PrimalMinimizer"},Method->"Automatic"]; (*RevisedSimplex *)
         {zf,MapThread[Rule,{Join[PayoffVector, {Global`e, f}],res}]}
 ];
 
@@ -2016,7 +2046,7 @@ FirstCriticalVal[args___]:=(Message[FirstCriticalVal::argerr];$Failed);
 FirstCriticalVal[game_] := Block[{con},
           con = LinearOptimization[e - f, Append[
           NewRelax[CoalitionalRationality, e - f],
-          ParetoOptimality], Join[PayoffVector, {e, f}],{"PrimalMinimumValue","PrimalMinimizer"},Method->"RevisedSimplex"];
+          ParetoOptimality], Join[PayoffVector, {e, f}],{"PrimalMinimumValue","PrimalMinimizer"},Method->"Automatic"];
           MapThread[Rule, {{Global`eps1}, {con[[1]]}}]
     ];
         
@@ -2735,7 +2765,8 @@ fLSnc[pyf_List,cmpM_List,stM_List,n_]:=Block[{M0,xm,lm,zv,cpM,pyM,tpy,cmpPy,rlcm
 
 
 (*
-In this section, we introduce a set of functions to compute the pre-nucleolus by a Fenchel Transform Method. This is just a conjucture, and it is a combination of the the approach discussed in Meinhardt (2013) and Kido (2004,2005,2008).
+In this section, we introduce a set of functions to compute the pre-nucleolus by a Fenchel Transform Method. This is just a conjecture,
+and it is a combination of the the approach discussed in Meinhardt (2013) and Kido (2004,2005,2008).
 
 *)   
 
@@ -3024,7 +3055,7 @@ IIMBalancedSelectionQ[selcoal_List, tol_,opts:OptionsPattern[BalancedSelectionQ]
      wghvec = PseudoInverse[Transpose[sysvec]].onesvec;
      tol1=Min[{tol,10^(-5)}];
      wghvec1=wghvec+tol1;
-(* Trying to find a balanced subcollection *)
+(* Trying to find a balanced sub-collection *)
      Which[MemberQ[wghvec1,0],{wghvec,sysvec}=ReduceMatrix[wghvec1,sysvec,T,onesvec],
           Apply[Or,Negative[wghvec1]],{wghvec,sysvec}=ReduceRkMatrix[wghvec1,sysvec,T,onesvec], 
           True,wghvec];
@@ -3400,7 +3431,7 @@ BalancedSelectionQ[selcoal_List, tol_, opts:OptionsPattern[BalancedSelectionQ]]:
      Print["wghvec=",wghvec];
      Print["wghvec1=",wghvec1];
 *)
-(* Trying to find a balanced subcollection *)
+(* Trying to find a balanced sub-collection *)
      Which[MemberQ[wghvec1,0],{wghvec,sysvec}=ReduceMatrix[wghvec1,sysvec,T,onesvec],
           Apply[Or,Negative[wghvec1]],{wghs,smat}=ReduceRkMatrix[wghvec1,sysvec,T,onesvec], 
           True,wghvec];
@@ -3443,7 +3474,7 @@ The disadvantage is that under certain conditions, we make no selection at all.
     slc=tk[[1]];
     smat=Developer`ToPackedArray[balcmat[[slc]]];
     wghs =PseudoInverse[Transpose[smat]].onesvec; 
-(* Trying to find a balanced subcollection *)
+(* Trying to find a balanced sub-collection *)
     Which[MemberQ[wghs,0],{wghs,smat}=ReduceMatrix[wghs,smat,T,onesvec],
           Apply[Or,Negative[wghs]],{wghs,smat}=ReduceRkMatrix[wghs,smat,T,onesvec],
           True,wghs];
@@ -3920,7 +3951,7 @@ FindPreKernelSolution[game_,opts:OptionsPattern[FindPreKernelSolution]] :=
 
 FindPreKernelSolution[game_, payoff_List, opts:OptionsPattern[FindPreKernelSolution]]:=
 Block[{prec,rattol,reclim,setprk,sil,res},
-       Off[$RecursionLimit::reclim]; (*Swichting off all warnings that reclim is exceeded *)
+       Off[$RecursionLimit::reclim]; (* Switching off all warnings that reclim is exceeded *)
        Off[General::stop];
        Off[MapThread::mptd];
        Off[MapThread::list];
@@ -3939,7 +3970,7 @@ Block[{prec,rattol,reclim,setprk,sil,res},
              Which[Depth[payoff] == 3, KernelSolution[game,#,prec,rattol,setprk,sil] &/@ payoff,
                    Depth[payoff] == 2, KernelSolution[game,payoff,prec,rattol,setprk,sil],
                    True, DisplayMessFindKernel[payoff]]];
-       On[$RecursionLimit::reclim]; (*Swichting on all warnings that have been turned off *)
+       On[$RecursionLimit::reclim]; (*Switching on all warnings that have been turned off *)
        On[General::stop];
        On[MapThread::mptd];
        On[MapThread::list];
@@ -3969,7 +4000,7 @@ FindKernelSolution[game_,opts:OptionsPattern[FindKernelSolution]] :=
 
 FindKernelSolution[game_, payoff_List, opts:OptionsPattern[FindKernelSolution]]:=
 Block[{prec,rattol,reclim,setker,sil,res},
-       Off[$RecursionLimit::reclim]; (*Swichting off all warnings that reclim is exceeded *)
+       Off[$RecursionLimit::reclim]; (*Switching off all warnings that reclim is exceeded *)
        Off[General::stop];
        Off[MapThread::mptd];
        Off[MapThread::list];
@@ -3988,7 +4019,7 @@ Block[{prec,rattol,reclim,setker,sil,res},
              Which[Depth[payoff] == 3, KernelSolution[game,#,prec,rattol,setker,sil] &/@ payoff,
                    Depth[payoff] == 2, KernelSolution[game,payoff,prec,rattol,setker,sil],
                    True, DisplayMessFindKernel[payoff]]];
-       On[$RecursionLimit::reclim]; (*Swichting on all warnings that have been turned off *)
+       On[$RecursionLimit::reclim]; (*Switching on all warnings that have been turned off *)
        On[General::stop];
        On[MapThread::mptd];
        On[MapThread::list];
@@ -4116,8 +4147,8 @@ DeltaLP[game_, i_Integer, j_Integer, eps_:0, ops:OptionsPattern[DeltaLP]] :=
 DeltaLP[game_, i_Integer, j_Integer, eps_:0, changesolver_:False] :=
    Block[{},
         Which[changesolver==False, 
-                             {zf,res}=LinearOptimization[-Global`\[Delta], Union[TransferConstraints[game, i, j, eps]], Join[x /@ T, {Global`\[Delta]}],{"PrimalMinimumValue","PrimalMinimizer"},Method->"RevisedSimplex"];
-                             Return[{-zf,MapThread[Rule,{Join[x /@ T, {Global`\[Delta]}],res}]}],
+                             {zf,res}=LinearOptimization[-Global`\[Delta], Union[TransferConstraints[game, i, j, eps]], Join[x /@ T, {Global`\[Delta]}],{"PrimalMinimumValue","PrimalMinimizer"},Method->"Automatic"];
+                             Return[{zf,MapThread[Rule,{Join[x /@ T, {Global`\[Delta]}],res}]}],
               True, 
                   Chop[Rationalize[NMaximize[Prepend[Union[TransferConstraints[game, i, j, eps]],Global`\[Delta]], Join[x /@ T, {Global`\[Delta]}]]]]]
 ];
@@ -4174,7 +4205,7 @@ SortConstraints[ineq_, para_] :=
     Extract[ineq, extpos]];
 
 
-FeasibleConstraints[ineq_, delta_,changesolver_] := 
+FeasibleConstraints[ineq_, delta_,changesolver_,mthd_] := 
   Block[{newungl,delexc = Sort[delta], creatpara, redpara, paramet, nebenbed, zf, fineq, feasbineq = {}, allineq, varb, sol, resl, setofineq},
     newungl = Drop[ineq, -1];
     creatpara = Array[a[#] &,{Length[delexc],Length[newungl]}];
@@ -4187,10 +4218,10 @@ FeasibleConstraints[ineq_, delta_,changesolver_] :=
       creatpara = Drop[creatpara, 1];
       delexc = Drop[delexc, 1];
       ];
-    allineq = Rationalize[Flatten[Append[feasbineq, Last[ineq]]],0.01];
+    allineq = Rationalize[Flatten[Append[feasbineq, Last[ineq]]],10^(-9)];
     varb = Append[x /@ T, redpara] // Flatten;
     zf = Total[redpara];
-    sol = Which[SameQ[changesolver,False], LinearOptimization[zf, allineq, varb,{"PrimalMinimumValue","PrimalMinimizer"},Method->"RevisedSimplex"],
+    sol = Which[SameQ[changesolver,False], LinearOptimization[zf, allineq, varb,{"PrimalMinimumValue","PrimalMinimizer"},Method-> mthd], (*RevisedSimplex *)
                 True, Rationalize[NMinimize[Prepend[allineq,zf], varb]]];
     If[SameQ[changesolver,False],sol={zf,MapThread[Rule,{varb,Last[sol]}]},True];
     resl = x /@ T /. sol[[2]];
@@ -4488,6 +4519,7 @@ KernelCalculation[game_, opts:OptionsPattern[KernelCalculation]] :=
   Off[Set::setraw];
   Off[Set::write];
   callm = OptionValue[CallMaximize];
+  mth = OptionValue[Method];
   changeps = OptionValue[ChangeInternalEps];
   dispres = OptionValue[DisplayAllResults];
   epsi1 = OptionValue[EpsilonValue];
@@ -4512,21 +4544,21 @@ KernelCalculation[game_, opts:OptionsPattern[KernelCalculation]] :=
                         This function seems to be stable for non zero-monotonic games. *) 
                  If[ (zmonoQ || kernQ) == True, 
                  DisplayZmQKerQ01[zmonoQ,kernQ];
-                 KernelPoints[orggame, {},callm,changeps, dispres, EpsilonValue -> epsilon, opts],
+                 KernelPoints[orggame, {},callm,changeps, dispres, EpsilonValue -> epsilon, Method->mth,opts],
                  DisplayZmQKerQ02[zmonoQ,kernQ];
-                 KernelSubCallZero[orggame, callm, changeps, dispres, EpsilonValue -> epsilon, SetGameToNonZeroMonotonic -> notzeromono]
+                 KernelSubCallZero[orggame, callm, changeps, dispres, EpsilonValue -> epsilon, SetGameToNonZeroMonotonic -> notzeromono, Method-> mth]
                  ],
            If[(zmonoQ || kernQ) == False,
               DisplayZmQKerQ02[zmonoQ,kernQ];
-              KernelSubCallZero[orggame, callm, changeps,  dispres, EpsilonValue -> epsilon, SetGameToNonZeroMonotonic -> notzeromono],
+              KernelSubCallZero[orggame, callm, changeps,  dispres, EpsilonValue -> epsilon, SetGameToNonZeroMonotonic -> notzeromono, Method-> mth],
               If[kernQ == False,
                  DisplayZmQKerQ03[zmonoQ,kernQ];
-                 KernelSubCallEmpty[orggame,callm, changeps,  dispres, EpsilonValue -> epsilon, SetGameToNonZeroMonotonic -> notzeromono],
+                 KernelSubCallEmpty[orggame,callm, changeps,  dispres, EpsilonValue -> epsilon, SetGameToNonZeroMonotonic -> notzeromono, Method-> mth],
                  If[avcQ == True, 
                    DisplayAvcQ[avcQ];
-                   KernelSubCall[orggame,callm, changeps, dispres, EpsilonValue -> epsilon, SetGameToNonZeroMonotonic -> notzeromono],
+                   KernelSubCall[orggame,callm, changeps, dispres, EpsilonValue -> epsilon, SetGameToNonZeroMonotonic -> notzeromono, Method-> mth],
                    DisplayAvcQ[avcQ];
-                   KernelSubCall[orggame,callm, changeps, dispres, EpsilonValue -> epsilon, SetGameToNonZeroMonotonic -> notzeromono]
+                   KernelSubCall[orggame,callm, changeps, dispres, EpsilonValue -> epsilon, SetGameToNonZeroMonotonic -> notzeromono, Method-> mth]
                    ]
                 ]
              ]
@@ -4572,30 +4604,33 @@ DisplayRemark[eps_Real] :=
 
 
 KernelSubCallEmpty[game_,callm_,changeps_,dispres_,opts:OptionsPattern[KernelCalculation]] := 
-     Block[{epsi1,notzeromono,critical,kernres},
+     Block[{mth,epsi1,notzeromono,critical,kernres},
           epsi1 = OptionValue[EpsilonValue];
           notzeromono = OptionValue[SetGameToNonZeroMonotonic];
+          mth = OptionValue[Method];
           critical = Which[changeps == False, epsi1, True, SecondCriticalVal[game][[1, 2]]];
-          kernres = KernelPoints[game, {}, callm, changeps,  dispres, EpsilonValue -> critical, SetGameToNonZeroMonotonic -> notzeromono]
+          kernres = KernelPoints[game, {}, callm, changeps,  dispres, EpsilonValue -> critical, SetGameToNonZeroMonotonic -> notzeromono,Method->mth]
 
 
  ];
 
 KernelSubCall[game_,callm_,changeps_,dispres_,opts:OptionsPattern[KernelCalculation]] := 
-     Block[{epsi1,notzeromono,critical,kernres},
+     Block[{mth,epsi1,notzeromono,critical,kernres},
           epsi1 = OptionValue[EpsilonValue];
-          notzeromono = OptionValue[SetGameToNonZeroMonotonic]; 
+          notzeromono = OptionValue[SetGameToNonZeroMonotonic];
+          mth = OptionValue[Method]; 
           critical = Which[changeps == False, epsi1, True, FourthCriticalVal[game][[1, 2]]];
-          kernres = KernelPoints[game, {}, callm, changeps,  dispres, EpsilonValue -> critical, SetGameToNonZeroMonotonic -> notzeromono]
+          kernres = KernelPoints[game, {}, callm, changeps,  dispres, EpsilonValue -> critical, SetGameToNonZeroMonotonic -> notzeromono,Method->mth]
 
 
  ];
 
 
 KernelSubCallZero[game_,callm_,changeps_,dispres_,opts:OptionsPattern[KernelCalculation]] := 
-     Block[{epsi1,notzeromono,critical,kernres,kernsol},
+     Block[{mth,epsi1,notzeromono,critical,kernres,kernsol},
           epsi1 = OptionValue[EpsilonValue];
           notzeromono = OptionValue[SetGameToNonZeroMonotonic]; 
+          mth = OptionValue[Method];
           critical = Which[changeps == False, epsi1, True, StarCriticalVal[game][[1, 2]]];
 (* 
 The function KernelPoints[] is not stable for non zero-monotonic games.
@@ -4606,9 +4641,9 @@ function Kernel[] to avoid infinite loops.
           kernres = KernelPoints[game, {}, critical]
 *)
        Which[notzeromono == False,
-             kernsol= Take[Kernel[game, DisplayAllResults -> True, EpsilonValue -> critical],3];
+             kernsol= Take[Kernel[game, Method->mth, DisplayAllResults -> True, EpsilonValue -> critical],3];
              kernres = Append[kernsol,kernsol[[1]]],
-            True, KernelPoints[game, {}, callm, changeps, dispres, EpsilonValue -> critical, SetGameToNonZeroMonotonic -> notzeromono]
+            True, KernelPoints[game, {}, callm, changeps, dispres, EpsilonValue -> critical, SetGameToNonZeroMonotonic -> notzeromono,Method->mth]
          ]
  ];
 
@@ -4620,9 +4655,10 @@ as described in Meinhardt(2006). Recursive procedure.
 *)
 
 KernelPoints[game_, storepay_:{}, callm_, changeps_, dispres_, opts:OptionsPattern[KernelCalculation]] := 
-  Block[{epsi1, notzeromono, ruf, zwerg, initialpay = storepay, folg, rf, del, alloc, po, newgame, maxsets, tijsets, mengsys, reslofSt2, constofSt2, const = {}, var, subres,sol, reddel,unpay, retval, objfunc, epsilon, leastgame},
+  Block[{epsi1, notzeromono, mth, ruf, zwerg, initialpay = storepay, folg, rf, del, alloc, po, newgame, maxsets, tijsets, mengsys, reslofSt2, constofSt2, const = {}, var, subres,sol, reddel,unpay, retval, objfunc, epsilon, leastgame},
     epsi1 = OptionValue[EpsilonValue];
     notzeromono = OptionValue[SetGameToNonZeroMonotonic]; 
+    mth = OptionValue[Method];
     epsilon = epsi1;
     newgame = EpsValue[game, epsi1];
     ruf = MaxDeltaij[newgame, epsi1,callm];
@@ -4633,7 +4669,7 @@ KernelPoints[game_, storepay_:{}, callm_, changeps_, dispres_, opts:OptionsPatte
     subres = (var) /. zwerg;
     initialpay = FlattenAt[Append[initialpay, Union[subres]], Length[initialpay] + 1];
     del = Global`\[Delta] /. Take[ruf[[#, 2]], -2] & /@ rf;
-    del = Rationalize[#,0.01] & /@ del;
+    del = Rationalize[#,10^(-9)] & /@ del;
     tijsets = TijLoop[newgame];
     po = MapThread[Position[Flatten[ExcessPayoff[newgame, #1]], -#2] &,{subres, del}]; 
     maxsets = Extract[Subsets[T], #] & /@ po;
@@ -4642,12 +4678,15 @@ KernelPoints[game_, storepay_:{}, callm_, changeps_, dispres_, opts:OptionsPatte
     objfunc = Total[var];
     const = Flatten[Join[Append[const, objfunc <= v[T]]]];
     reddel = Sort[-Union[del]];
-    {reslofSt2, constofSt2} = FeasibleConstraints[const, reddel, callm];
+    {reslofSt2, constofSt2} = FeasibleConstraints[const, reddel, callm, mth];
     initialpay = Append[initialpay,reslofSt2];
     unpay = Union[initialpay];
-    const = Rationalize[Union[constofSt2]];
-    sol = Which[SameQ[callm,False], LinearOptimization[-objfunc, const, var,{"PrimalMinimumValue","PrimalMinimizer"},Method->"RevisedSimplex"], 
-                True, Rationalize[NMaximize[Prepend[const, objfunc], var]]];
+    const = Rationalize[Union[constofSt2],10^(-9)];
+    (* In the next line, we handle incorrectly specified opt-prob.  *)
+    If[FreeQ[const, Indeterminate],True,Print["Warning: OPT-PROB incorrectly specified. Aborting Calculation!"];
+                                        Return[Extract[subres,Position[KernelImputationListQ[game, subres], True]]]];
+    sol = Which[SameQ[callm,False], LinearOptimization[-objfunc, const, var,{"PrimalMinimumValue","PrimalMinimizer"},Method->mth], (* RevisedSimplex *) 
+                True, Rationalize[NMaximize[Prepend[const, objfunc], var],10^(-9)]];
     If[SameQ[callm,False],sol=ReplacePart[sol,{2}->MapThread[Rule,{var,sol[[2]]}]],True];
     alloc = var /. sol[[2]];
     retval=Apply[Or,Union[KernelImputationListQ[newgame,subres]]];
@@ -4662,15 +4701,15 @@ KernelPoints[game_, storepay_:{}, callm_, changeps_, dispres_, opts:OptionsPatte
       If[epsi1 != 0,
          Print["epsi1=",epsi1];
          MessageKerPoints02;
-         KernelPoints[newgame, initialpay,callm,changeps,dispres,EpsilonValue -> 0, SetGameToNonZeroMonotonic -> notzeromono],
+         KernelPoints[newgame, initialpay,callm,changeps,dispres,EpsilonValue -> 0, SetGameToNonZeroMonotonic -> notzeromono, Method->mth],
            epsilon = FirstCriticalVal[newgame][[1, 2]];
            If[epsilon == 0,
                 Print["eps=",epsilon];
                 epsilon = SecondCriticalVal[newgame][[1, 2]];
                 leastgame = EpsValue[newgame, epsilon];
-                KernelPoints[leastgame, initialpay,callm,changeps,dispres,EpsilonValue -> epsilon, SetGameToNonZeroMonotonic -> notzeromono],
+                KernelPoints[leastgame, initialpay,callm,changeps,dispres,EpsilonValue -> epsilon, SetGameToNonZeroMonotonic -> notzeromono,Method->mth],
            leastgame = EpsValue[newgame, epsilon];
-           KernelPoints[leastgame, initialpay,callm,changeps,dispres,EpsilonValue -> 0, SetGameToNonZeroMonotonic -> notzeromono]
+           KernelPoints[leastgame, initialpay,callm,changeps,dispres,EpsilonValue -> 0, SetGameToNonZeroMonotonic -> notzeromono,Method->mth]
               ]
          ]
        ]
@@ -4694,31 +4733,32 @@ MessageKerPoints02 :=
 (* Description of the algorithm can be found in section 5 in Meinhardt (2006) *)
 
 Kernel[args___]:=(Message[Kernel::argerr];$Failed);
-Kernel[game_,opts:OptionsPattern[Kernel]] := Block[{chopt, dispres, eps, kersol, coreq,orgval,callm},
+Kernel[game_,opts:OptionsPattern[Kernel]] := Block[{chopt, dispres, mth, eps, kersol, coreq,orgval,callm},
        dispres = OptionValue[DisplayAllResults];
        eps = OptionValue[EpsilonValue];
        callm = OptionValue[CallMaximize];
+       mth = OptionValue[Method];
        orgval = Rationalize[v[#] & /@ Subsets[T]]; 
 (* EpsValue[] changes the coalitional values. orgval store the original values.  *)
        kersol = If[Depth[eps]==1,
          coreq = CoreQ[game];
           If[eps == 0, 
-             If[coreq == False, KernelSubCallFir[game,dispres,callm], KernelSubCallSec[game,dispres,callm]
-               ], KernelSubCallThir[game,eps,dispres,callm]
+             If[coreq == False, KernelSubCallFir[game,dispres,callm,mth], KernelSubCallSec[game,dispres,callm,mth]
+               ], KernelSubCallThir[game,eps,dispres,callm,mth]
             ], DisplayRemark[eps]    
           ];
         DefineGame[T,orgval]; (* Reconstruction of the original game. *)
-        kersol
+        Chop[Rationalize[kersol,10^(-9)]]
 ];
 
-KernelSubCallFir[game_,dispres_,callm_]:= 
+KernelSubCallFir[game_,dispres_,callm_,mthd_]:= 
 Block[{firstcrit,seccrit,newgame,nb,alldelvar,dvar,objfunc,var,solut,kersol,tra},
         firstcrit = FirstCriticalVal[game][[1,2]];
         newgame = EpsValue[game, firstcrit];
         {nb,alldelvar,dvar} = AllConstraints[newgame];
         objfunc= Total[dvar];
         var= Union[x /@ T, alldelvar];
-        solut = Which[SameQ[callm,False],LinearOptimization[-objfunc, nb, var,{"PrimalMinimumValue","PrimalMinimizer"},Method->"RevisedSimplex"], 
+        solut = Which[SameQ[callm,False],LinearOptimization[-objfunc, nb, var,{"PrimalMinimumValue","PrimalMinimizer"},Method-> mthd], (*RevisedSimplex *)
                               True,Rationalize[NMaximize[Prepend[nb,objfunc],var],10^(-12)]];
         If[SameQ[callm,False],solut=ReplacePart[solut,{2}->MapThread[Rule,{var,solut[[2]]}]],True];
         kersol=(x /@ T) /.Take[solut[[2]],Length[T]];
@@ -4727,12 +4767,12 @@ Block[{firstcrit,seccrit,newgame,nb,alldelvar,dvar,objfunc,var,solut,kersol,tra}
 ];
 
 
-KernelSubCallSec[game_,dispres_,callm_]:= 
+KernelSubCallSec[game_,dispres_,callm_,mthd_]:= 
 Block[{nb,alldelvar,dvar,objfunc,var,solut,kersol,tra},
              {nb,alldelvar,dvar} = AllConstraints[game]; 
              objfunc= Total[dvar];
              var= Union[x /@ T, alldelvar];
-             solut = Which[SameQ[callm,False],LinearOptimization[-objfunc, nb, var,{"PrimalMinimumValue","PrimalMinimizer"},Method->"RevisedSimplex"],  
+             solut = Which[SameQ[callm,False],LinearOptimization[-objfunc, nb, var,{"PrimalMinimumValue","PrimalMinimizer"},Method-> mthd],  
                                    True,Rationalize[NMaximize[Prepend[nb,objfunc],var],10^(-12)]];
              If[SameQ[callm,False],solut=ReplacePart[solut,{2}->MapThread[Rule,{var,solut[[2]]}]],True];
              kersol=(x /@ T) /.Take[solut[[2]],Length[T]];
@@ -4741,13 +4781,13 @@ Block[{nb,alldelvar,dvar,objfunc,var,solut,kersol,tra},
 
 ];
 
-KernelSubCallThir[game_,eps_,dispres_,callm_]:= 
+KernelSubCallThir[game_,eps_,dispres_,callm_,mthd_]:= 
 Block[{newgame,nb,alldelvar,dvar,objfunc,var,solut,kersol,tra},
       newgame = EpsValue[game, eps];
       {nb,alldelvar,dvar} = AllConstraints[newgame];
       objfunc= Total[dvar];
       var= Union[x /@ T, alldelvar];
-      solut = Which[SameQ[callm,False],LinearOptimization[-objfunc, nb, var,{"PrimalMinimumValue","PrimalMinimizer"},Method->"RevisedSimplex"], 
+      solut = Which[SameQ[callm,False],LinearOptimization[-objfunc, nb, var,{"PrimalMinimumValue","PrimalMinimizer"},Method-> mthd], 
                             True,Rationalize[NMaximize[Prepend[nb,objfunc],var],10^(-12)]];
       If[SameQ[callm,False],solut=ReplacePart[solut,{2}->MapThread[Rule,{var,solut[[2]]}]],True];
       kersol=(x /@ T) /.Take[solut[[2]],Length[T]];
@@ -4784,17 +4824,18 @@ AllConstraints[game_]:=
 
 KernelVertices[args___]:=(Message[KernelVertices::argerr];$Failed);
 KernelVertices[game_, opts:OptionsPattern[KernelVertices]] := 
-  Block[{callm, sil, epsval, fieps, kerli, ratkli, sol, obj, const, var, trans,kerQ,posker,prkQ,posprk,kl,pkl},
+  Block[{callm, mthd, sil, epsval, fieps, kerli, ratkli, sol, obj, const, var, trans,kerQ,posker,prkQ,posprk,kl,pkl},
     callm = OptionValue[CallMaximize];
+    mthd = OptionValue[Method];
     sil = OptionValue[Silent];
     epsval = OptionValue[EpsilonValue];
     fieps= FirstCriticalVal[game][[1,2]];
     epsval = If[epsval < fieps, fieps,epsval];
     {sol, obj, const, var, trans} = 
-      Which[SameQ[callm,True],  Kernel[game, CallMaximize -> True, EpsilonValue -> epsval, DisplayAllResults -> True], 
-            True,  Kernel[game, CallMaximize -> False, EpsilonValue -> epsval, DisplayAllResults -> True]];
+      Which[SameQ[callm,True],  Kernel[game, CallMaximize -> True, Method->mthd, EpsilonValue -> epsval, DisplayAllResults -> True], 
+            True,  Kernel[game, CallMaximize -> False, Method->mthd, EpsilonValue -> epsval, DisplayAllResults -> True]];
     If[SameQ[sil,False], Print["sol: ", sol],True];
-    kerli = DetermineAddVertices[{sol}, obj, const, var, T, callm,sil];
+    kerli = DetermineAddVertices[{sol}, obj, const, var, T, callm,sil,mthd];
     If[SameQ[sil,False], Print["kerli: ", kerli], True];
     ratkli = Union[Rationalize[#,1.5*10^(-12)]&/@ kerli];
     kerQ=KernelImputationListQ[game,ratkli];
@@ -4807,7 +4848,7 @@ KernelVertices[game_, opts:OptionsPattern[KernelVertices]] :=
     ];
 
 
-DetermineAddVertices[sol_, obj_, const_ , var_ , T_, callm_,sil_, zf_:{}] := 
+DetermineAddVertices[sol_, obj_, const_ , var_ , T_, callm_,sil_, mth_, zf_:{}] := 
   Block[{nwzf,dures,valzf,boolzf,dualvar,yset,duyp,newineq,nwsol,prmax,lngt,kersolQ,oldres=sol},
     nwzf = Total[var];
     dures = SolveDual[nwzf, const, var];
@@ -4819,7 +4860,7 @@ DetermineAddVertices[sol_, obj_, const_ , var_ , T_, callm_,sil_, zf_:{}] :=
     duyp = Position[yset, 0];
     newineq = Extract[const, duyp];
     nwsol = Which[SameQ[callm,True], Rationalize[NMaximize[Prepend[newineq,nwzf],var]],
-                    True, LinearOptimization[-nwzf, newineq, var,{"PrimalMinimumValue","PrimalMinimizer"},Method->"RevisedSimplex"]]; 
+                    True, LinearOptimization[-nwzf, newineq, var,{"PrimalMinimumValue","PrimalMinimizer"},Method->mth]]; 
  (*   Print["nwsol=",nwsol]; *)
     Which[SameQ[First[nwsol],Infinity], Return[oldres],
           SameQ[First[nwsol],-Infinity], Return[oldres],  
@@ -4834,7 +4875,7 @@ DetermineAddVertices[sol_, obj_, const_ , var_ , T_, callm_,sil_, zf_:{}] :=
     AppendTo[oldres, kersolQ];
     oldres = Union[oldres];
     Which[(SameQ[sol,oldres] && Greater[2*prmax,valzf]), oldres, True, 
-      DetermineAddVertices[oldres, obj, newineq, var, T, callm, sil, valzf]]
+      DetermineAddVertices[oldres, obj, newineq, var, T, callm, sil, mth , valzf]]
 ];
 
 
@@ -5563,8 +5604,8 @@ ConjugateMessage01[hstfunc_] :=
 
 
 ConjugateMessage02[gradp_List]:=
- (Print["A subgradient of the conjugate h^{*} at the zero vector is: \n", gradp];
-  Print["The subgradient may not coincide with the solution of the objective function h,"];
+ (Print["A sub-gradient of the conjugate h^{*} at the zero vector is: \n", gradp];
+  Print["The sub-gradient may not coincide with the solution of the objective function h,"];
   Print["which must be a pre-kernel solution."];
   Print["This result may be another pre-kernel solution!"];
   Print["The conjugate h^{*} is not differential at the zero vector and the solution is not a unique vector!"];

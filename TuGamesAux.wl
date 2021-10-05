@@ -1,8 +1,8 @@
 (* ::Package:: *)
 
 (* :Title: TuGamesAux.m *)
-(* Release Date: 28.09.2021 *)
-(* Version: 3.0.0 *)
+(* Release Date: 04.10.2021 *)
+(* Version: 3.0.1 *)
 
 (* :Context: TuGamesAux` *)
 
@@ -17,7 +17,7 @@
     E-Mail: Holger.Meinhardt@wiwi.uni-karlsruhe.de
 *)
 
-(* :Package Version: 3.0.0 *)
+(* :Package Version: 3.0.1 *)
 
 (* 
    :Mathematica Version: 12.x
@@ -94,8 +94,11 @@
        Performing some code maintenance.
 
     Version 3.0.0:
-       Not anymore backward compatible to Mathemaitca versions smaller than 12 due to the port
+       Not anymore backward compatible to Mathematica versions smaller than 12 due to the port
        to the new collection of algorithms for solving convex problems introduced in version 12.
+
+    Version 3.0.1:
+        Some minor bug fixes. Improving performance of functions revised in Version 3.
 *)
 
 BeginPackage["TUG`TuGamesAux`"];
@@ -300,7 +303,7 @@ SolvePrimal[zf_,eq_List,var_List, bd_:{}, opts:OptionsPattern[LinearOptimization
     bv=-First[#] &/@ bvect;
     eqm=cmat[[1]];
     beq=bv[[1]];
-    {res,nzf}=LinearOptimization[obf,{cmat,bv},{{eqm},{beq}},{"PrimalMinimizer", "PrimalMinimumValue"},Method->"RevisedSimplex"];
+    {res,nzf}=LinearOptimization[obf,{cmat,bv},{{eqm},{beq}},{"PrimalMinimizer", "PrimalMinimumValue"},Method->"Automatic"];
     rl = MapThread[Rule, {var, res}];
     Prepend[{rl}, nzf]
     ];
@@ -314,7 +317,7 @@ SolveDual[zf_, eq_List, var_List, bd_:{},opts:OptionsPattern[LinearOptimization]
    eqm=cmat[[1]];
    beq=tobf[[1]];
    cmat = SparseArray[cmat];
-   {res,nzf}=LinearOptimization[obf,{cmat,-tobf},{{eqm},{-beq}},{"DualMaximizer", "DualMaximumValue"},Method->"RevisedSimplex"];
+   {res,nzf}=LinearOptimization[obf,{cmat,-tobf},{{eqm},{-beq}},{"DualMaximizer", "DualMaximumValue"},Method->"Automatic"];
    dim = Dimensions[cmat];
    yvar = Global`y[#] & /@ Table[i, {i, First[dim]}];
    rl = MapThread[Rule, {yvar, First[res]}];

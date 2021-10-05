@@ -1,7 +1,7 @@
 (* ::Package:: *)
 
 (* :Title: ParaTuGames.m
-    : Release Date : 01.10.2021
+    : Release Date : 04.10.2021
 
 
 *)
@@ -21,7 +21,7 @@ Off[Needs::nocont]
     holger.meinhardt@wiwi.uni-karlsruhe.de
 *)
 
-(* :Package Version: 1.0.0 *)
+(* :Package Version: 1.0.1 *)
 
 (* 
    :Mathematica Version: 12.x
@@ -120,31 +120,41 @@ ParaPreKernelElement::usage =
 ParaModiclus::usage = 
 "Modiclus[game,opts] computes the modiclus as the projection of the pre-nucleolus from the
  dual cover game onto the player set T of the original game. Do not confound this command
- with the function ModfiedNucleolus[]. The algorithm is based on a method by Peleg to translate
+ with the function ModifiedNucleolus[]. The algorithm is based on a method by Peleg to translate
  the definition of the Nucleolus into a sequence of linear programs on the pre-imputation set.
- A simplex method is now used to increase its computational reliability.";
+ A simplex method is now used to increase its computational reliability. For its default value
+ 'False' the function Kernel[game] will be invoked to avoid infinite loops. To increases the
+ computational reliability in cases of numerical issues the following methods can be used:
+ RevisedSimplex, CLP, GUROBI, MOSEK, or Automatic. Default setting is Automatic. This option
+ must be used in connection with CallMaximize->False. For getting more precise results one
+ can even set Method->{InteriorPoint, Tolerance->10^-10}.";
 
 
 ParaIsModiclusQ::usage = 
-"IsModiclusQ[game,payoff,opts] checks whether the provided payoff vector is the modiclus of the game.";
+"IsModiclusQ[game,payoff,opts] checks whether the provided payoff vector is the modiclus of the game.
+ For its default value 'False' the function Kernel[game] will be invoked to avoid infinite loops. 
+ To increases the computational reliability in cases of numerical issues the following methods can be used:
+ RevisedSimplex, CLP, GUROBI, MOSEK, or Automatic. Default setting is Automatic. This option
+ must be used in connection with CallMaximize->False. For getting more precise results one
+ can even set Method->{InteriorPoint, Tolerance->10^-10}.";
 
 
 ParaModPreKernel::usage =
-    "ParaModPreKernel[game] computes a modified pre-kernel element as the solution
+"ParaModPreKernel[game] computes a modified pre-kernel element as the solution
  of the pre-kernel from the excess comparability cover game.
- Do not confound this command with the function ModfiedKernel[].";
+ Do not confound this command with the function ModifiedKernel[].";
 
 ParaIsModPreKernelQ::usage =
-    "ParaIsModPreKernelQ[game,payoff] checks whether the provided payoff vector is a modified
+"ParaIsModPreKernelQ[game,payoff] checks whether the provided payoff vector is a modified
  pre-kernel element of the game.";
 
 ParaProperModPreKernel::usage =
-    "ParaProperModPreKernel[game] computes a proper modified pre-kernel element as the projection
+"ParaProperModPreKernel[game] computes a proper modified pre-kernel element as the projection
  of the pre-kernel from the dual cover game onto the player set T of the original game.
- Do not confound this command with the function ModfiedKernel[].";
+ Do not confound this command with the function ModifiedKernel[].";
 
 ParaIsProperModPreKernelQ::usage =
-    "ParaIsProperModPreKernelQ[game,payoff] checks whether the provided payoff vector is a proper modified
+"ParaIsProperModPreKernelQ[game,payoff] checks whether the provided payoff vector is a proper modified
  pre-kernel element of the game.";
 
 ParaSMPreKernel::usage = 
@@ -612,7 +622,7 @@ ParaSMPreKernel[game_] := Block[{ovls, dv, av, AVGame, smpk},
   av = (ovls + dv)/2;
   AVGame = DefineGame[T, av];
   smpk = ParaPreKernelElement[AVGame];
-  DefineGame[T, ovls];(*Redefine the original game.*)
+  DefineGame[T, ovls];(* Redefine the original game.*)
   Return[smpk];
   ];
 
@@ -623,7 +633,7 @@ ParaIsSMPreKernelQ[game_, payoff_] := Block[{ovls, dv, av, AVGame, smpkQ},
   av = (ovls + dv)/2;
   AVGame = DefineGame[T, av];
   smpkQ = ParaPreKernelQ[AVGame, payoff];
-  DefineGame[T, ovls];(*Redefine the original game.*)
+  DefineGame[T, ovls];(* Redefine the original game.*)
   Return[smpkQ];
   ];
 
@@ -990,8 +1000,8 @@ ParaSumMargContribution[superset_List, teilmg_List] :=
 
 
 (*
-Def. Every subset S of T induce a subgame w via w(S) = v(S) on the new player set S.
-Prop. A game v is superadditive, if for every subgame w it holds w =< dual w.
+Def. Every subset S of T induce a sub-game w via w(S) = v(S) on the new player set S.
+Prop. A game v is superadditive, if for every sub-game w it holds w =< dual w.
 *)
 
 ParaSuperAdditiveQ[args___]:=(Message[ParaSuperAdditiveQ::argerr];$Failed);

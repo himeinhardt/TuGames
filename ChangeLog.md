@@ -1,4 +1,6 @@
 [![GitHub (pre-)release](https://img.shields.io/github/release/himeinhardt/TuGames/all.svg)](https://github.com/himeinhardt/TuGames/releases)
+[![Mathematica 8.0 - 12.3.1](https://img.shields.io/badge/Mathematica-8.0_--_12.3.1-brightgreen.svg)](#compatibility)
+[![license MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/himeinhardt/TuGames/blob/master/LICENSE.md)
 #   :Title: TuGames
 ##  :Version History:
 ###    Version 1.0: without options
@@ -146,7 +148,7 @@
 
 	Some minor code revision.
 
-###    Version 2.5
+###    Version 2.5:
 1. Modification:
 
      Adding the function `ApproxNuc[]` to compute the (p,k)-nucleolus which is an approximation of
@@ -167,7 +169,7 @@
 
 
 
-###    Version 2.5.1
+###    Version 2.5.1:
 1. Modification:
 
      * Installation procedure has changed. The package is now distributed as a Paclet. The documentation
@@ -180,7 +182,7 @@
 
      Some minor code revision and bug fixes.
 
-###   Version 2.5.2
+###   Version 2.5.2:
 1. Modification:
 
     We have revised the Install procedure of the *Cddmathlink* library, which makes it not anymore necessary
@@ -192,14 +194,14 @@
 
      Some minor code revision and bug fixes.
 
-###    Version 2.5.3
+###    Version 2.5.3:
 1. Modification:
 
      * Adding some binaries for Mathematica 10.0 or later on OS X 10.9 or later. We are very grateful
         to Szabolcs Horvát for providing these to the community.
      * Change of the License to the MIT License terms.
 
-###    Version 2.5.4
+###    Version 2.5.4:
 1. Modification:
 * Functions to compute and to verify the simplified modified pre-kernel/nucleolus are added. They are called
         `SMPrenucleolus[],IsSMPrenuceolusQ[],SMPreKernel[],IsSMPreKernelQ[]`. For the last two commands we implemented
@@ -232,7 +234,7 @@
         for n=6 we have to check 158 classes.
 
 
-###    Version 2.6.0
+###    Version 2.6.0:
 1. Modification:
 
      * Adding functions to compute the Chi-Value, EPSD-Value, Gately-Value, PD-Value, and the nucleolus by the Leng and Parlar (2010) formulae for three person
@@ -242,15 +244,17 @@
 
      * Performing some code maintenance and minor bug fixes.
 
-###    Version 2.6.1
+###    Version 2.6.1:
 
 1. Revision:
 
     * Code revision and optimization. The (anti-)pre-kernel computation is now faster up to a factor 3 in serial as well as in parallel.
 
-###    Version 2.6.2
-
-       Adding functions:
+###    Version 2.6.2:
+1. Modification:
+	
+   Adding functions:
+	
             *  AlmostConvexQ[] to check if the game is almost convex.
             *  AlmostConcaveQ[] to check if the game is almost concave.
             *  ADMCGameQ[] to check the property if the game satisfies almost diminishing marginal contributions.
@@ -258,19 +262,26 @@
             *  kConvexity[] to check if the game is k-convex.
             *  EANSCValue[] to compute the Equal Allocation of Non-Separable Contribution/Cost value.
 
-       Revised the functions:
+2. Revision:
+	Revised the functions:
+	
               ConvexQ[], ConcaveQ[], Nuc1convex[].
-
+3. Bug Fixes:
+	
        Minor Bug fixes and code revision.
 
-###    Version 3.0.0
+###    Version 3.0.0:
 
-       Not anymore backward compatible to Mathemaitca versions smaller than 12 due to the port
-       to the new collection of algorithms for solving convex problems introduced in version 12.
+1. Synopsis:
+	
+Not anymore backward compatible to Mathematica versions smaller than 12 due to the port
+to the new collection of algorithms for solving convex problems introduced in version 12.
 
-       ConstrainedMax/ConstrainedMin and LinearProgramming/DualLinearProgramming are replaced by LinearOptimization.
+2. Modifiaction:
 
-       This replacement has been conducted for the following functions:
+  `ConstrainedMax/ConstrainedMin` and `LinearProgramming/DualLinearProgramming` are replaced by `LinearOptimization`.
+
+   This replacement has been conducted for the following functions:
 
        Nucleolus                  -- Part of CooperativeGames. Function originally written by M. Carter.
        LeastCoreAux               -- Part of CooperativeGames. Function originally written by M. Carter.
@@ -281,9 +292,9 @@
        Modiclus                   -- Part of TuGames.
        IsModiclusQ                -- Part of TuGames.
        Kernel                     -- Part of TuGames.
-       KernelCalculations         -- Part of TuGames.
+       KernelCalculation          -- Part of TuGames.
        BalancedInequalityQ        -- Part of TuGames.
-       BalancedCollcetionQ        -- Part of TuGames.
+       BalancedCollectionQ        -- Part of TuGames.
        EpsCore                    -- Part of TuGames.
        FirstCriticalVal           -- Part of TuGames.
        DeltaLP                    -- Part of TuGames.
@@ -295,9 +306,21 @@
        ParaModiclus               -- Part of ParaTuGames.
        ParaIsModiclus             -- Part of ParaTuGames.
 
-      New added functions are:
-      WeaklyBalancedCollcetionQ   -- Part of TuGames.
+   New added functions are:
+	
+      WeaklyBalancedCollectionQ   -- Part of TuGames.
       WeaklyBalancedSystemQ       -- Part of TuGamesAux.
 
 
-     The function WeaklyBalancedCollcetionQ replaces WeaklyBalancedSelectionQ, the latter will be deprecated in a future version.
+   The function `WeaklyBalancedCollectionQ` replaces `WeaklyBalancedSelectionQ`, the latter will be deprecated in a future version.
+
+###  Version 3.0.1:
+	
+1.Revision:
+	
+	Improved exception handling for functions using `LinearOptimization`. Performance improving of revised functions in Version 3.
+	
+2. Bug Fixes:
+	
+   Some minor bug fixes.
+ 
