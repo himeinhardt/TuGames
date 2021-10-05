@@ -274,10 +274,9 @@
 
 1. Synopsis:
 	
-Not anymore backward compatible to Mathematica versions smaller than 12 due to the port
-to the new collection of algorithms for solving convex problems introduced in version 12.
+    Not anymore backward compatible to Mathematica versions smaller than 12 due to the port to the new collection of algorithms for solving convex problems introduced in version 12.
 
-2. Modifiaction:
+2. Modification:
 
   `ConstrainedMax/ConstrainedMin` and `LinearProgramming/DualLinearProgramming` are replaced by `LinearOptimization`.
 
@@ -316,7 +315,7 @@ to the new collection of algorithms for solving convex problems introduced in ve
 
 ###  Version 3.0.1:
 	
-1.Revision:
+1. Revision:
 	
 	Improved exception handling for functions using `LinearOptimization`. Performance improving of revised functions in Version 3.
 	
