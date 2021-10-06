@@ -261,7 +261,7 @@ The forthcoming discussion assume that you have properly installed the files men
 
 To start with the calculation, we have to load some packages in a first step. This can be done by the following commands. 
 
-In[2]:=  Needs["TUG`"]
+In[1]:=  Needs["TUG`"]
 ===================================================
 Loading Package 'TuGames' for Unix
 ===================================================
@@ -315,16 +315,35 @@ In[11]:= nc=Nucleolus[ExpGame]
 Out[11]= {---, ---, ---}
            3    3    3
 
-In[12]:= prn=PreNucleolus[ExpGame]                                                                                                                                                                                
-          170  230  260
-Out[12]= {---, ---, ---}
-           3    3    3
+In[12]:= WeaklyBalancedCollectionQ[ExpGame,nc]                                                                                                                                                                                                
 
-In[13]:= prk=PreKernelSolution[ExpGame]
+Out[12]= True
 
+In[13]:= prn=PreNucleolus[ExpGame]                                                                                                                                                                                
           170  230  260
 Out[13]= {---, ---, ---}
            3    3    3
+
+In[14]:= BalancedCollectionQ[ExpGame,prn]                                                                                                                                                                                                     
+
+Out[14]= True
+
+
+In[15]:= prk=PreKernelSolution[ExpGame]
+
+          170  230  260
+Out[15]= {---, ---, ---}
+           3    3    3
+
+In[16]:= mnc=Modiclus[ExpGame]                                                                                                                                                                                                                    
+
+          220  220  220
+Out[16]= {---, ---, ---}
+           3    3    3
+
+In[17]:= IsModiclusQ[ExpGame,mnc]                                                                                                                                                                                                             
+
+Out[17]= True
 
 
 
@@ -334,45 +353,75 @@ Out[13]= {---, ---, ---}
 
 Alternatively, one can also supply a different method to check the existence of the core or to find a (pre-)kernel element or the (pre-)nucleolus. This may be useful when one encounters numerical issues, the evaluation lasts too long or with the need to determine an additional (pre-)kernel element. Although, the latter case is not relevant for a three person game, we nevertheless demonstrate its usage for the above example.  
 
-```
 
-In[14]:= CoreQ[ExpGame,Method->RevisedSimplex]
+In[18]:= CoreQ[ExpGame,Method->RevisedSimplex]
 
-Out[14]= True
+Out[18]= True
 
 
-In[15]:= ker=Kernel[ExpGame,CallMaximize->False,Method->CLP]
+In[19]:= ker=Kernel[ExpGame,CallMaximize->False,Method->CLP]
 
          170  230  260
-Out[15]= {---, ---, ---}
+Out[19]= {---, ---, ---}
           3    3    3
 
-In[16]:= nc=Nucleolus[ExpGame,CallMaximize->False,Method->RevisedSimplex]
+In[20]:= nc=Nucleolus[ExpGame,CallMaximize->False,Method->RevisedSimplex]
 
           170  230  260
-Out[16]= {---, ---, ---}
+Out[20]= {---, ---, ---}
            3    3    3
 
 
-In[17]:= prn=PreNucleolus[ExpGame,CallMaximize->False,Method->{InteriorPoint, Tolerance->10^-8}]
+In[21]:= prn=PreNucleolus[ExpGame,CallMaximize->False,Method->{InteriorPoint, Tolerance->10^-8}]
 
           1065164637  695287163  1514771007
-Out[17]= {----------, ---------, ----------}
+Out[21]= {----------, ---------, ----------}
            18797023    9068963    17478127
 
-In[18]:= prn=PreNucleolus[ExpGame,CallMaximize->False,Method->{InteriorPoint, Tolerance->10^-9}]
+In[22]:= WeaklyBalancedCollectionQ[ExpGame,prn]                                                                                                                                                                                               
+
+Out[22]= False
+
+In[23]:= BalancedCollectionQ[ExpGame,prn]                                                                                                                                                                                                     
+
+Out[23]= False
+
+
+In[24]:= prn=PreNucleolus[ExpGame,CallMaximize->False,Method->{InteriorPoint, Tolerance->10^-9}]
 
           170  230  260
-Out[18]= {---, ---, ---}
+Out[24]= {---, ---, ---}
            3    3    3
 
-In[19]:= prk=PreKernelSolution[ExpGame,SolutionExcat->False,Method->IPOPT]
+In[25]:= prk=PreKernelSolution[ExpGame,SolutionExact->False,Method->IPOPT]                                                                                                                                                                     
+
+FindMinimum::sdir: Search direction has become too small.
+
+FindMinimum::sdir: Search direction has become too small.
 
           170  230  260
-Out[19]= {---, ---, ---}
+Out[25]= {---, ---, ---}
            3    3    3
 
-Admissible methods for the presented commands CoreQ, Kernel, Nucleolus and PreNucleolus are: RevisedSimplex, CLP, GUROBI, MOSEK, or Automatic. The default setting is Automatic. This option must be used in connection with CallMaximize->False. One can even try Method->{InteriorPoint, Tolerance->10^-7} to get a more precise result whenever one encounters numerical issues. In contrast, admissible methods for the function PreKernelSolution are: Automatic, Newton, ConjugateGradient, PrincipalAxis or IPOPT. Here, one has in addition to set SolutionExact->False to change to the non-default setting. 
+
+In[26]:= mnc=Modiclus[ExpGame,Method->{InteriorPoint, Tolerance->10^-7}]                                                                                                                                                                      
+
+          297599353  80924213  63785847
+Out[26]= {---------, --------, --------}
+           4058173   1103512    869807
+
+In[27]:= IsModiclusQ[ExpGame,mnc]                                                                                                                                                                                                             
+
+Out[27]= False
+
+
+In[28]:= Modiclus[ExpGame,Method->{InteriorPoint, Tolerance->10^-8}]                                                                                                                                                                          
+
+          220  220  220
+Out[28]= {---, ---, ---}
+           3    3    3
+
+Admissible methods for the presented commands CoreQ, Kernel, Nucleolus, PreNucleolus or Modiclus are: RevisedSimplex, CLP, GUROBI, MOSEK, or Automatic. The default setting is Automatic. This option must be used in connection with CallMaximize->False. One can even try Method->{InteriorPoint, Tolerance->10^-7} to get a more precise result whenever one encounters numerical issues. In contrast, admissible methods for the function PreKernelSolution are: Automatic, Newton, ConjugateGradient, PrincipalAxis or IPOPT. Here, one has in addition to set SolutionExact->False to change to the non-default setting. 
 
 For more information see TUG/Tutorials/GettingStarted from the Documentation Center (cf. Section 6).
 
