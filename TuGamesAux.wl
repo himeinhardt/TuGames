@@ -1,8 +1,8 @@
 (* ::Package:: *)
 
 (* :Title: TuGamesAux.m *)
-(* Release Date: 04.10.2021 *)
-(* Version: 3.0.1 *)
+(* Release Date: 06.10.2021 *)
+(* Version: 3.0.2 *)
 
 (* :Context: TuGamesAux` *)
 
@@ -17,7 +17,7 @@
     E-Mail: Holger.Meinhardt@wiwi.uni-karlsruhe.de
 *)
 
-(* :Package Version: 3.0.1 *)
+(* :Package Version: 3.0.2 *)
 
 (* 
    :Mathematica Version: 12.x
@@ -202,6 +202,9 @@ Sets2Dec::usage
 RStirlingNumber::usage=
 "RStirlingNumber[r,n,k] computes the r-associated Stirling number of the second kind.";
 
+SortVecDecOrder::usage = 
+"SortVecDecOrder[vec] order vec into a non-increasing order. See Eq. (5.11) page 82 Peleg and Sudhoelter (2007). ";
+
 (* :Options: *)
 
 Options[AssignmentProblem] := {Verbose -> False};
@@ -216,6 +219,7 @@ AdjointMatrix::argerr="One argument was expected.";
 Coal2Dec::argerr="One argument was expected.";
 IsHermitianMatrixQ::argerr="One argument was expected.";
 Sets2Dec::argerr="One argument was expected.";
+SortVecDecOrder::argerr="One argument was expected.";
 
 (* :Two Arguments: *)
 Angle::argerr="Two arguments were expected.";
@@ -827,6 +831,21 @@ LieBracket[mat01_?ListQ,mat02_?ListQ]:= mat01.mat02 - mat02.mat01;
 
 (* Linear Algebra *)
 
+
+(* Inspired by StackExchange: https://math.stackexchange.com/questions/4266981/a-simple-case-of-euclidean-space-vector  *)
+SortVecDecOrder[args___]:=(Message[SortVecDecOrder::argerr];$Failed);
+SortVecDecOrder[vec_List]:=Block[{lv,T1,pws,szp,it,pos},
+  lv=Length[vec];
+  T1=Range[lv];
+  pws=Drop[Subsets[T1],1];
+  szp=Length[#] &/@ pws;
+  it=Extract[pws,Position[szp,#]] &/@ T1;
+  pos=Outer[List,#] &/@ it;
+  Map[Max[Min[Extract[vec,#]] &/@ #] &, pos]
+];
+
+
+
 (* Borrowed from WolframMathWorld *)
 
 AdjointMatrix[args___]:=(Message[AdjointMatrix::argerr];$Failed);
@@ -843,6 +862,8 @@ RStirlingNumber[r_, n_, 1] /; n >= r = 1;
 RStirlingNumber[r_, n_, k_] /; r > 0 && n > 0 && k > 0 && n >= k r := 
    RStirlingNumber[r, n, k] = k RStirlingNumber[r, n - 1, k] + Binomial[n - 1, r - 1] RStirlingNumber[r, n - r, k - 1];
 RStirlingNumber[___] = 0;
+
+
 
 End[];
 

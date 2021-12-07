@@ -3,17 +3,17 @@
 (*** Wolfram Notebook File ***)
 (* http://www.wolfram.com/nb *)
 
-(* CreatedBy='Mathematica 12.1' *)
+(* CreatedBy='Mathematica 12.2' *)
 
 (*CacheID: 234*)
 (* Internal cache information:
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    159646,       3780]
-NotebookOptionsPosition[    157265,       3745]
-NotebookOutlinePosition[    157657,       3761]
-CellTagsIndexPosition[    157614,       3758]
+NotebookDataLength[    162969,       3854]
+NotebookOptionsPosition[    160416,       3815]
+NotebookOutlinePosition[    160979,       3835]
+CellTagsIndexPosition[    160936,       3832]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -25,8 +25,8 @@ Cell[BoxData[
     RowBox[{"IOTuGamesV6", ".", 
      RowBox[{"m", "\n", "    ", ":", " ", 
       RowBox[{"Release", " ", "Date"}], " ", ":", " ", 
-      RowBox[{"22.04", ".2020"}], "\n", "    ", ":", " ", 
-      RowBox[{"Version", " ", "2.6", ".0"}]}]}]}], " ", "\n", "\n", "*)"}], 
+      RowBox[{"07.12", ".2021"}], "\n", "    ", ":", " ", 
+      RowBox[{"Version", " ", "3.0", ".2"}]}]}]}], " ", "\n", "\n", "*)"}], 
   "\n", "\n", 
   RowBox[{"(*", " ", 
    RowBox[{":", "Context", ":", " ", "IOTuGamesV6`"}], " ", "*)"}], "\n", 
@@ -51,13 +51,8 @@ Cell[BoxData[
        RowBox[{"Meinhardt", "@", "wiwi"}], ".", "uni"}]}], "-", 
      RowBox[{"karlsruhe", ".", "de"}]}]}], "\n", "*)"}], "\n", "\n", 
   RowBox[{"(*", "\n", "   ", 
-   RowBox[{
-    RowBox[{":", " ", 
-     RowBox[{"Mathematica", " ", "Version"}], " ", ":", " ", 
-     RowBox[{"8.", "x"}]}], ",", " ", 
-    RowBox[{"9.", "x"}], ",", " ", 
-    RowBox[{"10.", "x"}], ",", " ", 
-    RowBox[{"11.", "x"}], ",", " ", 
+   RowBox[{":", " ", 
+    RowBox[{"Mathematica", " ", "Version"}], " ", ":", " ", 
     RowBox[{"12.", "x"}]}], "\n", "*)"}], "\n", 
   RowBox[{"(*", " ", "\n", "   ", 
    RowBox[{
@@ -123,8 +118,9 @@ therefore adjusted by setting PtRadius. Similar for the line segment of a\n   \
 addition, the modiclus\n                   can be drawn by invoking the \
 options ViewModiclusSol -> True. Finally, a bug\n                   w.r.t. \
 the option UseManipulate -> True has been fixed.\n      Version 2.6.0:\n      \
-             Performing some code maintenance.   \n \>"}]}]}]}]}], 
-   "*)"}]}]], "Code",ExpressionUUID->"1d02bdcf-d6f7-4ad0-aba0-8d490ebd57ac"],
+             Performing some code maintenance.   \n \n      Version 3.0.2:\n  \
+                 \n \>"}]}]}]}]}], "*)"}]}]], "Code",ExpressionUUID->\
+"53c2eb14-c90c-47d1-bf8f-48c8b8ce1246"],
 
 Cell[BoxData[
  RowBox[{
@@ -151,7 +147,7 @@ Cell[BoxData[
      RowBox[{
      "8.", " ", "\n", "    ", "Four", " ", "Person", " ", "Games", " ", 
       RowBox[{"only", "!"}]}]}]}], "\n", "*)"}], "\n", "\n"}]], "Code",Express\
-ionUUID->"8845b317-8fb2-42e2-88f6-3a982cd415c5"],
+ionUUID->"6277af3b-3706-4f6c-b774-62083e84ee93"],
 
 Cell[BoxData[{
  RowBox[{
@@ -239,7 +235,7 @@ NucleolusCoord.\>\""}], ";"}], "\n"}], "\n",
    RowBox[{"PictureSize", "::", "usage"}], " ", "=", "\n", 
    "\"\<An option to specify the size of the image of StrongEpsCore3dV6[]. \
 Same as ImageSize. \n Both values must coincide.\>\""}], ";"}]}], "Code",Expre\
-ssionUUID->"491176fb-6bd1-46e4-9139-5b3eb1ae1446"],
+ssionUUID->"6807cee9-e8a1-4833-a06f-e34b099c497c"],
 
 Cell[BoxData[
  RowBox[{
@@ -381,10 +377,50 @@ Cell[BoxData[
          RowBox[{"ViewPoint", " ", "->", " ", 
           RowBox[{"{", 
            RowBox[{"1.714", ",", " ", "2.478", ",", " ", "1.540"}], "}"}]}], 
-         ",", 
+         ",", "  ", 
+         RowBox[{"ViewCenter", " ", "->", " ", 
+          RowBox[{"{", 
+           RowBox[{".35", ",", " ", ".35", ",", " ", ".3"}], "}"}]}], ",", 
+         " ", 
+         RowBox[{"ImageMargins", " ", "->", " ", "15"}], ",", " ", 
          RowBox[{"Lighting", " ", "->", " ", "lt"}]}], "]"}], " ", "&"}], ",",
        " ", 
-      RowBox[{"{", "Graphics3D", "}"}]}], "]"}], ";"}], "\n", "   ", "\n", 
+      RowBox[{"{", "Graphics3D", "}"}]}], "]"}], ";"}], "\n", 
+   RowBox[{"(*", "\n", " ", 
+    RowBox[{
+     RowBox[{"Activate", " ", "the", " ", "line", " ", "below"}], ",", " ", 
+     RowBox[{
+     "if", " ", "you", " ", "want", " ", "to", " ", "reccur", " ", "to", " ", 
+      "the", " ", "old", " ", "behavior"}], ",", " ", 
+     RowBox[{
+      RowBox[{"and", " ", "deactivate", " ", "the", " ", "line", " ", 
+       RowBox[{"above", ".", " ", "\n", 
+        RowBox[{"Map", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"SetOptions", "[", 
+            RowBox[{"#", ",", 
+             RowBox[{"AspectRatio", " ", "->", " ", "1"}], ",", 
+             RowBox[{"Boxed", " ", "->", " ", "False"}], ",", 
+             RowBox[{"ImageSize", "->", 
+              RowBox[{"{", 
+               RowBox[{"400", ",", "434"}], "}"}]}], ",", 
+             RowBox[{"ViewPoint", " ", "->", " ", 
+              RowBox[{"{", 
+               RowBox[{"1.714", ",", " ", "2.478", ",", " ", "1.540"}], 
+               "}"}]}], ",", " ", 
+             RowBox[{"Lighting", " ", "->", " ", "lt"}]}], "]"}], " ", "&"}], 
+          ",", " ", 
+          RowBox[{"{", "Graphics3D", "}"}]}], "]"}]}]}], ";"}]}], "\n", 
+    "*)"}], "\n", 
+   RowBox[{"(*", " ", "\n", 
+    RowBox[{"SetOptions", "[", 
+     RowBox[{"Graphics3D", ",", " ", 
+      RowBox[{"ViewCenter", " ", "->", " ", 
+       RowBox[{"{", 
+        RowBox[{".35", ",", " ", ".25", ",", " ", "1"}], "}"}]}], ",", "  ", 
+      RowBox[{"ImageMargins", " ", "->", " ", "15"}]}], "]"}], "  ", "\n", 
+    "*)"}], " ", "\n", "\n", "  ", "\n", 
    RowBox[{
     RowBox[{
      RowBox[{"Options", "[", "PlotCore3dV6", "]"}], " ", "=", " ", 
@@ -411,8 +447,10 @@ Cell[BoxData[
         RowBox[{"ShowImputationSet", " ", "->", " ", "True"}], ",", " ", 
         RowBox[{"SyncDim", " ", "->", " ", "True"}], ",", " ", 
         RowBox[{"Verbosely", " ", "->", " ", "True"}], ",", " ", 
-        RowBox[{"PtRadius", " ", "->", " ", "0.021"}]}], "}"}], "]"}]}], 
-    ";"}], "\n", 
+        RowBox[{"PtRadius", " ", "->", " ", "0.021"}], ",", " ", 
+        RowBox[{"PictureSize", " ", "->", " ", 
+         RowBox[{"{", 
+          RowBox[{"400", ",", "434"}], "}"}]}]}], "}"}], "]"}]}], ";"}], "\n", 
    RowBox[{
     RowBox[{
      RowBox[{"Options", "[", "StrongEpsCore3dV6", "]"}], " ", "=", " ", 
@@ -527,8 +565,11 @@ Cell[BoxData[
         RowBox[{"CriticalValue", " ", "->", " ", 
          RowBox[{"{", "1", "}"}]}], ",", " ", 
         RowBox[{"SyncDim", " ", "->", " ", "True"}], ",", 
-        RowBox[{"PtRadius", " ", "->", " ", "0.021"}]}], "}"}], "]"}]}], 
-    ";"}], " ", "\n", 
+        RowBox[{"PtRadius", " ", "->", " ", "0.021"}], ",", 
+        RowBox[{"PictureSize", " ", "->", " ", 
+         RowBox[{"{", 
+          RowBox[{"400", ",", "434"}], "}"}]}]}], "}"}], "]"}]}], ";"}], " ", 
+   "\n", 
    RowBox[{
     RowBox[{
      RowBox[{"Options", "[", "SkelImputationV6", "]"}], " ", "=", " ", 
@@ -572,9 +613,9 @@ Cell[BoxData[
        RowBox[{"{", 
         RowBox[{
         "vwskl", ",", "vwker", ",", "vwshv", ",", "vwnuc", ",", "vwpay", ",", 
-         "vwmnc", ",", "vwleg", ",", "mnc", ",", "rd", ",", "kerc", ",", 
-         "shc", ",", "nuc", ",", "paycoord", ",", "shimp", ",", "vrb", ",", 
-         "bx", ",", "dld4", ",", "filopts", ",", "gr", ",", "psm", ",", 
+         "vwmnc", ",", "vwleg", ",", "mnc", ",", "rd", ",", "kerc", ",", "fs",
+          ",", "shc", ",", "nuc", ",", "paycoord", ",", "shimp", ",", "vrb", 
+         ",", "bx", ",", "dld4", ",", "filopts", ",", "gr", ",", "psm", ",", 
          "crQ"}], "}"}], ",", "\n", "    ", 
        RowBox[{
         RowBox[{"filopts", " ", "=", " ", 
@@ -613,8 +654,11 @@ Cell[BoxData[
          RowBox[{"OptionValue", "[", "NucleolusCoord", "]"}]}], ";", "\n", 
         "    ", 
         RowBox[{"mnc", " ", "=", " ", 
-         RowBox[{"OptionValue", "[", "ModiclusCoord", "]"}]}], ";", "\t ", 
-        "\n", "    ", 
+         RowBox[{"OptionValue", "[", "ModiclusCoord", "]"}]}], ";", "\n", 
+        "    ", 
+        RowBox[{"fs", " ", "=", " ", 
+         RowBox[{"OptionValue", "[", "PictureSize", "]"}]}], ";", "\t ", "\n",
+         "    ", 
         RowBox[{"paycoord", " ", "=", " ", 
          RowBox[{"OptionValue", "[", "PayoffCoord", "]"}]}], ";", "\t ", "\n",
          "    ", 
@@ -653,6 +697,7 @@ Cell[BoxData[
              RowBox[{"ModiclusCoord", " ", "->", " ", "mnc"}], ",", " ", 
              RowBox[{"ViewPayoffSol", " ", "->", " ", "vwpay"}], ",", " ", 
              RowBox[{"PayoffCoord", " ", "->", " ", "paycoord"}], ",", " ", 
+             RowBox[{"PictureSize", "->", " ", "fs"}], ",", " ", 
              RowBox[{"ViewLegend", " ", "->", " ", "vwleg"}], ",", " ", 
              RowBox[{"ShowImputationSet", " ", "->", " ", "shimp"}], ",", 
              RowBox[{"SyncDim", " ", "->", " ", "dld4"}], ",", " ", 
@@ -680,14 +725,15 @@ Cell[BoxData[
               RowBox[{"ModiclusCoord", " ", "->", " ", "mnc"}], ",", " ", 
               RowBox[{"ViewPayoffSol", " ", "->", " ", "vwpay"}], ",", " ", 
               RowBox[{"PayoffCoord", " ", "->", " ", "paycoord"}], ",", " ", 
+              RowBox[{"PictureSize", "->", " ", "fs"}], ",", " ", 
               RowBox[{"ViewLegend", " ", "->", " ", "vwleg"}], ",", " ", 
               RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", 
               RowBox[{"Boxed", "->", " ", "False"}], ",", " ", "filopts"}], 
              "]"}]}]}], "\n", "                  ", "]"}]}], ";", "\n", 
         "    ", 
         RowBox[{"Return", "[", "gr", "]"}], ";"}]}], "\n", "\n", "]"}]}], 
-    ";"}], "\n"}]}]], "Code",ExpressionUUID->"b8bc213d-0aee-48a9-b856-\
-90ee7bbb042d"],
+    ";"}], "\n"}]}]], "Code",ExpressionUUID->"7c92b4f9-714d-47f5-96e6-\
+097e69f7aa00"],
 
 Cell[BoxData[{
  RowBox[{
@@ -707,13 +753,13 @@ Cell[BoxData[{
        "vwskl", ",", "vwker", ",", "vwshv", ",", "vwnuc", ",", "vwmnc", ",", 
         "vwpay", ",", "vwleg", ",", "kerc", ",", "rd", ",", "shc", ",", "nuc",
          ",", "mnc", ",", "paycoord", ",", "shimp", ",", "origgame", ",", 
-        "trext", ",", "varl", ",", "minv", ",", "dld4", ",", "filopts", ",", 
-        "norm", ",", "normgame", ",", "vertlist", ",", "linearity", ",", 
-        "ecdlist", ",", " ", "eadlist", ",", " ", "icdlist", ",", " ", 
-        "iadlist", ",", "extmat", ",", "d1", ",", "d2", ",", "oldvls", ",", 
-        "dpt", ",", "dlvert", ",", "gr1", ",", "gr2", ",", "gr3", ",", "gr4", 
-        ",", "gr5", ",", "gr6", ",", "gr7", ",", "gr8", ",", "grli", ",", 
-        "gr", ",", 
+        "trext", ",", "fs", ",", "varl", ",", "minv", ",", "dld4", ",", 
+        "filopts", ",", "norm", ",", "normgame", ",", "vertlist", ",", 
+        "linearity", ",", "ecdlist", ",", " ", "eadlist", ",", " ", "icdlist",
+         ",", " ", "iadlist", ",", "extmat", ",", "d1", ",", "d2", ",", 
+        "oldvls", ",", "dpt", ",", "dlvert", ",", "gr1", ",", "gr2", ",", 
+        "gr3", ",", "gr4", ",", "gr5", ",", "gr6", ",", "gr7", ",", "gr8", 
+        ",", "grli", ",", "gr", ",", 
         RowBox[{"psm", "=", 
          RowBox[{"{", "}"}]}]}], "}"}], ",", "\n", "    ", 
       RowBox[{
@@ -752,8 +798,11 @@ Cell[BoxData[{
         RowBox[{"OptionValue", "[", "NucleolusCoord", "]"}]}], ";", "\n", 
        "    ", 
        RowBox[{"mnc", " ", "=", " ", 
-        RowBox[{"OptionValue", "[", "ModiclusCoord", "]"}]}], ";", "\t ", 
-       "\n", "    ", 
+        RowBox[{"OptionValue", "[", "ModiclusCoord", "]"}]}], ";", "\n", 
+       "    ", 
+       RowBox[{"fs", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "PictureSize", "]"}]}], ";", "\t ", "\n", 
+       "    ", 
        RowBox[{"paycoord", " ", "=", " ", 
         RowBox[{"OptionValue", "[", "PayoffCoord", "]"}]}], ";", "\t ", "\n", 
        "    ", 
@@ -958,11 +1007,16 @@ Cell[BoxData[{
          RowBox[{
           RowBox[{"SameQ", "[", 
            RowBox[{"vwleg", ",", "False"}], "]"}], ",", 
-          RowBox[{"Show", "[", "grli", "]"}], ",", "\n", 
+          RowBox[{"Show", "[", 
+           RowBox[{"grli", ",", " ", 
+            RowBox[{"ImageSize", " ", "->", " ", "fs"}]}], "]"}], ",", "\n", 
           "\t                    ", 
           RowBox[{"ShowLegend", "[", 
            RowBox[{
-            RowBox[{"Show", "[", "grli", "]"}], ",", " ", 
+            RowBox[{"Show", "[", 
+             RowBox[{"grli", ",", " ", 
+              RowBox[{"ImageSize", " ", "->", " ", "fs"}]}], "]"}], ",", " ", 
+            
             RowBox[{"{", 
              RowBox[{
               RowBox[{"{", 
@@ -1138,7 +1192,7 @@ Cell[BoxData[{
             RowBox[{"vert", ",", " ", "vskl"}], "]"}]}], "}"}], ",", 
          "filopts"}], "]"}]}], ";", "\n", "    ", 
       RowBox[{"Return", "[", "gr", "]"}], ";"}]}], "\n", "   ", "]"}]}], 
-  ";"}]}], "Code",ExpressionUUID->"8de4d22f-4aae-4d40-81aa-7a55732f513e"],
+  ";"}]}], "Code",ExpressionUUID->"974b9f19-5065-4b42-926f-111c76e71c0c"],
 
 Cell[BoxData[{
  RowBox[{
@@ -1158,9 +1212,9 @@ Cell[BoxData[{
        "vwskl", ",", "vwker", ",", "vwshv", ",", "vwnuc", ",", "vwmnc", ",", 
         "vwpay", ",", "kerc", ",", "shc", ",", "nuc", ",", "mnc", ",", "rd", 
         ",", "psm", ",", "origgame", ",", "paycoord", ",", "shimp", ",", 
-        "dld4", ",", "filopts", ",", "oldvls", ",", "norm", ",", "normgame", 
-        ",", "gr1", ",", "gr2", ",", "gr3", ",", "gr4", ",", "gr5", ",", 
-        "gr6", ",", "grli", ",", "gr"}], "}"}], ",", "\n", "    ", 
+        "dld4", ",", "filopts", ",", "fs", ",", "oldvls", ",", "norm", ",", 
+        "normgame", ",", "gr1", ",", "gr2", ",", "gr3", ",", "gr4", ",", 
+        "gr5", ",", "gr6", ",", "grli", ",", "gr"}], "}"}], ",", "\n", "    ", 
       RowBox[{
        RowBox[{"filopts", " ", "=", " ", 
         RowBox[{"FilterRules", "[", 
@@ -1192,7 +1246,10 @@ Cell[BoxData[{
         RowBox[{"OptionValue", "[", "NucleolusCoord", "]"}]}], ";", "\n", 
        "    ", 
        RowBox[{"mnc", " ", "=", " ", 
-        RowBox[{"OptionValue", "[", "ModiclusCoord", "]"}]}], ";", "\t \t ", 
+        RowBox[{"OptionValue", "[", "ModiclusCoord", "]"}]}], ";", "\n", 
+       "    ", 
+       RowBox[{"fs", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "PictureSize", "]"}]}], ";", "\t \t ", 
        "\n", "    ", 
        RowBox[{"paycoord", " ", "=", " ", 
         RowBox[{"OptionValue", "[", "PayoffCoord", "]"}]}], ";", "\t ", "\n", 
@@ -1279,7 +1336,10 @@ Cell[BoxData[{
           "gr1", ",", "gr2", ",", "gr3", ",", "gr4", ",", "gr5", ",", "gr6"}],
            "}"}], "]"}]}], ";", "\n", "    ", 
        RowBox[{"gr", "=", 
-        RowBox[{"Show", "[", "grli", "]"}]}], ";", "\n", "    ", 
+        RowBox[{"Show", "[", 
+         RowBox[{"grli", ",", 
+          RowBox[{"ImageSize", "->", " ", "fs"}]}], "]"}]}], ";", "\n", 
+       "    ", 
        RowBox[{"origgame", "=", 
         RowBox[{"DefineGame", "[", 
          RowBox[{"T", ",", "oldvls"}], "]"}]}], ";", "\n", "    ", 
@@ -1630,7 +1690,7 @@ Cell[BoxData[{
       RowBox[{"gr3", "=", 
        RowBox[{"Show", "[", 
         RowBox[{"grli", ",", 
-         RowBox[{"ImageSize", " ", "->", " ", "fs"}], ",", " ", 
+         RowBox[{"ImageSize", "->", "fs"}], ",", 
          RowBox[{"PlotLabel", " ", "->", " ", 
           RowBox[{"StringJoin", "[", 
            RowBox[{"\"\<eps=\>\"", ",", 
@@ -1638,8 +1698,8 @@ Cell[BoxData[{
              RowBox[{"N", "[", "epsval", "]"}], "]"}]}], "]"}]}]}], "]"}]}], 
       ";", " ", "\n", "     ", 
       RowBox[{"Return", "[", "gr3", "]"}], ";"}]}], "\n", "     ", "\n", 
-    "]"}]}], ";"}]}], "Code",ExpressionUUID->"7147c352-20c1-482a-8396-\
-f717dcef3025"],
+    "]"}]}], ";"}]}], "Code",ExpressionUUID->"6c334fc7-0bc1-43fd-b5bb-\
+04575939cd78"],
 
 Cell[BoxData[
  RowBox[{
@@ -1695,7 +1755,7 @@ Cell[BoxData[
        RowBox[{"Max", "[", 
         RowBox[{"epsval", ",", "1"}], "]"}]}], ";", "\n", "  ", 
       RowBox[{"Return", "[", "epsval", "]"}], ";"}]}], "\n", "]"}]}], 
-  ";"}]], "Code",ExpressionUUID->"b0aed142-14aa-4147-afe7-78f6e72f79aa"],
+  ";"}]], "Code",ExpressionUUID->"ddd3a4db-78e8-4570-bbbe-ad199e76ff25"],
 
 Cell[BoxData[{
  RowBox[{
@@ -1905,12 +1965,13 @@ Cell[BoxData[{
     RowBox[{
      RowBox[{"{", 
       RowBox[{
-      "shcr", ",", " ", "imps", ",", " ", "crv", ",", " ", "vwker", ",", " ", 
-       "kcoord", ",", " ", "vwsh", ",", " ", "shc", ",", " ", "vwnuc", ",", 
-       "nuc", ",", " ", "rd", ",", " ", "vwmnc", ",", " ", "mnc", ",", " ", 
-       "vwpay", ",", " ", "paycoord", ",", "filopts", ",", "epsw", ",", " ", 
-       "uppval", ",", " ", "lowval", ",", " ", "stpsize", ",", "manip", ",", 
-       " ", "vpt", ",", "dld4", ",", "detlow"}], "}"}], ",", "\n", "    ", 
+      "shcr", ",", " ", "fs", ",", " ", "imps", ",", " ", "crv", ",", " ", 
+       "vwker", ",", " ", "kcoord", ",", " ", "vwsh", ",", " ", "shc", ",", 
+       " ", "vwnuc", ",", "nuc", ",", " ", "rd", ",", " ", "vwmnc", ",", " ", 
+       "mnc", ",", " ", "vwpay", ",", " ", "paycoord", ",", "filopts", ",", 
+       "epsw", ",", " ", "uppval", ",", " ", "lowval", ",", " ", "stpsize", 
+       ",", "manip", ",", " ", "vpt", ",", "dld4", ",", "detlow"}], "}"}], 
+     ",", "\n", "    ", 
      RowBox[{
       RowBox[{"filopts", " ", "=", " ", 
        RowBox[{"FilterRules", "[", 
@@ -1972,6 +2033,9 @@ Cell[BoxData[{
        RowBox[{"OptionValue", "[", "ViewPoint", "]"}]}], ";", "\n", "    ", 
       RowBox[{"dld4", " ", "=", " ", 
        RowBox[{"OptionValue", "[", "SyncDim", "]"}]}], ";", "\n", "    ", 
+      RowBox[{"fs", " ", "=", " ", 
+       RowBox[{"OptionValue", "[", "PictureSize", "]"}]}], ";", "\n", "    ", 
+      
       RowBox[{"rd", " ", "=", " ", 
        RowBox[{"OptionValue", "[", "PtRadius", "]"}]}], ";", "\n", "    ", 
       RowBox[{"detlow", " ", "=", " ", 
@@ -2006,7 +2070,8 @@ Cell[BoxData[{
             RowBox[{"ShowImputationSet", " ", "->", " ", "imps"}], ",", 
             RowBox[{"SyncDim", " ", "->", " ", "True"}], ",", 
             RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", 
-            RowBox[{"ViewPoint", " ", "->", "vpt"}]}], "]"}], ",", " ", 
+            RowBox[{"ViewPoint", " ", "->", "vpt"}], ",", 
+            RowBox[{"PictureSize", "->", "fs"}]}], "]"}], ",", " ", 
           RowBox[{"{", 
            RowBox[{"t", ",", " ", 
             RowBox[{"uppval", "[", 
@@ -2033,6 +2098,7 @@ Cell[BoxData[{
             RowBox[{"ShowImputationSet", " ", "->", " ", "imps"}], ",", 
             RowBox[{"SyncDim", " ", "->", " ", "True"}], ",", 
             RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", 
+            RowBox[{"PictureSize", "->", "fs"}], ",", 
             RowBox[{"ViewPoint", " ", "->", " ", 
              RowBox[{"Dynamic", "[", 
               RowBox[{"{", 
@@ -2064,8 +2130,8 @@ Cell[BoxData[{
             RowBox[{"{", 
              RowBox[{"v3", ",", " ", "1.54", ",", "\"\<z-coordinate\>\""}], 
              "}"}], ",", " ", "4"}], "}"}]}], "]"}]}], "]"}]}]}], " ", "\n", 
-    "    ", "]"}]}], ";"}]}], "Code",ExpressionUUID->"96dfe838-3d72-4caa-b383-\
-40eb7ccf73b7"],
+    "    ", "]"}]}], ";"}]}], "Code",ExpressionUUID->"6eb8a487-98c0-4b72-9378-\
+002a7c819063"],
 
 Cell[BoxData[
  RowBox[{
@@ -2193,7 +2259,7 @@ Cell[BoxData[
             RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], 
            "]"}]}]}], "\n", "    ", "]"}]}], ";", "\n", "    ", 
       RowBox[{"Return", "[", "gr", "]"}], ";"}]}], "\n", "]"}]}], 
-  ";"}]], "Code",ExpressionUUID->"ff0e0f22-10c3-4638-8ee3-092662d20b3a"],
+  ";"}]], "Code",ExpressionUUID->"8d8e3baa-e112-4279-87c5-77a4638c184f"],
 
 Cell[BoxData[
  RowBox[{
@@ -2269,7 +2335,7 @@ Cell[BoxData[
            RowBox[{"SyncDim", " ", "->", "dld4"}], ",", 
            RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], 
           "]"}]}]}], "]"}]}]}], "\n", "]"}]}], ";"}]], "Code",ExpressionUUID->\
-"eb17bf0a-c7ae-48d2-b99e-6b3e48e28e6f"],
+"a6dbb51d-6515-454d-9049-9a609148e61c"],
 
 Cell[BoxData[{
  RowBox[{
@@ -2420,8 +2486,8 @@ Cell[BoxData[{
             RowBox[{"PtRadius", " ", "->", " ", "rd"}], ",", "filopts"}], 
            "]"}]}]}], "]"}]}], ";", "\n", "    ", 
       RowBox[{"Return", "[", "retval", "]"}]}]}], "\n", "]"}]}], 
-  ";"}], "\n"}], "Code",ExpressionUUID->"08ca9927-de22-4507-964f-\
-2a9568996092"],
+  ";"}], "\n"}], "Code",ExpressionUUID->"f6569ac1-f2c8-4654-9457-\
+e8f6ef4195ad"],
 
 Cell[BoxData[
  RowBox[{
@@ -2478,7 +2544,7 @@ Cell[BoxData[
             RowBox[{"1", ",", "0", ",", "0"}], "]"}], ",", " ", "sph"}], " ", 
           "}"}], ",", "filopts"}], "]"}]}], ";", "\n", "    ", 
       RowBox[{"Return", "[", "gr", "]"}], ";"}]}], "\n", "]"}]}], 
-  ";"}]], "Code",ExpressionUUID->"369efd3d-4325-4d51-9036-c3da88b79913"],
+  ";"}]], "Code",ExpressionUUID->"67a0fc3f-8b03-4cbb-a360-834767fd7377"],
 
 Cell[BoxData[{
  RowBox[{
@@ -2704,7 +2770,7 @@ Cell[BoxData[{
        RowBox[{"Position", "[", 
         RowBox[{"varl", ",", "minv"}], "]"}]}], ";", "\n", "    ", 
       RowBox[{"First", "[", "psm", "]"}]}]}], "\n", "]"}]}], ";"}]}], "Code",E\
-xpressionUUID->"4fb1159a-a2d2-4840-a74e-9380a0bc26c1"],
+xpressionUUID->"90604de4-3941-4896-a2d2-f482bc60c90d"],
 
 Cell[BoxData[
  RowBox[{
@@ -2759,7 +2825,7 @@ Cell[BoxData[
           RowBox[{"Green", ",", " ", "sph"}], " ", "}"}], ",", "filopts"}], 
         "]"}]}], ";", "\n", "    ", 
       RowBox[{"Return", "[", "gr", "]"}], ";"}]}], "\n", "]"}]}], 
-  ";"}]], "Code",ExpressionUUID->"ac110388-a811-46ff-8af8-04879ca748c8"],
+  ";"}]], "Code",ExpressionUUID->"d368da9b-beab-43f0-96a6-d44db6d2e66f"],
 
 Cell[BoxData[
  RowBox[{
@@ -2814,7 +2880,7 @@ Cell[BoxData[
           RowBox[{"Purple", ",", " ", "sph"}], " ", "}"}], ",", "filopts"}], 
         "]"}]}], ";", "\n", "    ", 
       RowBox[{"Return", "[", "gr", "]"}], ";"}]}], "\n", "]"}]}], 
-  ";"}]], "Code",ExpressionUUID->"0c019de9-86d4-422c-b3df-a36e14ea237e"],
+  ";"}]], "Code",ExpressionUUID->"b633c138-7279-42eb-92f6-6f465edc85cd"],
 
 Cell[BoxData[
  RowBox[{
@@ -2871,7 +2937,7 @@ Cell[BoxData[
             RowBox[{"0", ",", "0", ",", "1"}], "]"}], ",", " ", "sph"}], " ", 
           "}"}], ",", "filopts"}], "]"}]}], ";", "\n", "    ", 
       RowBox[{"Return", "[", "gr", "]"}], ";"}]}], "\n", "]"}]}], 
-  ";"}]], "Code",ExpressionUUID->"787a731d-cfa4-48af-a154-d38b76bae58b"],
+  ";"}]], "Code",ExpressionUUID->"029657db-02f6-4029-b1d5-7560a9b008f6"],
 
 Cell[BoxData[
  RowBox[{
@@ -2951,8 +3017,8 @@ Cell[BoxData[
         RowBox[{"Graphics3D", "[", 
          RowBox[{"sph", " ", ",", "filopts"}], "]"}]}], ";", "\n", "    ", 
        RowBox[{"Return", "[", "gr", "]"}], ";"}]}], "\n", "   ", "]"}]}], 
-   ";"}], "\n"}]], "Code",ExpressionUUID->"c35f9188-a848-4dcb-bc3c-\
-4877afa5dc19"],
+   ";"}], "\n"}]], "Code",ExpressionUUID->"213d13ed-d975-4c5c-a659-\
+cea99d3731b4"],
 
 Cell[BoxData[
  RowBox[{
@@ -3015,7 +3081,7 @@ Cell[BoxData[
             RowBox[{"0", ",", "1", ",", "0"}], "]"}], ",", " ", "sph"}], " ", 
           "}"}], ",", "filopts"}], "]"}]}], ";", "\n", "    ", 
       RowBox[{"Return", "[", "gr", "]"}], ";"}]}], "\n", "]"}]}], 
-  ";"}]], "Code",ExpressionUUID->"939bb114-b2e4-453c-8d9a-4044be0b5c53"],
+  ";"}]], "Code",ExpressionUUID->"b579ee5b-e48c-464e-b6a1-1bf1405ec753"],
 
 Cell[BoxData[
  RowBox[{
@@ -3069,7 +3135,7 @@ Cell[BoxData[
           RowBox[{"Yellow", ",", " ", "crseg"}], " ", "}"}], ",", "filopts"}],
          "]"}]}], ";", "\n", "      ", 
       RowBox[{"Return", "[", "gr", "]"}], ";"}]}], "\n", "]"}]}], 
-  ";"}]], "Code",ExpressionUUID->"37b02df8-8234-4b20-a131-85715aefa94e"],
+  ";"}]], "Code",ExpressionUUID->"cad97bc0-b0a4-4301-a8cb-9d647277bf83"],
 
 Cell[BoxData[{
  RowBox[{
@@ -3171,13 +3237,13 @@ Cell[BoxData[{
        RowBox[{
        "vwskl", ",", "vwker", ",", "vwshv", ",", "vwnuc", ",", "vwmnc", ",", 
         "vwpay", ",", "kerc", ",", "shc", ",", "nuc", ",", "mnc", ",", 
-        "paycoord", ",", "rd", ",", "epsval", ",", "psm", ",", "shups", ",", 
-        "shcr", ",", "strCr", ",", "epsw", ",", "shlws", ",", "critval", ",", 
-        "dld4", ",", "filopts", ",", "oldvls", ",", "norm", ",", "normgame", 
-        ",", "gr0", ",", "origgame", ",", "gr1", ",", "epsvls", ",", 
-        "newgame", ",", "crQ", ",", "gr2", ",", "gr3", ",", "gr4", ",", "gr5",
-         ",", "gr6", ",", "gr7", ",", "gr8", ",", "gr9", ",", "grli", ",", 
-        "gr"}], "}"}], ",", "\n", "        ", 
+        "paycoord", ",", "rd", ",", "fs", ",", "epsval", ",", "psm", ",", 
+        "shups", ",", "shcr", ",", "strCr", ",", "epsw", ",", "shlws", ",", 
+        "critval", ",", "dld4", ",", "filopts", ",", "oldvls", ",", "norm", 
+        ",", "normgame", ",", "gr0", ",", "origgame", ",", "gr1", ",", 
+        "epsvls", ",", "newgame", ",", "crQ", ",", "gr2", ",", "gr3", ",", 
+        "gr4", ",", "gr5", ",", "gr6", ",", "gr7", ",", "gr8", ",", "gr9", 
+        ",", "grli", ",", "gr"}], "}"}], ",", "\n", "        ", 
       RowBox[{
        RowBox[{"filopts", " ", "=", " ", 
         RowBox[{"FilterRules", "[", 
@@ -3241,6 +3307,9 @@ Cell[BoxData[{
        "        ", 
        RowBox[{"dld4", " ", "=", " ", 
         RowBox[{"OptionValue", "[", "SyncDim", "]"}]}], ";", "\n", "        ", 
+       RowBox[{"fs", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "PictureSize", "]"}]}], ";", "\n", 
+       "        ", 
        RowBox[{"dld4", "=", 
         RowBox[{"If", "[", 
          RowBox[{
@@ -3416,7 +3485,8 @@ Cell[BoxData[{
        ";", "\n", "        ", 
        RowBox[{"gr", "=", 
         RowBox[{"Show", "[", 
-         RowBox[{"grli", ",", 
+         RowBox[{"grli", ",", " ", 
+          RowBox[{"ImageSize", "->", " ", "fs"}], ",", " ", 
           RowBox[{"PlotLabel", " ", "->", " ", 
            RowBox[{"StringJoin", "[", 
             RowBox[{"\"\<eps=\>\"", ",", 
@@ -3601,8 +3671,8 @@ Cell[BoxData[{
                RowBox[{"Tube", "[", "redead", "]"}]}], "]"}]}], "}"}], ",", 
            "filopts"}], "]"}]}], "]"}]}], ";", "\n", "      ", 
       RowBox[{"Return", "[", "gr", "]"}], ";"}]}], "\n", "]"}]}], 
-  ";"}], "\n"}], "Code",ExpressionUUID->"09cf20d1-8cbe-44c0-b0a7-\
-eede28c53780"],
+  ";"}], "\n"}], "Code",ExpressionUUID->"f3113af7-ed76-4ed4-af83-\
+502dc5f2ea8d"],
 
 Cell[BoxData[{
  RowBox[{
@@ -3736,18 +3806,22 @@ Cell[BoxData[{
        RowBox[{"Return", "[", "gr", "]"}], ";"}]}], "\n", "]"}]}], ";"}], 
   "\n"}], "\n", 
  RowBox[{
-  RowBox[{"End", "[", "]"}], ";"}]}], "Code",ExpressionUUID->"c9dbd7e2-4002-\
-4e6a-844f-28bb75aa66ed"],
+  RowBox[{"End", "[", "]"}], ";"}]}], "Code",ExpressionUUID->"ec888861-58ee-\
+494a-8622-7455fbc58b64"],
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"EndPackage", "[", "]"}], "\n"}]], "Code",ExpressionUUID->"0fdfde68-bbfa-4986-9137-a87e3f635565"]
+  RowBox[{"EndPackage", "[", "]"}], "\n"}]], "Code",ExpressionUUID->"7e86c19c-c657-411e-a711-01649d6b2326"]
 },
-WindowSize->{808, 869},
-WindowMargins->{{144, Automatic}, {91, Automatic}},
-FrontEndVersion->"12.1 for Linux x86 (64-bit) (March 18, 2020)",
+WindowSize->{808, 839},
+WindowMargins->{{144, Automatic}, {84, Automatic}},
+TaggingRules->{
+ "WelcomeScreenSettings" -> {"FEStarting" -> False}, 
+  "CodeFormatter" -> {
+   "ToolbarState" -> False, "ToolbarAccentColor" -> RGBColor["#2497b7"]}},
+FrontEndVersion->"12.2 for Linux x86 (64-bit) (December 12, 2020)",
 StyleDefinitions->"Default.nb",
-ExpressionUUID->"3c427da1-baf5-49e5-b60b-0dc5c8bd5353"
+ExpressionUUID->"a52fb37e-6aa7-46eb-93a8-01c8e49bd837"
 ]
 (* End of Notebook Content *)
 
@@ -3760,28 +3834,28 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 5440, 106, 1182, "Code",ExpressionUUID->"1d02bdcf-d6f7-4ad0-aba0-8d490ebd57ac"],
-Cell[6001, 128, 982, 25, 303, "Code",ExpressionUUID->"8845b317-8fb2-42e2-88f6-3a982cd415c5"],
-Cell[6986, 155, 3458, 86, 1050, "Code",ExpressionUUID->"491176fb-6bd1-46e4-9139-5b3eb1ae1446"],
-Cell[10447, 243, 19875, 446, 70, "Code",ExpressionUUID->"b8bc213d-0aee-48a9-b856-90ee7bbb042d"],
-Cell[30325, 691, 19020, 449, 70, "Code",ExpressionUUID->"8de4d22f-4aae-4d40-81aa-7a55732f513e"],
-Cell[49348, 1142, 21710, 499, 70, "Code",ExpressionUUID->"7147c352-20c1-482a-8396-f717dcef3025"],
-Cell[71061, 1643, 2200, 54, 70, "Code",ExpressionUUID->"b0aed142-14aa-4147-afe7-78f6e72f79aa"],
-Cell[73264, 1699, 16878, 368, 70, "Code",ExpressionUUID->"96dfe838-3d72-4caa-b383-40eb7ccf73b7"],
-Cell[90145, 2069, 5267, 126, 70, "Code",ExpressionUUID->"ff0e0f22-10c3-4638-8ee3-092662d20b3a"],
-Cell[95415, 2197, 3053, 74, 70, "Code",ExpressionUUID->"eb17bf0a-c7ae-48d2-b99e-6b3e48e28e6f"],
-Cell[98471, 2273, 6237, 150, 70, "Code",ExpressionUUID->"08ca9927-de22-4507-964f-2a9568996092"],
-Cell[104711, 2425, 2157, 55, 70, "Code",ExpressionUUID->"369efd3d-4325-4d51-9036-c3da88b79913"],
-Cell[106871, 2482, 8844, 224, 70, "Code",ExpressionUUID->"4fb1159a-a2d2-4840-a74e-9380a0bc26c1"],
-Cell[115718, 2708, 2080, 53, 70, "Code",ExpressionUUID->"ac110388-a811-46ff-8af8-04879ca748c8"],
-Cell[117801, 2763, 2080, 53, 70, "Code",ExpressionUUID->"0c019de9-86d4-422c-b3df-a36e14ea237e"],
-Cell[119884, 2818, 2158, 55, 70, "Code",ExpressionUUID->"787a731d-cfa4-48af-a154-d38b76bae58b"],
-Cell[122045, 2875, 3155, 79, 70, "Code",ExpressionUUID->"c35f9188-a848-4dcb-bc3c-4877afa5dc19"],
-Cell[125203, 2956, 2400, 61, 70, "Code",ExpressionUUID->"939bb114-b2e4-453c-8d9a-4044be0b5c53"],
-Cell[127606, 3019, 2140, 52, 70, "Code",ExpressionUUID->"37b02df8-8234-4b20-a131-85715aefa94e"],
-Cell[129749, 3073, 22125, 531, 70, "Code",ExpressionUUID->"09cf20d1-8cbe-44c0-b0a7-eede28c53780"],
-Cell[151877, 3606, 5250, 133, 70, "Code",ExpressionUUID->"c9dbd7e2-4002-4e6a-844f-28bb75aa66ed"],
-Cell[157130, 3741, 131, 2, 70, "Code",ExpressionUUID->"0fdfde68-bbfa-4986-9137-a87e3f635565"]
+Cell[558, 20, 5323, 102, 1248, "Code",ExpressionUUID->"53c2eb14-c90c-47d1-bf8f-48c8b8ce1246"],
+Cell[5884, 124, 982, 25, 303, "Code",ExpressionUUID->"6277af3b-3706-4f6c-b774-62083e84ee93"],
+Cell[6869, 151, 3458, 86, 1050, "Code",ExpressionUUID->"6807cee9-e8a1-4833-a06f-e34b099c497c"],
+Cell[10330, 239, 22145, 496, 70, "Code",ExpressionUUID->"7c92b4f9-714d-47f5-96e6-097e69f7aa00"],
+Cell[32478, 737, 19353, 457, 70, "Code",ExpressionUUID->"974b9f19-5065-4b42-926f-111c76e71c0c"],
+Cell[51834, 1196, 21915, 505, 70, "Code",ExpressionUUID->"6c334fc7-0bc1-43fd-b5bb-04575939cd78"],
+Cell[73752, 1703, 2200, 54, 70, "Code",ExpressionUUID->"ddd3a4db-78e8-4570-bbbe-ad199e76ff25"],
+Cell[75955, 1759, 17132, 374, 70, "Code",ExpressionUUID->"6eb8a487-98c0-4b72-9378-002a7c819063"],
+Cell[93090, 2135, 5267, 126, 70, "Code",ExpressionUUID->"8d8e3baa-e112-4279-87c5-77a4638c184f"],
+Cell[98360, 2263, 3053, 74, 70, "Code",ExpressionUUID->"a6dbb51d-6515-454d-9049-9a609148e61c"],
+Cell[101416, 2339, 6237, 150, 70, "Code",ExpressionUUID->"f6569ac1-f2c8-4654-9457-e8f6ef4195ad"],
+Cell[107656, 2491, 2157, 55, 70, "Code",ExpressionUUID->"67a0fc3f-8b03-4cbb-a360-834767fd7377"],
+Cell[109816, 2548, 8844, 224, 70, "Code",ExpressionUUID->"90604de4-3941-4896-a2d2-f482bc60c90d"],
+Cell[118663, 2774, 2080, 53, 70, "Code",ExpressionUUID->"d368da9b-beab-43f0-96a6-d44db6d2e66f"],
+Cell[120746, 2829, 2080, 53, 70, "Code",ExpressionUUID->"b633c138-7279-42eb-92f6-6f465edc85cd"],
+Cell[122829, 2884, 2158, 55, 70, "Code",ExpressionUUID->"029657db-02f6-4029-b1d5-7560a9b008f6"],
+Cell[124990, 2941, 3155, 79, 70, "Code",ExpressionUUID->"213d13ed-d975-4c5c-a659-cea99d3731b4"],
+Cell[128148, 3022, 2400, 61, 70, "Code",ExpressionUUID->"b579ee5b-e48c-464e-b6a1-1bf1405ec753"],
+Cell[130551, 3085, 2140, 52, 70, "Code",ExpressionUUID->"cad97bc0-b0a4-4301-a8cb-9d647277bf83"],
+Cell[132694, 3139, 22331, 535, 70, "Code",ExpressionUUID->"f3113af7-ed76-4ed4-af83-502dc5f2ea8d"],
+Cell[155028, 3676, 5250, 133, 70, "Code",ExpressionUUID->"ec888861-58ee-494a-8622-7455fbc58b64"],
+Cell[160281, 3811, 131, 2, 70, "Code",ExpressionUUID->"7e86c19c-c657-411e-a711-01649d6b2326"]
 }
 ]
 *)

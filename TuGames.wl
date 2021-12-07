@@ -18,7 +18,7 @@ Off[General::obspkg];
     holger.meinhardt@wiwi.uni-karlsruhe.de
 *)
 
-(* :Package Version: 3.0.1 *)
+(* :Package Version: 3.0.2 *)
 
 (* 
    :Mathematica Version: 12.x
@@ -331,6 +331,26 @@ Off[General::obspkg];
      Improved exception handling for functions using LinearOptimization. Performance improving of revised functions in Version 3.
 
      Some minor bug fixes.
+
+     Version 3.0.2
+
+     Adjusting the functions
+     
+       ApproxPreNuc                -- Part of TuGames,
+       ApproxNuc                   -- Part of TuGames,
+       DuttaRay                    -- Part of TuGames,  
+       LorenzSolution              -- Part of TuGames,
+       NonLinPreNuc                -- Part of TuGames,
+       NonLinNuc                   -- Part of TuGames,
+       PreKernelSolution           -- Part of TuGames
+
+    to the new set of optimization algorithms.
+
+    Adding options to the functions PreKernelQ, MaxExcessBalanced, AntiPreKernelQ, MinExcessBalanced, ParaPreKernelQ, ParaMaxExcessBalanced, ParaAntiPreKernelQ, ParaMinExcessBalanced.
+    
+    Improving the performance of PreKernelSolution.
+
+    Some minor bug fixes and code revision. 
 *)
  
 
@@ -379,8 +399,8 @@ If[SameQ[Global`$ParaMode,"False"],
 Print["==================================================="];
 Print["Loading Package 'TuGames' for ", $OperatingSystem];
 Print["==================================================="];
-Print["TuGames V3.0.1 by Holger I. Meinhardt"];
-Print["Release Date: 04.10.2021"];
+Print["TuGames V3.0.2 by Holger I. Meinhardt"];
+Print["Release Date: 07.12.2021"];
 Print["Program runs under Mathematica Version 12.0 or later"];
 Print["Version 12.x or higher is recommended"];
 Print["==================================================="];,
@@ -544,8 +564,8 @@ KernelCalculation::usage =
  'False' the function Kernel[game] will be invoked to avoid infinite loops. To increases the 
  computational reliability in cases of numerical issues the following methods can be used: 
  RevisedSimplex, CLP, GUROBI, MOSEK, or Automatic. Default setting is Automatic. This option
- must be used in connection with CallMaximize->False. For getting more precise results one 
- can even set Method->{InteriorPoint, Tolerance->10^-10}.";
+ can be used in either case by CallMaximize->False or CallMaximize->True. For getting more 
+ precise results one can even set Method->{InteriorPoint, Tolerance->10^-10}.";
 
 Kernel::usage = 
 "Kernel[game,options] computes a kernel point of the game from one LP. Options are:
@@ -557,8 +577,8 @@ Kernel::usage =
  calculated, for instance, by the function FirstCriticalVal[game]. To increases the computational 
  reliability in cases of numerical issues the following methods can be used: RevisedSimplex, CLP,
  GUROBI, MOSEK, or Automatic. Default setting is Automatic. This option must be used in 
- connection with CallMaximize->False. For getting more precise results one can even set 
- Method->{InteriorPoint, Tolerance->10^-10}.";
+ connection with CallMaximize->False or CallMaximize->True. For getting more precise results 
+ one can even set Method->{InteriorPoint, Tolerance->10^-10}.";
 
 KernelVertices::usage =
 "KernelVertices[game,options] computes the vertices of the Kernel solution from an LP. To 
@@ -574,8 +594,7 @@ ModifiedKernel::usage =
  on a method by Peleg to translate the definition of the Nucleolus into 
  a sequence of linear programs. To increases the computational reliability in 
  cases of numerical issues the following methods can be used: RevisedSimplex, CLP, 
- GUROBI, MOSEK, or Automatic. Default setting is Automatic. This option must be used 
- in connection with CallMaximize->False. For getting more precise results 
+ MOSEK, or Automatic. Default setting is Automatic. For getting more precise results 
  one can even set Method->{InteriorPoint, Tolerance->10^-10}.";
 
 
@@ -585,8 +604,7 @@ ModifiedNucleolus::usage =
  Nucleolus into a sequence of linear programs. The recursion stops, if the set
  of new equal constraints is empty. To increases the computational reliability in 
  cases of numerical issues the following methods can be used: RevisedSimplex, CLP, 
- GUROBI, MOSEK, or Automatic. Default setting is Automatic. This option must be used 
- in connection with CallMaximize->False. For getting more precise results 
+  MOSEK, or Automatic. Default setting is Automatic. For getting more precise results 
  one can even set Method->{InteriorPoint, Tolerance->10^-10}.";
 
 
@@ -604,16 +622,29 @@ FTPreNuc::usage =
 "FTPreNuc[game] computes the pre-nucleolus by a Fenchel Transform Method.";
 
 NonLinPreNuc::usage = 
-"NonLinPreNuc[game,p,k,tol] computes by a non-linear optimization method the pre-nucleolus, otherwise it returns a $Failed.";
+"NonLinPreNuc[game,p,k,tol,options] computes by a non-linear optimization method the pre-nucleolus, 
+ otherwise it returns a $Failed. Different solvers can be selected by option setting Method->Solver. 
+ Permissible solvers are: Automatic, GUROBI, IPOPT, MOSEK, DifferentialEvolution, NelderMead, 
+ RandomSearch, or SimulatedAnnealing. Default setting is Automatic";
 
 ApproxPreNuc::usage =
-"ApproxPreNuc[game,p,k] computes the (p,k)-nucleolus by a non-linear minimization method. It is an approximation of the pre-nucleolus. If (p,k)=(2,k), then it computes the least square pre-nucleolus.";
+"ApproxPreNuc[game,p,k,options] computes the (p,k)-nucleolus by a non-linear minimization method. 
+ It is an approximation of the pre-nucleolus. If (p,k)=(2,k), then it computes the least square pre-nucleolus. 
+ Different solvers can be selected by option setting Method->Solver. Permissible solvers are: Automatic, GUROBI, 
+ IPOPT, MOSEK, DifferentialEvolution, NelderMead, RandomSearch, or SimulatedAnnealing. Default setting is Automatic";
 
 NonLinNuc::usage = 
-"NonLinNuc[game,p,k,tol] computes by a non-linear optimization method the nucleolus, otherwise it returns a $Failed.";
+"NonLinNuc[game,p,k,tol,options] computes by a non-linear optimization method the nucleolus, 
+ otherwise it returns a $Failed. Different solvers can be selected by option setting Method->Solver. 
+ Permissible solvers are: Automatic, GUROBI, IPOPT, MOSEK, DifferentialEvolution, NelderMead, 
+ RandomSearch, or SimulatedAnnealing. Default setting is Automatic";
 
 ApproxNuc::usage =
-"ApproxNuc[game,p,k] computes the (p,k)-nucleolus by a non-linear minimization method. It is an approximation of the nucleolus. If (p,k)=(2,k), then it computes the least square nucleolus.";
+"ApproxNuc[game,p,k,options] computes the (p,k)-nucleolus by a non-linear minimization method. 
+ It is an approximation of the nucleolus. If (p,k)=(2,k), then it computes the least square nucleolus. 
+ Different solvers can be selected by option setting Method->Solver. Permissible solvers are: Automatic, 
+ GUROBI, IPOPT, MOSEK, DifferentialEvolution, NelderMead, RandomSearch, or SimulatedAnnealing. 
+ Default setting is Automatic";
 
 ModCoalArray::usage =
 "ModCoalArray[game,payoff] computes a modified coalition array of first, second, ..., kth maximal excess.";
@@ -628,7 +659,7 @@ PreNucleolus::usage =
 "PreNucleolus[game,options] computes the pre-nucleolus from the set of pre-imputations.
  The algorithm is based on a method by Peleg to translate the definition of the Nucleolus into 
  a sequence of linear programs on the pre-imputation set. To increases the computational reliability 
- in cases of numerical issues the following methods can be used: RevisedSimplex, CLP, GUROBI, MOSEK, 
+ in cases of numerical issues the following methods can be used: RevisedSimplex, CLP, MOSEK, 
  or Automatic. Default setting is Automatic. This option must be used in connection with CallMaximize->False. 
  For getting more precise results, one can even set  Method->{InteriorPoint, Tolerance->10^-10}.";
 
@@ -638,7 +669,7 @@ Modiclus::usage =
  with the function ModifiedNucleolus[]. The algorithm is based on a method by Peleg to translate
  the definition of the Nucleolus into a sequence of linear programs on the pre-imputation set.
  To increases the computational reliability in cases of numerical issues the following methods
- can be used: RevisedSimplex, CLP, GUROBI, MOSEK, or Automatic. Default setting is Automatic. This option
+ can be used: RevisedSimplex, CLP, MOSEK, or Automatic. Default setting is Automatic. This option
  must be used in connection with CallMaximize->False. For getting more precise results one can even set 
  Method->{InteriorPoint, Tolerance->10^-10}.";
 
@@ -646,7 +677,7 @@ Modiclus::usage =
 IsModiclusQ::usage = 
 "IsModiclusQ[game,payoff,opts] checks whether the provided payoff vector is the modiclus of the game.
  To increases the computational reliability in cases of numerical issues the following methods
- can be used: RevisedSimplex, CLP, GUROBI, MOSEK, or Automatic. Default setting is Automatic. This option
+ can be used: RevisedSimplex, CLP, MOSEK, or Automatic. Default setting is Automatic. This option
  must be used in connection with CallMaximize->False. For getting more precise results one can even set 
  Method->{InteriorPoint, Tolerance->10^-10}";
 
@@ -694,10 +725,14 @@ IsSMPrenucleolusQ::usage =
 "IsSMPrenucleolusQ[game,payoff] checks if payoff is the simplified modified pre-nucleolus of the game.";
 
 DuttaRay::usage = 
-"DuttaRay[game] computes the Dutta-Ray solution for convex games.";
+"DuttaRay[game,options] computes the Dutta-Ray solution for convex games. Different solvers can be selected 
+ by option setting Method->Solver. Permissible solvers are: Automatic, GUROBI, IPOPT, MOSEK, DifferentialEvolution, 
+ NelderMead, RandomSearch, or SimulatedAnnealing. Default setting is Automatic";
 
 LorenzSolution::usage = 
-"LorenzSolution[game] computes the Lorenz solution whenever the core exits.";
+"LorenzSolution[game,options] computes the Lorenz solution whenever the core exits. Different solvers can be 
+ selected by option setting Method->Solver. Permissible solvers are: Automatic, GUROBI, IPOPT, MOSEK, 
+ DifferentialEvolution, NelderMead, RandomSearch, or SimulatedAnnealing. Default setting is Automatic";
 
 CollectionOfDecreasingExcess::usage =
 "CollectionOfDecreasingExcess[game,payoff] determines the collection of coalitions with highest up 
@@ -709,8 +744,8 @@ BalancedCollectionQ::usage =
  be 'True' for the prenucleolus, otherwise 'False'. For its default value 'False' the function 
  Kernel[game] will be invoked to avoid infinite loops. To increases the computational reliability 
  in cases of numerical issues the following methods can be used: RevisedSimplex, CLP, GUROBI, MOSEK, 
- or Automatic. Default setting is RevisedSimplex. This option must be used in connection with CallMaximize->False. 
- For getting more precise results one can even set Method->{InteriorPoint, Tolerance->10^-10}.";
+ or Automatic. Default setting is RevisedSimplex. For getting more precise results one can even set 
+ Method->{InteriorPoint, Tolerance->10^-10}.";
 
 
 WeaklyBalancedCollectionQ::usage =
@@ -719,8 +754,7 @@ WeaklyBalancedCollectionQ::usage =
  be 'True' for the nucleolus, otherwise 'False'. For its default value 'False' the function Kernel[game] 
  will be invoked to avoid infinite loops. To increases the computational reliability in cases of numerical issues 
  the following methods can be used: RevisedSimplex, CLP, GUROBI, MOSEK, or Automatic. Default setting is RevisedSimplex. 
- This option must be used in connection with CallMaximize->False. For getting more precise results one
- can even set Method->{InteriorPoint, Tolerance->10^-10}.";
+ For getting more precise results one can even set Method->{InteriorPoint, Tolerance->10^-10}.";
 
 kBalancednessQ::usage =
 "kBalancednessQ[collect_List, coalOfsize_k, options] determines whether the coalition collection
@@ -733,12 +767,14 @@ BalancedSelectionQ::usage =
  Implements Kohlberg's Theorem. The return value must be 'True' for the prenucleolus, 
  otherwise 'False'. It might be that this function returns in any case a 'False', 
  this is due to circumvent wrong selections. Whenever one has computed the prekernel 
- set, one can set the option Tight->True to filter out the prenucleolus.";
+ set, one can set the option Tight->True to filter out the prenucleolus. It is recommended
+ to switch to BalancedCollectionQ, which is more robust.";
 
 WeaklyBalancedSelectionQ::usage = 
 "WeaklyBalancedSelectionQ[game,payoff,options] or WeaklyBalancedSelectionQ[coalstruct, options] 
  determines whether the induced collections are weakly balanced w.r.t. all excess levels. 
- Implements a weak form of Kohlberg's Theorem, i.e. it allows zero weights.";
+ Implements a weak form of Kohlberg's Theorem, i.e. it allows zero weights. It is recommended
+ to switch to WeaklyBalancedCollectionQ, which is more robust.";
 
 SelectionKBalancedQ::usage =
 "SelectionKBalancedQ[game, payoff,k options] or SelectionKBalancedQ[coalstruct,k options] 
@@ -757,12 +793,14 @@ PreKernelElement::usage =
 PreKernelSolution::usage = 
 "PreKernelSolution[game,payoff,options] computes a pre-kernel solution by relying on 
  Algorithm 8.1.1 and 8.2.1 of Meinhardt (2013). Default solver is SolutionExact -> True in order to call
-FindMinimum set SolutionExact->False. If the solution is still not correct or to search for a
-different pre-kernel element change the Method of FindMinimum, admissible values are: Method -> Automatic
-either to: Method -> Newton, Method -> ConjugateGradient, Method -> PrincipalAxis or Method -> IPOPT. 
-By setting the  option AntiPreKernel -> True,  an anti-pre-kernel of the game can be computed. In order to look for 
-further solutions, invoke   {prk,cvfunc,grad} = PreKernelSolution[game,payoff, ConjugateFunction -> True, 
-ShowObjectiveFunction -> True].";
+ FindMinimum set SolutionExact->False. If the solution is still not correct or to search for a
+ different pre-kernel element change the Method of FindMinimum, admissible values are: Method -> Automatic
+ either to: Method -> Newton, Method-> QuasiNewton, Method -> InteriorPoint, Method->Gradient, 
+ Method -> ConjugateGradient, Method -> PrincipalAxis, Method->LevenbergMarquardt, Method->GUROBI, 
+ Method->MOSEK, or Method -> IPOPT.  By setting the  option AntiPreKernel -> True,  
+ an anti-pre-kernel of the game can be computed. In order to look for further solutions, invoke   
+ {prk,cvfunc,grad} = PreKernelSolution[game,payoff, ConjugateFunction -> True, 
+ ShowObjectiveFunction -> True].";
 
 AntiPreKernelSolution::usage = 
 "AntiPreKernelSolution[game,payoff,options] computes an anti-pre-kernel solution by relying on a 
@@ -1029,7 +1067,9 @@ StrongEpsCore2d::usage =
 "StrongEpsCore2d[game,opts] plots the strong epsilon core of a three person game. For more details see FilledCoreV6[].";
 
 FilledCoreV6::usage =
-"FilledCoreV6[game,opts] plots the core of a three person game. Filled the core area with light blue color. Furthermore, the Shapley value will be depicted as a blue point, the kernel as a light red, the pre-kernel as a red, and the nucleolus as a green point. Dedicated for Mathematica Version 6.x or higher only.";
+"FilledCoreV6[game,opts] plots the core of a three person game. Filled the core area with light blue color. 
+ Furthermore, the Shapley value will be depicted as a blue point, the kernel as a light red, the pre-kernel 
+ as a red, and the nucleolus as a green point. Dedicated for Mathematica Version 6.x or higher only.";
 
 Vec3DToSimplex::usage = 
 "Vec3DToSimplex[{x1,x2,x3}] transforms a vector of dimension 3 into a vector of dimension 2.";
@@ -1128,7 +1168,8 @@ kCover::usage =
 "kCover[game,k] determines the k-cover of the game. k is a natural number.";
 
 kConvexity::usage = 
-"kConvexity[game] determines whether the TU-game is k-convex. Return value is a list of natural numbers to indicate which kind of k-convexity is fulfilled. In case that the game is not k-convex, a list of zeors will be returned."; 
+"kConvexity[game] determines whether the TU-game is k-convex. Return value is a list of natural numbers to indicate 
+ which kind of k-convexity is fulfilled. In case that the game is not k-convex, a list of zeors will be returned."; 
 
 CoreElementsQ::usage = 
 "CoreElementsQ[game,payoff] checks if a list of payoffs contain core allocations."; 
@@ -1291,9 +1332,9 @@ ProperContribution::usage =
 
 
 Which[$OperatingSystem === "Unix",
-  Options[AverageConvexQ] := {DisplayAllResults -> False};
-  Options[BalancedCollectionQ] := {Method-> RevisedSimplex};
-  Options[SuperAdditiveQ] := {Silent -> True};
+  Options[AverageConvexQ] = {DisplayAllResults -> False};
+  Options[BalancedCollectionQ] = {Method-> RevisedSimplex};
+  Options[SuperAdditiveQ] = {Silent -> True};
   Options[DefineGame] = {RationalApproximate -> True};
   Options[CddVerticesCore] = {RationalExact -> True};
   Options[CddGmpVerticesCore] = {RationalExact -> True, WithIncidences -> False};
@@ -1304,12 +1345,12 @@ Which[$OperatingSystem === "Unix",
   Options[CddVerticesLowerSet] = {RationalExact -> True};
   Options[CddGmpPlotLowerSet] = {}; 
   Options[BestCoalitions] = {AllCoalitions -> False, AntiPreKernel -> False, MaximumSurpluses -> False, SmallestCardinality -> True}; 
-  Options[OptStepSize] := {Silent -> True, SmallestCardinality -> True}; 
-  Options[PreKernelElement] := {CalcStepSize -> True, PseudoInv->True,Silent -> True, SmallestCardinality -> True};
+  Options[OptStepSize] = {Silent -> True, SmallestCardinality -> True}; 
+  Options[PreKernelElement] = {CalcStepSize -> True, PseudoInv->True,Silent -> True, SmallestCardinality -> True, RationalTol -> 10^(-7)};
   Options[Modiclus] = {Method -> Automatic};
   Options[IsModiclusQ] = {Method -> Automatic};
-  Options[ModPreKernel] := {CalcStepSize -> True, PseudoInv->True,Silent -> True, SmallestCardinality -> True};       
-  Options[DirectionOfImprovement] := {CalcStepSize -> True, MaximumSurpluses -> False, PseudoInv->True,Silent -> True, SmallestCardinality -> True};
+  Options[ModPreKernel] = {CalcStepSize -> True, PseudoInv->True,Silent -> True, SmallestCardinality -> True};       
+  Options[DirectionOfImprovement] = {CalcStepSize -> True, MaximumSurpluses -> False, PseudoInv->True,Silent -> True, SmallestCardinality -> True};
   Options[Kernel] = {CallMaximize -> False, Method -> Automatic, DisplayAllResults -> False, EpsilonValue -> 0};
   Options[KernelCalculation] = {CallMaximize -> True, Method -> Automatic, ChangeInternalEps -> False, DisplayAllResults -> False, EpsilonValue -> 0, SetGameToNonZeroMonotonic -> False};
   Options[ModifiedKernel] = {Method -> Automatic};
@@ -1317,12 +1358,16 @@ Which[$OperatingSystem === "Unix",
   Options[ModifiedNucleolus] = {Method -> Automatic};
   Options[LexiCenter] = {Method -> Automatic};
   Options[PreNucleolus] = {Method -> Automatic};
-  Options[LorenzSolution] = {DigitPrecision -> 20, RationalApproximate -> True};
-  Options[DuttaRay] = {DigitPrecision -> 20, RationalApproximate -> True};
-  Options[kBalancednessQ] := {DisplayAllResults -> False, Silent -> True};
-  Options[BalancedSelectionQ] := {DisplayAllResults -> False, Silent -> True, Tight->False};
-  Options[WeaklyBalancedSelectionQ] := {DisplayAllResults -> False, Silent -> True, Tight->False};
-  Options[WeaklyBalancedCollectionQ] := {Method-> RevisedSimplex};
+  Options[NonLinPreNuc] = {Method -> Automatic};
+  Options[NonLinNuc] = {Method -> Automatic};
+  Options[ApproxNuc] = {Method -> Automatic};
+  Options[ApproxPreNuc] = {Method -> Automatic};
+  Options[LorenzSolution] = {DigitPrecision -> 20, RationalApproximate -> True,Method-> Automatic};
+  Options[DuttaRay] = {DigitPrecision -> 20, RationalApproximate -> True, Method-> Automatic};
+  Options[kBalancednessQ] = {DisplayAllResults -> False, Silent -> True};
+  Options[BalancedSelectionQ] = {DisplayAllResults -> False, Silent -> True, Tight->False};
+  Options[WeaklyBalancedSelectionQ] = {DisplayAllResults -> False, Silent -> True, Tight->False};
+  Options[WeaklyBalancedCollectionQ] = {Method-> RevisedSimplex};
   Options[SelectionKBalancedQ] := {DisplayAllResults -> False, Silent -> True, Tight->False};
   Options[PreKernelSolution] = {AntiPreKernel -> False, ConjugateFunction -> False,  DigitPrecision -> 6, Method -> Automatic, ShowObjectiveFunction -> False, RationalTol -> 10^(-9),  Silent -> True, SmallestCardinality -> True, SolutionExact -> True}; (* If the solution is not correct, change Method to: "Newton", "ConjugateGradient", "PrincipalAxis"  *)
   Options[PreKernel] = {AntiPreKernel -> False, RationalTol -> 10^(-9),  Silent -> True, SmallestCardinality -> True};        
@@ -1334,23 +1379,27 @@ Which[$OperatingSystem === "Unix",
   Options[AllAntiSurpluses] = {DisplayMatrixForm -> False};
   Options[ExcessPayoff] = {DisplayMatrixForm -> False};
   Options[FindKernelSolution] = {DigitPrecision -> 6, RationalTol -> 10^(-7), SetRecursionLimit -> 512, Silent -> True};
-  Options[FindPreKernelSolution] = {DigitPrecision -> 6, RationalTol -> 10^(-7), SetRecursionLimit -> 512, Silent -> True}; 
+  Options[FindPreKernelSolution] = {DigitPrecision -> 6, RationalTol -> 10^(-7), SetRecursionLimit -> 512, Silent -> True};
+  Options[PreKernelQ] = {RationalTol -> 10^(-6)};
+  Options[AntiPreKernelQ] = {RationalTol -> 10^(-6)};
+  Options[MaxExcessBalanced] = {RationalTol -> 10^(-6)};
+  Options[MinExcessBalanced] = {RationalTol -> 10^(-6)}; 
   Options[UpperSetIncImputationQ] = {Silent -> True};
   Options[LowerSetIncImputationQ] = {Silent -> True};
   Options[PreKernelEqualsKernelQ] = {Silent -> True};
-  Options[AnimationKernelProperty2d] = {UpperCritVal ->{5}, LowerCritVal -> {},IncSize -> {-(1/4)},UseManipulate->False};
+  Options[AnimationKernelProperty2d] = {UpperCritVal ->{5}, LowerCritVal -> {},IncSize -> {-(1/4)}, FigureSize -> 500, UseManipulate->False};
   Options[StrongEpsCore2d] = {EpsilonValue -> 5,FigureSize -> 500,Labeling -> True};
   Options[FilledCoreV6] = {DisplayLegend -> True,FigureSize -> 500,PreImpSet -> True,Silent -> False};
-  Options[SetsToVec] :={EffVector -> False};
-  Options[ImputationToVec] :={DisplayAllResults -> False, EffVector -> False, InFavor -> False};
-  Options[ImputationToEqClass] := {BargUnanMat -> False};
-  Options[BargainUnanMatrix] :={EffVector -> True};
-  Options[DeltaLP]:={CallMaximize-> False};
-  Options[UnanConvexQ] := {DisplayAllResults -> False, DisplayCoord-> False, NumericalPrec -> 10^(-12)};
-  Options[UnanAvConvexQ] := {DisplayAllResults -> False, DisplayCoord-> False, NumericalPrec -> 10^(-12)};,
+  Options[SetsToVec] ={EffVector -> False};
+  Options[ImputationToVec] ={DisplayAllResults -> False, EffVector -> False, InFavor -> False};
+  Options[ImputationToEqClass] = {BargUnanMat -> False};
+  Options[BargainUnanMatrix] ={EffVector -> True};
+  Options[DeltaLP]={CallMaximize-> False, Method -> Automatic};
+  Options[UnanConvexQ] = {DisplayAllResults -> False, DisplayCoord-> False, NumericalPrec -> 10^(-12)};
+  Options[UnanAvConvexQ] = {DisplayAllResults -> False, DisplayCoord-> False, NumericalPrec -> 10^(-12)};,
 True,
-  Options[AverageConvexQ] := {DisplayAllResults -> False};
-  Options[BalancedCollectionQ] := {Method-> RevisedSimplex};
+  Options[AverageConvexQ] = {DisplayAllResults -> False};
+  Options[BalancedCollectionQ] = {Method-> RevisedSimplex};
   Options[DefineGame] = {RationalApproximate -> True};
   Options[CddVerticesCore] = {RationalExact -> False};
   Options[CddGmpVerticesCore] = {RationalExact -> True, WithIncidences -> False};
@@ -1361,12 +1410,12 @@ True,
   Options[CddGmpPlotLowerSet] = {}; 
   Options[BestCoalitions] := {AllCoalitions -> False, AntiPreKernel -> False, MaximumSurpluses -> False, SmallestCardinality -> True}; 
   Options[OptStepSize] := {Silent -> True, SmallestCardinality -> True};   
-  Options[PreKernelElement] := {CalcStepSize -> True, PseudoInv->True,Silent -> True, SmallestCardinality -> True};
+  Options[PreKernelElement] = {CalcStepSize -> True, PseudoInv->True,Silent -> True, SmallestCardinality -> True};
   Options[Modiclus] = {Method -> Automatic};
   Options[IsModiclusQ] = {Method -> Automatic};
-  Options[ModPreKernel] := {CalcStepSize -> True, PseudoInv->True,Silent -> True, SmallestCardinality -> True};
+  Options[ModPreKernel] = {CalcStepSize -> True, PseudoInv->True,Silent -> True, SmallestCardinality -> True};
   Options[ProperModPreKernel] = {AntiPreKernel -> False, ConjugateFunction -> False,  DigitPrecision -> 6, Method -> Automatic, ShowObjectiveFunction -> False, RationalTol -> 10^(-9),  Silent -> True, SmallestCardinality -> True, SolutionExact -> False};
-  Options[DirectionOfImprovement] := {CalcStepSize -> True, MaximumSurpluses -> False, PseudoInv->True, Silent -> True, SmallestCardinality -> True};
+  Options[DirectionOfImprovement] = {CalcStepSize -> True, MaximumSurpluses -> False, PseudoInv->True, Silent -> True, SmallestCardinality -> True};
   Options[Kernel] = {CallMaximize -> False, Method -> Automatic, DisplayAllResults -> False, EpsilonValue -> 0}; 
   Options[KernelCalculation] = {CallMaximize -> True, Method -> Automatic, ChangeInternalEps -> False, DisplayAllResults -> False, EpsilonValue -> 0, SetGameToNonZeroMonotonic -> False};
   Options[ModifiedKernel] = {Method -> Automatic}; 
@@ -1374,18 +1423,22 @@ True,
   Options[ModifiedNucleolus] = {Method -> Automatic}; 
   Options[LexiCenter] = {Method -> Automatic}; 
   Options[PreNucleolus] = {Method -> Automatic};
-  Options[LorenzSolution] = {DigitPrecision -> 20, RationalApproximate -> True};
-  Options[DuttaRay] = {DigitPrecision -> 20, RationalApproximate -> True};
-  Options[kBalancednessQ] := {DisplayAllResults -> False, Silent -> True};
-  Options[BalancedSelectionQ] := {DisplayAllResults -> False,  Silent -> True, Tight->False}
-  Options[WeaklyBalancedSelectionQ] := {DisplayAllResults -> False,  Silent -> True, Tight->False};
-  Options[BalancedCollectionQ] := {Method-> RevisedSimplex};
-  Options[SelectionKBalancedQ] := {DisplayAllResults -> False, Silent -> True, Tight->False};
+  Options[NonLinPreNuc] = {Method -> Automatic};
+  Options[NonLinNuc] = {Method -> Automatic};
+  Options[ApproxNuc] = {Method -> Automatic};
+  Options[ApproxPreNuc] = {Method -> Automatic};
+  Options[LorenzSolution] = {DigitPrecision -> 20, RationalApproximate -> True, Method-> Automatic};
+  Options[DuttaRay] = {DigitPrecision -> 20, RationalApproximate -> True, Method-> Automatic};
+  Options[kBalancednessQ] = {DisplayAllResults -> False, Silent -> True};
+  Options[BalancedSelectionQ] = {DisplayAllResults -> False,  Silent -> True, Tight->False}
+  Options[WeaklyBalancedSelectionQ] = {DisplayAllResults -> False,  Silent -> True, Tight->False};
+  Options[BalancedCollectionQ] = {Method-> RevisedSimplex};
+  Options[SelectionKBalancedQ] = {DisplayAllResults -> False, Silent -> True, Tight->False};
   Options[PreKernelSolution] = {AntiPreKernel -> False, ConjugateFunction -> False,  DigitPrecision -> 6, Method -> Newton, ShowObjectiveFunction -> False, RationalTol -> 10^(-9),  Silent -> True, SmallestCardinality -> True, SolutionExact -> False};
   Options[PreKernel] = {AntiPreKernel -> False, RationalTol -> 10^(-9),  Silent -> True, SmallestCardinality -> True};    
   Options[AntiPreKernelSolution] = {AntiPreKernel -> True, ConjugateFunction -> False, DigitPrecision -> 6, Method -> Newton, ShowObjectiveFunction -> False, RationalTol -> 10^(-9), Silent -> True, SmallestCardinality -> True, SolutionExact -> False};   
   Options[BestCoalToMatrix] = {DisplayAllResults -> True, DisplayMatrixForm -> True}; 
-  Options[ImputationToMatrix] := Options[BestCoalToMatrix]; 
+  Options[ImputationToMatrix] = Options[BestCoalToMatrix]; 
   Options[ConvexConjugate] = {Silent -> True};
   Options[AllMaxSurpluses] = {DisplayMatrixForm -> False};
   Options[AllAntiSurpluses] = {DisplayMatrixForm -> False};
@@ -1395,16 +1448,20 @@ True,
   Options[UpperSetIncImputationQ] = {Silent -> True};
   Options[LowerSetIncImputationQ] = {Silent -> True};
   Options[PreKernelEqualsKernelQ] = {Silent -> True};
+  Options[PreKernelQ] = {RationalTol -> 10^(-6)};
+  Options[AntiPreKernelQ] = {RationalTol -> 10^(-6)};
+  Options[MaxExcessBalanced] = {RationalTol -> 10^(-6)};                        
+  Options[MinExcessBalanced] = {RationalTol -> 10^(-6)};
   Options[AnimationKernelProperty2d] = {UpperCritVal ->{5}, LowerCritVal -> {},IncSize -> {-(1/4)},UseManipulate->False};
   Options[StrongEpsCore2d] = {EpsilonValue -> 5,FigureSize -> 500,Labeling -> True};
   Options[FilledCoreV6] = {DisplayLegend -> True,FigureSize -> 500,PreImpSet -> True,Silent -> False};
-  Options[SetsToVec] :={EffVector -> False};
-  Options[ImputationToVec] :={DisplayAllResults -> False, EffVector -> False, InFavor -> False};
-  Options[ImputationToEqClass] := {BargUnanMat -> False};
-  Options[BargainUnanMatrix] :={EffVector -> True};
-  Options[DeltaLP]:={CallMaximize-> False};
-  Options[UnanConvexQ] := {DisplayAllResults -> False, DisplayCoord-> False, NumericalPrec -> 10^(-12)};
-  Options[UnanAvConvexQ]  := {DisplayAllResults -> False, DisplayCoord-> False, NumericalPrec -> 10^(-12)};
+  Options[SetsToVec] ={EffVector -> False};
+  Options[ImputationToVec] ={DisplayAllResults -> False, EffVector -> False, InFavor -> False};
+  Options[ImputationToEqClass] = {BargUnanMat -> False};
+  Options[BargainUnanMatrix] ={EffVector -> True};
+  Options[DeltaLP]={CallMaximize-> False, Method -> Automatic};
+  Options[UnanConvexQ] = {DisplayAllResults -> False, DisplayCoord-> False, NumericalPrec -> 10^(-12)};
+  Options[UnanAvConvexQ]  = {DisplayAllResults -> False, DisplayCoord-> False, NumericalPrec -> 10^(-12)};
 ];
 
 
@@ -1614,7 +1671,7 @@ Transfer::argerr="Five arguments were expected.";
 Begin["`Private`"];
 
 (* Check the directory where you have installed your packages *)
-If[GreaterEqual[$VersionNumber,9.],Needs["PlotLegends`"],True];
+Needs["PlotLegends`"];
 
 (* 
   In order to run even the cddmathlink libraries in parallel, we have to create here some artificial 
@@ -1675,7 +1732,7 @@ DefineGame[args___]:=(Message[DefineGame::argerr];$Failed);
 DefineGame[R_List, values_List, opts:OptionsPattern[DefineGame]] := (Clear[T]; T = R; Clear[v];
     approxrat = OptionValue[RationalApproximate];
     If[SameQ[2^Length[T],Length[values]],True,Print["Game is not consistently defined!"];Return[]];
-    If[(approxrat && $VersionNumber >= 5.) == True, 
+    If[SameQ[approxrat,True], 
       MapThread[Set[v[#1], #2] &, {Coalitions, Rationalize[values, 5^(-12)]}];, 
       MapThread[Set[v[#1], #2] &, {Coalitions, values}];]);
 
@@ -2293,10 +2350,10 @@ PrintRemark[payoff_List]:= (
 ExcessPayoff[args___]:=(Message[ExcessPayoff::argerr];$Failed);
 ExcessPayoff[game_,payoff_List, opts:OptionsPattern[ExcessPayoff]]:= Block[{dispmat,assg,li,res},
   dispmat = OptionValue[DisplayMatrixForm];    
-  If[Depth[payoff] == 2 || Depth[payoff] == 3,
-    li = If[Length[Dimensions[payoff]]==1,{payoff},payoff];
+  If[Depth[payoff] === 2 || Depth[payoff] === 3,
+    li = If[Length[Dimensions[payoff]]===1,{payoff},payoff];
     assg = MapThread[Rule,{Map[x,T],#}] & /@ li;
-    res = ReplaceAll[(v[#]-x[#])& /@ Coalitions, #] & /@ assg;
+    res = ReplaceAll[(v[#]-x[#])& /@ Subsets[T], #] & /@ assg;
     Which[dispmat == False, res, True, DisplayErgb[res]],
             PrintRemark[payoff]
 		]
@@ -2339,19 +2396,21 @@ TIJsets[i_Integer, j_Integer]:=DeleteCases[Cases[ProperCoalitions,{___,i,___}],{
 
 
 MaxExcessBalanced[args___]:=(Message[MaxExcessBalanced::argerr];$Failed);
-MaxExcessBalanced[game_, payoff_List]:= Block[{dimpay},
+MaxExcessBalanced[game_, payoff_List,opts:OptionsPattern[MaxExcessBalanced]]:= Block[{rattol,dimpay},
+    rattol = OptionValue[RationalTol];
     dimpay = Dimensions[payoff];
     Which[Length[dimpay] === 2,
-         Which[(Last[dimpay]===Length[T] && Depth[payoff] ===3), MaxExcessBalCheck[game, #] & /@ payoff, 
+         Which[(Last[dimpay]===Length[T] && Depth[payoff] ===3), MaxExcessBalCheck[game, #,RationalTol->rattol] & /@ payoff, 
                        True, PrintRemark[payoff]], 
    Length[dimpay] === 1,
-            Which[(First[dimpay]===Length[T] && Depth[payoff] === 2 ), MaxExcessBalCheck[game, payoff], 
+            Which[(First[dimpay]===Length[T] && Depth[payoff] === 2 ), MaxExcessBalCheck[game, payoff,RationalTol->rattol], 
                          True,  PrintRemark[payoff]], 
    True, PrintRemark[payoff]]
 ];
 
-MaxExcessBalCheck[game_,payoff_List]:= 
- Block[{plpr,rvpr,asspay,sij,sji,msrplij,msrplji,msrij,msrji,lthij,tolvec,sysij,sysji,eqQ},
+MaxExcessBalCheck[game_,payoff_List,opts:OptionsPattern[MaxExcessBalanced]]:= 
+ Block[{rattol,plpr,rvpr,asspay,sij,sji,msrplij,msrplji,msrij,msrji,lthij,tolvec,sysij,sysji,eqQ},
+    rattol = OptionValue[RationalTol];
     plpr = PlayerPairs[T];
     rvpr = Reverse[#] & /@ plpr;
     asspay = AssgPay[payoff];
@@ -2360,27 +2419,29 @@ MaxExcessBalCheck[game_,payoff_List]:=
     {msrplij,msrplji}= {MaxExcess[sij, asspay],MaxExcess[sji, asspay]};
     {msrij,msrji} = {msrplij - msrplji,msrplji - msrplij};
     lthij = Binomial[Length[T],2];
-    tolvec = Table[1.5*10^(-7), {i, lthij}];
-    sysij = Union[MapThread[LessEqual, {Abs[msrij], tolvec}]];
-    sysji = Union[MapThread[LessEqual, {Abs[msrji], tolvec}]];
+    tolvec = Array[1.5*rattol &, lthij];
+    sysij = Union[MapThread[LessEqual, {Abs[N[msrij]], tolvec}]];
+    sysji = Union[MapThread[LessEqual, {Abs[N[msrji]], tolvec}]];
     eqQ = Apply[Join, {sysij, sysji}];
     Apply[And, eqQ]
 ];
 
 MinExcessBalanced[args___]:=(Message[MinExcessBalanced::argerr];$Failed);
-MinExcessBalanced[game_, payoff_List]:= Block[{dimpay},
+MinExcessBalanced[game_, payoff_List,opts:OptionsPattern[MaxExcessBalanced]]:= Block[{rattol,dimpay},
+    rattol = OptionValue[RationalTol]; 
     dimpay = Dimensions[payoff];
     Which[Length[dimpay] === 2,
-         Which[(Last[dimpay]===Length[T] && Depth[payoff] ===3), MinExcessBalCheck[game, #] & /@ payoff, 
+         Which[(Last[dimpay]===Length[T] && Depth[payoff] ===3), MinExcessBalCheck[game, #,RationalTol->rattol] & /@ payoff, 
                        True, PrintRemark[payoff]], 
    Length[dimpay] === 1,
-            Which[(First[dimpay]===Length[T] && Depth[payoff] === 2 ), MinExcessBalCheck[game, payoff], 
+            Which[(First[dimpay]===Length[T] && Depth[payoff] === 2 ), MinExcessBalCheck[game, payoff,RationalTol->rattol], 
                          True,  PrintRemark[payoff]], 
    True, PrintRemark[payoff]]
 ];
 
-MinExcessBalCheck[game_,payoff_List]:= 
- Block[{plpr, rvpr, asspay,sij,sji,msrplij,msrplji,msrij, msrji,lthij,tolvec,sysij,sysji,eqQ},
+MinExcessBalCheck[game_,payoff_List,opts:OptionsPattern[MinExcessBalanced]]:= 
+ Block[{rattol,plpr, rvpr, asspay,sij,sji,msrplij,msrplji,msrij, msrji,lthij,tolvec,sysij,sysji,eqQ},
+    rattol = OptionValue[RationalTol];
     plpr = PlayerPairs[T];
     rvpr = Reverse[#] & /@ plpr;
     asspay = AssgPay[payoff];
@@ -2389,7 +2450,7 @@ MinExcessBalCheck[game_,payoff_List]:=
     {msrplij,msrplji} = {MinExcess[sij, asspay],MinExcess[sji, asspay]};
     {msrij,msrji} = {msrplij - msrplji,msrplji - msrplij};
     lthij = Binomial[Length[T],2];
-    tolvec = Table[1.5*10^(-8), {i, lthij}];
+    tolvec = Table[1.5*rattol, {i, lthij}];
     sysij = Union[MapThread[LessEqual, {Abs[msrij], tolvec}]];
     sysji = Union[MapThread[LessEqual, {Abs[msrji], tolvec}]];
     eqQ = Apply[Join, {sysij, sysji}];
@@ -2600,7 +2661,8 @@ SeqLP[obf_, cmat_List, bvect_List,bds_List,bA_:{},opts:OptionsPattern[ModifiedNu
     lw=First[#] &/@ Drop[bds,1];
     up=Last[#] &/@ Drop[bds,1];
     bv=-First[#] &/@ bvect;
-    bv0=Join[Join[bv,up],-lw]; 
+    bv0=Join[Join[bv,up],-lw];  
+    (* ConstraintSensitivity cannot be used with GUROBI. *)
     {res1,{yineq,yeq},zf}=LinearOptimization[obf,{cmat0,bv0},{meq,beq},{"PrimalMinimizer","ConstraintSensitivity","PrimalMinimumValue"},Method->mthd];
     res=Drop[res1,1];
     If[SameQ[zf,-Infinity],Return[Rationalize[res,10^(-9)]]];
@@ -2827,7 +2889,8 @@ PnSelectFTMCR[exc_List,sC_,lt_,tol_,pIk_:{},plIk_:{},pslex_:{},blQ_:True,mtrk_:0
 		sC1=Delete[sC,smtr];
 		Im=DeleteDuplicates[Join[pIk,sS]];
 		lIm1=Join[plIk,{lS}];
-	        bQ=BalancedSelectionQ[Im,tol,Tight->True];
+                bQ=First[BalancedSystemQ[Im, T]];
+	        (* bQ=BalancedSelectionQ[Im,tol,Tight->True]; *)
                 mt = ConstVec[Im];
                 mrk = MatrixRank[mt];
 		(*
@@ -2857,129 +2920,142 @@ In this section, we provide a set of functions that compute the nucleolus by a n
 
 *)   
 
+NonLinPreNuc[game_,p_,k_,opts:OptionsPattern[NonLinNuc]]:=Block[{mthd},
+     mthd=OptionValue[Method];
+     NonLinPreNuc[game,p,k,10^(-2),2,Method->mthd]
+];
 
-NonLinPreNuc[game_,p_,k_,tol_:10^(-2),jj_:2]:=Block[{sar,vars,xpk,mcl,tol1,pmcl,clm,lcm,cex},
-                      sar=ApproxPreNuc[game,p,k];
-		      vars=x[#] &/@ T;
-		      xpk=vars /. sar[[2]];
+
+
+NonLinPreNuc[game_,p_,k_,tol_:10^(-2),jj_:2,opts:OptionsPattern[NonLinPreNuc]]:=Block[{mthd,sar,vars,xpk,mcl,tol1,pmcl,clm,lcm,cex},
+                      mthd=OptionValue[Method];
+                      sar=ApproxPreNuc[game,p,k,Method->mthd];
+                      vars=x[#] &/@ T;
+                      xpk=vars /. sar[[2]];
                       pmcl=PnModCoalArray[game,xpk,tol];
- 		      clm=pmcl[[1]];
- 		      lcm=pmcl[[2]];
- 		      cex=pmcl[[3]];
- 		      PrependTo[clm,T];
- 		      PrependTo[lcm,1];
- 		      PrependTo[cex,0];
- 		      mcl={clm,lcm,cex};
+                      clm=pmcl[[1]];
+                      lcm=pmcl[[2]];
+                      cex=pmcl[[3]];
+                      PrependTo[clm,T];
+                      PrependTo[lcm,1];
+                      PrependTo[cex,0];
+                      mcl={clm,lcm,cex};
                       (* mcl=MapThread[Prepend,{pmcl,{T,1,0}}]; *)
-		      tol1=10^(-jj);
+                      tol1=10^(-jj);
                       If[clm=={} && jj<11,
-			 NonLinPreNuc[game,p,k,tol1,jj+1],
-			 If[SameQ[mcl,{{},{},{}}],
-                        	 Return[$Failed],
-				 FormatPreNuc[game,p,k,tol1,jj,mcl,vars]
-			 ]
-		      ]
-									   
-					     ];
+                         NonLinPreNuc[game,p,k,tol1,jj+1,Method->mthd],
+                         If[SameQ[mcl,{{},{},{}}],
+                                 Return[$Failed],
+                                 FormatPreNuc[game,p,k,tol1,jj,mcl,vars]
+                         ]
+                      ]
+                                                                           
+           ];
 
 
 FormatPreNuc[game_,p_,k_,tol_,jj_,iim_List,xvars_List]:=Block[{lsg},
                       lsg=Flatten[FindSolX[iim,xvars]];
                       If[SameQ[lsg,{}] && jj <11,NonLinPreNuc[game,p,k,tol,jj+1],
-		       If[SameQ[lsg,{}],Return[$Failed],xvars /. lsg]]
-					   ];
+                       If[SameQ[lsg,{}],Return[$Failed],xvars /. lsg]]
+            ];
 
+NonLinNuc[game_,p_,k_,opts:OptionsPattern[NonLinNuc]]:=Block[{mthd},
+     mthd=OptionValue[Method];
+     NonLinNuc[game,p,k,10^(-2),2,Method->mthd]
+];
 
-NonLinNuc[game_,p_,k_,tol_:10^(-2),jj_:2]:=Block[{sar,vars,xpk,mcl,tol1},
-                      sar=ApproxNuc[game,p,k];
-		      vars=x[#] &/@ T;
-		      xpk=vars /. sar[[2]];
+NonLinNuc[game_,p_,k_,tol_:10^(-2),jj_:2,opts:OptionsPattern[NonLinNuc]]:=Block[{sar,vars,xpk,mcl,tol1,mthd},
+                      mthd=OptionValue[Method];
+                      sar=ApproxNuc[game,p,k,Method->mthd];
+                      vars=x[#] &/@ T;
+                      xpk=vars /. sar[[2]];
                       mcl=ModCoalArray[game,xpk,tol];
-		      tol1=10^(-jj);
-                      If[mcl=={} && jj<11,NonLinNuc[game,p,k,tol1,jj+1],FormatSol[game,p,k,tol1,jj,mcl,vars]]
-					     ];
+                      tol1=10^(-jj);
+                      If[mcl=={} && jj<11,NonLinNuc[game,p,k,tol1,jj+1,Method->mthd],FormatSol[game,p,k,tol1,jj,mcl,vars]]
+        ];
 
 
 FormatSol[game_,p_,k_,tol_,jj_,iim_List,xvars_List]:=Block[{lsg},
                       lsg=Flatten[FindSolX[iim,xvars]];
                       If[SameQ[lsg,{}] && jj <11,NonLinNuc[game,p,k,tol,jj+1],
-		       If[SameQ[lsg,{}],Return[$Failed],xvars /. lsg]]
-					   ];
+                       If[SameQ[lsg,{}],Return[$Failed],xvars /. lsg]]
+        ];
 
 
 FormatPreNuc[game_,p_,k_,tol_,jj_,iim_List,xvars_List]:=Block[{lsg},
                       lsg=Flatten[FindSolX[iim,xvars]];
                       If[SameQ[lsg,{}] && jj <11,NonLinPreNuc[game,p,k,tol,jj+1],
-		       If[SameQ[lsg,{}],Return[$Failed],xvars /. lsg]]
-					   ];
+                       If[SameQ[lsg,{}],Return[$Failed],xvars /. lsg]]
+            ];
 
 
 FindSolX[ssz_List,vars_List]:=Block[{sys,eqsys},
-			   sys=(v[#]-x[#]) &/@ ssz[[1]];  
+                           sys=(v[#]-x[#]) &/@ ssz[[1]];  
                            eqsys=SolveSys[sys,ssz[[2]],ssz[[3]]];
                            If[NumberQ[eqsys],Return[{}],Solve[eqsys,vars]]
-			    ];
+        ];
 
 SolveSys[bsys_List,iim_List,exc_List,glsys_:{},idx_:1]:=Block[{lg,gls,eq,zv,vexc,rsys,nwgl,riim,rexc},
                      gls=Take[bsys,First[iim]];
-		     lg=Length[gls];
-		     If[exc=={} && lg==1,True,vexc=Take[exc,First[iim]]];
-		     eq=If[idx==1,
-			   zv=Table[0,lg];
-			   MapThread[Equal,{gls,zv}],
-			   If[lg>1,Apply[Equal,gls],
-			     Print["Warning:: An isolated excess found!"];
-		             Print["Solution might not be correct!!!"];
-			     MapThread[Equal,{gls,vexc}]]
-			];
-		     nwgl=Append[glsys,eq];				      
+                     lg=Length[gls];
+                     If[exc=={} && lg==1,True,vexc=Take[exc,First[iim]]];
+                     eq=If[idx==1,
+                           zv=Table[0,lg];
+                           MapThread[Equal,{gls,zv}],
+                           If[lg>1,Apply[Equal,gls],
+                             Print["Warning:: An isolated excess found!"];
+                             Print["Solution might not be correct!!!"];
+                             MapThread[Equal,{gls,vexc}]]
+                        ];
+                     nwgl=Append[glsys,eq];                                   
                      rsys=Drop[bsys,First[iim]];
-		     rexc=Drop[exc,First[iim]];
-		     riim=Delete[iim,1];		     
+                     rexc=Drop[exc,First[iim]];
+                     riim=Delete[iim,1];                     
                      If[riim=={},
-			Flatten[nwgl],
-			SolveSys[rsys,riim,rexc,nwgl,idx+1]
-		      ]
-		     ];
+                        Flatten[nwgl],
+                        SolveSys[rsys,riim,rexc,nwgl,idx+1]
+                      ]
+                     ];
 
 
 
-ApproxNuc[game_,p_,k_]:=Block[{lt,obj,const,rl,vars,sC,pexc,vi,eq},
-		        vars = x[#] &/@ T;
-			lt=Length[T];       
+ApproxNuc[game_,p_,k_,opts:OptionsPattern[ApproxNuc]]:=Block[{mthd,lt,obj,const,rl,vars,sC,pexc,vi,eq},
+                        mthd=OptionValue[Method];
+                        vars = x[#] &/@ T;
+                        lt=Length[T];       
                         sC=Delete[Subsets[T],1];
-			pexc=(v[#]-x[#]-k1)^p1 &/@ sC;
-			rl=MapThread[Rule,{{p1,k1},{p,k}}];
+                        pexc=(v[#]-x[#]-k1)^p1 &/@ sC;
+                        rl=MapThread[Rule,{{p1,k1},{p,k}}];
                         obj = Total[pexc] /. rl;
-			vi=v[#] &/@ Take[sC,lt];
+                        vi=v[#] &/@ Take[sC,lt];
                         const=Apply[And,MapThread[GreaterEqual,{vars,vi}]];
-			eq=Total[vars]==v[T];
+                        eq=Total[vars]==v[T];
                         AppendTo[const,eq];
-                        NMinimize[obj,{const},vars]
-			];
+                        NMinimize[Prepend[{const},obj],vars,Method->mthd]
+                        ];
 
 ModCoalArray[args___]:=(Message[ModCoalArray::argerr];$Failed);
 ModCoalArray[game_,payoff_,tol_:10^(-7)]:=Block[{sC,lt,prl,irQ,irc,slir,b0,I0,excpay,lI0,zv},
     sC=Delete[Delete[Subsets[T],1],-1];
-		lt=Length[T];				  
-		prl=Payoff[payoff];
-		irQ=Map[Abs[v[{#}]-x[#]]<=tol &,T] /.prl;
-		irc={#} &/@ T;
-		slir=Position[irQ,True];
-		b0=Extract[irc,slir];
-		I0=Union[{T},b0];
-		lI0=Length[I0];
-		zv=Table[0,lI0];
-                excpay=Delete[Delete[Flatten[ExcessPayoff[game,payoff]],1],-1];
-                SelectMCR[excpay,sC,lt,tol,I0,{lI0},zv]
-				     ];
+    lt=Length[T];                             
+    prl=Payoff[payoff];
+    irQ=Map[Abs[v[{#}]-x[#]]<=tol &,T] /.prl;
+    irc={#} &/@ T;
+    slir=Position[irQ,True];
+    b0=Extract[irc,slir];
+    I0=Union[{T},b0];
+    lI0=Length[I0];
+    zv=Table[0,lI0];
+    excpay=Delete[Delete[Flatten[ExcessPayoff[game,payoff]],1],-1];
+    SelectMCR[excpay,sC,lt,tol,I0,{lI0},zv]
+ ];
 
 PnModCoalArray[game_,payoff_,tol_]:=Block[{sC,lt,excpay},
     sC=Delete[Delete[Subsets[T],1],-1];
-		lt=Length[T];				  
-                excpay=Delete[Delete[Flatten[ExcessPayoff[game,payoff]],1],-1];
-                PnSelectMCR[excpay,sC,lt,tol,{},{},{}]
-				     ];
+    lt=Length[T];                             
+    excpay=Delete[Delete[Flatten[ExcessPayoff[game,payoff]],1],-1];
+    PnSelectMCR[excpay,sC,lt,tol,{},{},{}]
+   ];
 
 
 SelectMCR[exc_List,sC_,lt_,tol_,Ik_:{},lIk_:{},slex_:{0},blQ_:False,mtrk_:0]:=Block[{mtr,smtr,slc,sS,lS,sC1,Im,mrk,bQ,mt,mkr,exc1,slex1,lIm1},
@@ -2987,58 +3063,60 @@ SelectMCR[exc_List,sC_,lt_,tol_,Ik_:{},lIk_:{},slex_:{0},blQ_:False,mtrk_:0]:=Bl
      smtr=Position[mtr,True];
      slc=Extract[exc,smtr];
      sS=Extract[sC,smtr];
-		lS=Length[sS];				
-		sC1=Delete[sC,smtr];
-		Im=Join[Ik,sS];
-		lIm1=Join[lIk,{lS}];
-	        bQ=IIMBalancedSelectionQ[Im,tol,Tight->True];
-                mt = ConstVec[Im];
-                mrk = MatrixRank[mt];
-                (*
-		  If blQ==True, but bQ==False with mrk==mtrk, then the new sets are still in the span.
-		  However, if mrk>mtrk and bQ==False, the collection of sets ought to be
-		  discarded during the next iteration.
-		*)
-		If[SameQ[blQ,True] && LessEqual[mtrk,mrk],bQ=True,False];
-	        slex1=Flatten[Append[slex,slc]];
-		exc1=Delete[exc,smtr];
-		If[SameQ[mrk,lt] && SameQ[bQ,True],
-		   {Im,lIm1,slex1},
-		   If[bQ==True,
-			  SelectMCR[exc1,sC1,lt,tol,Im,lIm1,slex1,bQ,mrk],
-			  {}
-		   ]
-		      ]
-		        ];
+     lS=Length[sS];                          
+     sC1=Delete[sC,smtr];
+     Im=Join[Ik,sS];
+     lIm1=Join[lIk,{lS}];
+     bQ=First[BalancedSystemQ[Im, T]];
+     (* bQ=IIMBalancedSelectionQ[Im,tol,Tight->True]; *)
+     mt = ConstVec[Im];
+     mrk = MatrixRank[mt];
+     (*
+     If blQ==True, but bQ==False with mrk==mtrk, then the new sets are still in the span.
+     However, if mrk>mtrk and bQ==False, the collection of sets ought to be
+     discarded during the next iteration.
+      *)
+     If[SameQ[blQ,True] && LessEqual[mtrk,mrk],bQ=True,False];
+     slex1=Flatten[Append[slex,slc]];
+     exc1=Delete[exc,smtr];
+     If[SameQ[mrk,lt] && SameQ[bQ,True],
+       {Im,lIm1,slex1},
+       If[bQ==True,
+          SelectMCR[exc1,sC1,lt,tol,Im,lIm1,slex1,bQ,mrk],
+          {}
+       ]
+     ]
+ ];
 
 PnSelectMCR[exc_List,sC_,lt_,tol_,pIk_:{},plIk_:{},pslex_:{},blQ_:False,mtrk_:0]:=Block[{mtr,smtr,slc,sS,lS,sC1,mrk,Im,bQ,mt,mkr,exc1,slex1,lIm1},
     mtr=Abs[Subtract[#,Max[exc]]]<=tol &/@ exc;
     smtr=Position[mtr,True];
     slc=Extract[exc,smtr];
     sS=Extract[sC,smtr];
-		lS=Length[sS];				
-		sC1=Delete[sC,smtr];
-		Im=Join[pIk,sS];
-		lIm1=Join[plIk,{lS}];
-	        bQ=BalancedSelectionQ[Im,tol,Tight->True];
-                mt = ConstVec[Im];
-                mrk = MatrixRank[mt];
-	        (*
-		  If blQ==True, but bQ==False with mrk==mtrk, then the new sets are still in the span.
-		  However, if mrk>mtrk and bQ==False, the collection of sets ought to be
-		  discarded during the next iteration.
-		*)
-		If[SameQ[blQ,True] && LessEqual[mtrk,mrk],bQ=True,False];
-		slex1=Flatten[Append[pslex,slc]];
-		exc1=Delete[exc,smtr];
-		If[SameQ[mrk,lt] && SameQ[bQ,True],
-		   {Im,lIm1,slex1},
-		   If[SameQ[bQ,True],
-		      PnSelectMCR[exc1,sC1,lt,tol,Im,lIm1,slex1,bQ,mrk],
-		      {{},{},{}}
-		   ]
-		]
-							     ];
+    lS=Length[sS];                          
+    sC1=Delete[sC,smtr];
+    Im=Join[pIk,sS];
+    lIm1=Join[plIk,{lS}];
+    bQ=First[BalancedSystemQ[Im, T]];
+(*    bQ=BalancedSelectionQ[Im,tol,Tight->True]; *)
+    mt = ConstVec[Im];
+    mrk = MatrixRank[mt];
+    (*
+     If blQ==True, but bQ==False with mrk==mtrk, then the new sets are still in the span.
+     However, if mrk>mtrk and bQ==False, the collection of sets ought to be
+     discarded during the next iteration.
+     *)
+     If[SameQ[blQ,True] && LessEqual[mtrk,mrk],bQ=True,False];
+     slex1=Flatten[Append[pslex,slc]];
+     exc1=Delete[exc,smtr];
+     If[SameQ[mrk,lt] && SameQ[bQ,True],
+       {Im,lIm1,slex1},
+       If[SameQ[bQ,True],
+         PnSelectMCR[exc1,sC1,lt,tol,Im,lIm1,slex1,bQ,mrk],
+         {{},{},{}}
+         ]
+      ]
+  ];
 
 
 
@@ -3076,20 +3154,22 @@ IIMBalancedSelectionQ[selcoal_List, tol_,opts:OptionsPattern[BalancedSelectionQ]
 
 
 
-ApproxPreNuc[game_,p_,k_]:=Block[{obj,const,lt,ra,rl,vars,sC,pexc,vi,eq},
+ApproxPreNuc[game_,p_,k_,opts:OptionsPattern[ApproxPreNuc]]:=Block[{mthd,obj,const,lt,ra,rl,vars,sC,pexc,vi,eq},
       vars = x[#] &/@ T;
-			lt=Length[T];       
+      mthd=OptionValue[Method];
+      lt=Length[T];       
       sC=Delete[Subsets[T],1];
-			pexc=(v[#]-x[#]-k1)^p1 &/@ sC;
-			rl=MapThread[Rule,{{p1,k1},{p,k}}];
+      pexc=(v[#]-x[#]-k1)^p1 &/@ sC;
+      rl=MapThread[Rule,{{p1,k1},{p,k}}];
       obj = Total[pexc] /. rl;
-			ra=ReasonableOutcome[game];
+      ra=ReasonableOutcome[game];
       const=Apply[And,MapThread[LessEqual,{vars,ra}]];
-			(* Print["const=",const]; *)       
-			eq=Total[vars]==v[T];
-                        AppendTo[const,eq];
-                        NMinimize[obj,{const},vars]
-			];
+      (* Print["const=",const]; *)       
+      eq=Total[vars]==v[T];
+      AppendTo[const,eq];
+      NMinimize[Prepend[{const},obj],vars,Method->mthd]
+  ];
+
 
 
 (* This section is designated to the Modiclus Modified and Proper Modified Pre-Kernel *) 
@@ -3177,14 +3257,15 @@ Block[{sil, smc, optst, pinv, ovls, t0, dcvals, dcgame, doi, optstep, itpay,tol,
 ];
 
 ProperModPreKernel[args___]:=(Message[ProperModPreKernel::argerr];$Failed);
-ProperModPreKernel[game_,opts:OptionsPattern[ProperModPreKernel]] := Block[{ovls, dcvals, lt, t0, t1, DCGame, mdnc},
+ProperModPreKernel[game_,opts:OptionsPattern[ProperModPreKernel]] := Block[{ovls, dcvals, lt, t0, t1, dcpay,DCGame, mdnc},
   ovls = v[#] & /@ Coalitions; (* Storing original game values. *)
   t0 = T; (* Storing original game values. *)
   dcvals = DualCover[game];
   lt = Length[T];
   t1 = Range[2*lt];
+  dcpay=Table[v[T], Length[t1]]/2*Flatten[Append[{1, 1}, Array[0 &, Length[t1] - 2]]];
   DCGame = DefineGame[t1, dcvals];
-  mdnc = PreKernelSolution[DCGame,opts];
+  mdnc = PreKernelSolution[DCGame,dcpay,opts];
   DefineGame[t0, ovls]; (* Redefine the original game. *)
   Take[mdnc, lt]
   ];
@@ -3352,7 +3433,7 @@ IsSMPrenucleolusQ[game_, payoff_] :=
   dv = DualGame[game];
   av = (ovls + dv)/2;
   AVGame = DefineGame[T, av];
-  smpnQ = BalancedSelectionQ[AVGame, payoff, Tight -> True];
+  smpnQ = BalancedCollectionQ[AVGame, payoff];
   DefineGame[T, ovls];(*Redefine the original game.*)
   Return[smpnQ];
   ];
@@ -3535,11 +3616,10 @@ NormMinimize[mat_List, wghs_List]:=Block[{onesvec,zerolist,avars,constset,objfu,
     constset = MapThread[Greater[#1, #2] &, {avars, zerolist}];
     objfu = Norm[Transpose[mat].avars - onesvec];
     objsys=Prepend[constset,objfu];
-(* With constraints we get a floating point exception error under Linux and Version 7. $VersionNumber<=7 *)
-    If[SameQ[$OperatingSystem,"Unix"] && LessEqual[$VersionNumber,7],resmin = NMinimize[objfu, avars],
+    If[SameQ[$OperatingSystem,"Unix"],resmin = NMinimize[objfu, avars],
              resmin = NMinimize[objsys, avars]];
     gw = Last[#] & /@ resmin[[2]];
-    Rationalize[#,0.001] & /@ gw
+    Rationalize[#,10^(-9)] & /@ gw
 ];
 
 
@@ -3624,11 +3704,10 @@ WeakNormMinimize[mat_List, wghs_List]:=Block[{onesvec,zerolist,avars,constset,ob
     constset = MapThread[GreaterEqual[#1, #2] &, {avars, zerolist}];
     objfu = Norm[Transpose[mat].avars - onesvec];
     objsys=Prepend[constset,objfu];
-(* With constraints we get a floating point exception error under Linux and Version 7. $VersionNumber<=7 *)
-    If[SameQ[$OperatingSystem,"Unix"] && LessEqual[$VersionNumber,7],resmin = NMinimize[objfu, avars],
+    If[SameQ[$OperatingSystem,"Unix"],resmin = NMinimize[objfu, avars],
              resmin = NMinimize[objsys, avars]];
     gw = Last[#] & /@ resmin[[2]];
-    Rationalize[#,0.001] & /@ gw
+    Rationalize[#,10^(-9)] & /@ gw
 ];
 
 CollectionOfDecreasingExcess[args___]:=(Message[CollectionOfDecreasingExcess::argerr];$Failed);
@@ -3749,13 +3828,13 @@ CheckCoalStructure[selcoal_List, k_Integer, opts:OptionsPattern[SelectionKBalanc
     verb = OptionValue[Silent];
     If[verb === False, Print["selcoal=", selcoal ];, True ];
     Which[Depth[selcoal]  === 3,
-                     Which[GreaterEqual[k, Length[T]] === True,  BalancedSelectionQ[selcoal, opts],  
+                     Which[GreaterEqual[k, Length[T]] === True, First[BalancedSystemQ[selcoal, T, opts]],  
                                    GreaterEqual[k, 2] === True, SelctKBalacQ[selcoal, k, opts],
                                    True,  Print["The value of k must be an integer between 2 and ", Length[T]]],
                   Depth[selcoal]  === 4,
                        If[verb === False, Print["selcoal=", selcoal ];, True ];
                        cst = DeleteCases[selcoal,{}];
-                       Which[GreaterEqual[k, Length[T]] === True,  bcQ=BalancedSelectionQ[#, opts] &/@ cst,  
+                       Which[GreaterEqual[k, Length[T]] === True,  bcQ=First[BalancedSystemQ[#, T, opts]] &/@ cst,  
                                      GreaterEqual[k, 2] === True, SelctKBalacQ[#, k, opts] &/@ cst,
                                      True,  Print["The value of k must be an integer between 2 and ", Length[T]]],
                    selcoal ==={}, True, (* Depth[selcoal] ==2 *) 
@@ -3768,11 +3847,11 @@ CheckCoalStructure[selcoal_List, k_Integer, opts:OptionsPattern[SelectionKBalanc
 
 SelectionKBalancedQ[selcoal_List, k_Integer, opts:OptionsPattern[SelectionKBalancedQ]] := Block[{},
     Which[Depth[selcoal]  === 3,
-                     Which[GreaterEqual[k, Length[T]] === True,  BalancedSelectionQ[selcoal, opts],  
+                     Which[GreaterEqual[k, Length[T]] === True, First[BalancedSystemQ[selcoal, T, opts]],  
                                    GreaterEqual[k, 2] === True, SelctKBalacQ[selcoal, k, opts],
                                    True,  Print["The value of k must be an integer between 2 and ", Length[T]]],
                   Depth[selcoal]  === 4,
-                       Which[GreaterEqual[k, Length[T]] === True, BalancedSelectionQ[#, opts] &/@ selcoal,  
+                       Which[GreaterEqual[k, Length[T]] === True, First[BalancedSystemQ[#, T, opts]] &/@ selcoal,  
                                      GreaterEqual[k, 2] === True, SelctKBalacQ[#, k, opts] &/@ selcoal,
                                      True,  Print["The value of k must be an integer between 2 and ", Length[T]]],
                   True, Print["The input dimension is not correct."]
@@ -4139,18 +4218,20 @@ TransferConstraints[game_, i_Integer, j_Integer, eps_:0] :=
 
 DeltaLP[args___]:=(Message[DeltaLP::argerr];$Failed);
 DeltaLP[game_, i_Integer, j_Integer, eps_:0, ops:OptionsPattern[DeltaLP]] :=
-    Block[{changesolver},
+    Block[{changesolver,mthd},
+             mthd=OptionValue[Method];
              changesolver=OptionValue[CallMaximize];
-             DeltaLP[game, i, j, eps,changesolver]
+             DeltaLP[game, i, j, eps,changesolver,Method->mthd]
 ];
 
-DeltaLP[game_, i_Integer, j_Integer, eps_:0, changesolver_:False] :=
-   Block[{},
+DeltaLP[game_, i_Integer, j_Integer, eps_:0, changesolver_:False,ops:OptionsPattern[DeltaLP]] :=
+   Block[{mthd},
+        mthd=OptionValue[Method];
         Which[changesolver==False, 
-                             {zf,res}=LinearOptimization[-Global`\[Delta], Union[TransferConstraints[game, i, j, eps]], Join[x /@ T, {Global`\[Delta]}],{"PrimalMinimumValue","PrimalMinimizer"},Method->"Automatic"];
+                             {zf,res}=LinearOptimization[-Global`\[Delta], Union[TransferConstraints[game, i, j, eps]], Join[x /@ T, {Global`\[Delta]}],{"PrimalMinimumValue","PrimalMinimizer"}, Method->mthd];
                              Return[{zf,MapThread[Rule,{Join[x /@ T, {Global`\[Delta]}],res}]}],
               True, 
-                  Chop[Rationalize[NMaximize[Prepend[Union[TransferConstraints[game, i, j, eps]],Global`\[Delta]], Join[x /@ T, {Global`\[Delta]}]]]]]
+                  Chop[Rationalize[NMaximize[Prepend[{Union[TransferConstraints[game, i, j, eps]]},Global`\[Delta]], Join[x /@ T, {Global`\[Delta]}],Method->mthd]]]]
 ];
 
 delconst = {Global`\[Delta] >=  0};
@@ -4222,7 +4303,7 @@ FeasibleConstraints[ineq_, delta_,changesolver_,mthd_] :=
     varb = Append[x /@ T, redpara] // Flatten;
     zf = Total[redpara];
     sol = Which[SameQ[changesolver,False], LinearOptimization[zf, allineq, varb,{"PrimalMinimumValue","PrimalMinimizer"},Method-> mthd], (*RevisedSimplex *)
-                True, Rationalize[NMinimize[Prepend[allineq,zf], varb]]];
+                True, Rationalize[NMinimize[Prepend[{allineq},zf], varb,Method-> mthd]]];
     If[SameQ[changesolver,False],sol={zf,MapThread[Rule,{varb,Last[sol]}]},True];
     resl = x /@ T /. sol[[2]];
     setofineq = allineq /. Take[sol[[2]], -Length[redpara]];
@@ -4481,30 +4562,32 @@ DisplayMessage[payoff_List]:=(
 
 PreKernelQ[args___]:=(Message[PreKernelQ::argerr];$Failed);
 
-PreKernelQ[game_, payoff_List] :=Block[{tolv,graval,dimpay}, 
+PreKernelQ[game_, payoff_List,opts:OptionsPattern[PreKernelQ]] :=Block[{rattol,tolv,graval,dimpay},
+       rattol = OptionValue[RationalTol]; 
        graval = v[T];
        dimpay = Dimensions[payoff];
-       tolv=1.5*10^(-8);
+       tolv=1.5*rattol;
     Which[Length[dimpay] === 2,
-                                 Which[ (Last[dimpay]===Length[T] && Depth[payoff] ===3),MapThread[And,{(Abs[Total[#] - graval]<=tolv) & /@ payoff,MaxExcessBalanced[game, payoff]}],
+                                 Which[ (Last[dimpay]===Length[T] && Depth[payoff] ===3),MapThread[And,{(Abs[Total[#] - graval]<=tolv) & /@ payoff,MaxExcessBalanced[game, payoff,RationalTol->rattol]}],
                                                True, PrintRemark[payoff]],
                    Length[dimpay] === 1,
-                              Which[(First[dimpay]===Length[T] && Depth[payoff] === 2 ), MapThread[And,{{Abs[Total[payoff] - graval]<=tolv},{MaxExcessBalanced[game, payoff]}}], 
+                              Which[(First[dimpay]===Length[T] && Depth[payoff] === 2 ), MapThread[And,{{Abs[Total[payoff] - graval]<=tolv},{MaxExcessBalanced[game, payoff,RationalTol->rattol]}}], 
                                             True, PrintRemark[payoff]],
       True, PrintRemark[payoff]
             ]
  ];
 
 AntiPreKernelQ[args___]:=(Message[AntiPreKernelQ::argerr];$Failed);
-AntiPreKernelQ[game_, payoff_List] :=Block[{tolv,graval,dimpay}, 
+AntiPreKernelQ[game_, payoff_List,opts:OptionsPattern[AntiPreKernelQ]] :=Block[{rattol,tolv,graval,dimpay},
+       rattol = OptionValue[RationalTol]; 
        graval = v[T];
        dimpay = Dimensions[payoff];
-       tolv=1.5*10^(-8);
+       tolv=1.5*rattol;
     Which[Length[dimpay] === 2,
-                               Which[ (Last[dimpay]===Length[T] && Depth[payoff] ===3), MapThread[And,{(Abs[Total[#] - graval]<= tolv) & /@ payoff,MinExcessBalanced[game, payoff]}],
+                               Which[ (Last[dimpay]===Length[T] && Depth[payoff] ===3), MapThread[And,{(Abs[Total[#] - graval]<= tolv) & /@ payoff,MinExcessBalanced[game, payoff,RationalTol->rattol]}],
                                                True, PrintRemark[payoff]],
                    Length[dimpay] === 1,
-                              Which[(First[dimpay]===Length[T] && Depth[payoff] === 2 ), MapThread[And,{{Abs[Total[payoff] - graval]<=tolv},{MinExcessBalanced[game, payoff]}}], 
+                              Which[(First[dimpay]===Length[T] && Depth[payoff] === 2 ), MapThread[And,{{Abs[Total[payoff] - graval]<=tolv},{MinExcessBalanced[game, payoff,RationalTol->rattol]}}], 
                                             True, PrintRemark[payoff]],
       True, PrintRemark[payoff]
             ]
@@ -4686,7 +4769,7 @@ KernelPoints[game_, storepay_:{}, callm_, changeps_, dispres_, opts:OptionsPatte
     If[FreeQ[const, Indeterminate],True,Print["Warning: OPT-PROB incorrectly specified. Aborting Calculation!"];
                                         Return[Extract[subres,Position[KernelImputationListQ[game, subres], True]]]];
     sol = Which[SameQ[callm,False], LinearOptimization[-objfunc, const, var,{"PrimalMinimumValue","PrimalMinimizer"},Method->mth], (* RevisedSimplex *) 
-                True, Rationalize[NMaximize[Prepend[const, objfunc], var],10^(-9)]];
+                True, Rationalize[NMaximize[Prepend[{const}, objfunc], var, Method->mth],10^(-9)]];
     If[SameQ[callm,False],sol=ReplacePart[sol,{2}->MapThread[Rule,{var,sol[[2]]}]],True];
     alloc = var /. sol[[2]];
     retval=Apply[Or,Union[KernelImputationListQ[newgame,subres]]];
@@ -4759,7 +4842,7 @@ Block[{firstcrit,seccrit,newgame,nb,alldelvar,dvar,objfunc,var,solut,kersol,tra}
         objfunc= Total[dvar];
         var= Union[x /@ T, alldelvar];
         solut = Which[SameQ[callm,False],LinearOptimization[-objfunc, nb, var,{"PrimalMinimumValue","PrimalMinimizer"},Method-> mthd], (*RevisedSimplex *)
-                              True,Rationalize[NMaximize[Prepend[nb,objfunc],var],10^(-12)]];
+                              True,Rationalize[NMaximize[Prepend[{nb},objfunc],var,Method-> mthd],10^(-12)]];
         If[SameQ[callm,False],solut=ReplacePart[solut,{2}->MapThread[Rule,{var,solut[[2]]}]],True];
         kersol=(x /@ T) /.Take[solut[[2]],Length[T]];
         tra= dvar /. Take[solut[[2]],-Length[alldelvar]];
@@ -4773,7 +4856,7 @@ Block[{nb,alldelvar,dvar,objfunc,var,solut,kersol,tra},
              objfunc= Total[dvar];
              var= Union[x /@ T, alldelvar];
              solut = Which[SameQ[callm,False],LinearOptimization[-objfunc, nb, var,{"PrimalMinimumValue","PrimalMinimizer"},Method-> mthd],  
-                                   True,Rationalize[NMaximize[Prepend[nb,objfunc],var],10^(-12)]];
+                                   True,Rationalize[NMaximize[Prepend[{nb},objfunc],var,Method-> mthd],10^(-12)]];
              If[SameQ[callm,False],solut=ReplacePart[solut,{2}->MapThread[Rule,{var,solut[[2]]}]],True];
              kersol=(x /@ T) /.Take[solut[[2]],Length[T]];
              tra= dvar /. Take[solut[[2]],-Length[alldelvar]];
@@ -4788,7 +4871,7 @@ Block[{newgame,nb,alldelvar,dvar,objfunc,var,solut,kersol,tra},
       objfunc= Total[dvar];
       var= Union[x /@ T, alldelvar];
       solut = Which[SameQ[callm,False],LinearOptimization[-objfunc, nb, var,{"PrimalMinimumValue","PrimalMinimizer"},Method-> mthd], 
-                            True,Rationalize[NMaximize[Prepend[nb,objfunc],var],10^(-12)]];
+                            True,Rationalize[NMaximize[Prepend[{nb},objfunc],var,Method-> mthd],10^(-12)]];
       If[SameQ[callm,False],solut=ReplacePart[solut,{2}->MapThread[Rule,{var,solut[[2]]}]],True];
       kersol=(x /@ T) /.Take[solut[[2]],Length[T]];
       tra= dvar /. Take[solut[[2]],-Length[alldelvar]];
@@ -4859,7 +4942,7 @@ DetermineAddVertices[sol_, obj_, const_ , var_ , T_, callm_,sil_, mth_, zf_:{}] 
     yset = dualvar /. Last[dures];
     duyp = Position[yset, 0];
     newineq = Extract[const, duyp];
-    nwsol = Which[SameQ[callm,True], Rationalize[NMaximize[Prepend[newineq,nwzf],var]],
+    nwsol = Which[SameQ[callm,True], Rationalize[NMaximize[Prepend[{newineq},nwzf],var,Method->mth]],
                     True, LinearOptimization[-nwzf, newineq, var,{"PrimalMinimumValue","PrimalMinimizer"},Method->mth]]; 
  (*   Print["nwsol=",nwsol]; *)
     Which[SameQ[First[nwsol],Infinity], Return[oldres],
@@ -4931,8 +5014,8 @@ PreKernelSolution[game_,opts:OptionsPattern[PreKernelSolution]] :=
 PreKernelSolution[game_, payoff_List, opts:OptionsPattern[PreKernelSolution]] := 
   Block[{dimCorQ, showzf,rattol,conjfu,sil,anti,mth,ext,allres,ratres,res,detobj,grad,conj,smc,rclim},
       Off[FindMinimum::fmgz];
-      dimCorQ = Which[Depth[payoff] === 3, If[Length[#] === Length[T],True, False]&/@ payoff,
-                      Depth[payoff] === 2, If[Length[payoff]===Length[T],True, False], 
+      dimCorQ = Which[Depth[payoff] === 3, If[SameQ[Length[#],Length[T]],True, False]&/@ payoff,
+                      Depth[payoff] === 2, If[SameQ[Length[payoff],Length[T]],True, False], 
                       True, False
                 ];
       If[Apply[And,dimCorQ]===False,WrongDimension;Return[],True];
@@ -4945,8 +5028,10 @@ PreKernelSolution[game_, payoff_List, opts:OptionsPattern[PreKernelSolution]] :=
       ext = OptionValue[SolutionExact];
       smc = OptionValue[SmallestCardinality];
       rclim=If[Length[T] > 11,256,156];
-      allres = Which[Depth[payoff] == 3, Block[{$RecursionLimit = rclim},SDMPreKernel[game,#,Infinity,AntiPreKernel -> anti, Method -> mth, RationalTol->rattol, Silent -> sil, SmallestCardinality -> smc, SolutionExact -> ext] &/@ payoff],
-                     Depth[payoff] == 2, Block[{$RecursionLimit = rclim},SDMPreKernel[game, payoff,Infinity, AntiPreKernel -> anti, Method -> mth, RationalTol->rattol,  Silent -> sil, SmallestCardinality -> smc, SolutionExact -> ext]],
+      allres = Which[SameQ[Depth[payoff],3], 
+                       Block[{$RecursionLimit = rclim},SDMPreKernel[game,#,Infinity,AntiPreKernel -> anti, Method -> mth, RationalTol->rattol, Silent -> sil, SmallestCardinality -> smc, SolutionExact -> ext] &/@ payoff],
+                     SameQ[Depth[payoff],2], 
+                       Block[{$RecursionLimit = rclim},SDMPreKernel[game, payoff,Infinity, AntiPreKernel -> anti, Method -> mth, RationalTol->rattol,  Silent -> sil, SmallestCardinality -> smc, SolutionExact -> ext]],
                      True, DisplayMessFindKernel[payoff]
                      ];
       If[SameQ[Head[allres],List],True, Return[Chop[Rationalize[N[payoff],rattol]]]];
@@ -4958,8 +5043,9 @@ PreKernelSolution[game_, payoff_List, opts:OptionsPattern[PreKernelSolution]] :=
                   Depth[payoff] === 2, ratres,
                   True,ratres
                   ];
-      detobj = If[Depth[res]== 3, DetObjFunc[game,#,AntiPreKernel -> anti, Silent -> sil]&/@ res, {DetObjFunc[game,res, AntiPreKernel -> anti, Silent -> sil]}];
-      {grad,conj} = Which[conjfu === True, 
+      detobj = Which[SameQ[showzf || conjfu,True],If[Depth[res]=== 3, DetObjFunc[game,#,AntiPreKernel -> anti, Silent -> sil]&/@ res, {DetObjFunc[game,res, AntiPreKernel -> anti, Silent -> sil]}],
+                    True,{}];
+      {grad,conj} = Which[SameQ[conjfu,True], 
                       Which[Length[detobj] === Length[res], FormatConjugateRes[game,detobj, Silent -> sil, SolutionExact -> ext ] ,
                             Length[detobj] === 1, ConvexConjugate[game,detobj, Silent -> sil, SolutionExact -> ext],
                             True,{{},{}}],
@@ -4976,8 +5062,8 @@ PreKernelSolution[game_, payoff_List, opts:OptionsPattern[PreKernelSolution]] :=
                          ]
                  ];
       On[FindMinimum::fmgz];
-      If[showzf === False, res, 
-                 If[(Depth[res]===3 && Length[res]===1)===True,{Flatten[res], detobj,grad},{res,detobj,grad}]]
+      If[SameQ[showzf,False], res, 
+                 If[(SameQ[Depth[res],3] && SameQ[Length[res],1])===True,{Flatten[res], detobj,grad},{res,detobj,grad}]]
    ];
 
 WrongDimension:=(Print["Payoff vector has not the correct dimension!"]); 
@@ -5007,8 +5093,8 @@ FormatConjugateRes[game_,detobj_List, opts:OptionsPattern[PreKernelSolution]]:=
  Based on Algorithm 8.1. and 8.2 of Meinhardt, (2013).
 *)
 
-SDMPreKernel[game_, payoff_List,optval_, opts:OptionsPattern[PreKernelSolution]] := 
-  Block[{smc,sil,anti,mth,rattol,ext,rl,obj,var,init,minval,nwpay,tolv,meff,matE,matQ,vmeff,ralpv,alpv,bvec,solpay,maxexc,sumexc,dfpy,leq},
+SDMPreKernel[game_, payoff_List,optval_:Infinity, opts:OptionsPattern[PreKernelSolution]] := 
+  Block[{smc,sil,anti,mth,rattol,ext,rl,obj,var,init,minval,nwpay,meff,matE,matQ,vmeff,ralpv,alpv,bvec,sumexc},
     anti = OptionValue[AntiPreKernel];
     ext = OptionValue[SolutionExact];
     mth = OptionValue[Method];
@@ -5019,39 +5105,47 @@ SDMPreKernel[game_, payoff_List,optval_, opts:OptionsPattern[PreKernelSolution]]
     rl = MapThread[Rule, {var, payoff}];
     If[SameQ[ext,False],
        obj = DetObjFunc[game, payoff, AntiPreKernel -> anti, Silent -> sil, SmallestCardinality -> smc];
-       If[SameQ[Head[obj],Plus],True, Return[payoff]];
-       init = MapThread[List, {var,payoff}];,      
+       obj = Which[SameQ[ToString[mth],"GUROBI"],{obj}, 
+             SameQ[ToString[mth],"MOSEK"],{obj},
+             SameQ[ToString[mth],"IPOPT"],{obj}, 
+             True,obj];
+       Which[SameQ[Head[obj],Plus],sumexc=First[{obj} /. rl], 
+             SameQ[Head[First[obj]],Plus],
+                        sil=True;
+                        sumexc=First[obj /. rl],
+             True,Return[payoff]];
+       init = rl /. Rule -> List;,      
         meff = Bestcoalij01[game, payoff, AntiPreKernel -> anti, MaximumSurpluses -> False, SmallestCardinality -> smc]; 
-        matE = Developer`ToPackedArray[-SetsToVec[meff, T, EffVector -> True]];
-        matQ = 2*Transpose[matE].matE;
+        matE = Developer`ToPackedArray[-SetsToVec[meff, T, EffVector -> True]] //N;
+        matQ = Transpose[matE].matE;
         vmeff=Map[v[#] &, #] & /@ meff;
         ralpv = {1., -1.}.# & /@ vmeff;
         alpv = Prepend[ralpv,v[T]];
-        bvec = 2*Transpose[matE].alpv;
+        bvec = Transpose[matE].alpv;
+        sumexc=Norm[matE.payoff+alpv]^2; 
        ];
-    minval = Which[SameQ[ext,False], If[SameQ[sil,True], FindMinimum[obj, init, Method -> mth, AccuracyGoal -> 20, PrecisionGoal -> 18, WorkingPrecision->40], (*Approximate solution *) 
+    If[LessEqual[Abs[sumexc],rattol], Return[payoff],True];
+    minval = Which[SameQ[ext,False], If[SameQ[sil,True], 
+                                           Which[SameQ[ToString[mth],"GUROBI"],FindMinimum[obj, init, Method -> GUROBI],
+                                                 SameQ[ToString[mth],"MOSEK"],FindMinimum[obj, init, Method -> MOSEK],
+                                                 SameQ[ToString[mth],"IPOPT"],FindMinimum[obj, init, Method -> IPOPT], 
+                                                 True,FindMinimum[obj, init, Method -> mth, AccuracyGoal -> 20, PrecisionGoal -> 18, WorkingPrecision->40]], (*Approximate solution *) 
                                            FindMinimum[obj, init, Method -> mth, AccuracyGoal -> 20, PrecisionGoal -> 18, WorkingPrecision->40, StepMonitor :> Print[init]]],
-                  True, SolveLinEQ[matQ,bvec,var, Method -> "Automatic", Silent -> sil] (* Try to find an exact solution *)
+                  True, obj={};SolveLinEQ[matQ,bvec,var, Method -> "Automatic", Silent -> sil] (* Try to find an exact solution *)
              ];
-    solpay = Rationalize[var /. minval[[2]]];
-    tolv=Array[1.5*10^(-8) &, Length[T]];
-    dfpy=Abs[solpay-payoff];
-    leq=MapThread[LessEqual, {dfpy,tolv}];
-    If[SameQ[leq,True],Return[solpay],nwpay=solpay];
-    maxexc  = If[SameQ[anti,False],MaxSurpluses[game,nwpay],AntiSurpluses[game,nwpay]];
-    sumexc = Total[Flatten[MapThread[Subtract[#2, #1]^2 &, Outer[List, #]] & /@ maxexc]];
-    If[SameQ[sil,False],MessageSDMKer[obj,minval,nwpay,minval[[1]],maxexc,sumexc];
-        If[SameQ[ext,False], SolveLinEQ[matQ,bvec,var, Method -> mth, Silent -> False],True],True]; 
-    If[Chop[Rationalize[sumexc,rattol] ] === 0, nwpay,  
+    nwpay = var /. minval[[2]];
+    If[SameQ[sil,False],MessageSDMKer[obj,minval,nwpay,First[minval],sumexc];
+        If[SameQ[ext,False], SolveLinEQ[matQ,bvec,var, Method -> mth, Silent -> False],True],True];
+    If[LessEqual[Abs[sumexc],rattol], nwpay,  
                SDMPreKernel[game, nwpay, sumexc, AntiPreKernel -> anti, Method -> mth, RationalTol->rattol,Silent -> sil,SmallestCardinality -> smc,SolutionExact -> ext]]
    ];
 
-MessageSDMKer[zfc_,minw_,nwaz_, fucval_, mexc_, addexc_] :=
+MessageSDMKer[zfc_:{},minw_,nwaz_, fucval_, addexc_] :=
   Block[{},
         Print["The objective function h is: ",zfc];
         Print["The local minimum of h is: ",N[minw[[1]]]];
         Print["The local minimum of the objective function h is at:\n ",nwaz];
-        Print["The maximum surpluses are:\n", mexc];
+(*        Print["The maximum surpluses are:\n", mexc];*)
         Print["The value of the original objective function H is:\n ",{addexc, N[addexc]}];
         Print["The difference between the original function H and h is: ",N[addexc - fucval]];
   ];
@@ -5064,17 +5158,14 @@ SolveLinEQ[coefmat_List,bv_List,indvar_List,opts:OptionsPattern[PreKernelSolutio
     sil = OptionValue[Silent];
     mth = OptionValue[Method];
     coefm=Developer`ToPackedArray[coefmat];
-    If[sil===False, MessageSolveLinEQ[coefm,bv];, True];
-    If[$VersionNumber<6,
-       sol = If[Det[coefm] != 0, LinearSolve[coefm,-bv,Method -> mth],PseudoInverse[coefm].(-bv)];,
-       sol = If[Det[coefm] != 0, 
+    If[SameQ[sil,False], MessageSolveLinEQ[coefm,bv];, True];
+    sol = If[Det[coefm] != 0, 
               Which[LUDecomposition[coefm][[3]] <= 10^(4),LinearSolve[coefm,-bv,Method -> mth],
                     True, matpr=SetPrecision[coefm, 30]; 
                           bvpr = SetPrecision[bv, 30];
                           LeastSquares[matpr,-bvpr, Tolerance -> 10^(-10)]
-                          ],
-		PseudoInverse[coefm].(-bv)];
-       ];
+                          ], 
+              PseudoInverse[coefm].(-bv)];
     rl = MapThread[Rule,{indvar,sol}];
     {rl,Rationalize[rl]}
      ];
@@ -5147,7 +5238,7 @@ DetObjFunc[game_, payoff_List,opts:OptionsPattern[PreKernelSolution]] :=
 (* efficiency *)
     eff = (Total[x[#] & /@ T] - v[T])^2;
 (* Meinhardt (2013) formula 7.7 *)
-    obj[[1]] + eff 
+    First[obj] + eff 
     ];
 
 (* 
@@ -5194,19 +5285,19 @@ Bestcoalij01[game_, payoff_List,opts:OptionsPattern[BestCoalitions]] :=
     sij=MapThread[TIJsets[#1,#2] &,{pli,plj}];
     sji=MapThread[TIJsets[#1,#2] &,{plj,pli}];
     payass = MapThread[Rule,{x /@ T,payoff}];
-    If[anti===False,amax = ModMaxSurpluses[game,sij,sji,payass],amax=ModAntiSurpluses[game,sij,sji,payass]];
+    If[SameQ[anti,False],amax = ModMaxSurpluses[game,sij,sji,payass],amax=ModAntiSurpluses[game,sij,sji,payass]];
     sij=Developer`ToPackedArray[sij];
     sji=Developer`ToPackedArray[sji];
     amax=Developer`ToPackedArray[amax];
-    exc = ExcessPayoff[game, payoff][[1]];
+    exc = First[ExcessPayoff[game, payoff]];
     exvec = Drop[Drop[exc, 1], -1];
     intcoal = Drop[Drop[Subsets[T], 1], -1];
     ramax = Reverse[#] &/@ amax;
     ramax=Developer`ToPackedArray[ramax];
     selcij = MapThread[SelCoal[#1, intcoal, exvec, #2, opts] &, {sij, amax}];
     selcji = MapThread[SelCoal[#1, intcoal, exvec, #2, opts] &, {sji, ramax}];
-    sigcoal = If[allc === False, MapThread[{Flatten[#1], Flatten[#2]} &,{selcij, selcji}],{selcij, selcji}];
-    If[maxsurp === False, sigcoal,{sigcoal,amax}]
+    sigcoal = If[SameQ[allc,False], MapThread[{Flatten[#1], Flatten[#2]} &,{selcij, selcji}],{selcij, selcji}];
+    If[SameQ[maxsurp,False], sigcoal,{sigcoal,amax}]
     ];
 
 
@@ -5313,12 +5404,12 @@ SetsToVec[args___]:=(Message[SetsToVec::argerr];$Failed);
 SetsToVec[mg_List, T_List, opts:OptionsPattern[SetsToVec]] := 
     Block[{effvec, zrv, pscoal, replzr,coasts, onesoft},
     effvec = OptionValue[EffVector];
-    zrv = Table[0, {i, Length[T]}];
+    zrv = Array[0 &, Length[T]];
     pscoal = Outer[List, #] & /@ Developer`ToPackedArray[mg];
     replzr = Map[ReplacePart[zrv, 1, #] &, #] & /@ pscoal;
     coasts = MapThread[Subtract[#1, #2] &, #] & /@ replzr;
-    onesoft = Table[1,{i,Length[T]}];
-    If[effvec==True, Prepend[coasts,onesoft], coasts]
+    onesoft = Array[1 &, Length[T]];
+    If[SameQ[effvec,True], Prepend[coasts,onesoft], coasts]
 ];
 
 (* 
@@ -5503,20 +5594,23 @@ PreKernelElement[game_, payoff_List, opts:OptionsPattern[PreKernelElement]] := B
 (* Main Functions *)
 
 FuncPreKernelElement[game_, payoff_List, opts:OptionsPattern[PreKernelElement]] := 
-Block[{sil, smc, optst, doi, mex, optstep, itpay,tol,brc,pinv},
+Block[{sil, rattol,smc, optst, doi, mex, optstep, itpay,tol,brc,pinv},
      sil = OptionValue[Silent];
+     rattol = OptionValue[RationalTol];
      smc = OptionValue[SmallestCardinality];     
      optst = OptionValue[CalcStepSize];
      pinv = OptionValue[PseudoInv];
      {optstep, doi,mex} = Developer`ToPackedArray[DirectionOfImprovement[game, payoff, MaximumSurpluses -> True, CalcStepSize -> optst, PseudoInv->pinv,Silent -> sil, SmallestCardinality -> smc]];
-    If[sil ===False, Print["doi=", doi], True];
-    If[sil ===False, Print["optstep=", optstep], True];
-    itpay =  payoff + optstep*doi;
-    If[sil===False, Print["itpay=", itpay], True];
+     itpay =  payoff + optstep*doi;
+     If[SameQ[sil,False], 
+                 Print["doi=", doi];
+                 Print["optstep=", optstep];
+                 Print["itpay=", itpay];, 
+             True];
     If[Depth[itpay]!=2,Return[payoff],True];
-    tol=Table[1.5*10^(-7),{Length[T]}];
+    tol=Table[1.5*rattol,{Length[T]}];
     brc=Apply[And,MapThread[LessEqual[#1,#2] &,{Abs[doi],tol}]];
-    If[SameQ[brc,True], Rationalize[itpay,10^(-9)], FuncPreKernelElement[game, Rationalize[itpay,10^(-9)], CalcStepSize -> optst, Silent -> sil, SmallestCardinality -> smc]] 
+    If[SameQ[brc,True], Rationalize[itpay,rattol], FuncPreKernelElement[game, Rationalize[itpay,rattol], CalcStepSize -> optst, Silent -> sil, SmallestCardinality -> smc]] 
 ];
 
 
@@ -5529,8 +5623,8 @@ Block[{sil, smc, optst, meff, matE, matQ, matP, varpay, mex, mopt,submex, setpay
   pinv = OptionValue[PseudoInv];
   mopt= OptionValue[MaximumSurpluses];
   {meff, mex} = Bestcoalij01[game, payoff, MaximumSurpluses -> True, SmallestCardinality -> smc];
-  matE = -SetsToVec[meff, T, EffVector -> True] // N;
-  submex = {1., -1.}.# & /@ Developer`ToPackedArray[mex];
+  matE = Developer`ToPackedArray[-SetsToVec[meff, T, EffVector -> True]] // N;
+  submex = {1., -1.}.# & /@ mex;
   varpay = x[#] & /@ T;
   setpay = MapThread[Rule, {varpay, payoff}];
   grmex = v[T] - Total[x[#] & /@ T] /. setpay;
@@ -5855,15 +5949,16 @@ BaryCenter[game_]:=Block[{crv},
 
 
 AnimationKernelProperty2d[game_, opts:OptionsPattern[AnimationKernelProperty2d]] := 
- Block[{uppval,lowval,stpsize,detlow,manip},
+ Block[{uppval,lowval,stpsize,detlow,manip,fs},
+    fs  =  OptionValue[FigureSize];
     uppval = OptionValue[UpperCritVal];
     lowval = OptionValue[LowerCritVal];
     stpsize = OptionValue[IncSize];
     manip = OptionValue[UseManipulate];
     detlow = If[lowval=={},First[EpsCore[game]], lowval[[1]]];
     If[SameQ[manip,False],
-             Table[StrongEpsCore2d[game,EpsilonValue -> t,Labeling -> False], {t, uppval[[1]], detlow, stpsize[[1]]}],
-             Manipulate[StrongEpsCore2d[game,EpsilonValue -> t,Labeling -> False], {{t, uppval[[1]],"Epsilon"}, detlow, uppval[[1]], stpsize[[1]]}]
+             Table[StrongEpsCore2d[game, FigureSize -> fs, EpsilonValue -> t,Labeling -> False], {t, uppval[[1]], detlow, stpsize[[1]]}],
+             Manipulate[StrongEpsCore2d[game, FigureSize -> fs,EpsilonValue -> t,Labeling -> False], {{t, uppval[[1]],"Epsilon"}, detlow, uppval[[1]], stpsize[[1]]}]
       ]
     ];
 
@@ -6205,14 +6300,22 @@ DuttaRay[game_,opts:OptionsPattern[DuttaRay]] :=
 
 DuttaRayMain[game_,opts:OptionsPattern[DuttaRay]] := Block[{dp,rap,vrs, vN, objf, cr, prob, sol},
   dp=OptionValue[DigitPrecision];
-  rap=OptionValue[RationalApproximate];							      
+  rap=OptionValue[RationalApproximate];
+  mthd=OptionValue[Method];							      
   vrs = x[#] & /@ T;
   vN = Table[v[T]/Length[T], {i, 1, Length[T]}];
   objf = Total[MapThread[Subtract, {vrs, vN}]^2];
   cr = Core[game];
-  prob = Prepend[cr, objf];
-  sol = NMinimize[prob, vrs,WorkingPrecision -> dp];
-  sol = If[SameQ[rap,True],Rationalize[sol, 10^(-9)],sol];
+  prob = Prepend[{cr}, objf];
+  sol = Which[SameQ[ToString[mthd],"GUROBI"],NMinimize[prob, vrs, Method -> GUROBI],
+        SameQ[ToString[mthd],"Gurobi"],NMinimize[prob, vrs, Method -> GUROBI],
+        SameQ[ToString[mthd],"MOSEK"],NMinimize[prob, vrs, Method -> MOSEK],
+        SameQ[ToString[mthd],"Mosek"],NMinimize[prob, vrs, Method -> MOSEK],
+        SameQ[ToString[mthd],"IPOPT"],NMinimize[prob, vrs, Method -> IPOPT],
+        SameQ[ToString[mthd],"Ipopt"],NMinimize[prob, vrs, Method -> IPOPT],
+        True, NMinimize[prob, vrs,WorkingPrecision -> dp,Method -> mthd]
+       ];
+  sol = If[SameQ[rap,True],Rationalize[sol, 10^(-6)],sol];
   vrs /. Cases[sol, {__Rule}, \[Infinity]] // Flatten
   ];
 
@@ -6221,13 +6324,21 @@ LorenzSolution[args___]:=(Message[LorenzSolution::argerr];$Failed);
 LorenzSolution[game_,opts:OptionsPattern[LorenzSolution]] := Block[{dp,rap,vrs, vN, objf, cr, prob, sol},
   dp=OptionValue[DigitPrecision];
   rap=OptionValue[RationalApproximate];
+  mthd=OptionValue[Method];
   vrs = x[#] & /@ T;
   vN = Table[v[T]/Length[T], {i, 1, Length[T]}];
   objf = Total[MapThread[Subtract, {vrs, vN}]^2];
   cr = If[CoreQ[game],Core[game],{};Break[]];
-  prob = Prepend[cr, objf];
-  sol = NMinimize[prob, vrs,WorkingPrecision -> dp];
-  sol = If[SameQ[rap,True],Rationalize[sol, 10^(-9)],sol];
+  prob = Prepend[{cr}, objf];
+  sol = Which[SameQ[ToString[mthd],"GUROBI"],NMinimize[prob, vrs, Method -> GUROBI],
+        SameQ[ToString[mthd],"Gurobi"],NMinimize[prob, vrs, Method -> GUROBI],
+        SameQ[ToString[mthd],"MOSEK"],NMinimize[prob, vrs, Method -> MOSEK],
+        SameQ[ToString[mthd],"Mosek"],NMinimize[prob, vrs, Method -> MOSEK],
+        SameQ[ToString[mthd],"IPOPT"],NMinimize[prob, vrs, Method -> IPOPT],
+        SameQ[ToString[mthd],"Ipopt"],NMinimize[prob, vrs, Method -> IPOPT],
+        True, NMinimize[prob, vrs,WorkingPrecision -> dp,Method -> mthd]
+       ]; 
+  sol = If[SameQ[rap,True],Rationalize[sol, 10^(-6)],sol];
   vrs /. Cases[sol, {__Rule}, \[Infinity]] // Flatten
   ];
 

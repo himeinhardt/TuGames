@@ -323,3 +323,23 @@
 	
    Some minor bug fixes.
  
+
+###  Version 3.0.2
+
+     Adjusting the functions
+
+       ApproxPreNuc                -- Part of TuGames,
+       ApproxNuc                   -- Part of TuGames,
+       DuttaRay                    -- Part of TuGames,
+       LorenzSolution              -- Part of TuGames,
+       NonLinPreNuc                -- Part of TuGames,
+       NonLinNuc                   -- Part of TuGames,
+       PreKernelSolution           -- Part of TuGames
+
+    to the new set of optimization algorithms.
+
+    Adding options to the functions PreKernelQ, MaxExcessBalanced, AntiPreKernelQ, MinExcessBalanced, ParaPreKernelQ, ParaMaxExcessBalanced, ParaAntiPreKernelQ, ParaMinExcessBalanced.
+
+    Improving the performance of PreKernelSolution.
+
+    Some minor bug fixes and code revision.

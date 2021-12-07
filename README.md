@@ -2,7 +2,7 @@
 [![Mathematica 12.0 - 12.3.1](https://img.shields.io/badge/Mathematica-12.0_--_12.3.1-brightgreen.svg)](#compatibility)
 [![license MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/himeinhardt/TuGames/blob/master/LICENSE.md)
 
-# *Mathematica* Package: *TuGames* Version 3.0.1
+# *Mathematica* Package: *TuGames* Version 3.0.2
 
 ```
 Contents:
@@ -123,20 +123,17 @@ different Operating System ABIs. To retrieve your system ID execute in a Noteboo
 $SystemID
 ```
 
-We have provided some executables for *RHEL 7.5* and *MacOSX*. Unfortunately, we are not
-experienced enough under *Windows* to provide any for those. Thus, we invite the community
-to fill that gap and to provide some.
+We have provided some executables for *RHEL 7.5* and *MacOSX*. Unfortunately, we are not experienced enough under *Windows* to provide any for those. Thus, we invite the community to fill that gap and to provide some.
 
-In order check for *Mathematica* versions smaller than 12.1 the paths where you have to install the Cddmathlink library call
-the command
+In order check for *Mathematica* versions smaller than 12.1 the paths where you have to install the Cddmathlink library call the command
 
 ```
 In[1]:= PacletInformation["TUG"]
 
-Out[1]= {Name -> TUG, Version -> 3.0.1, BuildNumber -> , Qualifier -> , WolframVersion -> 12+,
+Out[1]= {Name -> TUG, Version -> 3.0.2, BuildNumber -> , Qualifier -> , WolframVersion -> 12+,
          SystemID -> All, Description -> A Mathematica Package for Cooperative Game Theory,
 	 Category -> , Creator -> Holger Ingmar Meinhardt <holger.meinhardt@partner.kit.edu>,
-	 Publisher -> , Support -> , Internal -> False, Location -> /home/kit/xxx/xxxx/.Mathematica/Paclets/Repository/TUG-3.0.1
+	 Publisher -> , Support -> , Internal -> False, Location -> /home/kit/xxx/xxxx/.Mathematica/Paclets/Repository/TUG-3.0.2
 	 Context -> {TUG`coop`, TUG`vertex`, TUG`}, Enabled -> True, Loading -> Manual}
 ```
 
@@ -146,7 +143,7 @@ To get the same information and beyond that under *Mathematica* version 12.1, it
 In[1]:= PacletObject["TUG"][All]
 ```
 ```
-Out[1]=  {"Name" -> "TUG", "Version" -> "3.0.1", "WolframVersion" -> "12+", 
+Out[1]=  {"Name" -> "TUG", "Version" -> "3.0.2", "WolframVersion" -> "12+", 
           "Qualifier" -> "", "SystemID" -> All, "Description" -> "A Mathematica Package for Cooperative Game Theory",
           "Category" -> Missing["NotAvailable"], "Keywords" -> Missing["NotAvailable"], 
           "UUID" -> Missing["NotAvailable"], 
@@ -156,7 +153,7 @@ Out[1]=  {"Name" -> "TUG", "Version" -> "3.0.1", "WolframVersion" -> "12+",
           "Internal" -> False, 
           "Context" -> {"TUG`coop`", "TUG`vertex`", "TUG`"}, 
           "Loading" -> Manual, "AutoUpdating" -> False, "Enabled" -> True, 
-          "Location" -> "/home/kit/xxx/xxxx/.Mathematica/Paclets/Repository/TUG-3.0.1"}
+          "Location" -> "/home/kit/xxx/xxxx/.Mathematica/Paclets/Repository/TUG-3.0.2"}
 ```
 or alternatively
 
@@ -189,21 +186,9 @@ occur on these operating systems to run the basic functions of the package.
 
 ## 2. Custom Installation
 
+Since `Version 2.5.1` the package is distributed as a `Paclet`, which allows a custom installation. The latest version is `TUG-3.0.2`, which is only compatible for Mathematica version 12.0 or higher. This version is not anymore usable for versions that are smaller than 12.0. Notice that `TUG-2.6.2` is the latest version that is compatible with Mathematica versions smaller than 12.0, and will remain compatible with the most recent Mathematica version as long as `ConstrainedMax/ConstrainedMin` and `LinearProgramming/DualLinearProgramming` are supported by Wolfram Research, otherwise one has to update to `TUG-3.0.0` or later.  The installation of the package requires about 90 MB free hard-disk space, and the Mathematica version should not be smaller than 10 while installing Version `TUG-2.6.2`. For Mathematica versions smaller than Version 10, a manual installation is requested. In that case one has to follow the guidelines related to the associated operating system that can be found from the Mathematica documentation. 
 
-Since `Version 2.5.1`, the package is distributed as a `Paclet`, which allows a custom installation. 
-The installation of the package requires about 90 MB free hard-disk space, and the Mathematica 
-version should not be smaller than 10. For Mathematica versions smaller than Version 10, a manual 
-installation is requested. In that case one has to follow the guidelines related to the associated
-operating system that can be found from the Mathematica documentation.
-
-
-Notice that `TUG-2.6.2` is the latest version that is compatible with Mathematica versions smaller than 12.0,
-and will remain compatible with the most recent Mathematica version as long as ConstrainedMax/ConstrainedMin and
-LinearProgramming/DualLinearProgramming are supported by Wolfram Research, otherwise one has to update
-to `TUG-3.0.0` or later. 
-
-The most simplest method is to install the `Paclet` directly from GitHub under Mathematica V12.0 or later
-while executing   
+The most simplest method is to install the `Paclet` directly from GitHub under Mathematica V12.0 or later while executing   
 
 ```
 ResourceFunction["GitHubInstall"]["himeinhardt", "TuGames"]
@@ -243,9 +228,7 @@ After that, the current version of TuGames can be installed while calling from y
 PDInstallPaclet["https://github.com/himeinhardt/TuGames"]
 ```
 
-The drawback of the foregoing procedure is that Linux (MacOSX?) users have to change the access permissions of the Cddmathlink executables.
-Follow the instructions from Section 1 to locate the Cddmathlink executables on your system after installation. Then change
-the file permissions in the associated folders by
+The drawback of the foregoing procedure is that Linux (MacOSX?) users have to change the access permissions of the Cddmathlink executables. Follow the instructions from Section 1 to locate the Cddmathlink executables on your system after installation. Then change the file permissions in the associated folders by
 
 ```
 chmod 755 cddmathlink
@@ -255,12 +238,9 @@ chmod 755 cddmathlink2gmp
 
 within a Linux console. After this procedure, your Cddmathlink executables are available on your computer.  
 
-In order to use the graphical features of the package, it is recommended to install the Cddmathlink executables
-in pre-defined folders as described in Section 1. This C-library must be compiled by yourself if the shipped
-executables are not binary compatible with your OS. Windows users should compile it with the help of *Cygwin*.
+In order to use the graphical features of the package, it is recommended to install the Cddmathlink executables in pre-defined folders as described in Section 1. This C-library must be compiled by yourself if the shipped executables are not binary compatible with your OS. Windows users should compile it with the help of *Cygwin*.
 
-If you plan to install these libraries somewhere else, then insert the path to this library in the file TuGames.m
-after the line of 
+If you plan to install these libraries somewhere else, then insert the path to this library in the file TuGames.m after the line of 
 
 
 ```
@@ -295,8 +275,8 @@ In[1]:=  Needs["TUG`"]
 ===================================================
 Loading Package 'TuGames' for Unix
 ===================================================
-TuGames V3.0.1 by Holger I. Meinhardt
-Release Date: 04.10.2021
+TuGames V3.0.2 by Holger I. Meinhardt
+Release Date: 07.12.2021
 Program runs under Mathematica Version 12.0 or later
 Version 12.x or higher is recommended
 ===================================================
@@ -305,8 +285,7 @@ Package 'TuGames' loaded
 ===================================================
 ```
 
-Let us consider a small three-person TU-game. For this purpose define first
-the player set 
+Let us consider a small three-person TU-game. For this purpose define first the player set 
 
 ```
 In[2]:= T={1,2,3};
@@ -459,7 +438,7 @@ Out[28]= {---, ---, ---}
 
 ```
 
-Admissible methods for the presented commands `CoreQ, Kernel, Nucleolus`, `PreNucleolus` or `Modiclus` are: `RevisedSimplex, CLP, GUROBI, MOSEK`, or `Automatic`. The default setting is `Automatic`. This option must be used in connection with `CallMaximize->False`. One can even try `Method->{InteriorPoint, Tolerance->10^-7}` to get a more precise result whenever one encounters numerical issues. In contrast, admissible methods for the function `PreKernelSolution` are: `Automatic, Newton, ConjugateGradient, PrincipalAxis` or `IPOPT`. Here, one has in addition to set `SolutionExact->False` to change to the non-default setting. 
+Admissible methods for the presented commands `CoreQ, Kernel, Nucleolus`, `PreNucleolus` or `Modiclus` are: `RevisedSimplex, CLP, GUROBI, MOSEK`, or `Automatic`. The default setting is `Automatic`. This option must be used in connection with `CallMaximize->False`. One can even try `Method->{InteriorPoint, Tolerance->10^-7}` to get a more precise result whenever one encounters numerical issues. In contrast, admissible methods for the function `PreKernelSolution` are: `Automatic, Newton, QuasiNewton, InteriorPoint, ConjugateGradient, Gradient, PrincipalAxis, LevenbergMarquardt, MOSEK, GUROBI` or `IPOPT`. Here, one has in addition to set `SolutionExact->False` to change to the non-default setting. 
  
 For more information see `TUG/Tutorials/GettingStarted` from the Documentation Center `(cf. Section 6)`.
 
@@ -616,8 +595,13 @@ whenever the Cddmathlink libraries are installed. Features are for instance: plo
 core and strong epsilon core skeleton together with the nucleolus, kernel and Shapley value 
 up to four players.  
 
-Consult for more information `TUG/Guides/TuGamesView2dV6` or `TUG/Guides/TuGamesView3dV6` from
-the Documentation Center.
+As an example, we visualize the geometric properties of the kernel and nucleolus (enlarged red dot) in the animation below. The Shapley value is the enlarged blue dot, which is given as a reference point.   
+
+![](anim.gif)
+
+For running the animation, a reload may be needed. 
+
+Consult for more information `TUG/Guides/TuGamesView2dV6` or `TUG/Guides/TuGamesView3dV6` from the Documentation Center.
 
 ## 8. Acknowledgment
 

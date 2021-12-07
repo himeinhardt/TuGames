@@ -1,7 +1,7 @@
 (* ::Package:: *)
 
 (* :Title: ParaTuGames.m
-    : Release Date : 04.10.2021
+    : Release Date : 07.12.2021
 
 
 *)
@@ -21,7 +21,7 @@ Off[Needs::nocont]
     holger.meinhardt@wiwi.uni-karlsruhe.de
 *)
 
-(* :Package Version: 1.0.1 *)
+(* :Package Version: 1.0.2 *)
 
 (* 
    :Mathematica Version: 12.x
@@ -88,7 +88,7 @@ ParaAntiPreKernel::usage =
  the anti of Algorithm 7.2.1 of Meinhardt (2013).";
 
 ParaAntiPreKernelQ::usage = 
-"ParaAntiPreKernelQ[game,payoff] checks whether the vector 'payoff' is an element of the anti-pre-kernel. 
+"ParaAntiPreKernelQ[game,payoff,opts] checks whether the vector 'payoff' is an element of the anti-pre-kernel. 
  ParaAntiPreKernelQ checks also the efficiency condition in contrast to the function MinExcessBalanced.";
 
 ParaAvConvexQ::usage = 
@@ -108,7 +108,7 @@ ParaPreKernel::usage =
  a system of linear equations in parallel mode. (cf. Algorithm 8.2.1 of Meinhardt (2013))";
 
 ParaPreKernelQ::usage = 
-"ParaPreKernelQ[game,payoff] checks whether the (pre-)imputation 'payoff' is an element of the pre-kernel. 
+"ParaPreKernelQ[game,payoff,options] checks whether the (pre-)imputation 'payoff' is an element of the pre-kernel. 
  ParaPreKernelQ checks also the efficiency condition in contrast to the function MaxExcessBalanced.";
 
 
@@ -195,12 +195,16 @@ ParaCharacteristicValues::usage =
 
 
 Options[ParaAntiPreKernel] = Sort[Options[PreKernel]];
+Options[ParaAntiPreKernelQ] = Sort[Options[PreKernelQ]];
 (* Options[ParaAvConvexQ] = Options[AverageConvexQ]; *)
 Options[ParaBestCoalitions] = Sort[Options[BestCoalitions]]; 
 Options[ParaSetsToVec] = Sort[Options[SetsToVec]];
 Options[ParaPreKernelElement] = Sort[Options[PreKernelElement]];
 Options[ParaDirectionOfImprovement] = Sort[Options[DirectionOfImprovement]];
 Options[ParaPreKernel] = Sort[Options[PreKernel]];
+Options[ParaPreKernelQ] = Sort[Options[PreKernelQ]];
+Options[ParaMaxExcessBalanced] = Sort[Options[MaxExcessBalanced]];
+Options[ParaMinExcessBalanced] = Sort[Options[MinExcessBalanced]];
 Options[ParaExcessPayoff] = Sort[Options[ExcessPayoff]];
 Options[ParaModPreKernel] = Sort[Options[ModPreKernel]];
 Options[ParaProperModPreKernel] = Sort[Options[ProperModPreKernel]];
@@ -287,16 +291,17 @@ ParaPreKernel[game_, payoff_List, opts:OptionsPattern[ParaPreKernel]] := Block[{
 
 (* Main Functions *)
 ParaPreKernelAlg2[game_, payoff_List, opts:OptionsPattern[ParaPreKernel]] := 
-Block[{sil, smc, meff, matE, vlis, alpv},
+Block[{rattol,sil, smc, meff, matE, vlis, alpv},
   sil = OptionValue[Silent];
   smc = OptionValue[SmallestCardinality];
+  rattol=OptionValue[RationalTol];
   meff = ParaBestCoalitions[game, payoff, MaximumSurpluses -> False, SmallestCardinality -> smc];
   matE = -ParaSetsToVec[meff, T, EffVector -> True];
   vlis = ParallelMap[MapThread[v[#1] &, {#}] &, meff, Method -> "CoarsestGrained",DistributedContexts -> None];
   alpv = ParallelMap[ReplaceAll[#, List -> Subtract] &, vlis, Method -> "CoarsestGrained",DistributedContexts -> None];
   PrependTo[alpv,v[T]];
   err=Norm[matE.payoff+alpv]^2;
-  If[LessEqual[err,1.5*10^(-12)],Return[payoff],
+  If[LessEqual[err,1.5*rattol],Return[payoff],
                xvec=-PseudoInverse[matE].alpv;
                ParaPreKernelAlg2[game,xvec,opts]]   
   ];
@@ -333,15 +338,18 @@ Block[{sil, smc, optst, doi, optstep, itpay,tol,brc,pinv},
      smc = OptionValue[SmallestCardinality];     
      optst = OptionValue[CalcStepSize];
      pinv = OptionValue[PseudoInv];
-    {optstep, doi} = ParaDirectionOfImprovement[game, payoff, MaximumSurpluses -> False, CalcStepSize -> optst, PseudoInv->pinv,Silent -> sil, SmallestCardinality -> smc]; 
-    If[sil ===False, Print["doi=", doi], True];
-    If[sil ===False, Print["optstep=", optstep], True];
-    itpay =  payoff + optstep*doi;
-    If[sil===False, Print["itpay=", itpay], True];
-    If[Depth[itpay]!=2,Return[payoff],True];
-    tol=Table[1.5*10^(-7),{Length[T]}];
-    brc=Apply[And,MapThread[LessEqual[#1,#2] &,{Abs[doi],tol}]];
-    If[SameQ[brc,True], Rationalize[itpay,10^(-9)], ParaPreKernelAlg3[game, Rationalize[itpay,10^(-9)], CalcStepSize -> optst, Silent -> sil, SmallestCardinality -> smc]] 
+     rattol=OptionValue[RationalTol];
+     {optstep, doi} = ParaDirectionOfImprovement[game, payoff, MaximumSurpluses -> False, CalcStepSize -> optst, PseudoInv->pinv,Silent -> sil, SmallestCardinality -> smc];
+     itpay =  payoff + optstep*doi; 
+     If[SameQ[sil,False], 
+                 Print["doi=", doi];
+                 Print["optstep=", optstep];
+                 Print["itpay=", itpay];, 
+              True];
+     If[Depth[itpay]!=2,Return[payoff],True];
+     tol=Table[1.5*rattol,{Length[T]}];
+     brc=Apply[And,MapThread[LessEqual[#1,#2] &,{Abs[doi],tol}]];
+     If[SameQ[brc,True], Rationalize[itpay,rattol], ParaPreKernelAlg3[game, Rationalize[itpay,rattol], CalcStepSize -> optst, Silent -> sil, SmallestCardinality -> smc]] 
 ];
 
 
@@ -672,18 +680,18 @@ ParaBestcoalij01[game_, payoff_List,opts:OptionsPattern[ParaBestCoalitions]] :=
                 sij=MapThread[ParaTIJsets[#1,#2] &,{pli,plj}];
                 sji=MapThread[ParaTIJsets[#1,#2] &,{plj,pli}];
                 payass = MapThread[Rule,{x /@ T,payoff}],Method -> "CoarsestGrained",DistributedContexts -> True];
-    If[anti===False,
+    If[SameQ[anti,False],
        amax = ParallelTable[ParaMaxSijSurpluses[game,sij[[i]],sji[[i]],payass],{i,Length[sij]},Method -> "CoarsestGrained",DistributedContexts -> True],
        amax = ParallelTable[ParaAntiSijSurpluses[game,sij[[i]],sji[[i]],payass],{i,Length[sij]},Method -> "CoarsestGrained",DistributedContexts -> True]
     ];
-    exc = ParaExcessPayoff[game, payoff][[1]];
+    exc = First[ParaExcessPayoff[game, payoff]];
     exvec = Drop[Drop[exc, 1], -1];
     intcoal = Drop[Drop[Subsets[T], 1], -1];
     ramax =  Map[Reverse[#] &, amax];
     selcij = ParallelTable[ParaSelCoal[sij[[i]], intcoal, exvec, amax[[i]]],{i,Length[amax]},Method -> "CoarsestGrained"];
     selcji = ParallelTable[ParaSelCoal[sji[[i]], intcoal, exvec, ramax[[i]]],{i,Length[ramax]},Method -> "CoarsestGrained"];
     sigcoal = MapThread[{Flatten[#1], Flatten[#2]} &,{selcij, selcji}];
-    If[maxsurp === False, sigcoal,{sigcoal,amax}]
+    If[SameQ[maxsurp,False], sigcoal,{sigcoal,amax}]
     ];
  
 
@@ -817,15 +825,16 @@ ParaDisplayErgb[payoff_List]:= Block[{exc,coal,mpc},
 (* User interface to check for (anti) pre-kernel element. *)
 
 ParaPreKernelQ[args___]:=(Message[ParaPreKernelQ::argerr];$Failed);
-ParaPreKernelQ[game_, payoff_List] :=Block[{tolv,graval,dimpay}, 
+ParaPreKernelQ[game_, payoff_List,opts:OptionsPattern[ParaPreKernelQ]] :=Block[{rattol,tolv,graval,dimpay},
+       rattol = OptionValue[RationalTol]; 
        graval = v[T];
        dimpay = Dimensions[payoff];
-       tolv=1.5*10^(-8);
+       tolv=1.5*rattol;
     Which[Length[dimpay] === 2,
-                                 Which[ (Last[dimpay]===Length[T] && Depth[payoff] ===3),MapThread[And,{(Abs[Total[#] - graval]<=tolv) & /@ payoff,ParaMaxExcessBalanced[game, payoff]}],
+                                 Which[ (Last[dimpay]===Length[T] && Depth[payoff] ===3),MapThread[And,{(Abs[Total[#] - graval]<=tolv) & /@ payoff,ParaMaxExcessBalanced[game, payoff,RationalTol->rattol]}],
                                                True, ParaPrintRemark[payoff]],
                    Length[dimpay] === 1,
-                              Which[(First[dimpay]===Length[T] && Depth[payoff] === 2 ), MapThread[And,{{Abs[Total[payoff] - graval]<=tolv},{ParaMaxExcessBalanced[game, payoff]}}], 
+                              Which[(First[dimpay]===Length[T] && Depth[payoff] === 2 ), MapThread[And,{{Abs[Total[payoff] - graval]<=tolv},{ParaMaxExcessBalanced[game, payoff,RationalTol->rattol]}}], 
                                             True, ParaPrintRemark[payoff]],
       True, ParaPrintRemark[payoff]
             ]
@@ -833,15 +842,16 @@ ParaPreKernelQ[game_, payoff_List] :=Block[{tolv,graval,dimpay},
 
 
 ParaAntiPreKernelQ[args___]:=(Message[ParaAntiPreKernelQ::argerr];$Failed);
-ParaAntiPreKernelQ[game_, payoff_List] :=Block[{tolv,graval,dimpay}, 
+ParaAntiPreKernelQ[game_, payoff_List,opts:OptionsPattern[ParaAntiPreKernelQ]] :=Block[{rattol,tolv,graval,dimpay},
+       rattol = OptionValue[RationalTol]; 
        graval = v[T];
        dimpay = Dimensions[payoff];
-       tolv=1.5*10^(-7);
+       tolv=1.5*rattol;
     Which[Length[dimpay] === 2,
-                               Which[ (Last[dimpay]===Length[T] && Depth[payoff] ===3), MapThread[And,{(Abs[Total[#] - graval]<= tolv) & /@ payoff,ParaMinExcessBalanced[game, payoff]}],
+                               Which[ (Last[dimpay]===Length[T] && Depth[payoff] ===3), MapThread[And,{(Abs[Total[#] - graval]<= tolv) & /@ payoff,ParaMinExcessBalanced[game, payoff,RationalTol->rattol]}],
                                                True, ParaPrintRemark[payoff]],
                    Length[dimpay] === 1,
-                              Which[(First[dimpay]===Length[T] && Depth[payoff] === 2 ), MapThread[And,{{Abs[Total[payoff] - graval]<=tolv},{ParaMinExcessBalanced[game, payoff]}}], 
+                              Which[(First[dimpay]===Length[T] && Depth[payoff] === 2 ), MapThread[And,{{Abs[Total[payoff] - graval]<=tolv},{ParaMinExcessBalanced[game, payoff,RationalTol->rattol]}}], 
                                             True, ParaPrintRemark[payoff]],
       True, ParaPrintRemark[payoff]
             ]
@@ -849,19 +859,21 @@ ParaAntiPreKernelQ[game_, payoff_List] :=Block[{tolv,graval,dimpay},
 
 
 ParaMaxExcessBalanced[args___]:=(Message[ParaMaxExcessBalanced::argerr];$Failed);
-ParaMaxExcessBalanced[game_, payoff_List]:= Block[{dimpay},
+ParaMaxExcessBalanced[game_, payoff_List,opts:OptionsPattern[ParaMaxExcessBalanced]]:= Block[{rattol,dimpay},
+    rattol = OptionValue[RationalTol];
     dimpay = Dimensions[payoff];
     Which[Length[dimpay] === 2,
-         Which[(Last[dimpay]===Length[T] && Depth[payoff] ===3), ParaMaxExcessBalCheck[game, #] & /@ payoff, 
+         Which[(Last[dimpay]===Length[T] && Depth[payoff] ===3), ParaMaxExcessBalCheck[game, #,RationalTol->rattol] & /@ payoff, 
                        True, ParaPrintRemark[payoff]], 
    Length[dimpay] === 1,
-            Which[(First[dimpay]===Length[T] && Depth[payoff] === 2 ), ParaMaxExcessBalCheck[game, payoff], 
+            Which[(First[dimpay]===Length[T] && Depth[payoff] === 2 ), ParaMaxExcessBalCheck[game, payoff,RationalTol->rattol], 
                          True,  ParaPrintRemark[payoff]], 
    True, ParaPrintRemark[payoff]]
 ];
 
-ParaMaxExcessBalCheck[game_,payoff_List]:= 
- Block[{plpr,rvpr,asspay,sij,sji,msrplij,msrplji,msrij,msrji,lthij,tolvec,sysij,sysji,eqQ},
+ParaMaxExcessBalCheck[game_,payoff_List,opts:OptionsPattern[ParaMaxExcessBalanced]]:= 
+ Block[{rattol,plpr,rvpr,asspay,sij,sji,msrplij,msrplji,msrij,msrji,lthij,tolvec,sysij,sysji,eqQ},
+    rattol = OptionValue[RationalTol];
     plpr = Partition[paralistIJ[T],2];
     rvpr = Map[Reverse[#] &, plpr];
     asspay = ParaAssgPay[payoff];
@@ -872,7 +884,7 @@ ParaMaxExcessBalCheck[game_,payoff_List]:=
     {msrplij,msrplji}= {ParaMaxExcess[sij, asspay],ParaMaxExcess[sji, asspay]};
     {msrij,msrji} = {msrplij - msrplji,msrplji - msrplij};
     lthij = Binomial[Length[T],2];
-    tolvec = Table[1.5*10^(-7), {i, lthij}];
+    tolvec = Table[1.5*rattol, {i, lthij}];
     sysij = Union[MapThread[LessEqual, {Abs[msrij], tolvec}]];
     sysji = Union[MapThread[LessEqual, {Abs[msrji], tolvec}]];
     eqQ = Apply[Join, {sysij, sysji}];
@@ -881,19 +893,21 @@ ParaMaxExcessBalCheck[game_,payoff_List]:=
 
 
 ParaMinExcessBalanced[args___]:=(Message[ParaMinExcessBalanced::argerr];$Failed);
-ParaMinExcessBalanced[game_, payoff_List]:= Block[{dimpay},
+ParaMinExcessBalanced[game_, payoff_List,opts:OptionsPattern[ParaMinExcessBalanced]]:= Block[{rattol,dimpay},
+    rattol = OptionValue[RationalTol];
     dimpay = Dimensions[payoff];
     Which[Length[dimpay] === 2,
-         Which[(Last[dimpay]===Length[T] && Depth[payoff] ===3), ParaMinExcessBalCheck[game, #] & /@ payoff, 
+         Which[(Last[dimpay]===Length[T] && Depth[payoff] ===3), ParaMinExcessBalCheck[game, #,RationalTol->rattol] & /@ payoff, 
                        True, ParaPrintRemark[payoff]], 
    Length[dimpay] === 1,
-            Which[(First[dimpay]===Length[T] && Depth[payoff] === 2 ), ParaMinExcessBalCheck[game, payoff], 
+            Which[(First[dimpay]===Length[T] && Depth[payoff] === 2 ), ParaMinExcessBalCheck[game, payoff,RationalTol->rattol], 
                          True,  ParaPrintRemark[payoff]], 
    True, ParaPrintRemark[payoff]]
 ];
 
-ParaMinExcessBalCheck[game_,payoff_List]:= 
- Block[{plpr, rvpr, asspay,sij,sji,msrplij,msrplji,msrij, msrji,lthij,tolvec,sysij,sysji,eqQ},
+ParaMinExcessBalCheck[game_,payoff_List,opts:OptionsPattern[ParaMaxExcessBalanced]]:= 
+ Block[{rattol,plpr, rvpr, asspay,sij,sji,msrplij,msrplji,msrij, msrji,lthij,tolvec,sysij,sysji,eqQ},
+    rattol = OptionValue[RationalTol];
     plpr = Partition[paralistIJ[T],2];
     rvpr = Map[Reverse[#] &,plpr];
     asspay = ParaAssgPay[payoff];
@@ -904,7 +918,7 @@ ParaMinExcessBalCheck[game_,payoff_List]:=
      {msrplij,msrplji} = {ParaMinExcess[sij, asspay],ParaMinExcess[sji, asspay]};
      {msrij,msrji} = {msrplij - msrplji,msrplji - msrplij};
     lthij = Binomial[Length[T],2];
-    tolvec = ParallelTable[1.5*10^(-7), {i, lthij}];
+    tolvec = ParallelTable[1.5*rattol, {i, lthij}];
      sysij = Union[MapThread[LessEqual, {Abs[msrij], tolvec}]];
     sysji = Union[MapThread[LessEqual, {Abs[msrji], tolvec}]];
     eqQ = Apply[Join, {sysij, sysji}];

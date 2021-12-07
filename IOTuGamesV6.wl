@@ -2,8 +2,8 @@
 
 (*
     : Title : IOTuGamesV6.m
-    : Release Date : 22.04.2020
-    : Version 2.6.0 
+    : Release Date : 07.12.2021
+    : Version 3.0.2 
 
 *)
 
@@ -20,7 +20,7 @@
 *)
 
 (*
-   : Mathematica Version : 8.x, 9.x, 10.x, 11.x, 12.x
+   : Mathematica Version : 12.x
 *)
 (* 
    :History:
@@ -52,6 +52,9 @@
                    w.r.t. the option UseManipulate -> True has been fixed.
       Version 2.6.0:
                    Performing some code maintenance.   
+ 
+      Version 3.0.2:
+                   
  *)
 
 
@@ -146,12 +149,20 @@ lt={White}
 lt={Neutral}
 *)
 lt=Lighting -> {{"Directional", RGBColor[.3, 1, .1], {{5, 5, 4}, {5, 5, 0}}}};
-Map[SetOptions[#,AspectRatio -> 1,Boxed -> False,ImageSize->{400,434},ViewPoint -> {1.714, 2.478, 1.540},Lighting -> lt] &, {Graphics3D}];
-   
-Options[PlotCore3dV6] = Sort[{ViewSkel -> False, ViewKernelSol -> False, KernelCoord -> {}, ViewShapleySol -> False, ShapleyCoord -> {}, ViewNucleolusSol-> False, NucleolusCoord->{}, ViewModiclusSol-> False, ModiclusCoord->{}, ViewPayoffSol -> False, PayoffCoord -> {}, ViewLegend -> False, ShowImputationSet -> True, SyncDim -> True, Verbosely -> True, PtRadius -> 0.021}];
+Map[SetOptions[#,AspectRatio -> 1,Boxed -> False,ImageSize->{400,434},ViewPoint -> {1.714, 2.478, 1.540},  ViewCenter -> {.35, .35, .3}, ImageMargins -> 15, Lighting -> lt] &, {Graphics3D}];
+(*
+ Activate the line below, if you want to reccur to the old behavior, and deactivate the line above. 
+Map[SetOptions[#,AspectRatio -> 1,Boxed -> False,ImageSize->{400,434},ViewPoint -> {1.714, 2.478, 1.540}, Lighting -> lt] &, {Graphics3D}];
+*)
+(* 
+SetOptions[Graphics3D, ViewCenter -> {.35, .25, 1},  ImageMargins -> 15]  
+*) 
+
+  
+Options[PlotCore3dV6] = Sort[{ViewSkel -> False, ViewKernelSol -> False, KernelCoord -> {}, ViewShapleySol -> False, ShapleyCoord -> {}, ViewNucleolusSol-> False, NucleolusCoord->{}, ViewModiclusSol-> False, ModiclusCoord->{}, ViewPayoffSol -> False, PayoffCoord -> {}, ViewLegend -> False, ShowImputationSet -> True, SyncDim -> True, Verbosely -> True, PtRadius -> 0.021, PictureSize -> {400,434}}];
 Options[StrongEpsCore3dV6] = Sort[{ShowStrongEpsCore -> True, ShowCore -> True, EpsStrValues -> {}, PictureSize -> {400,434},ViewSkel -> False, ShowImputationSet -> True, ViewKernelSol -> False, KernelCoord -> {}, ViewShapleySol -> False, ShapleyCoord -> {}, ViewNucleolusSol-> False, NucleolusCoord->{}, ViewModiclusSol-> False, ModiclusCoord->{}, ViewPayoffSol -> False, PayoffCoord -> {}, CriticalValue -> {1}, SyncDim -> True,PtRadius -> 0.021}];
 Options[AnimationKernelPropertyV6] = Sort[{UpperCriticalVal ->{1/2}, LowerCriticalVal -> {},ManipulateMode->False,StepSize -> {-(1/4)},ShowStrongEpsCore -> True, ShowCore -> True, EpsStrValues -> {}, PictureSize -> {400,434},ViewSkel -> False, ShowImputationSet -> True, ViewKernelSol -> False, KernelCoord -> {}, ViewShapleySol -> False, ShapleyCoord -> {}, ViewNucleolusSol-> False, NucleolusCoord->{}, ViewModiclusSol-> False, ModiclusCoord->{}, ViewPayoffSol -> False, PayoffCoord -> {}, CriticalValue -> {1}, SyncDim -> True,PtRadius -> 0.021}];
-Options[ShowKernelCatcherV6] = Sort[{ShowCore->False, ShowLowerSet->False, ShowUpperSet-> True, ShowStrongEpsCore -> False, EpsStrValues -> {}, ViewSkel -> False, ShowImputationSet -> True, ViewKernelSol -> False, KernelCoord -> {}, ViewShapleySol -> False, ShapleyCoord -> {}, ViewNucleolusSol-> False, NucleolusCoord->{}, ViewModiclusSol-> False, ModiclusCoord->{}, ViewPayoffSol -> False, PayoffCoord -> {}, CriticalValue -> {1}, SyncDim -> True,PtRadius -> 0.021}]; 
+Options[ShowKernelCatcherV6] = Sort[{ShowCore->False, ShowLowerSet->False, ShowUpperSet-> True, ShowStrongEpsCore -> False, EpsStrValues -> {}, ViewSkel -> False, ShowImputationSet -> True, ViewKernelSol -> False, KernelCoord -> {}, ViewShapleySol -> False, ShapleyCoord -> {}, ViewNucleolusSol-> False, NucleolusCoord->{}, ViewModiclusSol-> False, ModiclusCoord->{}, ViewPayoffSol -> False, PayoffCoord -> {}, CriticalValue -> {1}, SyncDim -> True,PtRadius -> 0.021,PictureSize -> {400,434}}]; 
 Options[SkelImputationV6] = Sort[{SyncDim -> 1}];
 
 Begin["`Private`"];
@@ -164,7 +175,7 @@ Get["TUG`vertex`PolytopeSkeleton`"];
 
 PlotCore3dV6[args___]:=(Message[PlotCore3dV6::argerr];$Failed);
 PlotCore3dV6[game_,opts:OptionsPattern[{PlotCore3dV6,Graphics3D}]] :=
-  Module[{vwskl,vwker,vwshv,vwnuc,vwpay,vwmnc,vwleg,mnc,rd,kerc,shc,nuc,paycoord,shimp,vrb,bx,dld4,filopts,gr,psm,crQ},
+  Module[{vwskl,vwker,vwshv,vwnuc,vwpay,vwmnc,vwleg,mnc,rd,kerc,fs,shc,nuc,paycoord,shimp,vrb,bx,dld4,filopts,gr,psm,crQ},
     filopts = FilterRules[{opts},Options[Graphics3D]];
     vwskl=OptionValue[ViewSkel];
     vwker=OptionValue[ViewKernelSol];
@@ -176,7 +187,8 @@ PlotCore3dV6[game_,opts:OptionsPattern[{PlotCore3dV6,Graphics3D}]] :=
     kerc = OptionValue[KernelCoord];
     shc = OptionValue[ShapleyCoord];
     nuc = OptionValue[NucleolusCoord];
-    mnc = OptionValue[ModiclusCoord];	 
+    mnc = OptionValue[ModiclusCoord];
+    fs = OptionValue[PictureSize];	 
     paycoord = OptionValue[PayoffCoord];	 
     shimp = OptionValue[ShowImputationSet];
     dld4= OptionValue[SyncDim];
@@ -184,9 +196,9 @@ PlotCore3dV6[game_,opts:OptionsPattern[{PlotCore3dV6,Graphics3D}]] :=
     bx= OptionValue[Boxed];
     rd = OptionValue[PtRadius];
     crQ = CoreQ[game];
-    {gr,psm} = If[SameQ[crQ,True], PlotCore3DV6[game,ViewSkel -> vwskl, ViewKernelSol -> vwker, KernelCoord -> kerc, ViewShapleySol -> vwshv, ShapleyCoord -> shc, ViewNucleolusSol -> vwnuc, NucleolusCoord -> nuc, ViewModiclusSol -> vwmnc, ModiclusCoord -> mnc, ViewPayoffSol -> vwpay, PayoffCoord -> paycoord, ViewLegend -> vwleg, ShowImputationSet -> shimp,SyncDim -> dld4, PtRadius -> rd, Boxed-> bx,filopts],
+    {gr,psm} = If[SameQ[crQ,True], PlotCore3DV6[game,ViewSkel -> vwskl, ViewKernelSol -> vwker, KernelCoord -> kerc, ViewShapleySol -> vwshv, ShapleyCoord -> shc, ViewNucleolusSol -> vwnuc, NucleolusCoord -> nuc, ViewModiclusSol -> vwmnc, ModiclusCoord -> mnc, ViewPayoffSol -> vwpay, PayoffCoord -> paycoord, PictureSize-> fs, ViewLegend -> vwleg, ShowImputationSet -> shimp,SyncDim -> dld4, PtRadius -> rd, Boxed-> bx,filopts],
                   If[SameQ[vrb,True],Print["Core is empty! No Core plotted."],True];
-                  PlotNonCoreSol3d[game, ViewKernelSol -> vwker, KernelCoord -> kerc, ViewShapleySol -> vwshv, ShapleyCoord -> shc, ViewNucleolusSol -> vwnuc, NucleolusCoord -> nuc, ViewModiclusSol -> vwmnc, ModiclusCoord -> mnc, ViewPayoffSol -> vwpay, PayoffCoord -> paycoord, ViewLegend -> vwleg, PtRadius -> rd,Boxed-> False, filopts]
+                  PlotNonCoreSol3d[game, ViewKernelSol -> vwker, KernelCoord -> kerc, ViewShapleySol -> vwshv, ShapleyCoord -> shc, ViewNucleolusSol -> vwnuc, NucleolusCoord -> nuc, ViewModiclusSol -> vwmnc, ModiclusCoord -> mnc, ViewPayoffSol -> vwpay, PayoffCoord -> paycoord, PictureSize-> fs, ViewLegend -> vwleg, PtRadius -> rd,Boxed-> False, filopts]
                   ];
     Return[gr];
 
@@ -195,7 +207,7 @@ PlotCore3dV6[game_,opts:OptionsPattern[{PlotCore3dV6,Graphics3D}]] :=
 
 
 PlotCore3DV6[game_,opts:OptionsPattern[{PlotCore3dV6,Graphics3D}]] :=
-  Module[{vwskl,vwker,vwshv,vwnuc,vwmnc,vwpay,vwleg,kerc,rd,shc,nuc,mnc,paycoord,shimp,origgame,trext,varl,minv,dld4,filopts,norm,normgame,vertlist,linearity,ecdlist, eadlist, icdlist, iadlist,extmat,d1,d2,oldvls,dpt,dlvert,gr1,gr2,gr3,gr4,gr5,gr6,gr7,gr8,grli,gr,psm={}},
+  Module[{vwskl,vwker,vwshv,vwnuc,vwmnc,vwpay,vwleg,kerc,rd,shc,nuc,mnc,paycoord,shimp,origgame,trext,fs,varl,minv,dld4,filopts,norm,normgame,vertlist,linearity,ecdlist, eadlist, icdlist, iadlist,extmat,d1,d2,oldvls,dpt,dlvert,gr1,gr2,gr3,gr4,gr5,gr6,gr7,gr8,grli,gr,psm={}},
     filopts = FilterRules[{opts},Options[Graphics3D]];
     vwskl = OptionValue[ViewSkel];
     vwker = OptionValue[ViewKernelSol];
@@ -207,7 +219,8 @@ PlotCore3DV6[game_,opts:OptionsPattern[{PlotCore3dV6,Graphics3D}]] :=
     kerc = OptionValue[KernelCoord];
     shc = OptionValue[ShapleyCoord];
     nuc = OptionValue[NucleolusCoord];
-    mnc = OptionValue[ModiclusCoord];	 
+    mnc = OptionValue[ModiclusCoord];
+    fs = OptionValue[PictureSize];	 
     paycoord = OptionValue[PayoffCoord];	 
     shimp = OptionValue[ShowImputationSet];
     dld4= OptionValue[SyncDim];
@@ -243,8 +256,8 @@ PlotCore3DV6[game_,opts:OptionsPattern[{PlotCore3dV6,Graphics3D}]] :=
     gr7=If[SameQ[vwmnc,True],ShowModiclusV6[normgame,ModiclusCoord -> mnc,SyncDim -> psm,PtRadius -> rd,filopts],{}];	 
     gr8=If[SameQ[vwpay,True],ShowPayoffV6[normgame,PayoffCoord -> paycoord,SyncDim -> psm,PtRadius -> rd,filopts],{}];	 
     grli=Flatten[{gr1,gr2,gr3,gr4,gr5,gr6,gr7,gr8}];
-    gr=If[SameQ[vwleg,False],Show[grli],
-	                    ShowLegend[Show[grli], {{{Graphics[{Blue, Disk[{0, 0}, 0.005]}], "Shapley Value"},
+    gr=If[SameQ[vwleg,False],Show[grli, ImageSize -> fs],
+	                    ShowLegend[Show[grli, ImageSize -> fs], {{{Graphics[{Blue, Disk[{0, 0}, 0.005]}], "Shapley Value"},
 					     {Graphics[{Green, Disk[{0, 0}, 0.005]}], "Nucleolus"},
 					     {Graphics[{Red, Disk[{0, 0}, 0.005]}], "Kernel"},
 					     {Graphics[{Purple, Disk[{0, 0}, 0.005]}], "Modiclus"}}, 
@@ -277,7 +290,7 @@ SkelCore3dV6[vert_List, ecd_List, ead_List, extmat_List, opts:OptionsPattern[{Pl
 
 
 PlotNonCoreSol3d[game_, opts:OptionsPattern[{PlotCore3dV6,Graphics3D}]] :=
-  Module[{vwskl,vwker,vwshv,vwnuc,vwmnc,vwpay,kerc,shc,nuc,mnc,rd,psm,origgame,paycoord,shimp,dld4,filopts,oldvls,norm,normgame,gr1,gr2,gr3,gr4,gr5,gr6,grli,gr},
+  Module[{vwskl,vwker,vwshv,vwnuc,vwmnc,vwpay,kerc,shc,nuc,mnc,rd,psm,origgame,paycoord,shimp,dld4,filopts,fs,oldvls,norm,normgame,gr1,gr2,gr3,gr4,gr5,gr6,grli,gr},
     filopts = FilterRules[{opts},Options[Graphics3D]];
     vwker = OptionValue[ViewKernelSol];
     vwshv = OptionValue[ViewShapleySol];
@@ -287,7 +300,8 @@ PlotNonCoreSol3d[game_, opts:OptionsPattern[{PlotCore3dV6,Graphics3D}]] :=
     kerc = OptionValue[KernelCoord];
     shc = OptionValue[ShapleyCoord];
     nuc = OptionValue[NucleolusCoord];
-    mnc = OptionValue[ModiclusCoord];	 	 
+    mnc = OptionValue[ModiclusCoord];
+    fs = OptionValue[PictureSize];	 	 
     paycoord = OptionValue[PayoffCoord];	 
     rd = OptionValue[PtRadius];
     psm = ImpRedDimV6[game];
@@ -301,7 +315,7 @@ PlotNonCoreSol3d[game_, opts:OptionsPattern[{PlotCore3dV6,Graphics3D}]] :=
     gr5=If[SameQ[vwmnc,True],ShowModiclusV6[normgame,ModiclusCoord -> mnc,SyncDim -> psm,PtRadius -> rd,filopts],{}];	 	 
     gr6=If[vwpay===True,ShowPayoffV6[normgame,PayoffCoord -> paycoord,SyncDim -> psm,PtRadius -> rd,filopts],{}];	 
     grli=Flatten[{gr1,gr2,gr3,gr4,gr5,gr6}];
-    gr=Show[grli];
+    gr=Show[grli,ImageSize-> fs];
     origgame=DefineGame[T,oldvls];
     Return[{gr,psm}];
       ];
@@ -373,7 +387,7 @@ StrongEpsCore3dV6[game_, opts:OptionsPattern[{StrongEpsCore3dV6,Graphics3D}]] :=
      gr2=PlotStrCore3DV6[newgame,ViewSkel -> True, ViewKernelSol -> vwker, KernelCoord -> kerc, ViewShapleySol -> vwshv, ShapleyCoord -> shc, ViewNucleolusSol -> vwnuc, NucleolusCoord-> nuc, ViewModiclusSol -> vwmnc, ModiclusCoord -> mnc, ViewPayoffSol -> vwpay, PayoffCoord -> paycoord, SyncDim -> psm,PtRadius -> rd,Boxed->False,filopts];
      origgame=DefineGame[T,oldvls];
      grli=Flatten[{gr2,gr1}];
-     gr3=Show[grli,ImageSize -> fs, PlotLabel -> StringJoin["eps=",ToString[N[epsval]]]]; 
+     gr3=Show[grli,ImageSize->fs,PlotLabel -> StringJoin["eps=",ToString[N[epsval]]]]; 
      Return[gr3];
      
 ];
@@ -430,7 +444,7 @@ PlotStrCore3DV6[game_,opts:OptionsPattern[{StrongEpsCore3dV6,Graphics3D}]] :=
 
 AnimationKernelPropertyV6[args___]:=(Message[AnimationKernelPropertyV6::argerr];$Failed);
 AnimationKernelPropertyV6[game_, opts:OptionsPattern[{AnimationKernelPropertyV6,Graphics3D}]] :=
-  Module[{shcr, imps, crv, vwker, kcoord, vwsh, shc, vwnuc,nuc, rd, vwmnc, mnc, vwpay, paycoord,filopts,epsw, uppval, lowval, stpsize,manip, vpt,dld4,detlow},
+  Module[{shcr, fs, imps, crv, vwker, kcoord, vwsh, shc, vwnuc,nuc, rd, vwmnc, mnc, vwpay, paycoord,filopts,epsw, uppval, lowval, stpsize,manip, vpt,dld4,detlow},
     filopts = FilterRules[{opts},Options[Graphics3D]];
     shcr = OptionValue[ShowCore];
     imps = OptionValue[ShowImputationSet];
@@ -452,11 +466,12 @@ AnimationKernelPropertyV6[game_, opts:OptionsPattern[{AnimationKernelPropertyV6,
     manip = OptionValue[ManipulateMode];
     vpt = OptionValue[ViewPoint];
     dld4 = OptionValue[SyncDim];
+    fs = OptionValue[PictureSize];
     rd = OptionValue[PtRadius];
     detlow = If[lowval=={},First[EpsCore[game]], lowval[[1]]];
     If[SameQ[manip,False],
-        Table[StrongEpsCore3dV6[game,EpsStrValues -> t, ViewKernelSol -> vwker, KernelCoord -> kcoord, ViewNucleolusSol -> vwnuc, NucleolusCoord -> nuc, ViewShapleySol -> vwsh, ShapleyCoord -> shc, ViewModiclusSol -> vwmnc, ModiclusCoord -> mnc, ViewPayoffSol -> vwpay, PayoffCoord -> paycoord, ShowCore->shcr, ShowImputationSet -> imps,SyncDim -> True,PtRadius -> rd,ViewPoint ->vpt], {t, uppval[[1]], detlow, stpsize[[1]]}],
-        Manipulate[StrongEpsCore3dV6[game,EpsStrValues -> t, ViewKernelSol -> vwker, KernelCoord -> kcoord, ViewNucleolusSol -> vwnuc, NucleolusCoord -> nuc, ViewShapleySol -> vwsh, ShapleyCoord -> shc, ShowCore->shcr, ViewPayoffSol -> vwpay, ViewModiclusSol -> vwmnc, ModiclusCoord -> mnc, PayoffCoord -> paycoord, ShowImputationSet -> imps,SyncDim -> True,PtRadius -> rd,ViewPoint -> Dynamic[{v1,v2,v3}]], {{t, uppval[[1]],"Epsilon" },detlow, uppval[[1]], stpsize[[1]]}, {{v1, 1.714,"x-coordinate"}, 4},{{v2, 2,"y-coordinate"}, 4},{{v3, 1.54,"z-coordinate"}, 4}]] 
+        Table[StrongEpsCore3dV6[game,EpsStrValues -> t, ViewKernelSol -> vwker, KernelCoord -> kcoord, ViewNucleolusSol -> vwnuc, NucleolusCoord -> nuc, ViewShapleySol -> vwsh, ShapleyCoord -> shc, ViewModiclusSol -> vwmnc, ModiclusCoord -> mnc, ViewPayoffSol -> vwpay, PayoffCoord -> paycoord, ShowCore->shcr, ShowImputationSet -> imps,SyncDim -> True,PtRadius -> rd,ViewPoint ->vpt,PictureSize->fs], {t, uppval[[1]], detlow, stpsize[[1]]}],
+        Manipulate[StrongEpsCore3dV6[game,EpsStrValues -> t, ViewKernelSol -> vwker, KernelCoord -> kcoord, ViewNucleolusSol -> vwnuc, NucleolusCoord -> nuc, ViewShapleySol -> vwsh, ShapleyCoord -> shc, ShowCore->shcr, ViewPayoffSol -> vwpay, ViewModiclusSol -> vwmnc, ModiclusCoord -> mnc, PayoffCoord -> paycoord, ShowImputationSet -> imps,SyncDim -> True,PtRadius -> rd,PictureSize->fs,ViewPoint -> Dynamic[{v1,v2,v3}]], {{t, uppval[[1]],"Epsilon" },detlow, uppval[[1]], stpsize[[1]]}, {{v1, 1.714,"x-coordinate"}, 4},{{v2, 2,"y-coordinate"}, 4},{{v3, 1.54,"z-coordinate"}, 4}]] 
     ];
 
 
@@ -712,7 +727,7 @@ GenKernelGraphLineV6[payoff_List,opts:OptionsPattern[{PlotCore3dV6,Graphics3D}]]
 
 ShowKernelCatcherV6[args___]:=(Message[ShowKernelCatcherV6::argerr];$Failed);
 ShowKernelCatcherV6[game_, opts:OptionsPattern[{ShowKernelCatcherV6,Graphics3D}]] :=
-    Module[{vwskl,vwker,vwshv,vwnuc,vwmnc,vwpay,kerc,shc,nuc,mnc,paycoord,rd,epsval,psm,shups,shcr,strCr,epsw,shlws,critval,dld4,filopts,oldvls,norm,normgame,gr0,origgame,gr1,epsvls,newgame,crQ,gr2,gr3,gr4,gr5,gr6,gr7,gr8,gr9,grli,gr},
+    Module[{vwskl,vwker,vwshv,vwnuc,vwmnc,vwpay,kerc,shc,nuc,mnc,paycoord,rd,fs,epsval,psm,shups,shcr,strCr,epsw,shlws,critval,dld4,filopts,oldvls,norm,normgame,gr0,origgame,gr1,epsvls,newgame,crQ,gr2,gr3,gr4,gr5,gr6,gr7,gr8,gr9,grli,gr},
         filopts = FilterRules[{opts},Options[Graphics3D]];
         vwskl = OptionValue[ViewSkel];
         vwker = OptionValue[ViewKernelSol];
@@ -733,6 +748,7 @@ ShowKernelCatcherV6[game_, opts:OptionsPattern[{ShowKernelCatcherV6,Graphics3D}]
         critval = OptionValue[CriticalValue];
         rd = OptionValue[PtRadius];
         dld4 = OptionValue[SyncDim];
+        fs = OptionValue[PictureSize];
         dld4=If[SameQ[dld4,False],{},First[DetDim2Del[game]]];
         shcr = If[SameQ[shcr,True],
                 crQ=CoreQ[game];
@@ -761,7 +777,7 @@ ShowKernelCatcherV6[game_, opts:OptionsPattern[{ShowKernelCatcherV6,Graphics3D}]
         gr9=If[vwpay===True,ShowPayoffV6[origgame,PayoffCoord -> paycoord,SyncDim -> psm,PtRadius -> rd,filopts],{}];	   
         origgame=DefineGame[T,oldvls];
         grli=Flatten[{gr0,gr1,gr2,gr3,gr4,gr5,gr6,gr7,gr8,gr9}];
-        gr=Show[grli,PlotLabel -> StringJoin["eps=",ToString[N[epsval]]]];
+        gr=Show[grli, ImageSize-> fs, PlotLabel -> StringJoin["eps=",ToString[N[epsval]]]];
         Return[gr];
 ];
 
