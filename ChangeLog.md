@@ -9,27 +9,17 @@
 #### 1. Code Revision
 *	Minor code revision.
 
-*  Some robustness problems with the function family `ModifiedNucleolus[]`
-        have been fixed but it is not completely solved. For convex games or inessential games
-        the solution computed might still be wrong.
+*  Some robustness problems with the function family `ModifiedNucleolus[]` have been fixed but it is not completely solved. For convex games or inessential games the solution computed might still be wrong.
 
 #### 2.  Modification
 
-	Some new functions to compute the pre-kernel, anti-pre-kernel
-        and some related functions were incorporated. The function names
-        are `PreKernelSolution[]` and `AntiPreKernelSolution[]`.
-        These functions are based on an algorithm that relies on the indirect function
-        approach to compute pre-kernel solutions. In order to check if the solution is
-        an anti-pre-kernel, the functions `MinExcessBalanced[], AntiPreKernelQ[]`
-        and `AllAntiSurpluses[]` have been added.
+Some new functions to compute the pre-kernel, anti-pre-kernel and some related functions were incorporated. The function names are `PreKernelSolution[]` and `AntiPreKernelSolution[]`. These functions are based on an algorithm that relies on the indirect function approach to compute pre-kernel solutions. In order to check if the solution is an anti-pre-kernel, the functions `MinExcessBalanced[], AntiPreKernelQ[]` and `AllAntiSurpluses[]` have been added.
 
 ###   Version 1.5
 #### 1. Code Revision
 *	Some code revision.
 
-*  The functions `DefineGame[], MaxExcessBalanced[], MinExcessBalanced[],
-       KernelImputationQ[], SuperAdditiveQ[]` and `AvConvex[]` have been completely rewritten.
-       For this reason the  functions: `AvSumCheck[], ContributionSum[]` have been deprecated.
+*  The functions `DefineGame[], MaxExcessBalanced[], MinExcessBalanced[], KernelImputationQ[], SuperAdditiveQ[]` and `AvConvex[]` have been completely rewritten. For this reason the  functions: `AvSumCheck[], ContributionSum[]` have been deprecated.
 
 *  The function `AverageConvexQ[]` is the same as `AvConvexQ[]`, but it allows to issue an option.
 
@@ -40,10 +30,10 @@
 Some new functions related to unanimity coordinates have been added. For instance
 
 * `DetUCoord[]` to get the unanimity coordinates from a set of positive coordinates.
-* `HarsanyiDividends[]` provides an alternative approach to compute the
-	unanimity coordinates (Harsanyi dividends) of the game.
-* `CharacteristicValues[]` computes the characteristic values of the game from
-       the unanimity coordinates.
+
+* `HarsanyiDividends[]` provides an alternative approach to compute the unanimity coordinates (Harsanyi dividends) of the game.
+
+* `CharacteristicValues[]` computes the characteristic values of the game from the unanimity coordinates.
 
 *  The functions `UnanConvexQ[], UnanAvConvexQ[]` provide alternative approaches to check convexity and average-convexity.
 
@@ -63,8 +53,7 @@ Some new functions related to unanimity coordinates have been added. For instanc
 
 *  First code adjustment to use this package in parallel.
 
-*  Furthermore, some basic functions can now be called within a running *MATLAB* session while
-       using our *MATLAB* toolbox *MatTuGames*, which is available from the following URL:
+*  Furthermore, some basic functions can now be called within a running *MATLAB* session while using our *MATLAB* toolbox *MatTuGames*, which is available from the following URL:
 
 	[MatTuGames](http://www.mathworks.cn/matlabcentral/fileexchange/35933?product=EL)
 
