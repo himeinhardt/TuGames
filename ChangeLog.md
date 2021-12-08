@@ -156,7 +156,7 @@ We have revised the Install procedure of the *Cddmathlink* library, which makes 
 
 #### 2. Bug fixes
 
-     Some minor code revision and bug fixes.
+Some minor code revision and bug fixes.
 
 ###    Version 2.5.3
 #### 1. Modification
@@ -212,17 +212,17 @@ Related to this context we provide the function `BalancedInequalityQ[]` to check
 	
    Adding functions
 	
-*  AlmostConvexQ[] to check if the game is almost convex.
-*  AlmostConcaveQ[] to check if the game is almost concave.
-*  ADMCGameQ[] to check the property if the game satisfies almost diminishing marginal contributions.
-*  AIMCGameQ[] to check the property if the game satisfies almost increasing marginal contributions.
-*  kConvexity[] to check if the game is k-convex.
-*  EANSCValue[] to compute the Equal Allocation of Non-Separable Contribution/Cost value.
+*  `AlmostConvexQ[]` to check if the game is almost convex.
+*  `AlmostConcaveQ[]` to check if the game is almost concave.
+*  `ADMCGameQ[]` to check the property if the game satisfies almost diminishing marginal contributions.
+*  `AIMCGameQ[]` to check the property if the game satisfies almost increasing marginal contributions.
+*  `kConvexity[]` to check if the game is k-convex.
+*  `EANSCValue[]` to compute the Equal Allocation of Non-Separable Contribution/Cost value.
 
 #### 2. Revision
 Revised the functions:
 	
-              ConvexQ[], ConcaveQ[], Nuc1convex[].
+`ConvexQ[], ConcaveQ[], Nuc1convex[]`.
 #### 3. Bug Fixes
 	
 Minor Bug fixes and code revision.
