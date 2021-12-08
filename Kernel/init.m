@@ -5,6 +5,7 @@ Off[Options::optnf]
 Off[OptionValue::nodef]
 Off[Needs::nocont]
 Off[Get::noopen]
+Get["Developer`"];
 Get["TUG`coop`CooperativeGames`"];
 Get["TUG`TuGames`"];
 Get["TUG`TuGamesAux`"];
