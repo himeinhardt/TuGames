@@ -5,15 +5,15 @@
 ##  :Version History:
 ###    Version 1.0: without options
 ###    Version 1.1: with options
-###    Version 1.3:
-1. Code Revision:
+###    Version 1.3
+#### 1. Code Revision
 *	Minor code revision.
 
 *  Some robustness problems with the function family `ModifiedNucleolus[]`
         have been fixed but it is not completely solved. For convex games or inessential games
         the solution computed might still be wrong.
 
-2.  Modification:
+#### 2.  Modification
 
 	Some new functions to compute the pre-kernel, anti-pre-kernel
         and some related functions were incorporated. The function names
@@ -23,8 +23,8 @@
         an anti-pre-kernel, the functions `MinExcessBalanced[], AntiPreKernelQ[]`
         and `AllAntiSurpluses[]` have been added.
 
-###   Version 1.5:
-1. Code Revision:
+###   Version 1.5
+#### 1. Code Revision
 *	Some code revision.
 
 *  The functions `DefineGame[], MaxExcessBalanced[], MinExcessBalanced[],
@@ -35,9 +35,9 @@
 
 *  The functions `PreKernelQ[]` and `AntiPreKernelQ[]` have been modified.
 
-2.  Modification:
+#### 2.  Modification
 
-    Some new functions related to unanimity coordinates have been added. For instance
+Some new functions related to unanimity coordinates have been added. For instance
 
 * `DetUCoord[]` to get the unanimity coordinates from a set of positive coordinates.
 * `HarsanyiDividends[]` provides an alternative approach to compute the
@@ -47,15 +47,15 @@
 
 *  The functions `UnanConvexQ[], UnanAvConvexQ[]` provide alternative approaches to check convexity and average-convexity.
 
-###    Version 1.6:
+###    Version 1.6
 
-1.   Bug fixes:
+#### 1. Bug fixes
 * `AverageConvexQ[]`        - Fix incorrect computation and a precision problem.
 * `DetUCoord[]`             - Fix incorrect computation.
 * `UnanAvConvexIffCondQ[]`  - Fix incorrect computation and a precision problem.
 * `AdjustedWorthVectors[]`  - Fix incorrect computation.
 
-2.  Modification:
+#### 2. Modification
 
 *  Some general code revision.
 
@@ -68,219 +68,187 @@
 
 	[MatTuGames](http://www.mathworks.cn/matlabcentral/fileexchange/35933?product=EL)
 
-###    Version 1.7:
+###    Version 1.7
 
-1.   Bug fixes:
-     * `PreKernelElement[]`        - Fix a precision problem.
-     * `KernelVertices[]`          - Fix a precision problem.
-     * `DirectionOfImprovement[]`  - Fix a precision problem.
-     * `MaxExcessBalanced[]`       - Fix a precision problem.
-     * `MinExcessBalanced[]`       - Fix a precision problem.
-     * `KernelImputationQ[]`       - Fix a precision problem.
-     * `KernelImputationListQ[]`   - Fix a precision problem.
-     * `ModifiedNucleolus[]`       - Fix incorrect computation with games having empty core.
-     * `ModifiedKernel[]`          - Fix incorrect computation with games having empty core.
-     * `LexiCenter[]`              - Fix incorrect computation with games having empty core.
-     * `PreNucleolus[]`            - Fix incorrect computation with games having empty core.
+#### 1. Bug fixes
+* `PreKernelElement[]`        - Fix a precision problem.
+* `KernelVertices[]`          - Fix a precision problem.
+* `DirectionOfImprovement[]`  - Fix a precision problem.
+* `MaxExcessBalanced[]`       - Fix a precision problem.
+* `MinExcessBalanced[]`       - Fix a precision problem.
+* `KernelImputationQ[]`       - Fix a precision problem.
+* `KernelImputationListQ[]`   - Fix a precision problem.
+* `ModifiedNucleolus[]`       - Fix incorrect computation with games having empty core.
+* `ModifiedKernel[]`          - Fix incorrect computation with games having empty core.
+* `LexiCenter[]`              - Fix incorrect computation with games having empty core.
+* `PreNucleolus[]`            - Fix incorrect computation with games having empty core.
 
-2.  Modification:
+#### 2. Modification
 
-       The parallel mode has been optimized. For more details see the README file and/or
-       the notebook file TuGamesParallel.nb in the Documentation folder.
+The parallel mode has been optimized. For more details see the README file and/or the notebook file TuGamesParallel.nb in the Documentation folder.
 
-       Tested up to 32 SubKernels. For running even the *Cddmathlink* libraries in parallel see
-       the explanation in the *README* file and/or for an example the notebook file
-       `TuGamesMovieParaModeV6.nb` in the Documentation directory.
+Tested up to 32 SubKernels. For running even the *Cddmathlink* libraries in parallel see the explanation in the *README* file and/or for an example the notebook file `TuGamesMovieParaModeV6.nb` in the Documentation directory.
 
-       To keep track our package with the new graphic concept of Mathematica 6.x and higher,
-       the following functions have been added or modified to depict solutions for three person games:
+To keep track our package with the new graphic concept of Mathematica 6.x and higher, the following functions have been added or modified to depict solutions for three person games:
 
-       * `AnimationKernelProperty2d[]`  - new function, dedicated for Mathematica 6.x and higher only!
-       * `StrongEpsCore2d[]`            - new function, dedicated for Mathematica 6.x and higher only!
-       * `FilledCoreV6[]`               - is an upgrade of FilledCore[] for version 6.x and higher.
+* `AnimationKernelProperty2d[]`  - new function, dedicated for Mathematica 6.x and higher only!
+* `StrongEpsCore2d[]`            - new function, dedicated for Mathematica 6.x and higher only!
+* `FilledCoreV6[]`               - is an upgrade of FilledCore[] for version 6.x and higher.
 
-       The graphical functions to plot game solutions for four person games reside in the package
-       `IOTuGamesV6.m`. To use the old graphic concept one has to load the package IOTuGames.m
-       in connection with << Version5`Graphics`.
-       All graphical extensions require the *Cddmathlink* libraries.
+The graphical functions to plot game solutions for four person games reside in the package `IOTuGamesV6.m`. To use the old graphic concept one has to load the package `IOTuGames.m` in connection with << Version5`Graphics`. All graphical extensions require the *Cddmathlink* libraries.
 
-###    Version 1.8:
-1.  Revision:
-      * `ModifiedNucleolus[]`       - Complete code revision to get rid of large round-off errors.
-                                   We use now a fast simplex method instead of an interior point
-                                   method to increase its reliability.
-      * `ModifiedKernel[]`          - See `ModifiedNucleolus[]`.
-      * `LexiCenter[]`              - See `ModifiedNucleolus[]`.
-      * `PreNucleolus[]`            - See `ModifiedNucleolus[]`.
+###    Version 1.8
+#### 1.  Revision
+* `ModifiedNucleolus[]`       - Complete code revision to get rid of large round-off errors. We use now a fast simplex method instead of an interior point method to increase its reliability.
+* `ModifiedKernel[]`          - See `ModifiedNucleolus[]`.
+* `LexiCenter[]`              - See `ModifiedNucleolus[]`.
+* `PreNucleolus[]`            - See `ModifiedNucleolus[]`.
 
-       The behavior of these functions have changed. Options are obsolete now. `ModifiedNucleolus[]` does
-       not compute anymore the pre-nucleolus for inessential games, it returns the empty set instead.
+The behavior of these functions have changed. Options are obsolete now. `ModifiedNucleolus[]` does not compute anymore the pre-nucleolus for inessential games, it returns the empty set instead.
 
 
-###    Version 2.2:
-1. Modification:
+###    Version 2.2
+#### 1. Modification 
 
-      * Transcription of the old option rules to the new ones invented by Mathematica 8.x.
-        This package is now exclusively dedicated to Mathematica version 8.x and higher.
-      * `FilledCore[]` is deprecated now. Using the old graphic concept Version 1.8 is required.
+* Transcription of the old option rules to the new ones invented by Mathematica 8.x. This package is now exclusively dedicated to Mathematica version 8.x and higher.
 
-###    Version 2.3:
-1. Modification:
+* `FilledCore[]` is deprecated now. Using the old graphic concept Version 1.8 is required.
 
-	Change protected command `SubsetQ[]` to `SubSetQ[]` from the VertexEnum package. Order is
-        reversed to `SubsetQ[]` which is new in Mathematica version 10.x.
+###    Version 2.3
+#### 1. Modification
 
-2. Revision:
+Change protected command `SubsetQ[]` to `SubSetQ[]` from the VertexEnum package. Order is reversed to `SubsetQ[]` which is new in Mathematica version 10.x.
 
-      Some minor code revision.
+#### 2. Revision
 
-3. New Functions:
-      * `MLExtension[]`           - Computes the multi-linear extension of the game.
-      * `ShapleyValueML[]`        - Computes the Shapley value from the multi-linear extension of the game.
-      * `PreKernel[]`             - Computes a pre-kernel point by Algorithm 8.2.1 of Meinhardt (2013).
+Some minor code revision.
 
-4. Bug fixes:
+#### 3. New Functions
+* `MLExtension[]`           - Computes the multi-linear extension of the game.
+* `ShapleyValueML[]`        - Computes the Shapley value from the multi-linear extension of the game.
+* `PreKernel[]`             - Computes a pre-kernel point by Algorithm 8.2.1 of Meinhardt (2013).
 
-      * `FindKernelSolution[]` convergence process to the kernel should be now more robust.
+#### 4. Bug fixes
 
-###    Version 2.4:
-1. Revision:
+* `FindKernelSolution[]` convergence process to the kernel should be now more robust.
 
-	Some minor code revision.
+###    Version 2.4
+#### 1. Revision
 
-###    Version 2.5:
-1. Modification:
+Some minor code revision.
 
-     Adding the function `ApproxNuc[]` to compute the (p,k)-nucleolus which is an approximation of
-        the nucleolus by a non-linear optimization approach, i.e., minimizes a p-norm. The function
-        `NonLinNuc[]` is based on this function to compute the nucleolus. We extended this idea to the
-        pre-nucleolus through the commands `ApproxPreNuc[]` and `NonLinPreNuc[]`. In addition, we added
-        the least square computation of the (pre-)nucleolus by the functions `LSNuc[]` and `LSPreNuc[]`.
+###    Version 2.5
+#### 1. Modification
 
-    Functions to compute the barycenter of the extreme points of the core, dual cover game,
-        dual extension, primal extension, modiclus, a proper modified pre-kernel element,
-        potential of a game, the Lorenz solution, and Dutta-Ray solution for convex games
-        have been added.
+Adding the function `ApproxNuc[]` to compute the (p,k)-nucleolus which is an approximation of the nucleolus by a non-linear optimization approach, i.e., minimizes a p-norm. The function `NonLinNuc[]` is based on this function to compute the nucleolus. We extended this idea to the pre-nucleolus through the commands `ApproxPreNuc[]` and `NonLinPreNuc[]`. In addition, we added the least square computation of the (pre-)nucleolus by the functions `LSNuc[]` and `LSPreNuc[]`.
 
-2. Bug fixes:
+Functions to compute the barycenter of the extreme points of the core, dual cover game, dual extension, primal extension, modiclus, a proper modified pre-kernel element, potential of a game, the Lorenz solution, and Dutta-Ray solution for convex games have been added.
 
-     An insufficient coloring of the function FilledCoreV6[] caused by an incomplete delaunay
-         triangulation of the Mathematica built-in function DelaunayTriangulation[] has been fixed.
+#### 2. Bug fixes
+
+An insufficient coloring of the function FilledCoreV6[] caused by an incomplete delaunay triangulation of the Mathematica built-in function DelaunayTriangulation[] has been fixed.
 
 
 
-###    Version 2.5.1:
-1. Modification:
+###    Version 2.5.1
+#### 1. Modification
 
-     * Installation procedure has changed. The package is now distributed as a Paclet. The documentation
-	was revised and extended. About 230 pages were added to the documentation. The error
-	handling of functions was improved.
-     * The functions to compute the modiclus and related solutions have been parallelized, and are part
-	of the `ParaTuGames` package.
+* Installation procedure has changed. The package is now distributed as a Paclet. The documentation was revised and extended. About 230 pages were added to the documentation. The error handling of functions was improved.
+* The functions to compute the modiclus and related solutions have been parallelized, and are part the `ParaTuGames` package.
 
-2. Bug fixes:
+#### 2. Bug fixes
+
+Some minor code revision and bug fixes.
+
+###   Version 2.5.2
+#### 1. Modification
+
+We have revised the Install procedure of the *Cddmathlink* library, which makes it not anymore necessary to explicitly formulate some conditions for all operating systems. Moreover, some default binaries for *RHEL* 7.5 and *Mathematica* 11.3 ship now with the package. Alternatively, we also added some for *RHEL* systems for *Mathematica* 10 and later. These binaries must be copied into the pre-specified folder.
+
+#### 2. Bug fixes
 
      Some minor code revision and bug fixes.
 
-###   Version 2.5.2:
-1. Modification:
+###    Version 2.5.3
+#### 1. Modification
 
-    We have revised the Install procedure of the *Cddmathlink* library, which makes it not anymore necessary
-	to explicitly formulate some conditions for all operating systems. Moreover, some default binaries for *RHEL* 7.5
-	and *Mathematica* 11.3 ship now with the package. Alternatively, we also added some for *RHEL* systems for
-	*Mathematica* 10 and later. These binaries must be copied into the pre-specified folder.
+* Adding some binaries for Mathematica 10.0 or later on OS X 10.9 or later. We are very grateful to Szabolcs Horvát for providing these to the community.
+* Change of the License to the MIT License terms.
 
-2. Bug fixes:
-
-     Some minor code revision and bug fixes.
-
-###    Version 2.5.3:
-1. Modification:
-
-     * Adding some binaries for Mathematica 10.0 or later on OS X 10.9 or later. We are very grateful
-        to Szabolcs Horvát for providing these to the community.
-     * Change of the License to the MIT License terms.
-
-###    Version 2.5.4:
-1. Modification:
-* Functions to compute and to verify the simplified modified pre-kernel/nucleolus are added. They are called
-        `SMPrenucleolus[],IsSMPrenuceolusQ[],SMPreKernel[],IsSMPreKernelQ[]`. For the last two commands we implemented
-        parallel counterparts called `ParaSMPreKernel[]`,and `ParaIsSMPreKernelQ[]` respectively.
+###    Version 2.5.4
+#### 1. Modification
+* Functions to compute and to verify the simplified modified pre-kernel/nucleolus are added. They are called `SMPrenucleolus[],IsSMPrenuceolusQ[],SMPreKernel[],IsSMPreKernelQ[]`. For the last two commands we implemented parallel counterparts called `ParaSMPreKernel[]`,and `ParaIsSMPreKernelQ[]` respectively.
 * Adding the function `BalancedCollectionQ[]` that should replace in the future the function `BalancedSelectionQ[]`.
         For n=>4 the function returns incorrect results, probably caused by a bug of the `DualLinearProgramming[]` function.
 
 
-2. Example of incorrect results:
+#### 2. Example of incorrect results:
 
-   Consider the collection of sets given by
+Consider the collection of sets given by
 ```
         cS4={{1}, {2}, {3}, {1, 2}, {1, 3}, {2, 4}, {3, 4}, {2, 3, 4}};
 ```
-   then the return value is false
+then the return value is false
 ```
          In[29]:= First[BalancedSystemQ[cS4, Range[4]]]
 
          Out[29]= False
 ```
-   However, the system is balanced, since the balancing weights are given by
+However, the system is balanced, since the balancing weights are given by
 
 ```
         whgs = {3,1,1,1,1,2,2,1}/5
 ```
 
-   Related to this context we provide the function `BalancedInequalityQ[]` to check whether a balanced system
-        satisfies a balanced inequality of a TU-game. Notice that if all balanced systems satisfying this property
-        non-emptiness of the core is guaranteed. Recall that for n=4 we need to check 9 equivalence classes, however,
-        for n=6 we have to check 158 classes.
+Related to this context we provide the function `BalancedInequalityQ[]` to check whether a balanced system satisfies a balanced inequality of a TU-game. Notice that if all balanced systems satisfying this property non-emptiness of the core is guaranteed. Recall that for n=4 we need to check 9 equivalence classes, however, for n=6 we have to check 158 classes.
 
 
-###    Version 2.6.0:
-1. Modification:
+###    Version 2.6.0
+#### 1. Modification
 
-     * Adding functions to compute the Chi-Value, EPSD-Value, Gately-Value, PD-Value, and the nucleolus by the Leng and Parlar (2010) formulae for three person
-       zero-normalized and super-additive games. Changing the package extension from *.m to *.wl.
+* Adding functions to compute the Chi-Value, EPSD-Value, Gately-Value, PD-Value, and the nucleolus by the Leng and Parlar (2010) formulae for three person zero-normalized and super-additive games. Changing the package extension from *.m to *.wl.
 
-2. Bug fixes and Revision:
+#### 2. Bug fixes and Revision
 
-     * Performing some code maintenance and minor bug fixes.
+* Performing some code maintenance and minor bug fixes.
 
-###    Version 2.6.1:
+###    Version 2.6.1
 
-1. Revision:
+#### 1. Revision
 
-    * Code revision and optimization. The (anti-)pre-kernel computation is now faster up to a factor 3 in serial as well as in parallel.
+* Code revision and optimization. The (anti-)pre-kernel computation is now faster up to a factor 3 in serial as well as in parallel.
 
-###    Version 2.6.2:
-1. Modification:
+###    Version 2.6.2
+#### 1. Modification:
 	
-   Adding functions:
+   Adding functions
 	
-            *  AlmostConvexQ[] to check if the game is almost convex.
-            *  AlmostConcaveQ[] to check if the game is almost concave.
-            *  ADMCGameQ[] to check the property if the game satisfies almost diminishing marginal contributions.
-            *  AIMCGameQ[] to check the property if the game satisfies almost increasing marginal contributions.
-            *  kConvexity[] to check if the game is k-convex.
-            *  EANSCValue[] to compute the Equal Allocation of Non-Separable Contribution/Cost value.
+*  AlmostConvexQ[] to check if the game is almost convex.
+*  AlmostConcaveQ[] to check if the game is almost concave.
+*  ADMCGameQ[] to check the property if the game satisfies almost diminishing marginal contributions.
+*  AIMCGameQ[] to check the property if the game satisfies almost increasing marginal contributions.
+*  kConvexity[] to check if the game is k-convex.
+*  EANSCValue[] to compute the Equal Allocation of Non-Separable Contribution/Cost value.
 
-2. Revision:
-	Revised the functions:
+#### 2. Revision
+Revised the functions:
 	
               ConvexQ[], ConcaveQ[], Nuc1convex[].
-3. Bug Fixes:
+#### 3. Bug Fixes
 	
-       Minor Bug fixes and code revision.
+Minor Bug fixes and code revision.
 
-###    Version 3.0.0:
+###    Version 3.0.0
 
-1. Synopsis:
+#### 1. Synopsis
 	
-    Not anymore backward compatible to Mathematica versions smaller than 12 due to the port to the new collection of algorithms for solving convex problems introduced in version 12.
+Not anymore backward compatible to Mathematica versions smaller than 12 due to the port to the new collection of algorithms for solving convex problems introduced in version 12.
 
-2. Modification:
+#### 2. Modification
 
-  `ConstrainedMax/ConstrainedMin` and `LinearProgramming/DualLinearProgramming` are replaced by `LinearOptimization`.
+`ConstrainedMax/ConstrainedMin` and `LinearProgramming/DualLinearProgramming` are replaced by `LinearOptimization`.
 
-   This replacement has been conducted for the following functions:
+This replacement has been conducted for the following functions:
 
        Nucleolus                  -- Part of CooperativeGames. Function originally written by M. Carter.
        LeastCoreAux               -- Part of CooperativeGames. Function originally written by M. Carter.
@@ -305,28 +273,29 @@
        ParaModiclus               -- Part of ParaTuGames.
        ParaIsModiclus             -- Part of ParaTuGames.
 
-   New added functions are:
+New added functions are:
 	
       WeaklyBalancedCollectionQ   -- Part of TuGames.
       WeaklyBalancedSystemQ       -- Part of TuGamesAux.
 
 
-   The function `WeaklyBalancedCollectionQ` replaces `WeaklyBalancedSelectionQ`, the latter will be deprecated in a future version.
+The function `WeaklyBalancedCollectionQ` replaces `WeaklyBalancedSelectionQ`, the latter will be deprecated in a future version.
 
-###  Version 3.0.1:
+###  Version 3.0.1
 	
-1. Revision:
+#### 1. Revision
 	
-	Improved exception handling for functions using `LinearOptimization`. Performance improving of revised functions in Version 3.
+Improved exception handling for functions using `LinearOptimization`. Performance improving of revised functions in Version 3.
 	
-2. Bug Fixes:
+#### 2. Bug Fixes
 	
-   Some minor bug fixes.
- 
+Some minor bug fixes.
 
-###  Version 3.0.2
+###  Version 3.0.2 
 
-     Adjusting the functions
+#### 1.Revision
+
+Adjusting the functions
 
        ApproxPreNuc                -- Part of TuGames,
        ApproxNuc                   -- Part of TuGames,
@@ -336,10 +305,23 @@
        NonLinNuc                   -- Part of TuGames,
        PreKernelSolution           -- Part of TuGames
 
-    to the new set of optimization algorithms.
+to the new set of optimization algorithms.
 
-    Adding options to the functions PreKernelQ, MaxExcessBalanced, AntiPreKernelQ, MinExcessBalanced, ParaPreKernelQ, ParaMaxExcessBalanced, ParaAntiPreKernelQ, ParaMinExcessBalanced.
+Adding options to the functions:
 
-    Improving the performance of PreKernelSolution.
+      PreKernelQ                  -- Part of TuGames,
+      MaxExcessBalanced           -- Part of TuGames,
+      AntiPreKernelQ              -- Part of TuGames,
+      MinExcessBalanced           -- Part of TuGames,
+      ParaPreKernelQ              -- Part of ParaTuGames,
+      ParaMaxExcessBalanced       -- Part of ParaTuGames,
+      ParaAntiPreKernelQ          -- Part of ParaTuGames,
+      ParaMinExcessBalanced       -- Part of ParaTuGames.
 
-    Some minor bug fixes and code revision.
+Improving the performance of `PreKernelSolution`.
+
+#### 2. Bug Fixes
+
+Some minor bug fixes and code revision.
+
+
