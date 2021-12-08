@@ -3,17 +3,17 @@
 (*** Wolfram Notebook File ***)
 (* http://www.wolfram.com/nb *)
 
-(* CreatedBy='Mathematica 11.3' *)
+(* CreatedBy='Mathematica 12.2' *)
 
 (*CacheID: 234*)
 (* Internal cache information:
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     48577,       1287]
-NotebookOptionsPosition[     48093,       1272]
-NotebookOutlinePosition[     48428,       1287]
-CellTagsIndexPosition[     48385,       1284]
+NotebookDataLength[     51556,       1357]
+NotebookOptionsPosition[     50844,       1337]
+NotebookOutlinePosition[     51407,       1357]
+CellTagsIndexPosition[     51364,       1354]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -56,7 +56,27 @@ Cell[BoxData[
     "of", " ", "\n", "Cooperative", " ", "Games", "\n", "\n", "by", "\n", 
     "\n", "Michael", " ", "Carter", "\n", "Department", " ", "of", " ", 
     "Economics", "\n", "University", " ", "of", " ", "Cantebury"}], "\n", 
-   "*)"}], "\n", 
+   "*)"}], "\n", "\n", 
+  RowBox[{"(*", "\n", 
+   RowBox[{"Release", " ", 
+    RowBox[{"Date", ":", " ", 
+     RowBox[{
+      RowBox[{
+      "28.09", ".2021", " ", "\n", "\n", "Modification", " ", "made", " ", 
+       "to", " ", "be", " ", "compatible", " ", "with", " ", "Mathematica", 
+       " ", "Version", " ", "12", "\n", "\n", "by", " ", "\n", "\n", "Holger",
+        " ", 
+       RowBox[{"I", ".", " ", "Meinhardt"}], "\n", "Institute", " ", "of", 
+       " ", "Operations", " ", "Research", "\n", "Karlsruhe", " ", 
+       "Institute", " ", "of", " ", "Technology", " ", 
+       RowBox[{"(", "KIT", ")"}], "\n", "D"}], "-", 
+      RowBox[{
+      "76128", " ", "Karlsruhe", "\n", "\n", "ConstrainedMin", " ", "is", " ",
+        "replaced", " ", "by", " ", 
+       RowBox[{"LinearOptimization", ".", "\n", "Is"}], " ", "not", " ", 
+       "anymore", " ", "usable", " ", "with", " ", "Mathematica", " ", 
+       "Versions", " ", "smaller", " ", "than", " ", "12."}]}]}]}], "\n", 
+   "\n", "*)"}], "\n", 
   RowBox[{
    RowBox[{
     RowBox[{"BeginPackage", "[", "\"\<TUG`coop`CooperativeGames`\>\"", "]"}], 
@@ -209,10 +229,21 @@ simplex\>\""}], ";"}], "\n",
         RowBox[{
          RowBox[{"ConstraintLabels", " ", "->", "True"}], ",", " ", 
          RowBox[{"Options", "[", "Graphics", "]"}]}], "}"}], "]"}], "]"}]}], 
-    ";"}], "\n", "\n", 
+    ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Options", "[", "CoreQ", "]"}], " ", "=", " ", 
+     RowBox[{"{", 
+      RowBox[{"Method", " ", "->", " ", "Automatic"}], "}"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Options", "[", "Nucleolus", "]"}], " ", "=", " ", 
+     RowBox[{"{", 
+      RowBox[{"Method", " ", "->", " ", "Automatic"}], "}"}]}], ";"}], "\n", 
+   "\n", 
    RowBox[{
     RowBox[{"Begin", "[", "\"\<`Private`\>\"", "]"}], ";"}]}]}]], "Code",Expre\
-ssionUUID->"e457aea8-1fea-46a0-a10d-56d57773e03c"],
+ssionUUID->"610f2e73-ad44-45e0-a94f-03ed71d6937e"],
 
 Cell[BoxData[{
  RowBox[{
@@ -225,7 +256,7 @@ Cell[BoxData[{
   RowBox[{
    RowBox[{
     RowBox[{"Imputations", "[", 
-     RowBox[{"game_:", "Null"}], "]"}], " ", ":=", "\n", "\t", 
+     RowBox[{"game_", ":", "Null"}], "]"}], " ", ":=", "\n", "\t", 
     RowBox[{"Append", "[", 
      RowBox[{"IndividualRationality", ",", " ", "ParetoOptimality"}], "]"}]}],
     ";"}], "\n"}], "\n", 
@@ -233,7 +264,7 @@ Cell[BoxData[{
   RowBox[{
    RowBox[{
     RowBox[{"Core", "[", 
-     RowBox[{"game_:", "Null"}], "]"}], " ", ":=", "\n", "    ", 
+     RowBox[{"game_", ":", "Null"}], "]"}], " ", ":=", "\n", "    ", 
     RowBox[{"Append", "[", 
      RowBox[{"CoalitionalRationality", ",", " ", "ParetoOptimality"}], 
      "]"}]}], ";"}], "\n"}], "\n", 
@@ -264,22 +295,34 @@ Cell[BoxData[{
   RowBox[{
    RowBox[{
     RowBox[{"CoreQ", "[", 
-     RowBox[{"game_:", "Null"}], "]"}], " ", ":=", " ", 
-    RowBox[{
-     RowBox[{"v", "[", "T", "]"}], " ", ">=", "\n", "\t", 
      RowBox[{
-      RowBox[{"ConstrainedMin", "[", 
-       RowBox[{
-        RowBox[{"x", "[", "T", "]"}], ",", "\n", "\t\t", 
-        "CoalitionalRationality", ",", " ", "\n", "\t\t", "PayoffVector"}], 
-       "]"}], "[", 
-      RowBox[{"[", "1", "]"}], "]"}]}]}], ";"}], "\n"}], "\n", 
+      RowBox[{"game_", ":", "Null"}], ",", 
+      RowBox[{"opts", ":", 
+       RowBox[{"OptionsPattern", "[", "CoreQ", "]"}]}]}], "]"}], " ", ":=", 
+    " ", 
+    RowBox[{"Block", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"mthd", ",", "grQ"}], "}"}], ",", "\n", "\t", 
+      RowBox[{
+       RowBox[{"mthd", " ", "=", " ", 
+        RowBox[{"OptionValue", "[", "Method", "]"}]}], ";", "\n", "\t", 
+       RowBox[{"grQ", " ", "=", " ", 
+        RowBox[{
+         RowBox[{"v", "[", "T", "]"}], " ", ">=", " ", 
+         RowBox[{"LinearOptimization", "[", 
+          RowBox[{
+           RowBox[{"x", "[", "T", "]"}], ",", "\n", "\t\t", 
+           "CoalitionalRationality", ",", " ", "\n", "\t\t", "PayoffVector", 
+           ",", "\"\<PrimalMinimumValue\>\"", ",", 
+           RowBox[{"Method", "->", "mthd"}]}], "]"}]}]}]}]}], "\n", "]"}]}], 
+   ";"}], "\n"}], "\n", 
  RowBox[{
   RowBox[{
    RowBox[{
     RowBox[{"InCoreQ", "[", 
      RowBox[{"y_List", ",", 
-      RowBox[{"game_:", "Null"}]}], "]"}], " ", ":=", " ", 
+      RowBox[{"game_", ":", "Null"}]}], "]"}], " ", ":=", " ", 
     RowBox[{
      RowBox[{"And", " ", "@@", "\n", "\t\t", 
       RowBox[{"Core", "[", "game", "]"}]}], " ", "/.", " ", 
@@ -289,7 +332,7 @@ Cell[BoxData[{
    RowBox[{
     RowBox[{"Blocking", "[", 
      RowBox[{"y_List", ",", 
-      RowBox[{"game_:", "Null"}]}], "]"}], " ", ":=", " ", 
+      RowBox[{"game_", ":", "Null"}]}], "]"}], " ", ":=", " ", 
     RowBox[{"Module", "[", 
      RowBox[{
       RowBox[{"{", "violated", "}"}], ",", "\n", "\t", 
@@ -325,7 +368,7 @@ Cell[BoxData[{
   RowBox[{
    RowBox[{
     RowBox[{"LeastCore", "[", 
-     RowBox[{"game_:", "Null"}], "]"}], " ", ":=", " ", 
+     RowBox[{"game_", ":", "Null"}], "]"}], " ", ":=", " ", 
     RowBox[{"LeastCoreAux", "[", 
      RowBox[{"Prepend", "[", "\n", "\t\t\t\t", 
       RowBox[{
@@ -335,7 +378,11 @@ Cell[BoxData[{
   RowBox[{
    RowBox[{
     RowBox[{"Nucleolus", "[", 
-     RowBox[{"game_:", "Null"}], "]"}], " ", ":=", " ", 
+     RowBox[{
+      RowBox[{"game_", ":", "Null"}], ",", 
+      RowBox[{"opts", ":", 
+       RowBox[{"OptionsPattern", "[", "Nucleolus", "]"}]}]}], "]"}], " ", ":=",
+     " ", 
     RowBox[{"Module", "[", 
      RowBox[{
       RowBox[{"{", "equations", "}"}], ",", "\n", 
@@ -352,9 +399,10 @@ Cell[BoxData[{
       RowBox[{
        RowBox[{"equations", " ", "=", " ", 
         RowBox[{"LeastCoreAux", "[", 
-         RowBox[{"Prepend", "[", 
-          RowBox[{"CoalitionalRationality", ",", " ", "ParetoOptimality"}], 
-          "]"}], "]"}]}], ";", "\n", "                ", 
+         RowBox[{
+          RowBox[{"Prepend", "[", 
+           RowBox[{"CoalitionalRationality", ",", " ", "ParetoOptimality"}], 
+           "]"}], ",", "opts"}], "]"}]}], ";", "\n", "                ", 
        RowBox[{"(*", " ", 
         RowBox[{
          RowBox[{"Print", "[", "equations", "]"}], ";"}], "*)"}], "\n", 
@@ -378,8 +426,8 @@ Cell[BoxData[{
    RowBox[{
     RowBox[{"ShapleyValue", "[", 
      RowBox[{
-      RowBox[{"game_:", "Null"}], ",", 
-      RowBox[{"S_List:", "T"}]}], "]"}], " ", ":=", " ", 
+      RowBox[{"game_", ":", "Null"}], ",", 
+      RowBox[{"S_List", ":", "T"}]}], "]"}], " ", ":=", " ", 
     RowBox[{"Module", "[", 
      RowBox[{
       RowBox[{"{", "value", "}"}], ",", "\n", "\t", 
@@ -418,7 +466,7 @@ Cell[BoxData[{
    RowBox[{
     RowBox[{"ShapleyValue", "[", 
      RowBox[{
-      RowBox[{"game_:", "Null"}], ",", 
+      RowBox[{"game_", ":", "Null"}], ",", 
       RowBox[{"i_", "?", "AtomQ"}]}], "]"}], " ", ":=", " ", "\n", "\t", 
     RowBox[{"ShapleyValue", "[", 
      RowBox[{"game", ",", 
@@ -599,8 +647,8 @@ Cell[BoxData[{
            "\n", "\t", "}"}], "]"}], " ", "/.", "toSimplex"}], ",", "\n", 
         "\t", 
         RowBox[{"PlotRange", " ", "->", " ", "All"}], ",", " ", "filopts"}], 
-       "\n", "]"}]}]}], "]"}]}], ";"}]}], "Code",ExpressionUUID->"432052c7-\
-ebfd-426c-adfe-2b0f4713aa4f"],
+       "\n", "]"}]}]}], "]"}]}], ";"}]}], "Code",ExpressionUUID->"62f46557-\
+0db3-4af3-9e7d-b7d0bfdb93d4"],
 
 Cell[BoxData[{
  RowBox[{
@@ -768,17 +816,25 @@ Cell[BoxData[{
  RowBox[{
   RowBox[{
    RowBox[{
-    RowBox[{"LeastCoreAux", "[", "constraints_", "]"}], " ", ":=", "\n", 
-    "     ", 
+    RowBox[{"LeastCoreAux", "[", 
+     RowBox[{"constraints_", ",", 
+      RowBox[{"opts", ":", 
+       RowBox[{"OptionsPattern", "[", "Nucleolus", "]"}]}]}], "]"}], " ", ":=",
+     "\n", "     ", 
     RowBox[{"Module", "[", 
      RowBox[{
       RowBox[{"{", 
        RowBox[{
        "lp", ",", "pt", ",", "value", ",", "newConstraints", ",", "binding", 
-        ",", "nonbinding", ",", "newconst"}], "}"}], ",", "\n", "\t", 
+        ",", "nonbinding", ",", "newconst", ",", "res", ",", "zf", ",", 
+        "res1"}], "}"}], ",", "\n", "\t", 
       RowBox[{
-       RowBox[{"lp", " ", "=", " ", 
-        RowBox[{"ConstrainedMin", "[", 
+       RowBox[{"mthd", "=", 
+        RowBox[{"OptionValue", "[", "Method", "]"}]}], ";", "\n", "\t", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"zf", ",", "res"}], "}"}], " ", "=", "  ", 
+        RowBox[{"LinearOptimization", "[", 
          RowBox[{
           RowBox[{"e", "-", "f"}], ",", "\n", "\t\t", 
           RowBox[{"Relax", "[", 
@@ -787,15 +843,25 @@ Cell[BoxData[{
           RowBox[{"Join", "[", 
            RowBox[{"PayoffVector", ",", 
             RowBox[{"{", 
-             RowBox[{"e", ",", "f"}], "}"}]}], "]"}]}], "\n", "\t\t", "]"}]}],
-        ";", "\n", "\t", 
-       RowBox[{"value", " ", "=", " ", 
-        RowBox[{"lp", "[", 
-         RowBox[{"[", "1", "]"}], "]"}]}], ";", "\n", "\t", 
+             RowBox[{"e", ",", "f"}], "}"}]}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+           "\"\<PrimalMinimumValue\>\"", ",", "\"\<PrimalMinimizer\>\""}], 
+           "}"}], ",", 
+          RowBox[{"Method", "->", "mthd"}]}], "\n", "\t\t", "]"}]}], ";", 
+       "\n", "        ", 
+       RowBox[{"res1", "=", 
+        RowBox[{"MapThread", "[", 
+         RowBox[{"Rule", ",", 
+          RowBox[{"{", 
+           RowBox[{"PayoffVector", ",", 
+            RowBox[{"Take", "[", 
+             RowBox[{"res", ",", 
+              RowBox[{"Length", "[", "T", "]"}]}], "]"}]}], "}"}]}], "]"}]}], 
+       ";", "\n", "\t", 
+       RowBox[{"value", " ", "=", " ", "zf"}], ";", "\n", "\t", 
        RowBox[{"pt", " ", "=", " ", 
-        RowBox[{"PayoffVector", " ", "/.", " ", 
-         RowBox[{"lp", "[", 
-          RowBox[{"[", "2", "]"}], "]"}]}]}], ";", "\n", "\t", 
+        RowBox[{"PayoffVector", " ", "/.", " ", "res1"}]}], ";", "\n", "\t", 
        RowBox[{"newConstraints", " ", "=", " ", 
         RowBox[{"Relax", "[", 
          RowBox[{"constraints", ",", " ", "value"}], "]"}]}], ";", "\n", 
@@ -810,10 +876,7 @@ Cell[BoxData[{
            RowBox[{
             RowBox[{"#", " ", "/.", " ", 
              RowBox[{"GreaterEqual", " ", ":>", " ", "Equal"}]}], " ", "/.", 
-            " ", 
-            RowBox[{"lp", "[", 
-             RowBox[{"[", "2", "]"}], "]"}]}], " ", "&"}]}], " ", "]"}]}], 
-       ";", "\n", " \t", 
+            " ", "res1"}], " ", "&"}]}], " ", "]"}]}], ";", "\n", " \t", 
        RowBox[{"nonbinding", " ", "=", " ", 
         RowBox[{"Complement", "[", 
          RowBox[{"newConstraints", ",", "binding"}], "]"}]}], ";", "\n", "\t", 
@@ -826,7 +889,9 @@ Cell[BoxData[{
         RowBox[{
          RowBox[{"newconst", " ", "===", " ", "constraints"}], ",", " ", 
          "newconst", ",", " ", 
-         RowBox[{"LeastCoreAux", "[", "newconst", "]"}]}], "]"}]}]}], "\n", 
+         RowBox[{"LeastCoreAux", "[", 
+          RowBox[{"newconst", ",", 
+           RowBox[{"Method", "->", "mthd"}]}], "]"}]}], "]"}]}]}], "\n", 
      "]"}]}], ";"}], "\n"}], "\n", 
  RowBox[{
   RowBox[{
@@ -1267,13 +1332,18 @@ Cell[BoxData[{
             RowBox[{"v", "[", 
              RowBox[{"{", "i_", "}"}], "]"}], " ", "=", " ", "0"}], ";"}], 
           "\n", ")"}]}]}]}]}]}]}], "\n", "\n", "*)"}]}], "\n", 
- RowBox[{"EndPackage", "[", "]"}]}], "Code",ExpressionUUID->"bb4c9188-a3b2-\
-47d7-a383-3164aa55ec92"]
+ RowBox[{"EndPackage", "[", "]"}]}], "Code",ExpressionUUID->"8503792b-7b57-\
+43dc-a25d-a612fe045f61"]
 },
-WindowSize->{550, 793},
-WindowMargins->{{428, Automatic}, {66, Automatic}},
-FrontEndVersion->"11.3 for Linux x86 (64-bit) (March 6, 2018)",
-StyleDefinitions->"Default.nb"
+WindowSize->{808, 839},
+WindowMargins->{{144, Automatic}, {84, Automatic}},
+TaggingRules->{
+ "WelcomeScreenSettings" -> {"FEStarting" -> False}, 
+  "CodeFormatter" -> {
+   "ToolbarState" -> False, "ToolbarAccentColor" -> RGBColor["#2497b7"]}},
+FrontEndVersion->"12.2 for Linux x86 (64-bit) (December 12, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"8db20ec7-f727-44f8-a7c3-822ae7147986"
 ]
 (* End of Notebook Content *)
 
@@ -1286,9 +1356,9 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 7508, 194, 1534, "Code",ExpressionUUID->"e457aea8-1fea-46a0-a10d-56d57773e03c"],
-Cell[8069, 216, 14522, 386, 2478, "Code",ExpressionUUID->"432052c7-ebfd-426c-adfe-2b0f4713aa4f"],
-Cell[22594, 604, 25495, 666, 70, "Code",ExpressionUUID->"bb4c9188-a3b2-47d7-a383-3164aa55ec92"]
+Cell[558, 20, 8874, 225, 1887, "Code",ExpressionUUID->"610f2e73-ad44-45e0-a94f-03ed71d6937e"],
+Cell[9435, 247, 15186, 403, 2415, "Code",ExpressionUUID->"62f46557-0db3-4af3-9e7d-b7d0bfdb93d4"],
+Cell[24624, 652, 26216, 683, 70, "Code",ExpressionUUID->"8503792b-7b57-43dc-a25d-a612fe045f61"]
 }
 ]
 *)

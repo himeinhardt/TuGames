@@ -17,6 +17,23 @@ Michael Carter
 Department of Economics
 University of Cantebury
 *)
+
+(*
+Release Date: 28.09.2021 
+
+Modification made to be compatible with Mathematica Version 12
+
+by 
+
+Holger I. Meinhardt
+Institute of Operations Research
+Karlsruhe Institute of Technology (KIT)
+D-76128 Karlsruhe
+
+ConstrainedMin is replaced by LinearOptimization.
+Is not anymore usable with Mathematica Versions smaller than 12.
+
+*)
 BeginPackage["TUG`coop`CooperativeGames`"];
 If[$VersionNumber < 9,Needs["Utilities`FilterOptions`"]];
 
@@ -62,6 +79,8 @@ Subsets::usage = "Subsets[S] lists the subsets of set S";
 ConstraintLabels::usage = "ConstraintLabels is an option for Draw";
 Options[Draw] = {ConstraintLabels ->True};
 Options[DrawSimplex] = Flatten[Sort[{ConstraintLabels ->True, Options[Graphics]}]];
+Options[CoreQ] = {Method -> Automatic};
+Options[Nucleolus] = {Method -> Automatic};
 
 Begin["`Private`"];
 
@@ -80,10 +99,12 @@ Core[(epsilon_Integer | epsilon_Real)] :=
 
 Core[game_, epsilon_] := Core[epsilon];
 
-CoreQ[game_:Null] := v[T] >=
-	ConstrainedMin[x[T],
+CoreQ[game_:Null,opts:OptionsPattern[CoreQ]] := Block[{mthd,grQ},
+	mthd = OptionValue[Method];
+	grQ = v[T] >= LinearOptimization[x[T],
 		CoalitionalRationality, 
-		PayoffVector][[1]];
+		PayoffVector,"PrimalMinimumValue",Method->mthd]
+];
 
 InCoreQ[y_List,game_:Null] := And @@
 		Core[game] /. Payoff[y];
@@ -103,9 +124,9 @@ LeastCore[game_:Null] := LeastCoreAux[Prepend[
 				ParetoOptimality]
 ];
 
-Nucleolus[game_:Null] := Module[{equations},
+Nucleolus[game_:Null,opts:OptionsPattern[Nucleolus]] := Module[{equations},
 (*		equations = Nest[LeastCoreAux, Prepend[CoalitionalRationality, ParetoOptimality], Length[T]]; *)
-                                        equations = LeastCoreAux[Prepend[CoalitionalRationality, ParetoOptimality]];
+                                        equations = LeastCoreAux[Prepend[CoalitionalRationality, ParetoOptimality],opts];
                 (* Print[equations];*)
 		equations = Cases[equations,_Equal];
                 (* Print[equations]; *)
@@ -216,22 +237,24 @@ Subsets[T_List] :=
 (*
 This definition was devised by Stan Wagon,  The Mathematica Journal 1, Spring 1991, p 46
 *)
-LeastCoreAux[constraints_] :=
-     Module[{lp,pt,value,newConstraints,binding,nonbinding,newconst},
-	lp = ConstrainedMin[e-f,
+LeastCoreAux[constraints_,opts:OptionsPattern[Nucleolus]] :=
+     Module[{lp,pt,value,newConstraints,binding,nonbinding,newconst,res,zf,res1},
+	mthd=OptionValue[Method];
+	{zf,res} =  LinearOptimization[e-f,
 		Relax[constraints,e-f],
-		Join[PayoffVector,{e,f}]
+		Join[PayoffVector,{e,f}],{"PrimalMinimumValue","PrimalMinimizer"},Method->mthd
 		];
-	value = lp[[1]];
-	pt = PayoffVector /. lp[[2]];
+        res1=MapThread[Rule,{PayoffVector,Take[res,Length[T]]}];
+	value = zf;
+	pt = PayoffVector /. res1;
 	newConstraints = Relax[constraints, value];
 		(*Partition into two sets *)
 
 	binding = Select[newConstraints, 
-		# /. GreaterEqual :> Equal /. lp[[2]] & ];
+		# /. GreaterEqual :> Equal /. res1 & ];
  	nonbinding = Complement[newConstraints,binding];
 	newconst = Join[NullVariables[binding], nonbinding];
-                    If[newconst === constraints, newconst, LeastCoreAux[newconst]]
+                    If[newconst === constraints, newconst, LeastCoreAux[newconst,Method->mthd]]
 ];
 
 NVectorQ[x_] := VectorQ[x,NumberQ];
