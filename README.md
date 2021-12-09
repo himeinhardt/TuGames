@@ -123,7 +123,7 @@ different Operating System ABIs. To retrieve your system ID execute in a Noteboo
 $SystemID
 ```
 
-We have provided some executables for *RHEL 7.5* and *MacOSX*. Unfortunately, we are not experienced enough under *Windows* to provide any for those. Thus, we invite the community to fill that gap and to provide some.
+We have provided some executables for *RHEL 7.5, RHEL 8.2*, and *MacOSX*. Unfortunately, we are not experienced enough under *Windows* to provide any for those. Thus, we invite the community to fill that gap and to provide some.
 
 In order check for *Mathematica* versions smaller than 12.1 the paths where you have to install the Cddmathlink library call the command
 
