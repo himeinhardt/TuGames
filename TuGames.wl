@@ -18,7 +18,7 @@ Off[General::obspkg];
     holger.meinhardt@wiwi.uni-karlsruhe.de
 *)
 
-(* :Package Version: 3.0.2 *)
+(* :Package Version: 3.1.0 *)
 
 (* 
    :Mathematica Version: 12.x
@@ -351,6 +351,23 @@ Off[General::obspkg];
     Improving the performance of PreKernelSolution.
 
     Some minor bug fixes and code revision. 
+
+    Version 3.0.3
+
+    Adding the new functions:
+
+      VetoRichPlayers, DecomposeInPositiveGames, AverageConcaveQ, AlmostAverageConvexQ, AlmostAverageConcaveQ, PositiveGameQ, SemiConvexQ.
+
+    Fixing Bug in AnimationKernelProperty2d with the FigureSize option in Manipulate. 
+       
+    Fixing an issue in ModifiedNucleolus and ModifiedKernel w.r.t. the boundary Infinity, which was replaced by 1000*v[T].
+
+    Some minor bug fixes and code revision.   
+
+    Version 3.1.0
+
+    Update of the Documentation references pages and adjustment to Mathematica Version 13.0.
+
 *)
  
 
@@ -399,8 +416,8 @@ If[SameQ[Global`$ParaMode,"False"],
 Print["==================================================="];
 Print["Loading Package 'TuGames' for ", $OperatingSystem];
 Print["==================================================="];
-Print["TuGames V3.0.2 by Holger I. Meinhardt"];
-Print["Release Date: 07.12.2021"];
+Print["TuGames V3.1.0 by Holger I. Meinhardt"];
+Print["Release Date: 15.03.2022"];
 Print["Program runs under Mathematica Version 12.0 or later"];
 Print["Version 12.x or higher is recommended"];
 Print["==================================================="];,
@@ -439,9 +456,16 @@ WeaklySuperAdditiveQ::usage =
 
 SelectSuperSets::usage = 
 "SelectSuperSets[i] selects all super sets of i";
+
+PositiveGameQ::usage = 
+"PositiveGameQ[game] returns True whenever all unanimity coordinates are non-negative, otherwise False."
  
 IncreasingMargContributions::usage = 
 "IncreasingMargContributions[game,i] checks if the marginal contributions of player i is increasing.";
+
+DecomposeInPositiveGames::usage = 
+"{True/False,{pg1,pg2,cg}}=DecomposeInPositiveGames[game] decomposes a TU game into a difference of two positive (i.e., convex) games, denoted by pg1 and pg2. The symbol cg is the recomposed game.";
+
 
 ConvCheck::usage = 
 "ConvCheck[game] checks the convexity of the game. It provides information whether 
@@ -451,11 +475,16 @@ ConvexQ::usage =
 "ConvexQ[game] checks if the Tu-game is convex (super-modular). It returns the value 'True' or 'False'.";
 
 AlmostConvexQ::usage = 
-"AlmostConvexQ[game] checks if the Tu-game is almost convex (super-modular). It returns the value 'True' or 'False'.";
+"AlmostConvexQ[game] checks if the Tu-game is almost convex (average super-modular). It returns the value 'True' or 'False'.";
 
+AlmostAverageConvexQ::usage = 
+"AlmostAverageConvexQ[game] checks if the Tu-game is almost average-convex (almost average super-modular). It returns the value 'True' or 'False'.";
 
 AlmostConcaveQ::usage = 
-"AlmostConcaveQ[game] checks if the Tu-game is almost concave (super-modular). It returns the value 'True' or 'False'.";
+"AlmostConcaveQ[game] checks if the Tu-game is almost concave (almost sub-modular). It returns the value 'True' or 'False'.";
+
+AlmostAverageConcaveQ::usage = 
+"AlmostAverageConcaveQ[game] checks if the Tu-game is almost average-concave (almost average sub-modular). It returns the value 'True' or 'False'.";
 
 ConcaveQ::usage = 
 "ConcaveQ[game] checks if the Tu-game is concave (sub-modular). It returns the value 'True' or 'False'.";
@@ -482,6 +511,17 @@ AvConvexQ::usage =
 "AvConvexQ[game, opts] checks the average-convexity of the game.   
  It returns 'True' or 'False'. Now same as AverageConvexQ[]. 
  For more details see also the description of AverageConvexQ[].";  
+
+AverageConcaveQ::usage = 
+"AverageConcaveQ[game,opts] checks the average-concavity of the game.
+ It returns 'True' or 'False'. Calling the function with the option will return
+ the sum of the marginal contributions for each coalition S w.r.t. to each 
+ superset S union {j}. These values must be non-positive.";
+
+AvConcaveQ::usage =   
+"AvConcaveQ[game, opts] checks the average-concavity of the game.   
+ It returns 'True' or 'False'. Now same as AverageConcaveQ[]. 
+ For more details see also the description of AverageConcaveQ[].";
 
 ADMCGameQ::usage = 
 "ADMCGameQ[game] checks if the TU-game satisfies the property of almost diminishing marginal contributions. It returns 'True' or 'False'.";
@@ -548,7 +588,7 @@ IntersectionOfMaxExcessSets::usage =
 KernelCalculation::usage = 
 "KernelCalculation[game,options] computes kernel or pre-kernel point(s) of a game. 
  Optional parameters are: ChangeInternalEps, DisplayAllResults, EpsilonValue and 
- SetGameToNonZeroMonotonic. The first optional parameter AVChangeInternalEps can 
+ SetGameToNonZeroMonotonic. The first optional parameter ChangeInternalEps can 
  be used to speed up computation or to search for different allocations in the initial LPs.
  If the option DisplayAllResults is set to 'True', then the return value is related
  to a kernel solution, objective function, constraint set of the final LP, 
@@ -564,7 +604,7 @@ KernelCalculation::usage =
  'False' the function Kernel[game] will be invoked to avoid infinite loops. To increases the 
  computational reliability in cases of numerical issues the following methods can be used: 
  RevisedSimplex, CLP, GUROBI, MOSEK, or Automatic. Default setting is Automatic. This option
- can be used in either case by CallMaximize->False or CallMaximize->True. For getting more 
+ can be used in either case by CallMaximize->False. For getting more 
  precise results one can even set Method->{InteriorPoint, Tolerance->10^-10}.";
 
 Kernel::usage = 
@@ -576,8 +616,7 @@ Kernel::usage =
  EpsilonValue is a critical value to change the strong epsilon-core. This value can be 
  calculated, for instance, by the function FirstCriticalVal[game]. To increases the computational 
  reliability in cases of numerical issues the following methods can be used: RevisedSimplex, CLP,
- GUROBI, MOSEK, or Automatic. Default setting is Automatic. This option must be used in 
- connection with CallMaximize->False or CallMaximize->True. For getting more precise results 
+ GUROBI, MOSEK, or Automatic. Default setting is Automatic. For getting more precise results 
  one can even set Method->{InteriorPoint, Tolerance->10^-10}.";
 
 KernelVertices::usage =
@@ -625,26 +664,26 @@ NonLinPreNuc::usage =
 "NonLinPreNuc[game,p,k,tol,options] computes by a non-linear optimization method the pre-nucleolus, 
  otherwise it returns a $Failed. Different solvers can be selected by option setting Method->Solver. 
  Permissible solvers are: Automatic, GUROBI, IPOPT, MOSEK, DifferentialEvolution, NelderMead, 
- RandomSearch, or SimulatedAnnealing. Default setting is Automatic";
+ RandomSearch, or SimulatedAnnealing. Default setting is Automatic.";
 
 ApproxPreNuc::usage =
 "ApproxPreNuc[game,p,k,options] computes the (p,k)-nucleolus by a non-linear minimization method. 
  It is an approximation of the pre-nucleolus. If (p,k)=(2,k), then it computes the least square pre-nucleolus. 
  Different solvers can be selected by option setting Method->Solver. Permissible solvers are: Automatic, GUROBI, 
- IPOPT, MOSEK, DifferentialEvolution, NelderMead, RandomSearch, or SimulatedAnnealing. Default setting is Automatic";
+ IPOPT, MOSEK, DifferentialEvolution, NelderMead, RandomSearch, or SimulatedAnnealing. Default setting is Automatic.";
 
 NonLinNuc::usage = 
 "NonLinNuc[game,p,k,tol,options] computes by a non-linear optimization method the nucleolus, 
  otherwise it returns a $Failed. Different solvers can be selected by option setting Method->Solver. 
  Permissible solvers are: Automatic, GUROBI, IPOPT, MOSEK, DifferentialEvolution, NelderMead, 
- RandomSearch, or SimulatedAnnealing. Default setting is Automatic";
+ RandomSearch, or SimulatedAnnealing. Default setting is Automatic.";
 
 ApproxNuc::usage =
 "ApproxNuc[game,p,k,options] computes the (p,k)-nucleolus by a non-linear minimization method. 
  It is an approximation of the nucleolus. If (p,k)=(2,k), then it computes the least square nucleolus. 
  Different solvers can be selected by option setting Method->Solver. Permissible solvers are: Automatic, 
  GUROBI, IPOPT, MOSEK, DifferentialEvolution, NelderMead, RandomSearch, or SimulatedAnnealing. 
- Default setting is Automatic";
+ Default setting is Automatic.";
 
 ModCoalArray::usage =
 "ModCoalArray[game,payoff] computes a modified coalition array of first, second, ..., kth maximal excess.";
@@ -669,16 +708,14 @@ Modiclus::usage =
  with the function ModifiedNucleolus[]. The algorithm is based on a method by Peleg to translate
  the definition of the Nucleolus into a sequence of linear programs on the pre-imputation set.
  To increases the computational reliability in cases of numerical issues the following methods
- can be used: RevisedSimplex, CLP, MOSEK, or Automatic. Default setting is Automatic. This option
- must be used in connection with CallMaximize->False. For getting more precise results one can even set 
+ can be used: RevisedSimplex, CLP, MOSEK, or Automatic. Default setting is Automatic. For getting more precise results one can even set 
  Method->{InteriorPoint, Tolerance->10^-10}.";
 
 
 IsModiclusQ::usage = 
 "IsModiclusQ[game,payoff,opts] checks whether the provided payoff vector is the modiclus of the game.
  To increases the computational reliability in cases of numerical issues the following methods
- can be used: RevisedSimplex, CLP, MOSEK, or Automatic. Default setting is Automatic. This option
- must be used in connection with CallMaximize->False. For getting more precise results one can even set 
+ can be used: RevisedSimplex, CLP, MOSEK, or Automatic. Default setting is Automatic. For getting more precise results one can even set 
  Method->{InteriorPoint, Tolerance->10^-10}";
 
 
@@ -741,8 +778,7 @@ CollectionOfDecreasingExcess::usage =
 BalancedCollectionQ::usage =
 "BalancedCollectionQ[game,payoff,options] determines whether the induced collections
  are balanced w.r.t. all excess levels.  Implements Kohlberg's Theorem. The return value must
- be 'True' for the prenucleolus, otherwise 'False'. For its default value 'False' the function 
- Kernel[game] will be invoked to avoid infinite loops. To increases the computational reliability 
+ be 'True' for the prenucleolus, otherwise 'False'. To increases the computational reliability 
  in cases of numerical issues the following methods can be used: RevisedSimplex, CLP, GUROBI, MOSEK, 
  or Automatic. Default setting is RevisedSimplex. For getting more precise results one can even set 
  Method->{InteriorPoint, Tolerance->10^-10}.";
@@ -751,8 +787,7 @@ BalancedCollectionQ::usage =
 WeaklyBalancedCollectionQ::usage =
 "WeaklyBalancedCollectionQ[game,payoff,options] determines whether the induced collections
  are weakly balanced w.r.t. all excess levels.  Implements Kohlberg's Theorem. The return value must
- be 'True' for the nucleolus, otherwise 'False'. For its default value 'False' the function Kernel[game] 
- will be invoked to avoid infinite loops. To increases the computational reliability in cases of numerical issues 
+ be 'True' for the nucleolus, otherwise 'False'. To increases the computational reliability in cases of numerical issues 
  the following methods can be used: RevisedSimplex, CLP, GUROBI, MOSEK, or Automatic. Default setting is RevisedSimplex. 
  For getting more precise results one can even set Method->{InteriorPoint, Tolerance->10^-10}.";
 
@@ -913,6 +948,9 @@ TransferConstraints::usage =
  for calculating the largest amount that be transferred from player i to j while remaining in the 
  core or strong epsilon core. Default value for 'eps' is zero, and the value 'eps' can be omitted
  while calling this function.";
+
+VetoRichPlayers::usage = 
+"VetoRichPlayers[game] returns the list of veto-rich players within the game, otherwise an empty list.";
 
 AllConstraints::usage = 
 "AllConstraints[game] computes the constraints set and variable set which are needed to calculate a 
@@ -1122,6 +1160,10 @@ GenUpperVector::usage =
 GenUpperSum::usage =
     "GenUpperSum[game,S_List] calculates the sum of generalized upper payoffs for coalition S.";
 
+SemiConvexQ::usagge = 
+    "SemiConvexQ[game] checks if the game is semi-convex.";
+
+
 AdjustedEffVector::usage = 
 "AdjustedEffVector[game,i] calculates the adjusted efficient upper vector of player i for 1-convex games.";
 
@@ -1322,8 +1364,10 @@ SmallestCardinality::usage =
  effective coalitions with smallest cardinality. Whenever this option is set to 'False', then the 
  set of coalitions w.r.t. the largest cardinality is returned.";
 
+(* obsolete
 KernelRange::usage =
 "Is an option for the function ModifiedKernel[] to search for a line segment of the (pre)-kernel.";
+ *)
 
 ProperContribution::usage =
 "This is an option to determine the vertices of the upper set, which is a kernel catcher.
@@ -1333,6 +1377,7 @@ ProperContribution::usage =
 
 Which[$OperatingSystem === "Unix",
   Options[AverageConvexQ] = {DisplayAllResults -> False};
+  Options[AverageConcaveQ] = {DisplayAllResults -> False};      
   Options[BalancedCollectionQ] = {Method-> RevisedSimplex};
   Options[SuperAdditiveQ] = {Silent -> True};
   Options[DefineGame] = {RationalApproximate -> True};
@@ -1399,6 +1444,7 @@ Which[$OperatingSystem === "Unix",
   Options[UnanAvConvexQ] = {DisplayAllResults -> False, DisplayCoord-> False, NumericalPrec -> 10^(-12)};,
 True,
   Options[AverageConvexQ] = {DisplayAllResults -> False};
+  Options[AverageConcaveQ] = {DisplayAllResults -> False};      
   Options[BalancedCollectionQ] = {Method-> RevisedSimplex};
   Options[DefineGame] = {RationalApproximate -> True};
   Options[CddVerticesCore] = {RationalExact -> False};
@@ -1475,8 +1521,12 @@ AIMCGameQ::argerr="One argument was expected.";
 AllConstraints::argerr="One argument was expected.";
 AlmostConcaveQ::argerr="One argument was expected.";
 AlmostConvexQ::argerr="One argument was expected.";
+AlmostAverageConvexQ::argerr="One argument was expected.";
+AlmostAverageConcaveQ::argerr="One argument was expected.";
 AntiPreKernelSolution::argerr="One argument was expected.";
+AvConcaveQ::argerr="One argument was expected.";
 AvConvexQ::argerr="One argument was expected.";
+AverageConcaveQ::argerr="One argument was expected.";
 AverageConvexQ::argerr="One argument was expected.";
 BaryCenter::argerr="One argument was expected.";
 CddGmpPlotCore::argerr="One argument was expected.";
@@ -1497,6 +1547,7 @@ ConvexQ::argerr="One argument was expected.";
 ConvexStrQ::argerr="One argument was expected.";
 ConvexUnanConditionQ::argerr="One argument was expected.";
 ConvStrQ::argerr="One argument was expected.";
+DecomposeInPositiveGames::argerr="One argument was expected.";
 DetQuasiAvConvex::argerr="One argument was expected.";
 Disagreement::argerr="One argument was expected.";
 DisagreeConvex::argerr="One argument was expected.";
@@ -1550,6 +1601,7 @@ Nuc1convex::argerr="One argument was expected.";
 OneNormalization::argerr="One argument was expected.";
 PDValue::argerr="One argument was expected.";
 PlayerPairs::argerr="One argument was expected.";
+PositiveGameQ::argerr="One argument was expected.";
 Potential::argerr="One argument was expected.";
 PreKernelElement::argerr="One argument was expected.";
 PreKernelEqualsKernelQ::argerr="One argument was expected.";
@@ -1567,6 +1619,7 @@ ScrbSolution::argerr="One argument was expected.";
 SecondCriticalVal::argerr="One argument was expected.";
 SecondStarCriticalVal::argerr="One argument was expected.";
 SelectSuperSets::argerr="One argument was expected.";
+SemiConvexQ::argerr="One argument was expected.";
 ShapleyValueML::argerr="One argument was expected.";
 SmallestContributionVector::argerr="One argument was expected.";
 SMPreKernel::argerr="One argument was expected.";
@@ -1590,6 +1643,7 @@ UpperSetIncImputationQ::argerr="One argument was expected.";
 UpperSetQ::argerr="One argument was expected.";
 UtopiaVector::argerr="One argument was expected.";
 ValueExcess::argerr="One argument was expected.";
+VetoRichPlayers::argerr="One argument was expected.";
 VerticesCore::argerr="One argument was expected.";
 WeaklyBalancedSelectionQ::argerr="One argument was expected.";
 WeaklySuperAdditiveQ::argerr="One argument was expected.";
@@ -1649,6 +1703,9 @@ Scrb::argerr="Two arguments were expected.";
 SetsToVec::argerr="Two arguments were expected.";
 SmallestContribution::argerr="Two arguments were expected.";
 StrIncreasMargContrib::argerr="Two arguments were expected.";
+SubGame::argerr="Two arguments were expected.";
+SbgAlmostAvQ::argerr="Two arguments were expected.";
+SbgAlmostAvCoQ::argerr="Two arguments were expected.";
 TIJsets::argerr="Two arguments were expected.";
 UnanAvConvexQ::argerr="Two arguments were expected.";
 UnanConvexQ::argerr="Two arguments were expected.";
@@ -1697,7 +1754,11 @@ Which[SameQ[Global`$ParaMode,"False"] && SameQ[Global`$NotebookMode,"False"],Fal
 
    PacletInformation["TUG"]
 
-   Then open the directory.
+   Then open the directory under Mathematica Version 12.x by
+
+   Information[PacletObject["TUG"],"Location"]
+   
+   otherwise use 
 
    SystemOpen@Lookup[PacletInformation["TUG"], "Location"]
 
@@ -1705,6 +1766,7 @@ Which[SameQ[Global`$ParaMode,"False"] && SameQ[Global`$NotebookMode,"False"],Fal
 *)
 
 (*  Deactivate the lines below if you have not installed cddmathlink. *)
+
 linksQ=Links[];
 If[Length[Position[StringFreeQ[#[[1]], "TUG" ~~ ___ ~~ "cddmathlink"] & /@ linksQ, False]]!=0,
 (* Checking first if a LinkObject exists already and uninstall the cddml libraries. *)
@@ -1832,6 +1894,26 @@ StandardSolution[game_]:=Block[{dmQ},
 
 (* convexity and av-convexity section starts *)
 
+PositiveGameQ[args___]:=(Message[PositiveGameQ::argerr];$Failed);
+PositiveGameQ[game_]:=Block[{unc},
+    unc = UnanimityCoordinates[game]; 
+    Apply[And,GreaterEqual[#,0] &/@ unc]
+]
+
+DecomposeInPositiveGames[game_]:=Block[{gb,valvec,hd,lhd,shd,pg1,pg2,cg},
+    gb=GameBasis[T];
+    valvec = v[#] &/@ Subsets[T];
+    hd = Inverse[gb].Drop[valvec,1];
+    lhd=Max[{0,#}] &/@ hd;
+    shd=-Min[{0,#}] &/@ hd;
+    pg1 = gb.lhd;
+    PrependTo[pg1,0];
+    pg2 = gb.shd;
+    PrependTo[pg2,0];
+    cg=pg1-pg2;
+    Return[{Equal[valvec,cg],{pg1,pg2,cg}}];
+];
+
 IncreasMargContributions[args___]:=(Message[IncreasMargContributions::argerr];$Failed);
 IncreasMargContributions[game_,i_Integer ,values_List]:=
 	Do[Print[(v[#]-v[DeleteCases[#,i]] <= 
@@ -1909,6 +1991,60 @@ QuasiDiminishingMargContributions[game_,i_Integer]:=
 		  Union[Flatten[{#,j}]],i]]) & /@ delT[i,j] ,
               {j,DeleteCases[T,i]}];
 
+(* Almost Average-Convexity *)
+
+AlmostAverageConvexQ[args___]:=(Message[AlmostAverageConvexQ::argerr];$Failed);
+AlmostAverageConvexQ[game_]:=Block[{ovls,acvQ},
+      ovls = v[#] & /@ Coalitions;
+      (* It is only necessary to check proper sub-coalitions of size equal or greater than 2. *)
+      acvQ=SbgAlmostAvQ[game,#,ovls,T] & /@ Drop[Drop[Coalitions,Length[T]+1],-1];
+      acvQ=Apply[And,acvQ]
+];
+
+SbgAlmostAvQ[args___]:=(Message[SbgAlmostAvQ::argerr];$Failed);
+SbgAlmostAvQ[game_,R_List,val_List,T0_List]:=Block[{sbs,sbvl,sbg,acvQ},
+    T=R;
+    sbs=Subsets[R];
+    sbvl=v[#] &/@ sbs;
+    sbg=DefineGame[T,sbvl]; 
+    acvQ=AvConvexQ[sbg];
+    DefineGame[T0, ovls];
+    Return[acvQ];
+];
+
+(* Almost Average-Concavity *)
+
+AlmostAverageConcaveQ[args___]:=(Message[AlmostAverageConcaveQ::argerr];$Failed);
+AlmostAverageConcaveQ[game_]:=Block[{ovls,acvQ},
+      ovls = v[#] & /@ Coalitions;
+      (* It is only necessary to check proper sub-coalitions of size equal or greater than 2. *)
+      acvQ=SbgAlmostAvCoQ[game,#,ovls,T] & /@ Drop[Drop[Coalitions,Length[T]+1],-1];
+      acvQ=Apply[And,acvQ]
+];
+
+SbgAlmostAvCoQ[args___]:=(Message[SbgAlmostAvCoQ::argerr];$Failed);
+SbgAlmostAvCoQ[game_,R_List,val_List,T0_List]:=Block[{sbs,sbvl,sbg,acvQ},
+    T=R;
+    sbs=Subsets[R];
+    sbvl=v[#] &/@ sbs;
+    sbg=DefineGame[T,sbvl]; 
+    acvQ=AvConcaveQ[sbg];
+    DefineGame[T0, ovls];
+    Return[acvQ];
+];
+
+
+SubGame[args___]:=(Message[SubGame::argerr];$Failed);
+SubGame[game_,R_List]:=Block[{ovls,t0,sbs,sbvl,sbgame},
+       ovls = v[#] & /@ Coalitions;
+       t0=T;
+       sbs=Subsets[R];
+       sbvl=v[#] &/@ sbs;
+       sbgame:=DefineGame[R,sbvl];
+       DefineGame[t0, ovls];
+       Return[sbgame];
+       ];
+
 
 ConcaveQ[args___]:=(Message[ConcaveQ::argerr];$Failed);
 ConcaveQ[game_]:= 
@@ -1942,7 +2078,6 @@ ConvexStrQ[game_]:= Block[{liste},
 	];
 
 AverageConvexQ[args___]:=(Message[AverageConvexQ::argerr];$Failed);
-
 AverageConvexQ[game_, opts:OptionsPattern[AverageConvexQ]] := Block[{dispres, pwset, chsum,delmp},
     dispres = OptionValue[DisplayAllResults];
     pwset = Subsets[T];
@@ -1985,11 +2120,47 @@ SumMargContribution[superset_List, teilmg_List, opts:OptionsPattern[AverageConve
                  True, {nnegQ, add}]
 ];
 
+AverageConcaveQ[args___]:=(Message[AverageConcaveQ::argerr];$Failed);
+AverageConcaveQ[game_, opts:OptionsPattern[AverageConcaveQ]] := Block[{dispres, pwset, chsum,delmp},
+    dispres = OptionValue[DisplayAllResults];
+    pwset = Subsets[T];
+    chsum = CovCheckSumQ[#, T, opts]  & /@ Drop[pwset, 1];
+     delmp = DeleteCases[chsum, {{}, {}}];
+    Which[SameQ[dispres,False], Apply[And, Union[chsum]],
+                  True, {Apply[And,Union[Flatten[First[#] & /@ delmp]]], Last[#] & /@ delmp}
+                ]
+ ];
+
+CovCheckSumQ[teilmg_List, T_, opts:OptionsPattern[AverageConvexQ]] := 
+  Block[{supset, smarg, dispres},
+    dispres = OptionValue[DisplayAllResults];
+    supset = OberMenge[teilmg, T];
+    smarg = CovSumMargContribution[#, teilmg, opts] & /@ supset;
+    Which[SameQ[dispres,False], Apply[And, Union[smarg]],
+                  True, {First[#] & /@ smarg, Last[#] & /@ smarg}
+                 ]
+];
+
+CovSumMargContribution[superset_List, teilmg_List, opts:OptionsPattern[AverageConvexQ]] := 
+  Block[{dispres, delisp, delitlm, sumtmg, add, nnegQ},
+    dispres = OptionValue[DisplayAllResults];
+    delisp = DeleteCases[superset, #] & /@ teilmg;
+    delitlm = DeleteCases[teilmg, #] & /@ teilmg;
+    sumtmg = MapThread[N[v[superset] - v[#1] - v[teilmg] + v[#2]] &, {delisp, delitlm}];
+    add = Total[sumtmg] // Simplify;
+    nnegQ = NonPositive[add];
+    Which[SameQ[dispres,False], nnegQ,
+                 True, {nnegQ, add}]
+];
+
+
 (* AvConvexQ[] is same as AverageConvexQ[] *)
 
 AvConvexQ[args___]:=(Message[AvConvexQ::argerr];$Failed);
-
 AvConvexQ[game_,  opts:OptionsPattern[AverageConvexQ]]  := AverageConvexQ[game, opts];
+
+AvConcaveQ[args___]:=(Message[AvConcaveQ::argerr];$Failed);
+AvConcaveQ[game_,  opts:OptionsPattern[AverageConcaveQ]]  := AverageConcaveQ[game, opts];
 
 (* Old Average Convex Function is deprecated *)
 
@@ -2496,13 +2667,13 @@ ModifiedNucleolus[game_, opts:OptionsPattern[ModifiedNucleolus]] :=
     ubds=Union[#] &/@ bds;
     blg = Length[#] &/@ ubds;
     pbd = Position[blg,1];
-    If[SameQ[pbd=={},False], 
-             zv = Array[Infinity &, Length[pbd]];
+    If[SameQ[pbd=={},False], (* Infinity does not work anymore!! We replace it by 1000*v[T] *)
+             zv = Array[1000*v[T] &, Length[pbd]];
              rl = MapThread[Rule,{Flatten[pbd],zv}];
              pra=ReplacePart[pra,rl];
              bds=MapThread[List,{minf,pra}];
-      ]; 
-    bds = FlattenAt[{{-Infinity,Infinity},bds},2];
+      ]; (* Infinity does not work anymore!! We replace it by 1000*v[T] *)
+    bds = FlattenAt[{{-1000*v[T],1000*v[T]},bds},2];
     SeqLP[obf, cmat, bvect,bds,{},opts]
     ];
 
@@ -2524,13 +2695,13 @@ ModifiedKernel[game_, opts:OptionsPattern[ModifiedKernel]] :=
     ubds=Union[#] &/@ bds;
     blg = Length[#] &/@ ubds;
     pbd = Position[blg,1];
-    If[SameQ[pbd=={},False], 
-             zv = Array[Infinity &, Length[pbd]];
+    If[SameQ[pbd=={},False], (* Infinity does not work anymore!! We replace it by 1000*v[T]*)
+             zv = Array[1000*v[T] &, Length[pbd]];
              rl = MapThread[Rule,{Flatten[pbd],zv}];
              pra=ReplacePart[pra,rl];
              bds=MapThread[List,{minf,pra}];
-      ];
-    bds = FlattenAt[{{-Infinity,Infinity},bds},2];
+      ]; (* Infinity does not work anymore!! We replace it by 1000*v[T]*)
+    bds = FlattenAt[{{-1000*v[T],1000*v[T]},bds},2];
     SeqLP2[game,obf, cmat, bvect,bds,{},opts]
     ];
 
@@ -2657,13 +2828,14 @@ SeqLP[obf_, cmat_List, bvect_List,bds_List,bA_:{},opts:OptionsPattern[ModifiedNu
     beq=-First[#] &/@ Cases[bvect,{_,0}];
     idm=Drop[IdentityMatrix[Length[T] + 1],1];
     cmat0=Join[Join[cmat,-idm],idm];
-    cmat0=SparseArray[cmat0];
+    cmat0=SparseArray[cmat0]; 
     lw=First[#] &/@ Drop[bds,1];
     up=Last[#] &/@ Drop[bds,1];
     bv=-First[#] &/@ bvect;
     bv0=Join[Join[bv,up],-lw];  
     (* ConstraintSensitivity cannot be used with GUROBI. *)
     {res1,{yineq,yeq},zf}=LinearOptimization[obf,{cmat0,bv0},{meq,beq},{"PrimalMinimizer","ConstraintSensitivity","PrimalMinimumValue"},Method->mthd];
+    (* Print["res=",res1]; *)
     res=Drop[res1,1];
     If[SameQ[zf,-Infinity],Return[Rationalize[res,10^(-9)]]];
     gr=Less[#,0] &/@ yineq;
@@ -3068,7 +3240,10 @@ SelectMCR[exc_List,sC_,lt_,tol_,Ik_:{},lIk_:{},slex_:{0},blQ_:False,mtrk_:0]:=Bl
      Im=Join[Ik,sS];
      lIm1=Join[lIk,{lS}];
      bQ=First[BalancedSystemQ[Im, T]];
-     (* bQ=IIMBalancedSelectionQ[Im,tol,Tight->True]; *)
+     (*
+     bQ=IIMBalancedSelectionQ[Im,tol,Tight->True]; 
+     Print["bQ=",bQ];
+     *)
      mt = ConstVec[Im];
      mrk = MatrixRank[mt];
      (*
@@ -4880,7 +5055,7 @@ Block[{newgame,nb,alldelvar,dvar,objfunc,var,solut,kersol,tra},
 ];
 
 
-(* Constructing the one large LP for Kernel[] *)
+(* Constructing one large LP for Kernel[] *)
 
 AllConstraints[args___]:=(Message[AllConstraints::argerr];$Failed);
 AllConstraints[game_]:=
@@ -5684,6 +5859,12 @@ ConvexConjugate[game_, confunc_,opts:OptionsPattern[ConvexConjugate]] :=
     {gradpv, Flatten[cgate]}
     ];
 
+
+VetoRichPlayers[args___]:=(Message[VetoRichPlayers::argerr];$Failed);
+VetoRichPlayers[game_]:=Block[{swi},
+    swi=Table[Extract[Drop[Coalitions,1],Position[MemberQ[#,i] &/@ Drop[Coalitions,1],False]],{i,Length[T]}];  
+    Extract[T,Position[Apply[And,#] &/@ Table[v[#]==0 &/@ swi[[i]],{i,Length[T]}],True]]
+]
 MessageConjugate := Print["Warning: The system of linear equations to determine the conjugate of h has no solution."];
 
 SolSys[eqsys_List,var_List]:=Block[{redsol},
@@ -5958,7 +6139,8 @@ AnimationKernelProperty2d[game_, opts:OptionsPattern[AnimationKernelProperty2d]]
     detlow = If[lowval=={},First[EpsCore[game]], lowval[[1]]];
     If[SameQ[manip,False],
              Table[StrongEpsCore2d[game, FigureSize -> fs, EpsilonValue -> t,Labeling -> False], {t, uppval[[1]], detlow, stpsize[[1]]}],
-             Manipulate[StrongEpsCore2d[game, FigureSize -> fs,EpsilonValue -> t,Labeling -> False], {{t, uppval[[1]],"Epsilon"}, detlow, uppval[[1]], stpsize[[1]]}]
+             SetOptions[StrongEpsCore2d, FigureSize -> fs];
+             Manipulate[StrongEpsCore2d[game, EpsilonValue -> t, Labeling -> False], {{t, uppval[[1]],"Epsilon"}, detlow, uppval[[1]], stpsize[[1]]}] 
       ]
     ];
 
@@ -6014,15 +6196,18 @@ FilledCoreV6[game_, opts:OptionsPattern[FilledCoreV6]] :=
     redead = Delete[T,#] &/@ T;
     rg = Range[3];
     impred=MapThread[Append,{redead,rg}];
-    trpts = If[SameQ[vert,{}],{},
-                        dltr = DelaunayTriangulation[vert];
+    trpts = Which[SameQ[vert,{}],{},
+                  (* SameQ[Length[vert],1],vert,*)
+                  True, dltr = DelaunayTriangulation[vert];
                         cvh= ConvexHull[vert];
                         AppendTo[cvh,First[cvh]];
 	                Flatten[Drop[#, 1]] & /@ dltr];
     gr0=Graphics[{Thick, GraphicsComplex[imp, Line[impred]]}];
     gr0b=Graphics[{{Gray,PointSize[0.015],ipts},lgd2}];
     gr1=If[GreaterEqual[$VersionNumber,10.],
-	   If[SameQ[vert,{}],{}, ConvexHullMesh[vert]],
+	      Which[SameQ[vert,{}],{},
+           SameQ[Length[vert],1],Graphics[{LightBlue,PointSize[0.018],Point[vert]}],
+           True, ConvexHullMesh[vert]],
 	   If[SameQ[vert,{}],{},Graphics[{LightBlue, GraphicsComplex[vert,Polygon[trpts]]}]]];
     gr1b=If[SameQ[vert,{}],{},Graphics[{{Blue,PointSize[0.015],vpts},lgd1}]];
     gr2=If[SameQ[vert,{}],{},Graphics[{Thick, GraphicsComplex[vert, Line[cvh]]}]];
@@ -6155,6 +6340,15 @@ UpperSum[game_, S_List]:=  Plus  @@ UpperPayoff /@ S;
 
 Gap[args___]:=(Message[Gap::argerr];$Failed);
 Gap[game_]:= (UpperSum[game,#] - v[#]) & /@ Coalitions;
+
+SemiConvexQ[args___]:=(Message[SemiConvexQ::argerr];$Failed);
+SemiConvexQ[game_]:=Block[{pup,si,lsq},
+      pup=MapThread[GreaterEqual,{UpperVector[game],v[{#}]&/@T}];
+      si=Table[Extract[Drop[Coalitions,1],Position[MemberQ[#,i] &/@ Drop[Coalitions,1],True]],{i,Length[T]}];
+      lsq=Apply[And,#] &/@ Table[UpperPayoff[game,i] <= (UpperSum[game,#] - v[#]) &/@ si[[i]],{i,Length[T]}];
+      Apply[And,MapThread[Apply,{pup,lsq}]]
+]
+
 
 (* Generalized Gap Function *)
 
@@ -6449,8 +6643,8 @@ CharacteristicValues[coord_List,T_,opts:OptionsPattern[]]:= Block[{},
 
 
 DetWorth[coord_List, T_, opts:OptionsPattern[]]:=Block[{tugb, cval},
-                 tugb = GameBasis[T] //N;
-                 cval = tugb.N[Drop[coord,1]];
+                 tugb = GameBasis[T] ;
+                 cval = tugb.Drop[coord,1];
                  Prepend[cval,0]
 ];
 

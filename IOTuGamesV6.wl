@@ -20,7 +20,7 @@
 *)
 
 (*
-   : Mathematica Version : 12.x
+   : Mathematica Version : 12.x, 13.x
 *)
 (* 
    :History:
@@ -53,7 +53,7 @@
       Version 2.6.0:
                    Performing some code maintenance.   
  
-      Version 3.0.2:
+      Version 3.0.2 and later: See ChangeLog
                    
  *)
 

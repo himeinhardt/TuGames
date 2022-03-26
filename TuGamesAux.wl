@@ -1,8 +1,8 @@
 (* ::Package:: *)
 
 (* :Title: TuGamesAux.m *)
-(* Release Date: 06.10.2021 *)
-(* Version: 3.0.2 *)
+(* Release Date: 15.03.2022 *)
+(* Version: 3.1.0 *)
 
 (* :Context: TuGamesAux` *)
 
@@ -17,10 +17,10 @@
     E-Mail: Holger.Meinhardt@wiwi.uni-karlsruhe.de
 *)
 
-(* :Package Version: 3.0.2 *)
+(* :Package Version: 3.1.0 *)
 
 (* 
-   :Mathematica Version: 12.x
+   :Mathematica Version: 12.x, 13.x
 
 *)
 
@@ -99,6 +99,9 @@
 
     Version 3.0.1:
         Some minor bug fixes. Improving performance of functions revised in Version 3.
+
+    Version 3.0.2 and later:
+        See ChangeLog.
 *)
 
 BeginPackage["TUG`TuGamesAux`"];

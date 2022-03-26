@@ -1,0 +1,1 @@
+For those who have not installed the cddmathlink binary or do observe a hanging of the binary load process should move the file `TuGames.wl` as a substitute into the root directory. Loading cddmathlink is switched off and with it all graphical features.     

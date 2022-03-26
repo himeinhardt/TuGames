@@ -1,8 +1,8 @@
 [![GitHub (pre-)release](https://img.shields.io/github/release/himeinhardt/TuGames/all.svg)](https://github.com/himeinhardt/TuGames/releases)
-[![Mathematica 12.0 - 12.3.1](https://img.shields.io/badge/Mathematica-12.0_--_12.3.1-brightgreen.svg)](#compatibility)
+[![Mathematica 12.0 - 13.0.1](https://img.shields.io/badge/Mathematica-12.0_--_13.0.1-brightgreen.svg)](#compatibility)
 [![license MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/himeinhardt/TuGames/blob/master/LICENSE.md)
 
-# *Mathematica* Package: *TuGames* Version 3.0.2
+# *Mathematica* Package: *TuGames* Version 3.1.0
 
 ```
 Contents:
@@ -130,10 +130,10 @@ In order check for *Mathematica* versions smaller than 12.1 the paths where you 
 ```
 In[1]:= PacletInformation["TUG"]
 
-Out[1]= {Name -> TUG, Version -> 3.0.2, BuildNumber -> , Qualifier -> , WolframVersion -> 12+,
+Out[1]= {Name -> TUG, Version -> 3.1.0, BuildNumber -> , Qualifier -> , WolframVersion -> 12+,
          SystemID -> All, Description -> A Mathematica Package for Cooperative Game Theory,
 	 Category -> , Creator -> Holger Ingmar Meinhardt <holger.meinhardt@partner.kit.edu>,
-	 Publisher -> , Support -> , Internal -> False, Location -> /home/kit/xxx/xxxx/.Mathematica/Paclets/Repository/TUG-3.0.2
+	 Publisher -> , Support -> , Internal -> False, Location -> /home/kit/xxx/xxxx/.Mathematica/Paclets/Repository/TUG-3.1.0
 	 Context -> {TUG`coop`, TUG`vertex`, TUG`}, Enabled -> True, Loading -> Manual}
 ```
 
@@ -143,7 +143,7 @@ To get the same information and beyond that under *Mathematica* version 12.1, it
 In[1]:= PacletObject["TUG"][All]
 ```
 ```
-Out[1]=  {"Name" -> "TUG", "Version" -> "3.0.2", "WolframVersion" -> "12+", 
+Out[1]=  {"Name" -> "TUG", "Version" -> "3.1.0", "WolframVersion" -> "12+", 
           "Qualifier" -> "", "SystemID" -> All, "Description" -> "A Mathematica Package for Cooperative Game Theory",
           "Category" -> Missing["NotAvailable"], "Keywords" -> Missing["NotAvailable"], 
           "UUID" -> Missing["NotAvailable"], 
@@ -153,7 +153,7 @@ Out[1]=  {"Name" -> "TUG", "Version" -> "3.0.2", "WolframVersion" -> "12+",
           "Internal" -> False, 
           "Context" -> {"TUG`coop`", "TUG`vertex`", "TUG`"}, 
           "Loading" -> Manual, "AutoUpdating" -> False, "Enabled" -> True, 
-          "Location" -> "/home/kit/xxx/xxxx/.Mathematica/Paclets/Repository/TUG-3.0.2"}
+          "Location" -> "/home/kit/xxx/xxxx/.Mathematica/Paclets/Repository/TUG-3.1.0"}
 ```
 or alternatively
 
@@ -186,7 +186,7 @@ occur on these operating systems to run the basic functions of the package.
 
 ## 2. Custom Installation
 
-Since `Version 2.5.1` the package is distributed as a `Paclet`, which allows a custom installation. The latest version is `TUG-3.0.2`, which is only compatible for Mathematica version 12.0 or higher. This version is not anymore usable for versions that are smaller than 12.0. Notice that `TUG-2.6.2` is the latest version that is compatible with Mathematica versions smaller than 12.0, and will remain compatible with the most recent Mathematica version as long as `ConstrainedMax/ConstrainedMin` and `LinearProgramming/DualLinearProgramming` are supported by Wolfram Research, otherwise one has to update to `TUG-3.0.0` or later.  The installation of the package requires about 90 MB free hard-disk space, and the Mathematica version should not be smaller than 10 while installing Version `TUG-2.6.2`. For Mathematica versions smaller than Version 10, a manual installation is requested. In that case one has to follow the guidelines related to the associated operating system that can be found from the Mathematica documentation. 
+Since `Version 2.5.1` the package is distributed as a `Paclet`, which allows a custom installation. The latest version is `TUG-3.1.0`, which is only compatible for Mathematica version 12.0 or higher. This version is not anymore usable for versions that are smaller than 12.0. Notice that `TUG-2.6.2` is the latest version that is compatible with Mathematica versions smaller than 12.0, and will remain compatible with the most recent Mathematica version as long as `ConstrainedMax/ConstrainedMin` and `LinearProgramming/DualLinearProgramming` are supported by Wolfram Research, otherwise one has to update to `TUG-3.0.0` or later.  The installation of the package requires about 90 MB free hard-disk space, and the Mathematica version should not be smaller than 10 while installing Version `TUG-2.6.2`. For Mathematica versions smaller than Version 10, a manual installation is requested. In that case one has to follow the guidelines related to the associated operating system that can be found from the Mathematica documentation. 
 
 The most simplest method is to install the `Paclet` directly from GitHub under Mathematica V12.0 or later while executing   
 
@@ -275,8 +275,8 @@ In[1]:=  Needs["TUG`"]
 ===================================================
 Loading Package 'TuGames' for Unix
 ===================================================
-TuGames V3.0.2 by Holger I. Meinhardt
-Release Date: 07.12.2021
+TuGames V3.1.0 by Holger I. Meinhardt
+Release Date: 15.03.2022
 Program runs under Mathematica Version 12.0 or later
 Version 12.x or higher is recommended
 ===================================================

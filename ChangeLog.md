@@ -1,5 +1,5 @@
 [![GitHub (pre-)release](https://img.shields.io/github/release/himeinhardt/TuGames/all.svg)](https://github.com/himeinhardt/TuGames/releases)
-[![Mathematica 8.0 - 12.3.1](https://img.shields.io/badge/Mathematica-8.0_--_12.3.1-brightgreen.svg)](#compatibility)
+[![Mathematica 8.0 - 13.0.1](https://img.shields.io/badge/Mathematica-8.0_--_13.0.1-brightgreen.svg)](#compatibility)
 [![license MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/himeinhardt/TuGames/blob/master/LICENSE.md)
 #   :Title: TuGames
 ##  :Version History:
@@ -314,3 +314,35 @@ Improving the performance of `PreKernelSolution`.
 Some minor bug fixes and code revision.
 
 
+### Version 3.0.3
+
+#### 1. Revision
+Functions usage documentation.
+
+####  2. Modification
+
+Adding the new functions:
+
+*  `VetoRichPlayers[]` determining the set of veto players.
+*  `DecomposeInPositiveGames[]` decomposes a TU game into positive games, i.e., convex games.
+*  `AvConcaveQ[]` checking if the game is average-concave.
+*  `AverageConcaveQ[]` checking if the game is average-concave.
+*  `AlmostAverageConvexQ[]` checking if the game is almost average-convex.
+*  `AlmostAverageConcaveQ[]` checking if the game is almost average-concave.
+*  `PositiveGameQ[]` checking if the game is positive, i.e., convex.
+*  `SemiConvexQ[]` checking if the game is semi-convex.
+
+
+####  3. Bug Fixes
+
+Fixing Bug in `AnimationKernelProperty2d[]` with the `FigureSize` option in `Manipulate[]`.
+
+Fixing an issue in `ModifiedNucleolus[]` and `ModifiedKernel[]` w.r.t. the boundary `Infinity`, which was replaced by `1000*v[T]`.
+
+Some minor bug fixes and code revision.
+
+### Version 3.1.0
+
+#### 1. Revision
+
+Update of the Documentation references pages and adjustment to the paclet system of Mathematica Version 13.0.

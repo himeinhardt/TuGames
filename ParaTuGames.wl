@@ -1,7 +1,7 @@
 (* ::Package:: *)
 
 (* :Title: ParaTuGames.m
-    : Release Date : 07.12.2021
+    : Release Date : 15.03.2022
 
 
 *)
@@ -21,10 +21,10 @@ Off[Needs::nocont]
     holger.meinhardt@wiwi.uni-karlsruhe.de
 *)
 
-(* :Package Version: 1.0.2 *)
+(* :Package Version: 1.0.3 *)
 
 (* 
-   :Mathematica Version: 12.x
+   :Mathematica Version: 12.x, 13.x
 
 *)
 (*:Keywords:
@@ -72,6 +72,7 @@ Off[Needs::nocont]
 
 (* 
    :History:
+    See ChangeLog. 
 *)
 
 Needs["TUG`coop`CooperativeGames`"];
