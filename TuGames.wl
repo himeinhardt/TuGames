@@ -18,7 +18,7 @@ Off[General::obspkg];
     holger.meinhardt@wiwi.uni-karlsruhe.de
 *)
 
-(* :Package Version: 3.1.0 *)
+(* :Package Version: 3.1.1 *)
 
 (* 
    :Mathematica Version: 12.x
@@ -55,12 +55,17 @@ Off[General::obspkg];
    the Coincidence of the Kernel and Prekernel, International Game Theory Review,
    Vol. 4, No. 3, 201-211, 2002. 
 
+   Pierre Dehez (2023), COOPERATIVE PRODUCT GAMES, LIDAM Discussion Paper CORE 2023 / 10
+
+   Pierre Dehez (2023), Sharing a collective probability of success, Mathematical Social
+   Sciences 123, 122-127.
+
    Theo Driessen, Cooperative Games, Solutions and Applications, Kluwer Academic
    Publishers, Dordrecht, 1988.
 
-   Theo Driessen. The Greedy Bankruptcy Game: An Alternative Game Theoretic Analysis of a Bankruptcy Problem. In
-   L.A. Petrosjan and V.V. Mazalov, editors, Game Theory and Applications, volume IV, pages 45\[Dash]61, Commack,
-   New York, 1998. Nova Science Publishers Inc.
+   Theo Driessen. The Greedy Bankruptcy Game: An Alternative Game Theoretic Analysis of a
+   Bankruptcy Problem. In L.A. Petrosjan and V.V. Mazalov, editors, Game Theory and Applications,
+   volume IV, pages 45\[Dash]61, Commack, New York, 1998. Nova Science Publishers Inc.
 
 
    E. Inarra and J. Usategui, The Shapley value and average convex games, 
@@ -77,9 +82,11 @@ Off[General::obspkg];
    for Bankruptcy Game, The Waseda Journal of Political Science and Economics,
    Waseda, Japan, 2006.
 
-   J. Getán, J. M. Izquierdo, J. Montes, C. Rafels. The bargaining set and the kernel for almost-convex
-   games, (2012). mimeo.
+   J. Getan, J. M. Izquierdo, J. Montes, C. Rafels. The bargaining set and the kernel
+   for almost-convex games, (2012). mimeo.
 
+   Hou, D., Xu, G., Sun, P., Driessen, T., 2018. The Shapley value for the probability game.
+   Oper. Res. Lett. 46, 457-461.
 
    I. Katsev and E. Yanovskaya, Between the Prekernel and the Prenucleolus, mimeo, 2009. 
 
@@ -97,10 +104,25 @@ Off[General::obspkg];
    game. Naval Research Logistics (NRL), 57(7):667\[Dash]672, 2010. doi: 10.1002/nav.20429.
    URL https://onlinelibrary.wiley.com/doi/abs/10.1002/nav.20429.
 
-   M. Leng, Ch. Luo, L. Liang. Multi-Player Allocations in the Presence of Diminishing Marginal Contributions:
-   Cooperative Game Analysis and Applications in Management Science, 2020, to appear in Management Science
+   M. Leng, Ch. Luo, L. Liang. Multi-Player Allocations in the Presence of Diminishing Marginal
+   Contributions: Cooperative Game Analysis and Applications in Management Science, 2020,
+   to appear in Management Science
 
-   SC. Littlechild and KG. Vaidya, The propensity to disrupt and the disruption nucleolus
+   S. C. Littlechild. A simple expression for the nucleolus in a special case. International
+   Journal of Game Theory, 3:21-29, 1974. URL https://doi.org/10.1007/BF01766216.
+
+   S. C. Littlechild and G. Owen. A simple expression for the shapely value in a special case.
+   Management Science, 20(3):370-372, 1973. ISSN 00251909, 15265501.
+   URL http://www.jstor.org/stable/2629727.
+
+   S. C. Littlechild and G. Owen. A further note on the nucleolus of the airport game.
+   International Journal of Game Theory, 5(2):91-95, 1976. URL https://doi.org/10.1007/BF01753311.
+
+   S. C. Littlechild and G. F. Thompson. Aircraft landing fees: A game theory approach.
+   The Bell Journal of Economics, 8(1):186-204, 1977. ISSN 0361915X.
+   URL http://www.jstor.org/stable/3003493.
+
+   S. C. Littlechild and KG. Vaidya, The propensity to disrupt and the disruption nucleolus
    of a characteristic function game. International Journal of Game Theory 5(2):151-161,
    1976.
 
@@ -147,6 +169,8 @@ Off[General::obspkg];
    International Journal of Game Theory, 25:113\[Dash]134, 1996.
    
    R. T. Rockafellar, Convex Analysis, Princeton University Press, 1970.
+
+   Rosales, D. (2014), Cooperative product games (www.academia.edu/401764)
 
    J. M. Solano and C. Rafels, Convexity versus average convexity: potential, 
    pmas, the shapley value and simple games, Documents de Treball, No. 3, 
@@ -368,6 +392,13 @@ Off[General::obspkg];
 
     Update of the Documentation references pages and adjustment to Mathematica Version 13.0.
 
+    Version 3.1.1
+
+    Adding the new functions:
+
+    ProductGame, ProbabilityGame, HarsanyiValue, ShapAirProb, TauValAirProb, NucAirProb.
+
+
 *)
  
 
@@ -416,8 +447,8 @@ If[SameQ[Global`$ParaMode,"False"],
 Print["==================================================="];
 Print["Loading Package 'TuGames' for ", $OperatingSystem];
 Print["==================================================="];
-Print["TuGames V3.1.0 by Holger I. Meinhardt"];
-Print["Release Date: 15.03.2022"];
+Print["TuGames V3.1.1 by Holger I. Meinhardt"];
+Print["Release Date: 21.04.2023"];
 Print["Program runs under Mathematica Version 12.0 or later"];
 Print["Version 12.x or higher is recommended"];
 Print["==================================================="];,
@@ -1121,17 +1152,29 @@ Nuc1convex::usage =
 EANSCValue::usage = 
 "EANSCValue[game] computes the Equal Allocation of Non-Separable Contribution/Cost value.";
 
+TauValAirProb::usage = 
+"TauValAirProb[cost,nj] calculates the Tau value from an airport cost allocation problem (cost,nj).";
+
+NucAirProb::usage = 
+"NucAirProb[cost,nj] calculates the nucleolus from an airport cost allocation problem (cost,nj).";
+
+ShapAirProb::usage = 
+"ShapAirProb[cost,nj] calculates the Shapley value from an airport cost allocation problem (cost,nj).";
+
 NewShapley::usage = 
-"NewShapley[game] calculates the Shapley Value of the game based on the marginal contributions of players. Function not very efficient!";
+"NewShapley[game] calculates the Shapley value of the game based on the marginal contributions of players. Function not very efficient!";
 
 Potential::usage =
 "Potential[game] computes the potential of a game.";
 
 ShapleyValueML::usage =
-"ShapleyValueML[game] computes the Shapley Value of the game using the multi-linear extension.";
+"ShapleyValueML[game] computes the Shapley value of the game using the multi-linear extension.";
 
 MLExtension::usage =
 "MLExtension[game] computes the multi-linear extension of the game.";
+
+HarsanyiValue::usage =
+"HarsanyiValue[game] computes the Harsanyi value of the game.";
 
 UtopiaVector::usage = 
 "UtopiaVector[game] calculates the utopia payoffs for all players.";
@@ -1476,7 +1519,7 @@ True,
   Options[LorenzSolution] = {DigitPrecision -> 20, RationalApproximate -> True, Method-> Automatic};
   Options[DuttaRay] = {DigitPrecision -> 20, RationalApproximate -> True, Method-> Automatic};
   Options[kBalancednessQ] = {DisplayAllResults -> False, Silent -> True};
-  Options[BalancedSelectionQ] = {DisplayAllResults -> False,  Silent -> True, Tight->False}
+  Options[BalancedSelectionQ] = {DisplayAllResults -> False,  Silent -> True, Tight->False};
   Options[WeaklyBalancedSelectionQ] = {DisplayAllResults -> False,  Silent -> True, Tight->False};
   Options[BalancedCollectionQ] = {Method-> RevisedSimplex};
   Options[SelectionKBalancedQ] = {DisplayAllResults -> False, Silent -> True, Tight->False};
@@ -1575,6 +1618,7 @@ GenUpperSum::argerr="One argument was expected.";
 GenUpperVector::argerr="One argument was expected.";
 GrandCoalitionLargestValueQ::argerr="One argument was expected.";
 HarsanyiDividends::argerr="One argument was expected.";
+HarsanyiValue::argerr="One argument was expected.";
 IntersectionUpperLowerSetQ::argerr="One argument was expected.";
 KernelCalculation::argerr="One argument was expected.";
 Kernel::argerr="One argument was expected.";
@@ -1697,15 +1741,18 @@ MaxExcessBalanced::argerr="Two arguments were expected.";
 MaxExcessSets::argerr="Two arguments were expected.";
 MinExcessBalanced::argerr="Two arguments were expected.";
 ModCoalArray::argerr="Two arguments were expected.";
+NucAirProb::argerr="Two arguments were expected.";
 OptStepSize::argerr="Two arguments were expected.";
 PreKernelQ::argerr="Two arguments were expected.";
 Scrb::argerr="Two arguments were expected.";
 SetsToVec::argerr="Two arguments were expected.";
+ShapAirProb::argerr="Two arguments were expected.";
 SmallestContribution::argerr="Two arguments were expected.";
 StrIncreasMargContrib::argerr="Two arguments were expected.";
 SubGame::argerr="Two arguments were expected.";
 SbgAlmostAvQ::argerr="Two arguments were expected.";
 SbgAlmostAvCoQ::argerr="Two arguments were expected.";
+TauValAirProb::argerr="Two arguments were expected.";
 TIJsets::argerr="Two arguments were expected.";
 UnanAvConvexQ::argerr="Two arguments were expected.";
 UnanConvexQ::argerr="Two arguments were expected.";
@@ -2345,10 +2392,10 @@ ThirdStarCriticalVal[game_] := Block[{lwbd, lwpara, upbd, uppara, thstarcval},
     MapThread[Rule, {{Global`thstareps}, {thstarcval}}]
     ];
 
-CaseOne[game_, uppara_List] := Block[{},Max[Min[{(v[#] + up[Complement[T, #]] - v[T]), v[#] - Total[v[{#1}] & /@ #], 0}] & /@ ProperCoalitions  /. uppara]];
-CaseTwo[game_, lwpara_List, uppara_List] := Block[{}, Max[Min[{v[#] - m[#], v[#] - Total[v[{#1}] & /@ #], v[#] + up[Complement[T, #]] - v[T]}] & /@ ProperCoalitions  /. lwpara  /. uppara]];
-CaseThree[game_, lwpara_List, uppara_List] := Block[{},Max[Min[{Max[{v[#] - m[#], 0}], v[#] - Total[v[{#1}] & /@ #], (v[#] + up[Complement[T, #]]  - v[T])}] & /@ ProperCoalitions  /. lwpara /. uppara]];
-CaseThreeFor3[game_, lwpara_List, uppara_List] := Block[{},Max[Min[{Max[{Min[{v[#] - Total[v[{#1}] & /@ #],v[#] - m[#]}],0}], Max[{(v[#] + up[Complement[T, #]] - v[T]),0}]}] & /@ ProperCoalitions  /. lwpara  /. uppara]];
+CaseOne[game_, uppara_List] := Block[{z0},Max[Min[{(v[#] + up[Complement[T, #]] - v[T]), v[#] - Total[v[{#1}] & /@ #], 0}] & /@ ProperCoalitions  /. uppara]];
+CaseTwo[game_, lwpara_List, uppara_List] := Block[{z0}, Max[Min[{v[#] - m[#], v[#] - Total[v[{#1}] & /@ #], v[#] + up[Complement[T, #]] - v[T]}] & /@ ProperCoalitions  /. lwpara  /. uppara]];
+CaseThree[game_, lwpara_List, uppara_List] := Block[{z0},Max[Min[{Max[{v[#] - m[#], 0}], v[#] - Total[v[{#1}] & /@ #], (v[#] + up[Complement[T, #]]  - v[T])}] & /@ ProperCoalitions  /. lwpara /. uppara]];
+CaseThreeFor3[game_, lwpara_List, uppara_List] := Block[{z0},Max[Min[{Max[{Min[{v[#] - Total[v[{#1}] & /@ #],v[#] - m[#]}],0}], Max[{(v[#] + up[Complement[T, #]] - v[T]),0}]}] & /@ ProperCoalitions  /. lwpara  /. uppara]];
 
 
 FifthCriticalVal[args___]:=(Message[FifthCriticalVal::argerr];$Failed);
@@ -2406,12 +2453,12 @@ DisplayMessageUpper:=(Print["This class of games is different from zero-monotoni
 
 IntersectionUpperLowerSetQ[args___]:=(Message[IntersectionUpperLowerSetQ::argerr];$Failed);
 
-IntersectionUpperLowerSetQ[game_] := Block[{},
+IntersectionUpperLowerSetQ[game_] := Block[{z0},
      LowerSetQ[game] && UpperSetQ[game]
    ];
 
 GrandCoalitionLargestValueQ[args___]:=(Message[GrandCoalitionLargestValueQ::argerr];$Failed);
-GrandCoalitionLargestValueQ[game_] := Block[{},
+GrandCoalitionLargestValueQ[game_] := Block[{z0},
   Max[v[#] &/@ Subsets[T]] <= v[T] 
   ];
 
@@ -2424,14 +2471,14 @@ PreKernelEqualsKernelQ[game_,opts:OptionsPattern[PreKernelEqualsKernelQ]] := Blo
                       UpperSetIncImputationQ[game], PrintMessPreKernelEq03; True,
 (*  This statement needs more!  (GrandCoalitionLargestValueQ[game] && IntersectionUpperLowerSetQ[game]),
                                  PrintMessPreKernelEq04; True,*)
-                True, PrintMessPreKernelEq05;False
+                _, PrintMessPreKernelEq05;False
          ],
         True,
           Switch[True, ZeroMonotoneQ[game], True,
                      (!(!LowerSetQ[game]) && (!UpperSetQ[game])), True,
                      UpperSetIncImputationQ[game], True,
 (*                     (GrandCoalitionLargestValueQ[game] && IntersectionUpperLowerSetQ[game]),True,*)
-                      True,False
+                      _,False
       ]
     ]
   ];
@@ -2472,6 +2519,19 @@ ReasonableSet[game_] := Block[{assr},
  
 (* strong epsilon core section ends *) 
 
+HarsanyiValue[args___]:=(Message[HarsanyiValue::argerr];$Failed);
+HarsanyiValue[game_]:=Block[{hd,sz,pt,liste,pm,aryf,mat},
+                     hd=HarsanyiDividends[game];
+		     sS=Subsets[T];
+                     sz=Delete[Length[#] &/@ sS,1];
+		     pt=Total[sz];
+		     liste = Table[If[i>=j,1,0],{i,Length[T]},{j,Length[T]}];
+		     pm=Permutations[#] &/@ liste;
+		     aryf=ArrayFlatten[pm,1];
+		     mat=aryf/sz;
+		     hd=Delete[HarsanyiDividends[game],1];
+		     hd.mat
+		      ];
 
 
 NewShapley[args___]:=(Message[NewShapley::argerr];$Failed);
@@ -2536,6 +2596,78 @@ DisplayErgb[payoff_List]:= Block[{exc,coal,mpc},
     mpc = Map[Global`Co,coal];
     MatrixForm[PrependTo[exc,mpc]]
 ];
+
+
+(* Airport Cost Allocation Problem *)
+ShapAirProb[args___]:=(Message[ShapAirProb::argerr];$Failed);
+ShapAirProb[cost_List,nj_List]:=Block[{c0,dc,smNj,cumMv,shv},
+	If[SameQ[Length[cost],Length[nj]],True,Print["Lists must have same size!"];Return[{}]];   
+        c0=Prepend[Delete[cost,-1],0];
+        dc=cost-c0;
+        smNj=Total[nj];
+        cumMv=Prepend[Delete[smNj-Accumulate[nj],-1],smNj];
+        shv=Accumulate[dc/cumMv]
+	];
+
+
+NucAirProb[args___]:=(Message[NucAirProb::argerr];$Failed);
+NucAirProb[cost_List,nj_List]:=Block[{cnj,cnjm,tCrd,cm,nc,alp,tk,elm,st,mta,cnj1,c1,idx,c2,df,lt},
+        If[SameQ[Length[cost],Length[nj]],True,Print["Lists must have same size!"];Return[{{},{},{}}]];   
+	cnj=Accumulate[nj];
+	cnjm=Last[cnj];
+	cm=Last[cost];
+	cnj=Delete[cnj,-1];
+	tCrd=Delete[cost,-1];
+	cm=Last[cost];
+	nc={};
+	alp={};
+	tk={};
+	elm={0};
+	mta={};
+	While[SameQ[SameQ[tCrd,{}],False],
+             cnj1=cnj+1;
+	     c1=Min[(tCrd-Total[mta])/cnj1];
+	     idx=Position[(tCrd-Total[mta])/cnj1,c1];
+	     elm=idx+elm;
+	     c2=(cm-Total[mta])/cnjm;
+	     AppendTo[alp,Min[{c1,c2}]];
+             alp=Flatten[alp];
+             AppendTo[tk,Extract[cnj,idx]];
+	     tk=Flatten[tk];
+	     AppendTo[nc,Array[Last[alp] &,Flatten[idx][[1]]]];
+	     nc=Flatten[nc];
+	     df=Length[nj]-Flatten[elm][[1]];
+	     cnj=Accumulate[Take[nj,-df]];
+	     cnjm=Last[cnj];
+	     cnj=Delete[cnj,-1];
+	     AppendTo[mta,Last[tk]*Last[alp]];
+	     mta=Flatten[mta];
+	     lt=Length[tCrd]-Flatten[idx][[1]];
+	     tCrd=Take[tCrd,-lt];
+	 ];
+	AppendTo[tk,cnjm];
+	tk=Flatten[tk];
+	c2=(cm-Total[mta])/cnjm;
+	AppendTo[alp,c2];
+	alp=-Flatten[alp];
+	AppendTo[nc,c2];
+	nc=Flatten[nc];
+	{nc,alp,tk}
+	];
+
+
+TauValAirProb[args___]:=(Message[TauValAirProb::argerr];$Failed);
+TauValAirProb[cost_List,nj_List]:=Block[{c1,nj1,tv,tvm},
+	If[SameQ[Length[cost],Length[nj]],True,Print["Lists must have same size!"];Return[{}]];   
+	If[GreaterEqual[Last[nj],2],
+	Last[cost]*cost/Total[cost*nj],
+	c1=Delete[cost,-1];
+        nj1=Delete[nj,-1];
+        tv=Last[c1]*c1/(Total[c1*nj1]+Last[c1]);
+	tvm=Last[tv]+(Last[cost]-Last[c1]);
+	Append[tv,tvm]]
+	];
+
 
 MaxExcessSets[args___]:=(Message[MaxExcessSets::argerr];$Failed);
 MaxExcessSets[game_, payoff_List] := Block[{exclist, propexc, maxexc, pos},
@@ -2821,7 +2953,7 @@ NucleolusThreePerson[game_] :=
  C.f. Owen 1974 and Owen (1995, pp.322-334.)
 *)
 
-SeqLP[obf_, cmat_List, bvect_List,bds_List,bA_:{},opts:OptionsPattern[ModifiedNucleolus]] :=
+SeqLP[obf_, cmat_List, bvect_List,bds_List,bA_List: {},opts:OptionsPattern[ModifiedNucleolus]] :=
    Block[{filopts,mthd,cmat0,cmat1,meq,beq,lw,up,idm,res,res1,bv,yineq,yeq,zf,bv0,rl2,gr,ps,al1,psal1,ov,ps1,zv,rl,bA1,lb,bA2,ons,wghs,mr,pw,pwQ,extb,bvect1,twv,ps2,rl3,zQ},
     mthd=OptionValue[Method];
     meq=If[SameQ[bA,{}],{Last[cmat]},DeleteCases[DeleteDuplicates[bA],{}]];
@@ -2876,7 +3008,7 @@ SeqLP[obf_, cmat_List, bvect_List,bds_List,bA_:{},opts:OptionsPattern[ModifiedNu
 ];
 
 
-SeqLP2[game_,obf_, cmat_List, bvect_List,bds_List,bA_:{},opts:OptionsPattern[ModifiedKernel]] :=
+SeqLP2[game_,obf_, cmat_List, bvect_List,bds_List,bA_List:{},opts:OptionsPattern[ModifiedKernel]] :=
       Block[{filopts,mthd,cmat1,dl1,dl2,dl3,dl4,pkQ,gr,ps,al1,psal1,ov,rl2,res,ps1,zv,rl,bA1,lb,bA2,ons,wghs,mr,pw,pwQ,extb,bvect1,twv,ps2,rl3,zQ},
     mthd=OptionValue[Method];
     meq=If[SameQ[bA,{}],{Last[cmat]},DeleteCases[DeleteDuplicates[bA],{}]];
@@ -3053,7 +3185,7 @@ FTCoalArray[game_,payoff_,tol_]:=Block[{sC,irQ,irc,slir,b0,I0,excpay,lI0,zv},
 
 
 (* We set the default of blQ to True in order to allow a return if mrk==lt on the first iteration.*)
-PnSelectFTMCR[exc_List,sC_,lt_,tol_,pIk_:{},plIk_:{},pslex_:{},blQ_:True,mtrk_:0]:=Block[{mtr,smtr,slc,sS,lS,sC1,Im,bQ,mt,mrk,exc1,slex1,lIm1},
+PnSelectFTMCR[exc_List,sC_,lt_,tol_,pIk_List:{},plIk_List:{},pslex_List:{},blQ_:True,mtrk_:0]:=Block[{mtr,smtr,slc,sS,lS,sC1,Im,bQ,mt,mrk,exc1,slex1,lIm1},
                 mtr=Abs[Subtract[#,Max[exc]]]<=tol &/@ exc;
 	        smtr=Position[mtr,True];
 	        {slc,sS}=Extract[#,smtr] &/@ {exc,sC};
@@ -3167,7 +3299,7 @@ FindSolX[ssz_List,vars_List]:=Block[{sys,eqsys},
                            If[NumberQ[eqsys],Return[{}],Solve[eqsys,vars]]
         ];
 
-SolveSys[bsys_List,iim_List,exc_List,glsys_:{},idx_:1]:=Block[{lg,gls,eq,zv,vexc,rsys,nwgl,riim,rexc},
+SolveSys[bsys_List,iim_List,exc_List,glsys_List:{},idx_:1]:=Block[{lg,gls,eq,zv,vexc,rsys,nwgl,riim,rexc},
                      gls=Take[bsys,First[iim]];
                      lg=Length[gls];
                      If[exc=={} && lg==1,True,vexc=Take[exc,First[iim]]];
@@ -3230,7 +3362,7 @@ PnModCoalArray[game_,payoff_,tol_]:=Block[{sC,lt,excpay},
    ];
 
 
-SelectMCR[exc_List,sC_,lt_,tol_,Ik_:{},lIk_:{},slex_:{0},blQ_:False,mtrk_:0]:=Block[{mtr,smtr,slc,sS,lS,sC1,Im,mrk,bQ,mt,mkr,exc1,slex1,lIm1},
+SelectMCR[exc_List,sC_,lt_,tol_,Ik_List:{},lIk_List:{},slex_List:{0},blQ_:False,mtrk_:0]:=Block[{mtr,smtr,slc,sS,lS,sC1,Im,mrk,bQ,mt,mkr,exc1,slex1,lIm1},
      mtr=Abs[Subtract[#,Max[exc]]]<=tol &/@ exc;
      smtr=Position[mtr,True];
      slc=Extract[exc,smtr];
@@ -3263,7 +3395,7 @@ SelectMCR[exc_List,sC_,lt_,tol_,Ik_:{},lIk_:{},slex_:{0},blQ_:False,mtrk_:0]:=Bl
      ]
  ];
 
-PnSelectMCR[exc_List,sC_,lt_,tol_,pIk_:{},plIk_:{},pslex_:{},blQ_:False,mtrk_:0]:=Block[{mtr,smtr,slc,sS,lS,sC1,mrk,Im,bQ,mt,mkr,exc1,slex1,lIm1},
+PnSelectMCR[exc_List,sC_,lt_,tol_,pIk_List:{},plIk_List:{},pslex_List:{},blQ_:False,mtrk_:0]:=Block[{mtr,smtr,slc,sS,lS,sC1,mrk,Im,bQ,mt,mkr,exc1,slex1,lIm1},
     mtr=Abs[Subtract[#,Max[exc]]]<=tol &/@ exc;
     smtr=Position[mtr,True];
     slc=Extract[exc,smtr];
@@ -3894,7 +4026,7 @@ BalancedCollect[game_, payoff_List] := Block[{levexc, redlev},
     Table[DeleteCases[DetBalancedCollec[#, payoff, redlev[[i]]] & /@ Drop[Drop[Subsets[T], -1],1], {}], {i, Length[redlev]}]
 ];
 
-DetBalancedCollec[S_List, payoff_List, \[Alpha]_] := Block[{},
+DetBalancedCollec[S_List, payoff_List, \[Alpha]_] := Block[{z0},
     If[GreaterEqual[Excess[payoff, S], \[Alpha]], S, {}]
 ];
 
@@ -4020,7 +4152,7 @@ CheckCoalStructure[selcoal_List, k_Integer, opts:OptionsPattern[SelectionKBalanc
 (* User interface for coalition structures. *)
 
 
-SelectionKBalancedQ[selcoal_List, k_Integer, opts:OptionsPattern[SelectionKBalancedQ]] := Block[{},
+SelectionKBalancedQ[selcoal_List, k_Integer, opts:OptionsPattern[SelectionKBalancedQ]] := Block[{z0},
     Which[Depth[selcoal]  === 3,
                      Which[GreaterEqual[k, Length[T]] === True, First[BalancedSystemQ[selcoal, T, opts]],  
                                    GreaterEqual[k, 2] === True, SelctKBalacQ[selcoal, k, opts],
@@ -4301,7 +4433,7 @@ SolutionSelection[game_,payoff_List]:= Block[{bool,pos,lsg},
       Which[Length[lsg]===1,Flatten[lsg],True,lsg]
 ];
 
-KernelSolution[game_, payoff_List, prec_,rattol_,setk_,silent_,payold_:{}] := 
+KernelSolution[game_, payoff_List, prec_,rattol_,setk_,silent_,payold_List:{}] := 
 Block[{payvec, pold=payold,approx,ratnum},
     payvec = If[SameQ[Global`PRK,setk],ConvergenceToKernel[game, payoff],ConvergenceToKernel2[game, payoff]];
     pold = payoff;
@@ -4537,7 +4669,7 @@ MaxSurplus[game_, pi_, pj_, payoff_List] :=
 
 
 ModMaxSurplus[game_, sij_List, payass_List] := 
-	Block[{},
+	Block[{z0},
           Max[ReplaceAll[Map[v[#] - x[#] &, sij],payass]]
       ];
 
@@ -4555,7 +4687,7 @@ AntiSurplus[game_, pi_, pj_, payoff_List] :=
 
 
 ModAntiSurplus[game_, sij_List, payass_List] := 
-	Block[{},
+	Block[{z0},
           Min[ReplaceAll[Map[v[#] - x[#] &, sij],payass]]
       ];
 
@@ -4704,7 +4836,7 @@ KernelImputationListQ[game_, payoff_List] := Block[{kerimpQ,impQ},
 
 
 ImputationQ[args___]:=(Message[ImputationQ::argerr];$Failed);
-ImputationQ[game_,payoff_List]:= Block[{},
+ImputationQ[game_,payoff_List]:= Block[{z0},
    Which[Depth[payoff] == 3, CheckImputations[game, #] & /@ payoff,
          Depth[payoff] == 2, CheckImputations[game,payoff],
          True, DisplayMessage[payoff]
@@ -4814,8 +4946,6 @@ KernelCalculation[game_, opts:OptionsPattern[KernelCalculation]] :=
                  KernelSubCallEmpty[orggame,callm, changeps,  dispres, EpsilonValue -> epsilon, SetGameToNonZeroMonotonic -> notzeromono, Method-> mth],
                  If[avcQ == True, 
                    DisplayAvcQ[avcQ];
-                   KernelSubCall[orggame,callm, changeps, dispres, EpsilonValue -> epsilon, SetGameToNonZeroMonotonic -> notzeromono, Method-> mth],
-                   DisplayAvcQ[avcQ];
                    KernelSubCall[orggame,callm, changeps, dispres, EpsilonValue -> epsilon, SetGameToNonZeroMonotonic -> notzeromono, Method-> mth]
                    ]
                 ]
@@ -4827,21 +4957,21 @@ KernelCalculation[game_, opts:OptionsPattern[KernelCalculation]] :=
   ];
  
 DisplayZmQKerQ01[zmQ_,coreQ_] := 
-  Block[{},
+  Block[{z0},
           Print["Game is zero-monotone? ",zmQ];
           Print["Core is nonempty? ",coreQ];
           Print["Game is either zero-monotonic or has nonempty core"]
          ];
          
 DisplayZmQKerQ02[zmQ_,coreQ_] := 
-   Block[{},
+   Block[{z0},
           Print["Game is zero-monotone? ",zmQ];
           Print["Core is nonempty? ",coreQ];
           Print["Game is not zero-monotonic and has empty core"]
           ];
           
 DisplayZmQKerQ03[zmQ_,coreQ_] :=
-   Block[{},
+   Block[{z0},
           Print["Game is zero-monotone? ",zmQ];
           Print["Core is nonempty? ",coreQ];
           Print["Core is empty"];
@@ -4850,7 +4980,7 @@ DisplayZmQKerQ03[zmQ_,coreQ_] :=
 DisplayAvcQ[avconQ_] := Print["Game is average-convex? ",avconQ];
 
 DisplayRemark[eps_Real] := 
-    Block[{},
+    Block[{z0},
       Print["Depth is equal to ",Depth[eps]];
       Print["Usage: Kernel[game,options]"];
       Print["and KernelCalculation[game,options]"];
@@ -4912,7 +5042,7 @@ Main functions to determine kernel elements according to the algorithm
 as described in Meinhardt(2006). Recursive procedure. 
 *)
 
-KernelPoints[game_, storepay_:{}, callm_, changeps_, dispres_, opts:OptionsPattern[KernelCalculation]] := 
+KernelPoints[game_, storepay_List:{}, callm_, changeps_, dispres_, opts:OptionsPattern[KernelCalculation]] := 
   Block[{epsi1, notzeromono, mth, ruf, zwerg, initialpay = storepay, folg, rf, del, alloc, po, newgame, maxsets, tijsets, mengsys, reslofSt2, constofSt2, const = {}, var, subres,sol, reddel,unpay, retval, objfunc, epsilon, leastgame},
     epsi1 = OptionValue[EpsilonValue];
     notzeromono = OptionValue[SetGameToNonZeroMonotonic]; 
@@ -4975,13 +5105,13 @@ KernelPoints[game_, storepay_:{}, callm_, changeps_, dispres_, opts:OptionsPatte
 
 
 MessageKerPoints01[erg_] := 
-   Block[{},
+   Block[{z0},
          Print["At least one player outweighs another player."]; 
          Print["A further calculation loop is required.\n", erg];
    ];
 
 MessageKerPoints02 :=
-   Block[{},
+   Block[{z0},
         Print["Solution is not balanced."];
         Print["The solution found may be a Kernel element."];
         Print["Check solution with the function KernelImputationQ or MaxExcessBalanced."];
@@ -5106,7 +5236,7 @@ KernelVertices[game_, opts:OptionsPattern[KernelVertices]] :=
     ];
 
 
-DetermineAddVertices[sol_, obj_, const_ , var_ , T_, callm_,sil_, mth_, zf_:{}] := 
+DetermineAddVertices[sol_, obj_, const_ , var_ , T_, callm_,sil_, mth_, zf_List:{}] := 
   Block[{nwzf,dures,valzf,boolzf,dualvar,yset,duyp,newineq,nwsol,prmax,lngt,kersolQ,oldres=sol},
     nwzf = Total[var];
     dures = SolveDual[nwzf, const, var];
@@ -5242,11 +5372,11 @@ PreKernelSolution[game_, payoff_List, opts:OptionsPattern[PreKernelSolution]] :=
    ];
 
 WrongDimension:=(Print["Payoff vector has not the correct dimension!"]); 
-WrongCoordDimension[T_]:= Block[{},
+WrongCoordDimension[T_]:= Block[{z0},
       Print["List of unanimity coordinates of size 2 has not the correct length!"];
       Print["The correct dimension is: ", Binomial[Length[T],2]];
 ];
-WrongCoordDimension[coord_List,T_]:= Block[{},
+WrongCoordDimension[coord_List,T_]:= Block[{z0},
       Print["List of unanimity coordinates of length ", Length[coord]];
       Print["is not correct!"];
       Print["The correct dimension is: ", 2^Length[T]];
@@ -5315,8 +5445,8 @@ SDMPreKernel[game_, payoff_List,optval_:Infinity, opts:OptionsPattern[PreKernelS
                SDMPreKernel[game, nwpay, sumexc, AntiPreKernel -> anti, Method -> mth, RationalTol->rattol,Silent -> sil,SmallestCardinality -> smc,SolutionExact -> ext]]
    ];
 
-MessageSDMKer[zfc_:{},minw_,nwaz_, fucval_, addexc_] :=
-  Block[{},
+MessageSDMKer[zfc_List:{},minw_,nwaz_, fucval_, addexc_] :=
+  Block[{z0},
         Print["The objective function h is: ",zfc];
         Print["The local minimum of h is: ",N[minw[[1]]]];
         Print["The local minimum of the objective function h is at:\n ",nwaz];
@@ -5422,7 +5552,7 @@ DetObjFunc[game_, payoff_List,opts:OptionsPattern[PreKernelSolution]] :=
 *)
 
 
-PrintMostEff[payoff_List, meffc_List] := Block[{},
+PrintMostEff[payoff_List, meffc_List] := Block[{z0},
        Print["A set of most effective coalitions at payoff ", payoff, " is: \n",  meffc]; 
 ];
 
@@ -5615,14 +5745,14 @@ EqClassMain[game_, payoff_, opts:OptionsPattern[ImputationToEqClass]]:= Block[{u
 ];
 
 DetEqClass[args___]:=(Message[DetEqClass::argerr];$Failed);
-DetEqClass[mat_List,T_]:= Block[{},
+DetEqClass[mat_List,T_]:= Block[{z0},
      Which[Dimensions[mat]==={Binomial[ Length[T],2], 2^Length[T]-1}, 
                                   FuncDetEqClass[mat, T],
                     True, WrongMatDimension[T]]
 
 ];
 
-WrongMatDimension[T_]:= Block[{},
+WrongMatDimension[T_]:= Block[{z0},
       Print["The unanimity matrix has not the correct dimension!"];
       Print["The correct dimension is: ", {Binomial[Length[T],2],2^Length[T]-1}];
 ];
@@ -6235,14 +6365,14 @@ PointSol[game_] :=
 
 
 Vec3DToSimplex[{x1_?NumberQ, x2_?NumberQ, x3_?NumberQ}] := 
-  Block[{}, {(x2 - x1) Sqrt[3]/2, x3 - (x1 + x2)/2}];
+  Block[{z0}, {(x2 - x1) Sqrt[3]/2, x3 - (x1 + x2)/2}];
 
 (* Borrowed from
 https://stackoverflow.com/questions/3506982/projecting-points-from-4d-space-into-3d-space-in-mathematica 
 *)
 
 Vec4DToSimplex[{x1_?NumberQ, x2_?NumberQ, x3_?NumberQ, x4_?NumberQ}] := 
-  Block[{}, {x2 + 1/2 * (x3 + x4), Sqrt[3] * (x3/2 + x4/6), Sqrt[6] * x4/3}];
+  Block[{z0}, {x2 + 1/2 * (x3 + x4), Sqrt[3] * (x3/2 + x4/6), Sqrt[6] * x4/3}];
 
 (* End mathlink section *)
 
@@ -6302,7 +6432,7 @@ DeltaJSet[list_, k_Integer] := Block[{genlist = {}, pos, retval},
 Nuc1convex[args___]:=(Message[Nuc1convex::argerr];$Failed);
 Nuc1convex[game_ /; OneConvexQ[game]]:= UpperVector[game] - Extract[Gap[game],-1] / Length[T];
 
-OneConvexQ[game_]:=Block[{},
+OneConvexQ[game_]:=Block[{z0},
 			 If[SameQ[First[kConvexity[game]],1],Return[True],
 			    Print["Game is not 1-convex! No solution can be retrieved!"];Return[False]];
 
@@ -6556,7 +6686,7 @@ mengen[list_]:= Block[{post},
 
 CoreElementsQ[args___]:=(Message[CoreElementsQ::argerr];$Failed);
 
-CoreElementsQ[game_,payoffs_List]:= Block[{},
+CoreElementsQ[game_,payoffs_List]:= Block[{z0},
   Which[Depth[payoffs] == 3, InCoreQ[#,game] & /@ payoffs,
         Depth[payoffs] == 2, InCoreQ[payoffs,game],
         True, DisplayUsageRem[payoffs]
@@ -6586,7 +6716,7 @@ An imputation x is in the core iff x =< dual v.
 *)
 BelongToCoreQ[args___]:=(Message[BelongToCoreQ::argerr];$Failed);
 
-BelongToCoreQ[game_, payoffs_List] := Block[{},
+BelongToCoreQ[game_, payoffs_List] := Block[{z0},
     Which[Depth[payoffs] == 3, PayList[game, payoffs],  
           Depth[payoffs] == 2, PaySole[game, payoffs],
           True,DisplayUsageRem[payoffs]
@@ -6636,7 +6766,7 @@ GameBasis[T_] := Block[{mgsys,gb},
 ];
 
 CharacteristicValues[args___]:=(Message[CharacteristicValues::argerr];$Failed);
-CharacteristicValues[coord_List,T_,opts:OptionsPattern[]]:= Block[{},
+CharacteristicValues[coord_List,T_,opts:OptionsPattern[]]:= Block[{z0},
       Which[ Length[coord] === 2^Length[T] , DetWorth[coord,T] ,
                     True, WrongCoordDimension[coord, T]]
 ];
@@ -6671,7 +6801,7 @@ HarsanyiDividends[game_]:=Block[{gb,valvec,unc},
 ];
 
 UnanConvexQ[args___]:=(Message[UnanConvexQ::argerr];$Failed);
-UnanConvexQ[coord_List,T_,opts:OptionsPattern[UnanConvexQ]]:=Block[{},
+UnanConvexQ[coord_List,T_,opts:OptionsPattern[UnanConvexQ]]:=Block[{z0},
                  Which[Length[coord] != 2^Length[T] , WrongCoordDimension[coord, T];,
                                UnanSize2NonNegQ[coord,T] === True, UnanConvexIffCondQ[coord,T,opts],
                                 True, Print["Game is not convex!"]; 
@@ -6721,7 +6851,7 @@ InEqCond[splij_List, submg_List] :=
 
 (* See Solano and Rafels, 1996 *)
 UnanAvConvexQ[args___]:=(Message[UnanAvConvexQ::argerr];$Failed);
-UnanAvConvexQ[coord_List,T_,opts:OptionsPattern[UnanAvConvexQ]]:=Block[{},
+UnanAvConvexQ[coord_List,T_,opts:OptionsPattern[UnanAvConvexQ]]:=Block[{z0},
                  Which[Length[coord] != 2^Length[T] , WrongCoordDimension[coord, T];,
                               True, UnanAvConvexIffCondQ[coord,T,opts]
   ]
@@ -6789,7 +6919,7 @@ Block[{uncrd, lnsi2, lnT, anfpt, endpt, tkcd, avccrd},
 
 DetUCoord[args___]:=(Message[DetUCoord::argerr];$Failed);
 DetUCoord[coord_List,T_]:=
- Block[{},
+ Block[{z0},
      Which[{Binomial[Length[T],2]} != Dimensions[coord], WrongCoordDimension[T];,
                     Union[NonNegative[coord]] === {True},  AvCcoord[coord,T] , 
                     True, Print["Input error! \n Negative values are not allowed!"];

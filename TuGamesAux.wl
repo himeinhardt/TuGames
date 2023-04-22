@@ -1,8 +1,8 @@
 (* ::Package:: *)
 
 (* :Title: TuGamesAux.m *)
-(* Release Date: 15.03.2022 *)
-(* Version: 3.1.0 *)
+(* Release Date: 18.04.2023 *)
+(* Version: 3.1.1 *)
 
 (* :Context: TuGamesAux` *)
 
@@ -17,7 +17,7 @@
     E-Mail: Holger.Meinhardt@wiwi.uni-karlsruhe.de
 *)
 
-(* :Package Version: 3.1.0 *)
+(* :Package Version: 3.1.1 *)
 
 (* 
    :Mathematica Version: 12.x, 13.x
@@ -131,6 +131,12 @@ ComplementaryMarket::usage =
  with complementary goods. See Maschler JET, 13, pp. 184-192. The set P can be understood as manufactures 
  and Q as workers. The set T is the player set with P union Q.";
 
+ProductGame::usage =
+"ProductGame[wghs] computes from weights vector the characteristic values and Harsanyi dividends of a product game."; 
+
+ProbabilityGame::usage =
+"ProbabilityGame[wghs] computes from weights vector the characteristic values of a probability game."; 
+
 ContestedGarment::usage = 
 "ContestGarment[Estate,{d1,d2}] computes a solution for a contested garment or two-creditor modest 
  bankruptcy problem.";
@@ -199,7 +205,7 @@ LieBracket::usage =
 Coal2Dec::usage =
 "Coal2Dec[n_Integer] converts the set of proper coalitions to its unique integer representations.";
 
-Sets2Dec::usage
+Sets2Dec::usage = 
 "Sets2Dec[list] converts a collection of coalitions to its unique integer representations.";
 
 RStirlingNumber::usage=
@@ -223,6 +229,8 @@ Coal2Dec::argerr="One argument was expected.";
 IsHermitianMatrixQ::argerr="One argument was expected.";
 Sets2Dec::argerr="One argument was expected.";
 SortVecDecOrder::argerr="One argument was expected.";
+ProductGame::argerr="One argument was expected.";
+ProbabilityGame::argerr="One argument was expected.";
 
 (* :Two Arguments: *)
 Angle::argerr="Two arguments were expected.";
@@ -354,10 +362,9 @@ CheckNearRing[Univers_List, RestSet_List, T2_, prevres_:{}] :=
     ];
 
 
-NearRingDef[A_, B_, R1_,Univers_List] := Module[{},
+NearRingDef[A_, B_, R1_,Univers_List] := Module[{z0},
     SameQ[Union[A, B],R1] || SameQ[Intersection[A, B], {}] || (Length[Position[Univers, Union[A, B]]] != 0 && 
           Length[Position[Univers, Intersection[A, B]]] != 0)
-    
     ];
 
 
@@ -381,6 +388,28 @@ ComplementaryMarket[T_List,P_List,Q_List,opts:OptionsPattern[ComplementaryMarket
               val /. a -> param
           ]
 ];
+
+
+(* Product Game  *)
+ProductGame[args___]:=(Message[ProductGame::argerr];$Failed);
+ProductGame[wghs_List]:=Module[{xlis,pval,chval,ylis,hdval},
+	   xlis = Subsets[wghs];		      
+           pval=Apply[Times,#] &/@ xlis; 
+           chval=pval-1;
+	   ylis =Subsets[whgs-1];
+	   hdval=Apply[Times,#] &/@ ylis;
+	   {chval,hdval} (*characteristic values and Harsanyi dividends.  *)
+		       ];
+
+(* Probability Game  *)
+ProbabilityGame[args___]:=(Message[ProbabilityGame::argerr];$Failed);
+ProbabilityGame[wghs_List]:=Module[{xlis,pval,chval},
+	If[Apply[And,GreaterEqual[#,0] &/@ wghs] && Apply[And,LessEqual[#,1] &/@ wghs],
+           xlis = Subsets[wghs];
+           pval=Apply[Times,1-#] &/@ xlis;
+           chval=1-pval,Print["The weights must lie between zero and one."]]
+		       ];
+
 
 (* Bankruptcy Situation *)
 
@@ -648,7 +677,7 @@ DisplayEuk[liste_]:=(
 (* Assigning symmetric values *)
 
 
-AssignValues[univers_List, alp_List] := Module[{},
+AssignValues[univers_List, alp_List] := Module[{z0},
       Which[Length[alp] != 0,
         Which[First[univers] === First[alp], Global`\[Alpha], 
           Length[First[univers]] <= 4, Global`\[Lambda], True, Global`\[Sigma]],
@@ -803,7 +832,7 @@ SymGameType4[T_List,S_List,val_Integer]:=Module[{S2,sbs,csb,asv,cl4,cw},
 
 
 
-AssValToCoal2[i_Integer,j_Integer,val_Integer,S1_List,S2_List]:=Module[{},
+AssValToCoal2[i_Integer,j_Integer,val_Integer,S1_List,S2_List]:=Module[{z0},
         Which[SameQ[(i!=j),True],
                    If[(MemberQ[S1,i] && MemberQ[S1,j]),v[{i,j}]=val,0],
              True, Print["NAN"];
@@ -811,7 +840,7 @@ AssValToCoal2[i_Integer,j_Integer,val_Integer,S1_List,S2_List]:=Module[{},
 ];
 
 
-AssValToCoal3[i_Integer,j_Integer,k_Integer,val_Integer,S1_List,S2_List]:=Module[{},
+AssValToCoal3[i_Integer,j_Integer,k_Integer,val_Integer,S1_List,S2_List]:=Module[{z0},
         Which[SameQ[(i!=j!=k),True],
                    If[(MemberQ[S1,i] && MemberQ[S1,j] && MemberQ[S2,k]),v[{i,j,k}]=val,0],
              True, Print["NAN"];
@@ -819,7 +848,7 @@ AssValToCoal3[i_Integer,j_Integer,k_Integer,val_Integer,S1_List,S2_List]:=Module
 ];
 
 
-AssValToCoal4[i_Integer,j_Integer,k_Integer,l_Integer,val_Integer,S1_List,S2_List]:=Module[{},
+AssValToCoal4[i_Integer,j_Integer,k_Integer,l_Integer,val_Integer,S1_List,S2_List]:=Module[{z0},
         Which[SameQ[(i!=j!=k!=l),True],
                    If[(MemberQ[S1,i] && MemberQ[S1,j] && MemberQ[S2,k] && MemberQ[S2,l]),v[{i,j,k,l}]=val,0],
              True, Print["NAN"];
