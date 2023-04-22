@@ -1,7 +1,7 @@
 (* ::Package:: *)
 
 (* :Title: ParaTuGames.m
-    : Release Date : 15.03.2022
+    : Release Date : 18.04.2023
 
 
 *)
@@ -21,7 +21,7 @@ Off[Needs::nocont]
     holger.meinhardt@wiwi.uni-karlsruhe.de
 *)
 
-(* :Package Version: 1.0.3 *)
+(* :Package Version: 1.0.4 *)
 
 (* 
    :Mathematica Version: 12.x, 13.x
@@ -779,7 +779,7 @@ ParaMaxSurplus[game_, pi_, pj_, payoff_List] :=
 
 
 ParaMaxSijSurplus[game_,sij_List, payass_List] := 
-	Block[{},
+	Block[{z0},
           Max[ReplaceAll[Map[v[#] - x[#] &, sij],payass]]
       ];
 
@@ -795,7 +795,7 @@ ParaAntiSurplus[game_, pi_, pj_, payoff_List] :=
       ];
 
 ParaAntiSijSurplus[game_,sij_List, payass_List] := 
-	Block[{},
+	Block[{z0},
           Min[ReplaceAll[Map[v[#] - x[#] &, sij],payass]]
       ];
 
@@ -942,7 +942,7 @@ ParaMinExc[mg_List, asspay_List] := Min[ReplaceAll[(v[#] - x[#]) & /@ mg, asspay
 (* Deriving a game from unanimity coordinates. *)
 
 ParaCharacteristicValues[args___]:=(Message[ParaCharacteristicValues::argerr];$Failed);
-ParaCharacteristicValues[coord_List,T_,opts:OptionsPattern[]]:= Block[{},
+ParaCharacteristicValues[coord_List,T_,opts:OptionsPattern[]]:= Block[{z0},
       Which[ Length[coord] === 2^Length[T] , ParaDetWorth[coord,T] ,
                     True, ParaWrongCoordDimension[coord, T]]
 ];
@@ -1043,11 +1043,11 @@ ParaSupAddQ[teilmg_List] := Block[{tpws, valsubg, duval, leq},
 
 ParaWrongDimension:=(Print["Payoff vector has not the correct dimension!"]); 
 
-ParaWrongCoordDimension[T_]:= Block[{},
+ParaWrongCoordDimension[T_]:= Block[{z0},
       Print["List of unanimity coordinates of size 2 has not the correct length!"];
       Print["The correct dimension is: ", Binomial[Length[T],2]];
 ];
-ParaWrongCoordDimension[coord_List,T_]:= Block[{},
+ParaWrongCoordDimension[coord_List,T_]:= Block[{z0},
       Print["List of unanimity coordinates of length ", Length[coord]];
       Print["is not correct!"];
       Print["The correct dimension is: ", 2^Length[T]];

@@ -1,6 +1,6 @@
 Paclet[ 
         Name -> "TUG",
-        Version -> "3.1.0",
+        Version -> "3.1.1",
         MathematicaVersion -> "12+",
         Description -> "A Mathematica Package for Cooperative Game Theory",
         Creator -> "Holger Ingmar Meinhardt <holger.meinhardt@partner.kit.edu>",

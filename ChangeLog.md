@@ -346,3 +346,16 @@ Some minor bug fixes and code revision.
 #### 1. Revision
 
 Update of the Documentation references pages and adjustment to the paclet system of Mathematica Version 13.0.
+
+### Version 3.1.1
+
+####  1. Modification
+
+Adding the new functions:
+
+* `ProductGame[]` computes from a weight vector the product game and Harsanyi dividends.
+* `ProbabilityGame[]` computes from a weight vector the probability game.
+* `HarsanyiValue[]` the Harsanyi value of the game.
+* `ShapAirProb[]` calculates the Shapley value from an airport cost allocation problem.
+* `TauValAirProb[]` calculates the Tau value from an airport cost allocation problem.
+* `NucAirProb[]` calculates the nucleolus from an airport cost allocation problem.
