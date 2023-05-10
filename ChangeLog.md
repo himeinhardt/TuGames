@@ -370,10 +370,10 @@ Update of the Documentation references pages.
 
 Adding the new functions:
 
-* `AirportProblem[]` computes from a from an airport cost allocation problem the associated cost game.
+* `AirportProblem[]` computes from an airport cost allocation problem the associated cost game.
 
 ####  3. Bug Fixes
 
-Fixing Bug in `ProductGame[]`, `KernelCalculation[]`.
+Fixing Bug related to the Harsanyi dividends in `ProductGame[]`, and `KernelCalculation[]` related to missing output.
 
 Some minor bug fixes and code revision.
