@@ -1,7 +1,7 @@
 (* ::Package:: *)
 
 (* :Title: ParaTuGames.m
-    : Release Date : 18.04.2023
+    : Release Date : 02.05.2023
 
 
 *)
@@ -356,7 +356,7 @@ Block[{sil, smc, optst, doi, optstep, itpay,tol,brc,pinv},
 
 ParaDirectionOfImprovement[args___]:=(Message[ParaDirectionOfImprovement::argerr];$Failed);
 ParaDirectionOfImprovement[game_, payoff_List, opts:OptionsPattern[ParaDirectionOfImprovement]] := 
-Module[{sil, smc, optst, meff, matE, mopt,matQ, matP, varpay, mex, submex, setpay, grmex, doi, optstep,pinv},
+Module[{sil, smc, optst, meff, matE, mopt, varpay, mex, submex, setpay, grmex, doi, optstep,pinv},
   sil = OptionValue[Silent];
   smc = OptionValue[SmallestCardinality];
   optst = OptionValue[CalcStepSize];

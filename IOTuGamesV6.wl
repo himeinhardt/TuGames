@@ -2,8 +2,8 @@
 
 (*
     : Title : IOTuGamesV6.m
-    : Release Date : 07.12.2021
-    : Version 3.0.2 
+    : Release Date : 02.05.2023
+    : Version 3.1.2 
 
 *)
 
@@ -277,7 +277,7 @@ DrawCore3dV6[vert_List, opts:OptionsPattern[{PlotCore3dV6,Graphics3D}]] :=
 
 SkelCore3dV6[args___]:=(Message[SkelCore3dV6::argerr];$Failed);
 SkelCore3dV6[vert_List, ecd_List, ead_List, extmat_List, opts:OptionsPattern[{PlotCore3dV6,Graphics3D}]] :=
-   Module[{amat,bvec,viewpt,trext,minv,psm,dlvert,uvp1,vskl,gr,filopts},
+   Module[{amat,bvec,uvp1,vskl,gr,filopts},
     filopts=FilterRules[{opts},Options[Graphics3D]];  
     amat=Transpose[Drop[Transpose[extmat],1]];
     amat = Take[#,-3] &/@ amat;
@@ -290,7 +290,7 @@ SkelCore3dV6[vert_List, ecd_List, ead_List, extmat_List, opts:OptionsPattern[{Pl
 
 
 PlotNonCoreSol3d[game_, opts:OptionsPattern[{PlotCore3dV6,Graphics3D}]] :=
-  Module[{vwskl,vwker,vwshv,vwnuc,vwmnc,vwpay,kerc,shc,nuc,mnc,rd,psm,origgame,paycoord,shimp,dld4,filopts,fs,oldvls,norm,normgame,gr1,gr2,gr3,gr4,gr5,gr6,grli,gr},
+  Module[{vwker,vwshv,vwnuc,vwmnc,vwpay,kerc,shc,nuc,mnc,rd,psm,origgame,paycoord,filopts,fs,oldvls,norm,normgame,gr1,gr2,gr3,gr4,gr5,gr6,grli,gr},
     filopts = FilterRules[{opts},Options[Graphics3D]];
     vwker = OptionValue[ViewKernelSol];
     vwshv = OptionValue[ViewShapleySol];
@@ -322,7 +322,7 @@ PlotNonCoreSol3d[game_, opts:OptionsPattern[{PlotCore3dV6,Graphics3D}]] :=
 
 SkelImputationV6[args___]:=(Message[SkelImputationV6::argerr];$Failed);
 SkelImputationV6[game_, opts:OptionsPattern[{SkelImputationV6,PlotCore3dV6,Graphics3D}]] := 
-     Module[{gr,filopts,showskl, impext, implin, impecdlist, rg, impeadlist, impicdlist, impiadlist, impinedata, m0, d0, trext, varl, minv, psm, dlvert, amat, bvec, vp, redead1, redead2, redead3, redead4},
+     Module[{gr,filopts, impext, implin, impecdlist, rg, impeadlist, impicdlist, impiadlist, impinedata, m0, d0, psm, dlvert, amat, bvec, vp, redead1, redead2, redead3, redead4},
      filopts = FilterRules[{opts},Options[Graphics3D]]; 
       psm = OptionValue[SyncDim];
      {{impext, implin}, impecdlist, impeadlist, impicdlist, impiadlist, impinedata} = CddGmpPlotImputationSet[game];
@@ -344,7 +344,7 @@ SkelImputationV6[game_, opts:OptionsPattern[{SkelImputationV6,PlotCore3dV6,Graph
 
 StrongEpsCore3dV6[args___]:=(Message[StrongEpsCore3dV6::argerr];$Failed);
 StrongEpsCore3dV6[game_, opts:OptionsPattern[{StrongEpsCore3dV6,Graphics3D}]] :=
-    Module[{vwskl,vwker,vwshv,vwnuc,vwmnc,vwpay,kerc,shc,nuc,mnc,epsw,paycoord,dld4,rd,fs,epsval,psm,filopts,strgskl,shcr,mvplt,impsetQ,critval,oldvls,origgame,norm,normgame,epsvls,crQ,newgame,gr0,gr1,gr2,gr3,grli},
+    Module[{vwskl,vwker,vwshv,vwnuc,vwmnc,vwpay,kerc,shc,nuc,mnc,epsw,paycoord,dld4,rd,fs,epsval,psm,filopts,strgskl,shcr,impsetQ,critval,oldvls,origgame,norm,normgame,epsvls,newgame,gr0,gr1,gr2,gr3,grli},
      filopts = FilterRules[{opts},Options[Graphics3D]]; 
      vwskl = OptionValue[ViewSkel];
      vwker = OptionValue[ViewKernelSol];
@@ -409,7 +409,7 @@ SelectCritical[game_,critval_List]:=
 
 
 PlotStrCore3DV6[game_,opts:OptionsPattern[{StrongEpsCore3dV6,Graphics3D}]] :=
-  Module[{vwskl,vwker,vwshv,vwnuc,vwmnc,vwpay,kerc,shc,nuc,mnc,rd,psm,dlvert,paycoord,shrc,dld4,filopts,norm,normgame,vertlist,linearity,ecdlist,eadlist,icdlist,iadlist,extmat,gr1,gr2,gr4,gr5,gr6,gr7,gr8,grli,gr},
+  Module[{vwskl,vwker,vwshv,vwnuc,vwmnc,vwpay,kerc,shc,nuc,mnc,rd,psm,dlvert,paycoord,dld4,filopts,norm,normgame,vertlist,linearity,ecdlist,eadlist,icdlist,iadlist,extmat,gr1,gr2,gr4,gr5,gr6,gr7,gr8,grli,gr},
     filopts = FilterRules[{opts},Options[Graphics3D]];
     vwskl = OptionValue[ViewSkel];
     vwker = OptionValue[ViewKernelSol];
@@ -578,7 +578,7 @@ ShowPayoffV6[game_,opts:OptionsPattern[{PlotCore3dV6,Graphics3D}]] :=
 ];
 
 RedDimV6[pay_List]:=
-  Module[{mcoor,psmc},
+  Module[{psmc},
     mcoord=Min[pay];
     psmc=Position[pay,mcoord];
     psmc=First[psmc];
@@ -795,7 +795,7 @@ DetDim2Del[game_,vert_:{}]:= Module[{crQ,trext,varl,minv,psm},
 
 SkelReasonableSetV6[args___]:=(Message[SkelReasonableSetV6::argerr];$Failed);
 SkelReasonableSetV6[game_, opts:OptionsPattern[Graphics3D]] :=
-   Module[{filopts,norm,normgame,extlist,linearity,ecdlist,eadlist,icdlist,iadlist,inedata,dlvert,amat,bvec,vlist0,uvp1,m0,d0,lgt,mlg,redead,rg,vskl,gr},
+   Module[{filopts,norm,normgame,extlist,linearity,ecdlist,eadlist,icdlist,iadlist,inedata,dlvert,amat,bvec,uvp1,m0,redead,rg,gr},
       filopts = FilterRules[{opts},Options[Graphics3D]]; 
       norm = OneNormalization[game];
       normgame = DefineGame[T,norm];
@@ -822,7 +822,7 @@ SkelReasonableSetV6[game_, opts:OptionsPattern[Graphics3D]] :=
 
 SkelLowerSetV6[args___]:=(Message[SkelLowerSetV6::argerr];$Failed);
 SkelLowerSetV6[game_, opts:OptionsPattern[]] :=
-   Module[{filopts,norm,normgame,extlist,linearity,ecdlist,eadlist,icdlist,iadlist,inedata,dlvert,amat,bvec,vlist0,uvp1,m0,d0,pt,sph,redead,rg,gr},
+   Module[{filopts,norm,normgame,extlist,linearity,ecdlist,eadlist,icdlist,iadlist,inedata,dlvert,amat,bvec,uvp1,m0,d0,sph,redead,rg,gr},
       filopts = FilterRules[{opts},Options[Graphics3D]]; 
       norm = OneNormalization[game];
       normgame = DefineGame[T,norm];

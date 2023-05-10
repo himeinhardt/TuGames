@@ -1,8 +1,8 @@
 (* ::Package:: *)
 
 (* :Title: TuGamesAux.m *)
-(* Release Date: 18.04.2023 *)
-(* Version: 3.1.1 *)
+(* Release Date: 02.05.2023 *)
+(* Version: 3.1.2 *)
 
 (* :Context: TuGamesAux` *)
 
@@ -17,7 +17,7 @@
     E-Mail: Holger.Meinhardt@wiwi.uni-karlsruhe.de
 *)
 
-(* :Package Version: 3.1.1 *)
+(* :Package Version: 3.1.2 *)
 
 (* 
    :Mathematica Version: 12.x, 13.x
@@ -112,6 +112,10 @@ Angle::usage =
 AssignmentProblem::usage =
 "AssignmentProblem[buyers, sellers, profitmat] determines the characteristic values from an 
  assignment problem. These values can be used to define the corresponding assignment game.";
+
+AirportProblem::usage =
+"AirportProblem[cost,nj] computes the associated airport cost game from (cost,nj). 
+ The sum of nj should not exceed 48 players.";
 
 BalancedSystemQ::usage = 
 "{bcQ,cfs}=BalancedSystemQ[coll,T] checks whether the collection of sets 'coll' is balanced.
@@ -234,6 +238,7 @@ ProbabilityGame::argerr="One argument was expected.";
 
 (* :Two Arguments: *)
 Angle::argerr="Two arguments were expected.";
+AirportProblem::argerr="Two arguments were expected.";
 BalancedSystemQ::argerr="Two arguments were expected.";
 ContestedGarment::argerr="Two arguments were expected.";
 EuclidianDistance::argerr="Two arguments were expected.";
@@ -274,7 +279,7 @@ Angle[x_?VectorQ, y_?VectorQ] :=  ArcCos[Divide[x.y,(Norm[x, 2] Norm[y, 2])]]/De
 
 LPtoMatrix[args___]:=(Message[LPtoMatrix::argerr];$Failed);
 LPtoMatrix[obf_, const_List, var_List]:=
-    Module[{zf, ineq, coemat, coebv, greq, lseq, eqeq, grout, lsout, eqout, ext1,
+    Module[{zf, coemat, coebv, greq, lseq, eqeq, grout, lsout, eqout, ext1,
        ext2, ext3, bv01, bv02, bv03, nbv01, bvec,ar,ps,rl},
     zf = Coefficient[obf, var];
 (*    ineq = Simplify[const]; *)
@@ -352,7 +357,7 @@ NearRingQ[set_List,T1_] := Module[{boolval},
 
 
 CheckNearRing[Univers_List, RestSet_List, T2_, prevres_:{}] := 
-  Module[{fi, restuni, res, allres, boolval},
+  Module[{fi, restuni, res, allres},
     fi = Flatten[Take[RestSet, 1]];
     res = NearRingDef[fi, #, T2, Univers] & /@ RestSet;
     restuni = Delete[RestSet, 1];
@@ -362,7 +367,7 @@ CheckNearRing[Univers_List, RestSet_List, T2_, prevres_:{}] :=
     ];
 
 
-NearRingDef[A_, B_, R1_,Univers_List] := Module[{z0},
+NearRingDef[A_, B_, R1_,Univers_List] := Module[{},
     SameQ[Union[A, B],R1] || SameQ[Intersection[A, B], {}] || (Length[Position[Univers, Union[A, B]]] != 0 && 
           Length[Position[Univers, Intersection[A, B]]] != 0)
     ];
@@ -372,6 +377,22 @@ DisplayMessNearRing[set_List] := (Print["Depth is equal to ", Depth[set]];
       Print["The collection of sets must be of depth 3 or 4."];
       Print["Usage: NearRi[set]"]);
 
+
+(* Airport Cost Allocation Problem *)
+
+AirportProblem[args___]:=(Message[AirportProblem::argerr];$Failed);
+AirportProblem[cost_List,nj_List]:=Module[{tmv,evc,clv},
+   tmv=Total[nj]; 
+   (* Checking if the game is not too large. *)
+   If[SameQ[LessEqual[Total[nj],48],True],	
+      evc=ArrayFlatten[Table[Array[cost[[i]] & ,nj[[i]]],{i,1,Length[nj]}],1];
+      clv=Max[#] &/@ Subsets[evc];
+      clv /. clv[[1]]->0,
+          Print["Game is too large! Should not exceed 48 Players!"];
+          Return[{}];
+   ]
+
+];
 
 (* Market Situation  *)
 
@@ -396,7 +417,7 @@ ProductGame[wghs_List]:=Module[{xlis,pval,chval,ylis,hdval},
 	   xlis = Subsets[wghs];		      
            pval=Apply[Times,#] &/@ xlis; 
            chval=pval-1;
-	   ylis =Subsets[whgs-1];
+	   ylis =Subsets[wghs-1];
 	   hdval=Apply[Times,#] &/@ ylis;
 	   {chval,hdval} (*characteristic values and Harsanyi dividends.  *)
 		       ];
@@ -566,7 +587,7 @@ Teilmg[T_List] :=Sort[Flatten /@ Distribute[{{},{#}} & /@ T, List]];
 (* Main functions to compute the characteristic function values for an Assignment game. *)
 
 MatchPairs[ bplayer_List, splayer_List, subst_List, opts:OptionsPattern[AssignmentProblem]] := 
-Module[{vrb,intcob, intcos, prtextb, prtexts, permcb, extcob, extcos, mptprs,rvmp},
+Module[{vrb,intcob, intcos, permcb, extcob, extcos, mptprs,rvmp},
   vrb = OptionValue[Verbose];
   intcob = Intersection[subst, bplayer];
   intcos = Intersection[subst, splayer];
@@ -677,7 +698,7 @@ DisplayEuk[liste_]:=(
 (* Assigning symmetric values *)
 
 
-AssignValues[univers_List, alp_List] := Module[{z0},
+AssignValues[univers_List, alp_List] := Module[{},
       Which[Length[alp] != 0,
         Which[First[univers] === First[alp], Global`\[Alpha], 
           Length[First[univers]] <= 4, Global`\[Lambda], True, Global`\[Sigma]],
@@ -701,7 +722,7 @@ Coal2Dec[n_Integer]:=Module[{T,ps,prs,xp,sxp},
 
 
 Sets2Dec[args___]:=(Message[Sets2Dec::argerr];$Failed);
-Sets2Dec[sets_List]:=Module[{T,ps,prs,xp,sxp},
+Sets2Dec[sets_List]:=Module[{xp,sxp},
    xp=sets-1;
    sxp=(2^#)&/@xp;
    Total[#]&/@ sxp
@@ -709,7 +730,7 @@ Sets2Dec[sets_List]:=Module[{T,ps,prs,xp,sxp},
 
 BalancedSystemQ[args___]:=(Message[BalancedSystemQ::argerr];$Failed);
 BalancedSystemQ[coll_List, T_List, opts:OptionsPattern[BalancedSystemQ]] :=
-  Module[{mthd,zvec, ovec, pos, mat, tmat, smat, d1, d2, veco, zf, bv, am, tbv, yineq, yeq, cf, rs, bq, bcQ},
+  Module[{mthd,zvec, ovec, pos, mat, tmat, smat, d1, d2, veco, zf, bv, yineq, yeq, cf, rs, bq, bcQ},
    mthd=OptionValue[Method];   
    zvec = Array[0 &, Length[T]];
    ovec = Array[1 &, Length[T]];
@@ -738,7 +759,7 @@ BalancedSystemQ[coll_List, T_List, opts:OptionsPattern[BalancedSystemQ]] :=
 
 WeaklyBalancedSystemQ[args___]:=(Message[WeaklyBalancedSystemQ::argerr];$Failed);
 WeaklyBalancedSystemQ[coll_List, b0_List,T_List, opts:OptionsPattern[BalancedSystemQ]] :=
-  Module[{mthd,zvec, ovec, coll0,pos0, pos, mat, tmat0,tmat, smat, d1, d2, veco, zf, bv, am, tbv, yineq, yeq, cf, rs, bq},
+  Module[{mthd,zvec, ovec, coll0,pos0, pos, mat,tmat, smat, d1, d2, veco, zf, bv, yineq, yeq, bq},
    mthd=OptionValue[Method];
    zvec = Array[0 &, Length[T]];
    ovec = Array[1 &, Length[T]];
@@ -832,7 +853,7 @@ SymGameType4[T_List,S_List,val_Integer]:=Module[{S2,sbs,csb,asv,cl4,cw},
 
 
 
-AssValToCoal2[i_Integer,j_Integer,val_Integer,S1_List,S2_List]:=Module[{z0},
+AssValToCoal2[i_Integer,j_Integer,val_Integer,S1_List,S2_List]:=Module[{},
         Which[SameQ[(i!=j),True],
                    If[(MemberQ[S1,i] && MemberQ[S1,j]),v[{i,j}]=val,0],
              True, Print["NAN"];
@@ -840,7 +861,7 @@ AssValToCoal2[i_Integer,j_Integer,val_Integer,S1_List,S2_List]:=Module[{z0},
 ];
 
 
-AssValToCoal3[i_Integer,j_Integer,k_Integer,val_Integer,S1_List,S2_List]:=Module[{z0},
+AssValToCoal3[i_Integer,j_Integer,k_Integer,val_Integer,S1_List,S2_List]:=Module[{},
         Which[SameQ[(i!=j!=k),True],
                    If[(MemberQ[S1,i] && MemberQ[S1,j] && MemberQ[S2,k]),v[{i,j,k}]=val,0],
              True, Print["NAN"];
@@ -848,7 +869,7 @@ AssValToCoal3[i_Integer,j_Integer,k_Integer,val_Integer,S1_List,S2_List]:=Module
 ];
 
 
-AssValToCoal4[i_Integer,j_Integer,k_Integer,l_Integer,val_Integer,S1_List,S2_List]:=Module[{z0},
+AssValToCoal4[i_Integer,j_Integer,k_Integer,l_Integer,val_Integer,S1_List,S2_List]:=Module[{},
         Which[SameQ[(i!=j!=k!=l),True],
                    If[(MemberQ[S1,i] && MemberQ[S1,j] && MemberQ[S2,k] && MemberQ[S2,l]),v[{i,j,k,l}]=val,0],
              True, Print["NAN"];

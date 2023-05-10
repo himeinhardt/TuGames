@@ -359,3 +359,21 @@ Adding the new functions:
 * `ShapAirProb[]` calculates the Shapley value from an airport cost allocation problem.
 * `TauValAirProb[]` calculates the Tau value from an airport cost allocation problem.
 * `NucAirProb[]` calculates the nucleolus from an airport cost allocation problem.
+
+### Version 3.1.2
+
+#### 1. Revision
+
+Update of the Documentation references pages.
+
+####  2. Modification
+
+Adding the new functions:
+
+* `AirportProblem[]` computes from a from an airport cost allocation problem the associated cost game.
+
+####  3. Bug Fixes
+
+Fixing Bug in `ProductGame[]`, `KernelCalculation[]`.
+
+Some minor bug fixes and code revision.

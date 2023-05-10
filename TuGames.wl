@@ -18,7 +18,7 @@ Off[General::obspkg];
     holger.meinhardt@wiwi.uni-karlsruhe.de
 *)
 
-(* :Package Version: 3.1.1 *)
+(* :Package Version: 3.1.2 *)
 
 (* 
    :Mathematica Version: 12.x
@@ -55,7 +55,7 @@ Off[General::obspkg];
    the Coincidence of the Kernel and Prekernel, International Game Theory Review,
    Vol. 4, No. 3, 201-211, 2002. 
 
-   Pierre Dehez (2023), COOPERATIVE PRODUCT GAMES, LIDAM Discussion Paper CORE 2023 / 10
+   Pierre Dehez (2023), COOPERATIVE PRODUCT GAMES, LIDAM Discussion Paper CORE 2023 / 10.
 
    Pierre Dehez (2023), Sharing a collective probability of success, Mathematical Social
    Sciences 123, 122-127.
@@ -447,8 +447,8 @@ If[SameQ[Global`$ParaMode,"False"],
 Print["==================================================="];
 Print["Loading Package 'TuGames' for ", $OperatingSystem];
 Print["==================================================="];
-Print["TuGames V3.1.1 by Holger I. Meinhardt"];
-Print["Release Date: 21.04.2023"];
+Print["TuGames V3.1.2 by Holger I. Meinhardt"];
+Print["Release Date: 08.05.2023"];
 Print["Program runs under Mathematica Version 12.0 or later"];
 Print["Version 12.x or higher is recommended"];
 Print["==================================================="];,
@@ -3140,7 +3140,7 @@ FTPreNuc[game_,tol_:10^(-2),jj_:2]:=Block[{pk,vars,xpk,mcl,tol1,pmcl,clm,lcm,cex
                       pk=PreKernel[game];
 		      vars=x[#] &/@ T;
                       pmcl=FTCoalArray[game,pk,tol];
-		      Print["pmcl=",pmcl];
+		      (* Print["pmcl=",pmcl]; *)
 		      clm=pmcl[[1]];
 		      lcm=pmcl[[2]];
 		      cex=pmcl[[3]];
@@ -4433,7 +4433,7 @@ SolutionSelection[game_,payoff_List]:= Block[{bool,pos,lsg},
       Which[Length[lsg]===1,Flatten[lsg],True,lsg]
 ];
 
-KernelSolution[game_, payoff_List, prec_,rattol_,setk_,silent_,payold_List:{}] := 
+KernelSolution[game_, payoff_List, prec_,rattol_,setk_,silent_,payold_:{}] := 
 Block[{payvec, pold=payold,approx,ratnum},
     payvec = If[SameQ[Global`PRK,setk],ConvergenceToKernel[game, payoff],ConvergenceToKernel2[game, payoff]];
     pold = payoff;
@@ -4946,8 +4946,10 @@ KernelCalculation[game_, opts:OptionsPattern[KernelCalculation]] :=
                  KernelSubCallEmpty[orggame,callm, changeps,  dispres, EpsilonValue -> epsilon, SetGameToNonZeroMonotonic -> notzeromono, Method-> mth],
                  If[avcQ == True, 
                    DisplayAvcQ[avcQ];
+                   KernelSubCall[orggame,callm, changeps, dispres, EpsilonValue -> epsilon, SetGameToNonZeroMonotonic -> notzeromono, Method-> mth],
+                   DisplayAvcQ[avcQ];
                    KernelSubCall[orggame,callm, changeps, dispres, EpsilonValue -> epsilon, SetGameToNonZeroMonotonic -> notzeromono, Method-> mth]
-                   ]
+		  ]
                 ]
              ]
        ], DisplayRemark[epsilon]
@@ -5042,7 +5044,7 @@ Main functions to determine kernel elements according to the algorithm
 as described in Meinhardt(2006). Recursive procedure. 
 *)
 
-KernelPoints[game_, storepay_List:{}, callm_, changeps_, dispres_, opts:OptionsPattern[KernelCalculation]] := 
+KernelPoints[game_, storepay_:{}, callm_, changeps_, dispres_, opts:OptionsPattern[KernelCalculation]] := 
   Block[{epsi1, notzeromono, mth, ruf, zwerg, initialpay = storepay, folg, rf, del, alloc, po, newgame, maxsets, tijsets, mengsys, reslofSt2, constofSt2, const = {}, var, subres,sol, reddel,unpay, retval, objfunc, epsilon, leastgame},
     epsi1 = OptionValue[EpsilonValue];
     notzeromono = OptionValue[SetGameToNonZeroMonotonic]; 

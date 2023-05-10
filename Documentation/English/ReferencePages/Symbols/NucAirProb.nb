@@ -1,0 +1,1100 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     42506,       1090]
+NotebookOptionsPosition[     34387,        931]
+NotebookOutlinePosition[     36503,        985]
+CellTagsIndexPosition[     36418,        980]
+WindowTitle->NucAirProb
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[GridBox[{
+   {GridBox[{
+      {
+       ItemBox[Cell[BoxData[
+         RowBox[{
+          TemplateBox[{12},
+           "Spacer1"], Cell["T U G SYMBOL", "PacletNameCell",
+           TextAlignment->Center,ExpressionUUID->
+           "d9e3dc50-9c74-42d0-ab73-3bdde3c75104"], 
+          TemplateBox[{8},
+           "Spacer1"]}]],
+         TextAlignment->Center,ExpressionUUID->
+         "ee68fbd9-2b26-43b0-ba6f-d6a21af8cee6"],
+        Background->RGBColor[0.490196, 0.576471, 0.690196],
+        ItemSize->Full], ""}
+     },
+     GridBoxAlignment->{"Rows" -> {{Center}}},
+     GridBoxItemSize->{"Columns" -> {Full, 
+         Scaled[0.02]}, "Rows" -> {{2.5}}}], Cell[TextData[{
+     Cell[BoxData[
+      TagBox[
+       ActionMenuBox[
+        FrameBox[Cell[TextData[{
+          "See Also",
+          " ",
+          Cell[BoxData[
+           GraphicsBox[
+            {GrayLevel[0.66667], Thickness[0.13], 
+             LineBox[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]},
+            AspectRatio->1,
+            ImageSize->20,
+            PlotRange->{{-3, 4}, {-1, 1}}]],ExpressionUUID->
+           "a5a12d5c-2691-4683-b061-366157a5717c"]
+         }],ExpressionUUID->"a34e23b7-18c8-428a-8d91-ea71f950098b"],
+         StripOnInput->False], {"\<\"DualGame\"\>":>Documentation`HelpLookup[
+        "paclet:TUG/ref/DualGame"], "\<\"AirportProblem\"\>":>
+        Documentation`HelpLookup[
+        "paclet:TUG/ref/AirportProblem"], "\<\"ComplementaryMarket\"\>":>
+        Documentation`HelpLookup[
+        "paclet:TUG/ref/ComplementaryMarket"], "\<\"ShapAirProb\"\>":>
+        Documentation`HelpLookup[
+        "paclet:TUG/ref/ShapAirProb"], "\<\"TauValAirProb\"\>":>
+        Documentation`HelpLookup[
+        "paclet:TUG/ref/TauValAirProb"], "\<\"WeightedMajority\"\>":>
+        Documentation`HelpLookup[
+        "paclet:TUG/ref/WeightedMajority"], "\<\"ModestBankruptcy\"\>":>
+        Documentation`HelpLookup[
+        "paclet:TUG/ref/ModestBankruptcy"], "\<\"GreedyBankruptcy\"\>":>
+        Documentation`HelpLookup[
+        "paclet:TUG/ref/GreedyBankruptcy"], "\<\"GenProfitMatrix\"\>":>
+        Documentation`HelpLookup[
+        "paclet:TUG/ref/GenProfitMatrix"], "\<\"SymGameType2\"\>":>
+        Documentation`HelpLookup[
+        "paclet:TUG/ref/SymGameType2"], "\<\"SymGameType3\"\>":>
+        Documentation`HelpLookup[
+        "paclet:TUG/ref/SymGameType3"], "\<\"SymGameType4\"\>":>
+        Documentation`HelpLookup[
+        "paclet:TUG/ref/SymGameType4"], "\<\"CostSaving\"\>":>
+        Documentation`HelpLookup["paclet:TUG/ref/CostSaving"]},
+        Appearance->None,
+        MenuAppearance->Automatic,
+        MenuStyle->"SeeAlso"],
+       MouseAppearanceTag["LinkHand"]]],
+      LineSpacing->{1.4, 0},ExpressionUUID->
+      "542109b9-ed68-4460-8efe-e5d5262d4310"],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      TagBox[
+       ActionMenuBox[
+        FrameBox[Cell[TextData[{
+          "Related Guides",
+          " ",
+          Cell[BoxData[
+           GraphicsBox[
+            {GrayLevel[0.66667], Thickness[0.13], 
+             LineBox[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]},
+            AspectRatio->1,
+            ImageSize->20,
+            PlotRange->{{-3, 4}, {-1, 1}}]],ExpressionUUID->
+           "db1d3a7b-2ef1-4664-929c-f6d87f9ecafc"]
+         }],ExpressionUUID->"e89d9cc6-d6c4-4a2a-90a8-c2207bd37cf1"],
+         StripOnInput->False], {"\<\"Graphics 2D\"\>":>
+        Documentation`HelpLookup[
+        "paclet:TUG/Guides/TuGamesView2dV6"], "\<\"Graphics 3D\"\>":>
+        Documentation`HelpLookup["paclet:TUG/Guides/TuGamesView3dV6"]},
+        Appearance->None,
+        MenuAppearance->Automatic,
+        MenuStyle->"MoreAbout"],
+       MouseAppearanceTag["LinkHand"]]],
+      LineSpacing->{1.4, 0},ExpressionUUID->
+      "07b46878-e9ff-44a6-85a3-291c4f5990e9"],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      TagBox[
+       ActionMenuBox[
+        FrameBox[Cell[TextData[{
+          "Tech Notes",
+          " ",
+          Cell[BoxData[
+           GraphicsBox[
+            {GrayLevel[0.66667], Thickness[0.13], 
+             LineBox[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]},
+            AspectRatio->1,
+            ImageSize->20,
+            PlotRange->{{-3, 4}, {-1, 1}}]],ExpressionUUID->
+           "0ebfd3f5-7bd0-4861-8316-de8782f20f4e"]
+         }],ExpressionUUID->"86f0633d-6261-472e-80ca-233501036436"],
+         StripOnInput->False], {"\<\"Game Theory Package\"\>":>
+        Documentation`HelpLookup["paclet:TUG/Guides/RefPageTuGames"]},
+        Appearance->None,
+        MenuAppearance->Automatic,
+        MenuStyle->"Tutorials"],
+       MouseAppearanceTag["LinkHand"]]],
+      LineSpacing->{1.4, 0},ExpressionUUID->
+      "0441d652-ea33-45b2-8dcb-9299d976035d"],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      TagBox[
+       ActionMenuBox[
+        FrameBox[Cell[TextData[{
+          "URL",
+          " ",
+          Cell[BoxData[
+           GraphicsBox[
+            {GrayLevel[0.66667], Thickness[0.13], 
+             LineBox[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]},
+            AspectRatio->1,
+            ImageSize->20,
+            PlotRange->{{-3, 4}, {-1, 1}}]],ExpressionUUID->
+           "b410e402-22f7-4197-b714-8b90b296ebde"]
+         }],ExpressionUUID->"4cfb4447-3788-4d89-bf58-3a4c672d8e00"],
+         StripOnInput->False], {"\<\"TUG/ref/NucAirProb\"\>":>
+        None, "\<\"Copy Wolfram Documentation Center URL\"\>":>
+        Module[{DocumentationSearch`Private`nb$}, 
+         DocumentationSearch`Private`nb$ = NotebookPut[
+            Notebook[{
+              Cell["TUG/ref/NucAirProb"]}, Visible -> False]]; 
+         SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+         FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+         NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+        Delimiter, "\<\"Copy web URL\"\>":>
+        Module[{DocumentationSearch`Private`nb$}, 
+         DocumentationSearch`Private`nb$ = NotebookPut[
+            Notebook[{
+              Cell[
+               BoxData[
+                MakeBoxes[
+                 Hyperlink[
+                 "http://reference.wolfram.com/language/TUG/ref/NucAirProb.\
+html"], StandardForm]], "Input", TextClipboardType -> "PlainText"]}, Visible -> 
+             False]]; SelectionMove[
+          DocumentationSearch`Private`nb$, All, Notebook]; 
+         FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+         NotebookClose[DocumentationSearch`Private`nb$]; 
+         Null], "\<\"Go to web URL\"\>":>FrontEndExecute[{
+          NotebookLocate[{
+            URL[If[
+               TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$127468], 
+               "http://reference.wolfram.com/system-modeler/", 
+               "http://reference.wolfram.com/language/"] <> 
+             "TUG/ref/NucAirProb" <> ".html"], None}]}]},
+        Appearance->None,
+        MenuAppearance->Automatic,
+        MenuStyle->"URLMenu"],
+       MouseAppearanceTag["LinkHand"]]],
+      LineSpacing->{1.4, 0},ExpressionUUID->
+      "ba1dc5b0-9f0a-4504-a36d-2eb04b2d5b36"]
+    }], "AnchorBar",
+     CacheGraphics->False,ExpressionUUID->
+     "3e314366-4344-405f-9bd8-26c7ec19a542"]}
+  }]], "AnchorBarGrid",
+ CellID->1,ExpressionUUID->"51555193-d009-47d5-9770-90aec943cd8a"],
+
+Cell["TUG`", "ContextNameCell",ExpressionUUID->"ecb41225-974c-4152-84cd-9bd9ff440b39"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[GridBox[{
+   {Cell[TextData[{
+     Cell[
+     "NucAirProb", "ObjectName",ExpressionUUID->
+      "41c408f4-b1c5-429a-ac7a-25a18f5e7978"],
+     Cell[BoxData[
+      TemplateBox[{8},
+       "Spacer1"]],ExpressionUUID->"3697aeef-6055-4e2a-a9b3-5752e39a77c2"],
+     Cell[BoxData[
+     ""], "ObjectNameTranslation",ExpressionUUID->
+      "2ccd1586-70bf-4af8-a660-66c469ca30bd"]
+    }],ExpressionUUID->"47d64c30-d374-4a7b-a77d-cf19c986ed30"], 
+    "\[SpanFromLeft]"}
+  }]], "ObjectNameGrid",ExpressionUUID->"b24d85c0-619d-4e68-a18f-\
+08442977e1b2"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{"NucAirProb", "[", 
+       RowBox[{"cost_List", ",", "nj_List"}], "]"}]], "InlineFormula",
+      FontFamily->"Source Sans Pro",ExpressionUUID->
+      "aebda6ba-cfa8-4c63-9ba3-440ce1e92a0f"],
+     " \[LineSeparator]computes from an airport cost allocation problem the \
+associated nucleolus of the airport cost game."
+    }],ExpressionUUID->"bace9153-c8ef-4f55-9a12-16d1e74eeadf"]}
+  }]], "Usage",
+ CellID->1257049017,ExpressionUUID->"48aa80ec-cebb-4789-aa4b-ed3648c98ce9"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[Cell[BoxData[
+ ButtonBox[Cell[TextData[{
+   Cell[BoxData[
+    DynamicBox[ToBoxes[
+      If[
+       MatchQ[
+        CurrentValue[
+         EvaluationNotebook[], {TaggingRules, "Openers", "NotesSection"}, 
+         Closed], 
+        Alternatives[Open, True]], 
+       Style[
+        Graphics[{
+          Thickness[0.18], 
+          RGBColor[0.8509803921568627, 0.396078431372549, 0], 
+          Line[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]}, AspectRatio -> 1, 
+         PlotRange -> {{-3, 4}, {-1, 1}}, ImageSize -> 20], Magnification -> 
+        0.68 Inherited], 
+       Rotate[
+        Style[
+         Graphics[{
+           Thickness[0.18], 
+           RGBColor[0.8509803921568627, 0.396078431372549, 0], 
+           Line[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]}, AspectRatio -> 1, 
+          PlotRange -> {{-3, 4}, {-1, 1}}, ImageSize -> 20], Magnification -> 
+         0.68 Inherited], Rational[1, 2] Pi, {-1.65, -1}]]],
+     ImageSizeCache->{13.600000000000001`, {5., 8.600000000000001}}]],
+    ExpressionUUID->"2237abe9-9677-4e85-a48d-cc202cb7b757"],
+   Cell[BoxData[
+    TemplateBox[{1},
+     "Spacer1"]],ExpressionUUID->"f34619ba-86fc-48e9-abba-81689e30d826"],
+   "Details and Options"
+  }], "NotesFrameText",ExpressionUUID->"2d536460-69be-4d46-a610-793baaa77305"],
+  Appearance->{Automatic, None, "Normal", Automatic},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->
+   "Preemptive"]],ExpressionUUID->"5733071d-9c9b-42ce-8203-5d15930823c5"]], \
+"NotesSection",
+ WholeCellGroupOpener->True,
+ CellGroupingRules->{"SectionGrouping", 50},
+ CacheGraphics->False,
+ CellID->546533402,ExpressionUUID->"6fc2aa15-60b3-4f19-bd07-d911d0fabc33"],
+
+Cell[TextData[{
+ "The expression ",
+ Cell[BoxData["cost_List"], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "9b721705-9db2-4e4d-a170-eadfbbf33813"],
+ " is the cost vector of types . In addition, the expression ",
+ Cell[BoxData["nj_List"], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "a6de800c-d3f8-43be-bf33-5fcccbe0a6f5"],
+ " specifies the number of aircraft movements of types , the total number of  \
+",
+ Cell[BoxData["nj_List"], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "436aa5a0-86e7-4204-9f79-b4ee57c8083d"],
+ " specifies the number of players. "
+}], "]]", "Notes",
+ CellID->313448337,ExpressionUUID->"5261c8e5-19d6-4f2e-9a9d-70d7fcd85949"],
+
+Cell[TextData[{
+ "To use this function, you need first to load the ",
+ Cell[BoxData[
+  TemplateBox[{"\"TuGames Package\"", "paclet:TUG/Guides/RefPageTuGames"},
+   "HyperlinkPaclet"]], "Output",ExpressionUUID->
+  "e871d2b2-8e8e-46bb-9857-c6707012dbec"],
+ " using  ",
+ Cell[BoxData[
+  RowBox[{"Needs", "[", "\"\<TUG`\>\"", "]"}]], "Input",ExpressionUUID->
+  "0e6321b7-cefb-4f05-9564-28f37f6a6232"],
+ "."
+}], "Notes",
+ CellID->177724765,ExpressionUUID->"dad12e2a-9616-4413-8ada-783f86de39fb"],
+
+Cell["\<\
+The airport cost allocation problem describes a situation to allocate the \
+fixed cost of the infrastructure of an airport to the corresponding aircraft \
+types in accordance to their capital consumption.\
+\>", "Notes",
+ CellID->2085588552,ExpressionUUID->"aa994f5c-40a7-4ad5-b90f-854e44b77972"],
+
+Cell["\<\
+This function computes the nucleolus of the airport cost game without \
+referring to the game. Rather it is computed form the airport cost allocation \
+problem.\
+\>", "Notes",
+ CellID->306311476,ExpressionUUID->"f4dd6d63-3a2f-4b0c-bf98-9ac53981e082"],
+
+Cell["\<\
+In fact, the anti-nucleolus is computed, since airport cost games are concave \
+and having therefore an empty imputation set.\
+\>", "Notes",
+ CellID->699197269,ExpressionUUID->"031102fd-adad-41b4-9173-268f7c63e087"],
+
+Cell["\<\
+See S. C. Littlechild and G. F. Thompson (1977), Bell Journal of Economics, \
+8, pp. 186-204.\
+\>", "Notes",
+ CellID->2108874141,ExpressionUUID->"65a9a8fe-b27d-4f1a-acca-5b65327feb25"],
+
+Cell[TextData[ButtonBox["Game Theory Package",
+ BaseStyle->"Link",
+ ButtonData->"paclet:TUG/Guides/RefPageTuGames"]], "TechNotes",
+ CellID->117336961,ExpressionUUID->"aca15224-78fd-4096-a1c3-d9b364803e61"]
+}, Dynamic[CurrentValue[
+ EvaluationNotebook[], {TaggingRules, "Openers", "NotesSection"}, Closed]]]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell[BoxData[
+  DynamicBox[ToBoxes[
+    If[
+     MatchQ[
+      CurrentValue[
+       EvaluationNotebook[], {
+       TaggingRules, "Openers", "PrimaryExamplesSection"}, Open], 
+      Alternatives[True, Open]], 
+     Style[
+      Graphics[{
+        Thickness[0.18], 
+        RGBColor[0.8509803921568627, 0.396078431372549, 0], 
+        Line[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]}, AspectRatio -> 1, 
+       PlotRange -> {{-3, 4}, {-1, 1}}, ImageSize -> 20], Magnification -> 
+      0.68 Inherited], 
+     Rotate[
+      Style[
+       Graphics[{
+         Thickness[0.18], 
+         RGBColor[0.8509803921568627, 0.396078431372549, 0], 
+         Line[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]}, AspectRatio -> 1, 
+        PlotRange -> {{-3, 4}, {-1, 1}}, ImageSize -> 20], Magnification -> 
+       0.68 Inherited], Rational[1, 2] Pi, {-1.65, -1}]]],
+   ImageSizeCache->{13.600000000000001`, {5., 8.600000000000001}}]],
+  ExpressionUUID->"04f6d321-6adf-46b8-a95e-9c6ac65f0023"],
+ Cell[BoxData[
+  TemplateBox[{1},
+   "Spacer1"]],ExpressionUUID->"6c51fa47-f68d-4112-bbb3-9b0639de8657"],
+ "Examples",
+ "\[NonBreakingSpace]\[NonBreakingSpace]",
+ Cell["(1)", "ExampleCount",ExpressionUUID->
+  "9c7e8078-8595-48c8-a031-a88be9468b55"]
+}], "PrimaryExamplesSection",
+ WholeCellGroupOpener->True,
+ CacheGraphics->False,
+ CellTags->"PrimaryExamplesSection",
+ CellID->51632185,ExpressionUUID->"7b7c5b20-769d-4654-836b-88287d40830a"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell[BoxData[
+  DynamicBox[ToBoxes[
+    If[
+     MatchQ[
+      CurrentValue[
+       EvaluationNotebook[], {TaggingRules, "Openers", "ExampleSection", "0"},
+        Closed], 
+      Alternatives[Open, True]], 
+     Style[
+      Graphics[{
+        Thickness[0.18], 
+        RGBColor[0.8509803921568627, 0.396078431372549, 0], 
+        Line[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]}, AspectRatio -> 1, 
+       PlotRange -> {{-3, 4}, {-1, 1}}, ImageSize -> 20], Magnification -> 
+      0.68 Inherited], 
+     Rotate[
+      Style[
+       Graphics[{
+         Thickness[0.18], 
+         RGBColor[0.8509803921568627, 0.396078431372549, 0], 
+         Line[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]}, AspectRatio -> 1, 
+        PlotRange -> {{-3, 4}, {-1, 1}}, ImageSize -> 20], Magnification -> 
+       0.68 Inherited], Rational[1, 2] Pi, {-1.65, -1}]]],
+   ImageSizeCache->{13.600000000000001`, {5., 8.600000000000001}}]],
+  ExpressionUUID->"ab6f6a3c-50c2-48d7-ae95-73f3811f4fee"],
+ Cell[BoxData[
+  TemplateBox[{1},
+   "Spacer1"]],ExpressionUUID->"b433b795-7f3d-4add-a7f5-104f541040c6"],
+ "Basic Examples",
+ "\[NonBreakingSpace]\[NonBreakingSpace]",
+ Cell["(1)", "ExampleCount",ExpressionUUID->
+  "01913099-7728-4bb3-ae93-ceb2b392f0f9"]
+}], "ExampleSection", "ExampleSection",
+ WholeCellGroupOpener->True,
+ CacheGraphics->False,
+ CellID->1556152630,ExpressionUUID->"20d85544-b2dd-4ceb-84e5-4cf467931ddd"],
+
+Cell["Loading the package:", "ExampleText",
+ CellID->1430927406,ExpressionUUID->"d19d05de-4156-4d73-a22e-23845c830233"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Needs", "[", "\"\<TUG`\>\"", "]"}]], "Input",
+ CellLabel->"In[1]:=",
+ CellID->1259233753,ExpressionUUID->"09336b74-d616-46a3-bdbb-e7c0536a0ae3"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\<\"===================================================\"\>"], \
+"Print",
+ CellContext->"Cell$$4237`",
+ CellLabel->"During evaluation of In[1]:=",
+ CellID->1433474060,ExpressionUUID->"31804965-92ac-4a4b-a51b-7ac76e874f52"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Loading Package 'TuGames' for \"\>", 
+   "\[InvisibleSpace]", "\<\"Unix\"\>"}],
+  SequenceForm["Loading Package 'TuGames' for ", "Unix"],
+  Editable->False]], "Print",
+ CellContext->"Cell$$4237`",
+ CellLabel->"During evaluation of In[1]:=",
+ CellID->553681498,ExpressionUUID->"29c499f1-29d1-4e74-8aae-f7f20696e255"],
+
+Cell[BoxData["\<\"===================================================\"\>"], \
+"Print",
+ CellContext->"Cell$$4237`",
+ CellLabel->"During evaluation of In[1]:=",
+ CellID->894079670,ExpressionUUID->"bb3a8179-aaa9-4037-b9e8-4ea6f2955f44"],
+
+Cell[BoxData["\<\"TuGames V3.1.2 by Holger I. Meinhardt\"\>"], "Print",
+ CellContext->"Cell$$4237`",
+ CellLabel->"During evaluation of In[1]:=",
+ CellID->1243564029,ExpressionUUID->"aecfdaf9-3447-46b8-80c8-082a9c25a95d"],
+
+Cell[BoxData["\<\"Release Date: 02.05.2023\"\>"], "Print",
+ CellContext->"Cell$$4237`",
+ CellLabel->"During evaluation of In[1]:=",
+ CellID->1909409332,ExpressionUUID->"9d7b1579-3fe3-4500-aa41-eb6a3674da20"],
+
+Cell[BoxData["\<\"Program runs under Mathematica Version 12.0 or later\"\>"], \
+"Print",
+ CellContext->"Cell$$4237`",
+ CellLabel->"During evaluation of In[1]:=",
+ CellID->1254464061,ExpressionUUID->"96565dcb-8c30-4234-aa50-951492c203bd"],
+
+Cell[BoxData["\<\"Version 12.x or higher is recommended\"\>"], "Print",
+ CellContext->"Cell$$4237`",
+ CellLabel->"During evaluation of In[1]:=",
+ CellID->2010242006,ExpressionUUID->"e6e33bc2-84a4-4779-be6e-ab0ceda42c03"],
+
+Cell[BoxData["\<\"===================================================\"\>"], \
+"Print",
+ CellContext->"Cell$$4237`",
+ CellLabel->"During evaluation of In[1]:=",
+ CellID->67675195,ExpressionUUID->"9896e6f7-2da1-4935-a9d8-96639b1b5f0e"],
+
+Cell[BoxData["\<\"===================================================\"\>"], \
+"Print",
+ CellContext->"Cell$$4237`",
+ CellLabel->"During evaluation of In[1]:=",
+ CellID->1000446880,ExpressionUUID->"7bcdde9b-a01c-4c32-8165-abb8f637c6da"],
+
+Cell[BoxData["\<\"Package 'TuGames' loaded\"\>"], "Print",
+ CellContext->"Cell$$4237`",
+ CellLabel->"During evaluation of In[1]:=",
+ CellID->2079345505,ExpressionUUID->"ab7da549-18e7-4881-8eb5-5503b7dd61f2"],
+
+Cell[BoxData["\<\"===================================================\"\>"], \
+"Print",
+ CellContext->"Cell$$4237`",
+ CellLabel->"During evaluation of In[1]:=",
+ CellID->487643749,ExpressionUUID->"245cd151-e9a9-4e75-8d1f-45833da1b02e"]
+}, Open  ]]
+}, Open  ]],
+
+Cell["\<\
+Consider first an airport cost allocation problem with 5 types having the \
+following fixed cost vector.\
+\>", "ExampleText",
+ CellID->1060603206,ExpressionUUID->"f5d2cf86-110a-497a-a99e-c5592ac04ce6"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"cost1", "=", 
+   RowBox[{"{", 
+    RowBox[{"10", ",", "15", ",", "35", ",", "77", ",", "121"}], "}"}]}], 
+  ";"}]], "Input",
+ CellLabel->"In[2]:=",
+ CellID->364669908,ExpressionUUID->"b5dcbf15-ce3f-4f88-aec5-1124c885ae0a"],
+
+Cell["with the following aircraft movements of types", "ExampleText",
+ CellID->2058204622,ExpressionUUID->"c583c398-e9e7-4168-bdb3-ea6e58d0a648"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"nj1", "=", 
+   RowBox[{"{", 
+    RowBox[{"4", ",", "5", ",", "3", ",", "3", ",", "1"}], "}"}]}], 
+  ";"}]], "Input",
+ CellLabel->"In[3]:=",
+ CellID->1727175520,ExpressionUUID->"b18b19ba-7e70-4d80-a3f6-1dff8cdf0fb6"],
+
+Cell["\<\
+This is enough to compute the nucleolus of the airport cost allocation \
+problem.\
+\>", "ExampleText",
+ CellID->58844815,ExpressionUUID->"3d56bc4b-eca5-46ae-8ef5-6d175aae6819"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"{", 
+   RowBox[{"ti1", ",", 
+    RowBox[{"{", 
+     RowBox[{"nc1", ",", "alp1", ",", "tk1"}], "}"}]}], "}"}], "=", 
+  RowBox[{
+   RowBox[{"NucAirProb", "[", 
+    RowBox[{"cost1", ",", "nj1"}], "]"}], "//", "AbsoluteTiming"}]}]], "Input",\
+
+ CellLabel->"In[4]:=",
+ CellID->807331718,ExpressionUUID->"24284c3b-10ef-4100-92d3-6f6e4365f143"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0.000256`", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       FractionBox["3", "2"], ",", 
+       FractionBox["3", "2"], ",", 
+       FractionBox["43", "8"], ",", 
+       FractionBox["379", "32"], ",", 
+       FractionBox["1787", "32"]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", 
+        FractionBox["3", "2"]}], ",", 
+       RowBox[{"-", 
+        FractionBox["43", "8"]}], ",", 
+       RowBox[{"-", 
+        FractionBox["379", "32"]}], ",", 
+       RowBox[{"-", 
+        FractionBox["1787", "32"]}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"9", ",", "3", ",", "3", ",", "1"}], "}"}]}], "}"}]}], 
+  "}"}]], "Output",
+ CellLabel->"Out[4]=",
+ CellID->784766338,ExpressionUUID->"abfed0ef-0590-4d27-955c-c36642870f79"]
+}, Open  ]],
+
+Cell["\<\
+The first output specifies the nucleolus w.r.t types, the second stores the \
+sequence of minmax excess value from the stylized LPs, and the third gives \
+the sequence of cumulative plane movements over the subsets of types. \
+\>", "ExampleText",
+ CellID->1850510576,ExpressionUUID->"962dc572-8c2c-4642-b51a-2b66c9156800"],
+
+Cell["\<\
+The cost allocation provided by the nucleolus times the plane movements per \
+types must reproduce the total annual fixed cost of operating the airport.\
+\>", "ExampleText",
+ CellID->79072685,ExpressionUUID->"cb6cdbe5-5d7a-4480-b8fa-eeb739640170"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"nj1", ".", "nc1"}]], "Input",
+ CellLabel->"In[5]:=",
+ CellID->891783887,ExpressionUUID->"4aaacfe9-94d2-466e-a929-67ebbeee1297"],
+
+Cell[BoxData["121"], "Output",
+ CellLabel->"Out[5]=",
+ CellID->766333375,ExpressionUUID->"41b2c48d-b199-45e6-9c4e-3cde7e78da22"]
+}, Open  ]]
+}, Dynamic[CurrentValue[
+ EvaluationNotebook[], {TaggingRules, "Openers", "ExampleSection", "0"}, 
+  Closed]]]]
+}, Dynamic[CurrentValue[
+ EvaluationNotebook[], {TaggingRules, "Openers", "PrimaryExamplesSection"}, 
+  Closed]]]],
+
+Cell[BoxData[GridBox[{
+   {
+    DynamicBox[FEPrivate`ImportImage[
+      FrontEnd`FileName[{"Documentation", "FooterIcons"}, 
+       "RelatedFunction.png"]],
+     ImageSizeCache->{50., {27., 33.}}], GridBox[{
+      {
+       StyleBox[
+        RowBox[{"See", " ", "Also"}], "SeeAlsoSection"]},
+      {Cell[TextData[{
+        Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["DualGame"]], "paclet:TUG/ref/DualGame", 
+           "TUG Package Symbol"},
+          "PackageLink",
+          BaseStyle->"InlineFormula"]], "InlineFormula",
+         FontFamily->"Source Sans Pro",ExpressionUUID->
+         "04bc9ea2-d433-4ef8-8626-3c62785db9a0"],
+        "\[NonBreakingSpace]",
+        StyleBox[
+        "\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+         "InlineSeparator"],
+        " ",
+        Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["AirportProblem"]], "paclet:TUG/ref/AirportProblem", 
+           "TUG Package Symbol"},
+          "PackageLink",
+          BaseStyle->"InlineFormula"]], "InlineFormula",
+         FontFamily->"Source Sans Pro",ExpressionUUID->
+         "e0ab7ef3-3b4f-4740-93c9-3e5a07358194"],
+        "\[NonBreakingSpace]",
+        StyleBox[
+        "\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+         "InlineSeparator"],
+        " ",
+        Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["ComplementaryMarket"]], 
+           "paclet:TUG/ref/ComplementaryMarket", "TUG Package Symbol"},
+          "PackageLink",
+          BaseStyle->"InlineFormula"]], "InlineFormula",
+         FontFamily->"Source Sans Pro",ExpressionUUID->
+         "e87a9e21-b2eb-41ca-aae3-3f46fb68caaa"],
+        "\[NonBreakingSpace]",
+        StyleBox[
+        "\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+         "InlineSeparator"],
+        " ",
+        Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["ShapAirProb"]], "paclet:TUG/ref/ShapAirProb", 
+           "TUG Package Symbol"},
+          "PackageLink",
+          BaseStyle->"InlineFormula"]], "InlineFormula",
+         FontFamily->"Source Sans Pro",ExpressionUUID->
+         "19a615db-b51a-4220-84d6-5286b6b883cb"],
+        "\[NonBreakingSpace]",
+        StyleBox[
+        "\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+         "InlineSeparator"],
+        " ",
+        Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["TauValAirProb"]], "paclet:TUG/ref/TauValAirProb", 
+           "TUG Package Symbol"},
+          "PackageLink",
+          BaseStyle->"InlineFormula"]], "InlineFormula",
+         FontFamily->"Source Sans Pro",ExpressionUUID->
+         "cd503f6c-723b-41dc-994c-4228729c50f0"],
+        "\[NonBreakingSpace]",
+        StyleBox[
+        "\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+         "InlineSeparator"],
+        " ",
+        Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["WeightedMajority"]], "paclet:TUG/ref/WeightedMajority", 
+           "TUG Package Symbol"},
+          "PackageLink",
+          BaseStyle->"InlineFormula"]], "InlineFormula",
+         FontFamily->"Source Sans Pro",ExpressionUUID->
+         "e9cb3153-8318-401a-aaf5-bf8108408d19"],
+        "\[NonBreakingSpace]",
+        StyleBox[
+        "\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+         "InlineSeparator"],
+        " ",
+        Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["ModestBankruptcy"]], "paclet:TUG/ref/ModestBankruptcy", 
+           "TUG Package Symbol"},
+          "PackageLink",
+          BaseStyle->"InlineFormula"]], "InlineFormula",
+         FontFamily->"Source Sans Pro",ExpressionUUID->
+         "314abe9e-a434-4218-b629-06121b327e16"],
+        "\[NonBreakingSpace]",
+        StyleBox[
+        "\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+         "InlineSeparator"],
+        " ",
+        Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["GreedyBankruptcy"]], "paclet:TUG/ref/GreedyBankruptcy", 
+           "TUG Package Symbol"},
+          "PackageLink",
+          BaseStyle->"InlineFormula"]], "InlineFormula",
+         FontFamily->"Source Sans Pro",ExpressionUUID->
+         "ccfdd3f9-5f0d-4ec0-839f-589468aa4eed"],
+        "\[NonBreakingSpace]",
+        StyleBox[
+        "\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+         "InlineSeparator"],
+        " ",
+        Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["GenProfitMatrix"]], "paclet:TUG/ref/GenProfitMatrix", 
+           "TUG Package Symbol"},
+          "PackageLink",
+          BaseStyle->"InlineFormula"]], "InlineFormula",
+         FontFamily->"Source Sans Pro",ExpressionUUID->
+         "ab6e0647-aff1-4c67-b9a0-2aa8395c908d"],
+        "\[NonBreakingSpace]",
+        StyleBox[
+        "\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+         "InlineSeparator"],
+        " ",
+        Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["SymGameType2"]], "paclet:TUG/ref/SymGameType2", 
+           "TUG Package Symbol"},
+          "PackageLink",
+          BaseStyle->"InlineFormula"]], "InlineFormula",
+         FontFamily->"Source Sans Pro",ExpressionUUID->
+         "be99f2b5-4782-46fc-adbb-71bffd225c2a"],
+        "\[NonBreakingSpace]",
+        StyleBox[
+        "\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+         "InlineSeparator"],
+        " ",
+        Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["SymGameType3"]], "paclet:TUG/ref/SymGameType3", 
+           "TUG Package Symbol"},
+          "PackageLink",
+          BaseStyle->"InlineFormula"]], "InlineFormula",
+         FontFamily->"Source Sans Pro",ExpressionUUID->
+         "d6fcdacc-f7b3-4d65-b294-024665127ce3"],
+        "\[NonBreakingSpace]",
+        StyleBox[
+        "\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+         "InlineSeparator"],
+        " ",
+        Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["SymGameType4"]], "paclet:TUG/ref/SymGameType4", 
+           "TUG Package Symbol"},
+          "PackageLink",
+          BaseStyle->"InlineFormula"]], "InlineFormula",
+         FontFamily->"Source Sans Pro",ExpressionUUID->
+         "3f536939-90e6-4431-a26f-fe42c7f8e3f7"],
+        "\[NonBreakingSpace]",
+        StyleBox[
+        "\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+         "InlineSeparator"],
+        " ",
+        Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["CostSaving"]], "paclet:TUG/ref/CostSaving", 
+           "TUG Package Symbol"},
+          "PackageLink",
+          BaseStyle->"InlineFormula"]], "InlineFormula",
+         FontFamily->"Source Sans Pro",ExpressionUUID->
+         "370e0575-6d10-487f-b289-808b078c0b5d"]
+       }], "SeeAlso",ExpressionUUID->"ebf06782-d855-4670-8875-2d3aec0a3c35"]}
+     }]}
+  }]], "SeeAlsoSection",ExpressionUUID->"efc0012b-1051-4d4a-8f46-\
+b569c4f6c29c"],
+
+Cell[BoxData[GridBox[{
+   {
+    DynamicBox[FEPrivate`ImportImage[
+      FrontEnd`FileName[{"Documentation", "FooterIcons"}, "RelatedGuide.png"]],
+     ImageSizeCache->{50., {27., 33.}}], GridBox[{
+      {
+       StyleBox[
+        RowBox[{"Related", " ", "Guides"}], "MoreAboutSection"]},
+      {
+       RowBox[{"\[FilledVerySmallSquare]", Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["Graphics 2D"]], "paclet:TUG/Guides/TuGamesView2dV6"},
+          "RefLinkPlain",
+          BaseStyle->{"MoreAbout"}]], "MoreAbout",ExpressionUUID->
+         "da4c3092-e5dd-4276-95ad-68b614ec4283"]}]},
+      {
+       RowBox[{"\[FilledVerySmallSquare]", Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["Graphics 3D"]], "paclet:TUG/Guides/TuGamesView3dV6"},
+          "RefLinkPlain",
+          BaseStyle->{"MoreAbout"}]], "MoreAbout",ExpressionUUID->
+         "bd23c964-f517-4a54-baa4-774406b88043"]}]}
+     }]}
+  }]], "MoreAboutSection",ExpressionUUID->"9a2fe7dc-2848-41d5-af98-\
+2e9083718e3e"],
+
+Cell[BoxData[GridBox[{
+   {
+    TemplateBox[{29},
+     "Spacer1"], GridBox[{
+      {
+       RowBox[{
+        TemplateBox[{17},
+         "Spacer1"], 
+        StyleBox[
+         RowBox[{"Related", " ", "Links"}], "RelatedLinksSection"]}]},
+      {Cell[BoxData[Cell[BoxData[
+         RowBox[{
+          TemplateBox[{16},
+           "Spacer1"], "\[FilledVerySmallSquare]", 
+          TemplateBox[{
+            Cell[
+             TextData[
+              Cell[
+               TextData[{
+                 Cell[
+                  BoxData[
+                   TemplateBox[{2}, "Spacer1"]]], "GreedyBankruptcy"}]]]], 
+            "paclet:TUG/Ref/GreedyBankruptcy"},
+           "RefLinkPlain",
+           BaseStyle->{"RelatedLinks"}]}]],ExpressionUUID->
+         "7ba4a3de-c90c-495a-82ae-9acaa29ce45f"]], "RelatedLinks",
+        ExpressionUUID->"93986a1b-7b0e-4182-8988-0b2ec6d2b005"]},
+      {Cell[BoxData[Cell[BoxData[
+         RowBox[{
+          TemplateBox[{16},
+           "Spacer1"], "\[FilledVerySmallSquare]", 
+          TemplateBox[{
+            Cell[
+             TextData[
+              Cell[
+               TextData[{
+                 Cell[
+                  BoxData[
+                   TemplateBox[{2}, "Spacer1"]]], "Nucleolus"}]]]], 
+            "paclet:TUG/Ref/Nucleolus"},
+           "RefLinkPlain",
+           BaseStyle->{"RelatedLinks"}]}]],ExpressionUUID->
+         "3a25a5c8-db6e-4ed1-9c72-2c227e676a13"]], "RelatedLinks",
+        ExpressionUUID->"a5ff98fe-1674-42b3-bf6a-a346f0f8b35c"]},
+      {Cell[BoxData[Cell[BoxData[
+         RowBox[{
+          TemplateBox[{16},
+           "Spacer1"], "\[FilledVerySmallSquare]", 
+          TemplateBox[{
+            Cell[
+             TextData[
+              Cell[
+               TextData[{
+                 Cell[
+                  BoxData[
+                   TemplateBox[{2}, "Spacer1"]]], "ShapleyValue"}]]]], 
+            "paclet:TUG/Ref/ShapleyValue"},
+           "RefLinkPlain",
+           BaseStyle->{"RelatedLinks"}]}]],ExpressionUUID->
+         "a801aff8-7fa1-40e7-8558-d70bfd164777"]], "RelatedLinks",
+        ExpressionUUID->"31dc7eab-1a3b-4602-bf2e-5010effc53c1"]}
+     }]}
+  }]], "RelatedLinksSection",ExpressionUUID->"e47fb699-81f7-4eb2-8604-\
+e50d6b48e9b4"],
+
+Cell[CellGroupData[{
+
+Cell["Related Demonstrations", "RelatedDemonstrationsSection",
+ CellID->906383680,ExpressionUUID->"cc5310ff-57ee-4d51-8844-be3f7151ba61"],
+
+Cell[TextData[ButtonBox["Getting Started",
+ BaseStyle->"Link",
+ ButtonData->"paclet:TUG/Tutorials/GettingStarted"]], "RelatedDemonstrations",\
+
+ CellID->1194386356,ExpressionUUID->"7fb19693-e7ab-4565-97b4-a3ded291baf9"],
+
+Cell[TextData[ButtonBox["Manual TuGames",
+ BaseStyle->"Link",
+ ButtonData->"paclet:TUG/Guides/ManualTuGames"]], "RelatedDemonstrations",
+ CellID->1641706272,ExpressionUUID->"63779dd9-b54d-44fc-897e-991c6f2ae4bb"],
+
+Cell[TextData[ButtonBox["ParaTuGames Package",
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:TUG/Tutorials/ParaExpGamePers12"]], "RelatedDemonstrations",
+ CellID->399251956,ExpressionUUID->"f74b57d0-ec95-4668-8819-7fbf9dd8adad"],
+
+Cell[TextData[ButtonBox["MATLink Connection to MatTuGames",
+ BaseStyle->"Link",
+ ButtonData->"paclet:TUG/Guides/MATtug"]], "RelatedDemonstrations",
+ CellID->821434655,ExpressionUUID->"e73fedc7-fe3e-42e8-96ac-cdc2a521e075"]
+}, Open  ]],
+
+Cell[" ", "FooterCell",ExpressionUUID->"0658bf83-8fa3-4773-9796-befc298a2fff"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{900., 830.25},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"NucAirProb",
+TaggingRules->{
+ "ModificationHighlight" -> False, "ColorType" -> "", "LinkTrails" -> "", 
+  "HasOptions" -> True, "ExampleCounter" -> 1, 
+  "Openers" -> {
+   "PrimaryExamplesSection" -> Open, "ExampleSection" -> {"0" -> Open}, 
+    "NotesSection" -> Closed}, "NewStyles" -> True, 
+  "CitationPopupData" -> $Failed, "ShowCitation" -> False, "RootCaptions" -> 
+  "", "Metadata" -> {
+   "built" -> "{2023, 5, 9, 19, 52, 10.756702}", 
+    "history" -> {"3.1", "", "", ""}, "context" -> "TUG`", "keywords" -> {}, 
+    "specialkeywords" -> {}, "tutorialcollectionlinks" -> {}, "index" -> True,
+     "label" -> "T U G Symbol", "language" -> "en", "paclet" -> "TUG", 
+    "status" -> "None", "summary" -> 
+    "NucAirProb[cost_List, nj_List] computes from an airport cost allocation \
+problem the associated nucleolus of the airport cost game.", "synonyms" -> {},
+     "tabletags" -> {}, "title" -> "NucAirProb", "titlemodifier" -> "", 
+    "windowtitle" -> "NucAirProb", "type" -> "Symbol", "uri" -> 
+    "TUG/ref/NucAirProb"}},
+CellContext->"Global`",
+FrontEndVersion->"13.0 for Linux x86 (64-bit) (December 2, 2021)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[
+    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
+   Cell[
+    StyleData["Input"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["Output"], CellContext -> "Global`"]}, Visible -> False, 
+  FrontEndVersion -> "13.0 for Linux x86 (64-bit) (December 2, 2021)", 
+  StyleDefinitions -> "Default.nb"],
+ExpressionUUID->"fb3e5da1-5cdc-49ab-a198-afcdbeae7576"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "PrimaryExamplesSection"->{
+  Cell[13669, 349, 1419, 37, 35, "PrimaryExamplesSection",ExpressionUUID->"7b7c5b20-769d-4654-836b-88287d40830a",
+   CellTags->"PrimaryExamplesSection",
+   CellID->51632185]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"PrimaryExamplesSection", 36219, 973}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[582, 21, 7387, 174, 56, "AnchorBarGrid",ExpressionUUID->"51555193-d009-47d5-9770-90aec943cd8a",
+ CellID->1],
+Cell[7972, 197, 86, 0, 24, "ContextNameCell",ExpressionUUID->"ecb41225-974c-4152-84cd-9bd9ff440b39"],
+Cell[CellGroupData[{
+Cell[8083, 201, 553, 14, 59, "ObjectNameGrid",ExpressionUUID->"b24d85c0-619d-4e68-a18f-08442977e1b2"],
+Cell[8639, 217, 552, 11, 111, "Usage",ExpressionUUID->"48aa80ec-cebb-4789-aa4b-ed3648c98ce9",
+ CellID->1257049017]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9228, 233, 1894, 47, 37, "NotesSection",ExpressionUUID->"6fc2aa15-60b3-4f19-bd07-d911d0fabc33",
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->546533402],
+Cell[11125, 282, 721, 16, 57, "]]",ExpressionUUID->"5261c8e5-19d6-4f2e-9a9d-70d7fcd85949",
+ CellID->313448337],
+Cell[11849, 300, 489, 12, 37, "Notes",ExpressionUUID->"dad12e2a-9616-4413-8ada-783f86de39fb",
+ CellID->177724765],
+Cell[12341, 314, 305, 5, 57, "Notes",ExpressionUUID->"aa994f5c-40a7-4ad5-b90f-854e44b77972",
+ CellID->2085588552],
+Cell[12649, 321, 260, 5, 57, "Notes",ExpressionUUID->"f4dd6d63-3a2f-4b0c-bf98-9ac53981e082",
+ CellID->306311476],
+Cell[12912, 328, 225, 4, 36, "Notes",ExpressionUUID->"031102fd-adad-41b4-9173-268f7c63e087",
+ CellID->699197269],
+Cell[13140, 334, 194, 4, 36, "Notes",ExpressionUUID->"65a9a8fe-b27d-4f1a-acca-5b65327feb25",
+ CellID->2108874141],
+Cell[13337, 340, 205, 3, 23, "TechNotes",ExpressionUUID->"aca15224-78fd-4096-a1c3-d9b364803e61",
+ CellID->117336961]
+}, Dynamic[CurrentValue[EvaluationNotebook[], {TaggingRules, "Openers", "NotesSection"}, Closed]]]],
+Cell[CellGroupData[{
+Cell[13669, 349, 1419, 37, 35, "PrimaryExamplesSection",ExpressionUUID->"7b7c5b20-769d-4654-836b-88287d40830a",
+ CellTags->"PrimaryExamplesSection",
+ CellID->51632185],
+Cell[CellGroupData[{
+Cell[15113, 390, 1399, 36, 30, "ExampleSection",ExpressionUUID->"20d85544-b2dd-4ceb-84e5-4cf467931ddd",
+ CellID->1556152630],
+Cell[16515, 428, 119, 1, 38, "ExampleText",ExpressionUUID->"d19d05de-4156-4d73-a22e-23845c830233",
+ CellID->1430927406],
+Cell[CellGroupData[{
+Cell[16659, 433, 168, 3, 27, "Input",ExpressionUUID->"09336b74-d616-46a3-bdbb-e7c0536a0ae3",
+ CellID->1259233753],
+Cell[CellGroupData[{
+Cell[16852, 440, 236, 4, 23, "Print",ExpressionUUID->"31804965-92ac-4a4b-a51b-7ac76e874f52",
+ CellID->1433474060],
+Cell[17091, 446, 364, 8, 23, "Print",ExpressionUUID->"29c499f1-29d1-4e74-8aae-f7f20696e255",
+ CellID->553681498],
+Cell[17458, 456, 235, 4, 23, "Print",ExpressionUUID->"bb3a8179-aaa9-4037-b9e8-4ea6f2955f44",
+ CellID->894079670],
+Cell[17696, 462, 220, 3, 23, "Print",ExpressionUUID->"aecfdaf9-3447-46b8-80c8-082a9c25a95d",
+ CellID->1243564029],
+Cell[17919, 467, 207, 3, 23, "Print",ExpressionUUID->"9d7b1579-3fe3-4500-aa41-eb6a3674da20",
+ CellID->1909409332],
+Cell[18129, 472, 237, 4, 70, "Print",ExpressionUUID->"96565dcb-8c30-4234-aa50-951492c203bd",
+ CellID->1254464061],
+Cell[18369, 478, 220, 3, 70, "Print",ExpressionUUID->"e6e33bc2-84a4-4779-be6e-ab0ceda42c03",
+ CellID->2010242006],
+Cell[18592, 483, 234, 4, 70, "Print",ExpressionUUID->"9896e6f7-2da1-4935-a9d8-96639b1b5f0e",
+ CellID->67675195],
+Cell[18829, 489, 236, 4, 70, "Print",ExpressionUUID->"7bcdde9b-a01c-4c32-8165-abb8f637c6da",
+ CellID->1000446880],
+Cell[19068, 495, 207, 3, 70, "Print",ExpressionUUID->"ab7da549-18e7-4881-8eb5-5503b7dd61f2",
+ CellID->2079345505],
+Cell[19278, 500, 235, 4, 70, "Print",ExpressionUUID->"245cd151-e9a9-4e75-8d1f-45833da1b02e",
+ CellID->487643749]
+}, Open  ]]
+}, Open  ]],
+Cell[19540, 508, 211, 4, 70, "ExampleText",ExpressionUUID->"f5d2cf86-110a-497a-a99e-c5592ac04ce6",
+ CellID->1060603206],
+Cell[19754, 514, 257, 7, 70, "Input",ExpressionUUID->"b5dcbf15-ce3f-4f88-aec5-1124c885ae0a",
+ CellID->364669908],
+Cell[20014, 523, 145, 1, 70, "ExampleText",ExpressionUUID->"c583c398-e9e7-4168-bdb3-ea6e58d0a648",
+ CellID->2058204622],
+Cell[20162, 526, 250, 7, 70, "Input",ExpressionUUID->"b18b19ba-7e70-4d80-a3f6-1dff8cdf0fb6",
+ CellID->1727175520],
+Cell[20415, 535, 186, 4, 70, "ExampleText",ExpressionUUID->"3d56bc4b-eca5-46ae-8ef5-6d175aae6819",
+ CellID->58844815],
+Cell[CellGroupData[{
+Cell[20626, 543, 372, 11, 70, "Input",ExpressionUUID->"24284c3b-10ef-4100-92d3-6f6e4365f143",
+ CellID->807331718],
+Cell[21001, 556, 816, 26, 51, "Output",ExpressionUUID->"abfed0ef-0590-4d27-955c-c36642870f79",
+ CellID->784766338]
+}, Open  ]],
+Cell[21832, 585, 332, 5, 70, "ExampleText",ExpressionUUID->"962dc572-8c2c-4642-b51a-2b66c9156800",
+ CellID->1850510576],
+Cell[22167, 592, 257, 4, 70, "ExampleText",ExpressionUUID->"cb6cdbe5-5d7a-4480-b8fa-eeb739640170",
+ CellID->79072685],
+Cell[CellGroupData[{
+Cell[22449, 600, 151, 3, 70, "Input",ExpressionUUID->"4aaacfe9-94d2-466e-a929-67ebbeee1297",
+ CellID->891783887],
+Cell[22603, 605, 128, 2, 36, "Output",ExpressionUUID->"41b2c48d-b199-45e6-9c4e-3cde7e78da22",
+ CellID->766333375]
+}, Open  ]]
+}, Dynamic[CurrentValue[EvaluationNotebook[], {TaggingRules, "Openers", "ExampleSection", "0"}, Closed]]]]
+}, Dynamic[CurrentValue[EvaluationNotebook[], {TaggingRules, "Openers", "PrimaryExamplesSection"}, Closed]]]],
+Cell[22973, 616, 7004, 190, 70, "SeeAlsoSection",ExpressionUUID->"efc0012b-1051-4d4a-8f46-b569c4f6c29c"],
+Cell[29980, 808, 1033, 26, 70, "MoreAboutSection",ExpressionUUID->"9a2fe7dc-2848-41d5-af98-2e9083718e3e"],
+Cell[31016, 836, 2221, 63, 70, "RelatedLinksSection",ExpressionUUID->"e47fb699-81f7-4eb2-8604-e50d6b48e9b4"],
+Cell[CellGroupData[{
+Cell[33262, 903, 137, 1, 70, "RelatedDemonstrationsSection",ExpressionUUID->"cc5310ff-57ee-4d51-8844-be3f7151ba61",
+ CellID->906383680],
+Cell[33402, 906, 219, 4, 70, "RelatedDemonstrations",ExpressionUUID->"7fb19693-e7ab-4565-97b4-a3ded291baf9",
+ CellID->1194386356],
+Cell[33624, 912, 212, 3, 70, "RelatedDemonstrations",ExpressionUUID->"63779dd9-b54d-44fc-897e-991c6f2ae4bb",
+ CellID->1641706272],
+Cell[33839, 917, 226, 4, 70, "RelatedDemonstrations",ExpressionUUID->"f74b57d0-ec95-4668-8819-7fbf9dd8adad",
+ CellID->399251956],
+Cell[34068, 923, 222, 3, 70, "RelatedDemonstrations",ExpressionUUID->"e73fedc7-fe3e-42e8-96ac-cdc2a521e075",
+ CellID->821434655]
+}, Open  ]],
+Cell[34305, 929, 78, 0, 70, "FooterCell",ExpressionUUID->"0658bf83-8fa3-4773-9796-befc298a2fff"]
+}
+]
+*)
+
+(* End of internal cache information *)
+
