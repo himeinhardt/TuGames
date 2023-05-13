@@ -398,6 +398,23 @@ Off[General::obspkg];
 
     ProductGame, ProbabilityGame, HarsanyiValue, ShapAirProb, TauValAirProb, NucAirProb.
 
+    Version 3.1.2
+
+    1. Revision
+
+      Update of the Documentation references pages.
+
+    2. Modification
+
+    Adding the new functions:
+
+    AirportProblem.
+
+    3. Bug Fixes
+
+    Fixing Bug related to the Harsanyi dividends in ProductGame and KernelCalculation related to missing output.
+
+    Some minor bug fixes and code revision.
 
 *)
  

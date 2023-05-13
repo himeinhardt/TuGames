@@ -1,5 +1,5 @@
 [![GitHub (pre-)release](https://img.shields.io/github/release/himeinhardt/TuGames/all.svg)](https://github.com/himeinhardt/TuGames/releases)
-[![Mathematica 12.0 - 13.2.0](https://img.shields.io/badge/Mathematica-12.0_--_13.2.0-brightgreen.svg)](#compatibility)
+[![Mathematica 12.0 - 13.2.1](https://img.shields.io/badge/Mathematica-12.0_--_13.2.1-brightgreen.svg)](#compatibility)
 [![license MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/himeinhardt/TuGames/blob/master/LICENSE.md)
 
 # *Mathematica* Package: *TuGames* Version 3.1.2
@@ -100,7 +100,7 @@ the binaries using the following compiler flags
 MLFLAGS = -lML64i4 -lpthread -lrt -luuid -ldl  
 ```
 
-See also my post at 
+See also our post at 
 
 [Vertex Enum](http://mathematica.stackexchange.com/questions/59660/any-packages-for-vertex-enumeration-on-mathematica)
 
