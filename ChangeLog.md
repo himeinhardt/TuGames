@@ -1,5 +1,5 @@
 [![GitHub (pre-)release](https://img.shields.io/github/release/himeinhardt/TuGames/all.svg)](https://github.com/himeinhardt/TuGames/releases)
-[![Mathematica 8.0 - 13.0.1](https://img.shields.io/badge/Mathematica-8.0_--_13.0.1-brightgreen.svg)](#compatibility)
+[![Mathematica 8.0 - 14.0.0](https://img.shields.io/badge/Mathematica-8.0_--_14.0.0-brightgreen.svg)](#compatibility)
 [![license MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/himeinhardt/TuGames/blob/master/LICENSE.md)
 #   :Title: TuGames
 ##  :Version History:
