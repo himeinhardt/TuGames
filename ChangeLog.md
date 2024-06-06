@@ -195,7 +195,7 @@ Related to this context we provide the function `BalancedInequalityQ[]` to check
 ###    Version 2.6.0
 #### 1. Modification
 
-* Adding functions to compute the Chi-Value, EPSD-Value, Gately-Value, PD-Value, and the nucleolus by the Leng and Parlar (2010) formulae for three person zero-normalized and super-additive games. Changing the package extension from *.m to *.wl.
+* Adding functions to compute the Chi-Value, EPSD-Value, Gately-Value, PD-Value, and the nucleolus by the Leng and Parlar (2010) formulae for three-person zero-normalized and super-additive games. Changing the package extension from *.m to *.wl.
 
 #### 2. Bug fixes and Revision
 
@@ -394,7 +394,7 @@ Adding the new functions:
 * `CostLocationGame[]` computes from a facility location situation the associated cost location game.
 * `EqDistDividends[]` computes the equally distributed dividends of the game, that is, the Shapley value.
 * `DualProbabilityGame[]` computes from weights vector the characteristic values of a dual probability game.
-* `FilledWeberSetV6[]` plots the Weber set of a three person game.
+* `FilledWeberSetV6[]` plots the Weber set of a three-person game.
 * `PlotWeberSet3dV6[]` plots the Weber set of a four-person game.
 * `PQNorm[]` computes the PQ-norm from two vectors.
 
