@@ -3,17 +3,17 @@
 (*** Wolfram Notebook File ***)
 (* http://www.wolfram.com/nb *)
 
-(* CreatedBy='Mathematica 11.3' *)
+(* CreatedBy='Mathematica 13.3' *)
 
 (*CacheID: 234*)
 (* Internal cache information:
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     72290,       1853]
-NotebookOptionsPosition[     71334,       1833]
-NotebookOutlinePosition[     71669,       1848]
-CellTagsIndexPosition[     71626,       1845]
+NotebookDataLength[     72365,       1853]
+NotebookOptionsPosition[     71445,       1833]
+NotebookOutlinePosition[     71838,       1849]
+CellTagsIndexPosition[     71795,       1846]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -91,7 +91,7 @@ Cell[BoxData[
        RowBox[{
         RowBox[{"www", ".", "mathworks", ".", "de"}], "/", "matlabcentral"}], 
        "/", "fileexchange"}], "/", "35933"}], "-", "mattugames"}]}], "\n", 
-   "*)"}]}]], "Code",ExpressionUUID->"3f930259-609c-4559-87c6-a5ae77d90233"],
+   "*)"}]}]], "Code",ExpressionUUID->"af3ee280-a59f-48c1-a3b5-4adcf79c061b"],
 
 Cell[BoxData[
  RowBox[{
@@ -134,7 +134,7 @@ Cell[BoxData[
         RowBox[{
          RowBox[{"Mathematica", " ", "list"}], ",", " ", "required"}], ")"}], 
        "."}]}]}]}], " ", "\n", "\n", "*)"}], "   "}]], "Code",ExpressionUUID->\
-"7a615f09-4b45-4dc1-aac0-46bbc58ce2c6"],
+"19b254a3-998c-4f15-8109-734f7721fcda"],
 
 Cell[BoxData[
  RowBox[{
@@ -627,7 +627,7 @@ must be an integer s.t. 1<=k<=n. Admissible values for str are \
      "\"\<MkRGPQ[v,payoff,K,str,tol] checks the k-RGP. The input argument \
 must be an integer s.t. 1<=k<=n. Admissible values for str are \
 'PRK,PRN,SHAP,HMS_PK,HMS_PN'.\>\""}], ";"}]}]}]], "Code",ExpressionUUID->\
-"7835c580-1fb8-43b0-b7d5-ede603fd277e"],
+"523cd703-a4fc-4eba-848d-d10c53f23fd3"],
 
 Cell[BoxData[{
  RowBox[{
@@ -647,7 +647,7 @@ toolbox.\>\""}], ";"}], "\n"}], "\n",
   RowBox[{
    RowBox[{"Mlb", "::", "usage"}], " ", "=", " ", "\n", "    ", 
    "\"\<Mlb[n] determines the linear basis of a TU game v.\>\""}], 
-  ";"}]}], "Code",ExpressionUUID->"2ffc7b37-947d-4c32-a09f-38516a72c106"],
+  ";"}]}], "Code",ExpressionUUID->"ddf86b08-00a9-4385-b7a0-298b4ea11281"],
 
 Cell[BoxData[{
  RowBox[{
@@ -1167,21 +1167,18 @@ the cardinality of the player set N.\>\""}], ";"}], "\n"}], "\n",
   RowBox[{
    RowBox[{"Mzon", "::", "usage"}], " ", "=", "\n", "    ", 
    "\"\<Mzon[v] creates a zero-one normalized game from game v.\>\""}], 
-  ";"}], "\n"}], "Code",ExpressionUUID->"3074911e-0b8e-4f72-a084-\
-dee0eb096a2c"],
+  ";"}], "\n"}], "Code",ExpressionUUID->"c436dcb4-a50c-447a-a50d-\
+bd75dfc76a28"],
 
 Cell[BoxData[{
  RowBox[{
   RowBox[{"Needs", "[", "\"\<MATLink`\>\"", "]"}], ";"}], "\n", 
  RowBox[{
   RowBox[{
-   RowBox[{"OpenMATLAB", "[", "]"}], ";"}], "\n"}], "\n", 
- RowBox[{
+   RowBox[{"OpenMATLAB", "[", "]"}], ";"}], "\n", "\n", 
   RowBox[{"(*", " ", 
    RowBox[{"Defining", " ", "the", " ", "interfaces", " ", "starts"}], " ", 
-   "*)"}]}]}], "Code",ExpressionUUID->"e55b09a8-8820-4f8d-9a74-af4902bfdf26"],
-
-Cell[BoxData[{
+   "*)"}], "\n"}], "\n", 
  RowBox[{
   RowBox[{"Madv", " ", "=", " ", 
    RowBox[{"MFunction", "[", "\"\<ADvalue\>\"", "]"}]}], ";"}], "\n", 
@@ -1220,7 +1217,7 @@ Cell[BoxData[{
   RowBox[{"Maddg", " ", "=", " ", 
    RowBox[{"MFunction", "[", "\"\<additive_game\>\"", "]"}]}], ";"}], "\n", 
  RowBox[{
-  RowBox[{"Mapex", " ", "=", " ", 
+  RowBox[{"Mkapex", " ", "=", " ", 
    RowBox[{"MFunction", "[", "\"\<m_apex_game\>\"", "]"}]}], ";"}], "\n", 
  RowBox[{
   RowBox[{"Maslv", " ", "=", " ", 
@@ -1331,24 +1328,26 @@ Cell[BoxData[{
   RowBox[{"McrQ", " ", "=", " ", 
    RowBox[{"MFunction", "[", "\"\<coreQ\>\"", "]"}]}], ";"}], "\n", 
  RowBox[{
-  RowBox[{"Mcrv", " ", "=", " ", 
-   RowBox[{"MFunction", "[", "\"\<CoreVertices\>\"", "]"}]}], ";"}], "\n", 
- RowBox[{
-  RowBox[{"Mcplexkr", " ", "=", " ", 
-   RowBox[{"MFunction", "[", "\"\<cplex_kernel\>\"", "]"}]}], ";"}], "\n", 
- RowBox[{
-  RowBox[{"Mcplexnc", " ", "=", " ", 
-   RowBox[{"MFunction", "[", "\"\<cplex_nucl\>\"", "]"}]}], ";"}], "\n", 
- RowBox[{
-  RowBox[{"Mcplexprk", " ", "=", " ", 
-   RowBox[{"MFunction", "[", "\"\<cplex_prekernel\>\"", "]"}]}], 
-  ";"}], "\n", 
- RowBox[{
-  RowBox[{"Mcplexprn", " ", "=", " ", 
-   RowBox[{"MFunction", "[", "\"\<cplex_prenucl\>\"", "]"}]}], ";"}], "\n", 
- RowBox[{
-  RowBox[{"Mcplexmnc", " ", "=", " ", 
-   RowBox[{"MFunction", "[", "\"\<cplex_modiclus\>\"", "]"}]}], ";"}], "\n", 
+  RowBox[{
+   RowBox[{"Mcrv", " ", "=", " ", 
+    RowBox[{"MFunction", "[", "\"\<CoreVertices\>\"", "]"}]}], ";"}], "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+     "CPLEX", " ", "is", " ", "depreciated", " ", "and", " ", "may", " ", 
+      "let", " ", "Matlab", " ", "crash", "\n", "Mcplexkr"}], " ", "=", " ", 
+     RowBox[{"MFunction", "[", "\"\<cplex_kernel\>\"", "]"}]}], ";", "\n", 
+    RowBox[{"Mcplexnc", " ", "=", " ", 
+     RowBox[{"MFunction", "[", "\"\<cplex_nucl\>\"", "]"}]}], ";", "\n", 
+    RowBox[{"Mcplexprk", " ", "=", " ", 
+     RowBox[{"MFunction", "[", "\"\<cplex_prekernel\>\"", "]"}]}], ";", "\n", 
+    
+    RowBox[{"Mcplexprn", " ", "=", " ", 
+     RowBox[{"MFunction", "[", "\"\<cplex_prenucl\>\"", "]"}]}], ";", "\n", 
+    RowBox[{"Mcplexmnc", " ", "=", " ", 
+     RowBox[{"MFunction", "[", "\"\<cplex_modiclus\>\"", "]"}]}], ";"}], "\n",
+    "*)"}]}], "\n", 
  RowBox[{
   RowBox[{"Mcritval1", " ", "=", " ", 
    RowBox[{"MFunction", "[", "\"\<critical_value1\>\"", "]"}]}], 
@@ -1547,14 +1546,13 @@ Cell[BoxData[{
     RowBox[{"MFunction", "[", "\"\<msk_modiclus\>\"", "]"}]}], ";"}], 
   " "}], "\n", 
  RowBox[{
+  RowBox[{"Mnc", " ", "=", " ", 
+   RowBox[{"MFunction", "[", "\"\<nucl\>\"", "]"}]}], ";"}], "\n", 
+ RowBox[{
   RowBox[{
-   RowBox[{"Mnc", " ", "=", " ", 
-    RowBox[{"MFunction", "[", "\"\<nucl\>\"", "]"}]}], ";"}], "\n", 
-  RowBox[{"(*", " ", 
-   RowBox[{
-    RowBox[{"MncQ", " ", "=", " ", 
-     RowBox[{"MFunction", "[", "\"\<B0_balancedCollectionQ\>\"", "]"}]}], 
-    ";"}], " ", "*)"}]}], "\n", 
+   RowBox[{"MncQ", " ", "=", " ", 
+    RowBox[{"MFunction", "[", "\"\<B0_balancedCollectionQ\>\"", "]"}]}], 
+   ";"}], " "}], "\n", 
  RowBox[{
   RowBox[{"Mowv", " ", "=", " ", 
    RowBox[{"MFunction", "[", "\"\<OwenValue\>\"", "]"}]}], ";"}], "\n", 
@@ -1592,12 +1590,14 @@ Cell[BoxData[{
   RowBox[{"Mprn", " ", "=", " ", 
    RowBox[{"MFunction", "[", "\"\<PreNucl\>\"", "]"}]}], ";"}], "\n", 
  RowBox[{
-  RowBox[{"Mprn2", " ", "=", " ", 
-   RowBox[{"MFunction", "[", "\"\<PreNucl2\>\"", "]"}]}], ";"}], "\n", 
- RowBox[{
-  RowBox[{"MprnQ", " ", "=", " ", 
-   RowBox[{"MFunction", "[", "\"\<balancedCollectionQ\>\"", "]"}]}], 
-  ";"}], "\n", 
+  RowBox[{
+   RowBox[{"Mprn2", " ", "=", " ", 
+    RowBox[{"MFunction", "[", "\"\<PreNucl2\>\"", "]"}]}], ";"}], "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"MprnQ", " ", "=", " ", 
+     RowBox[{"MFunction", "[", "\"\<balancedCollectionQ\>\"", "]"}]}], ";"}], 
+   " ", "*)"}]}], "\n", 
  RowBox[{
   RowBox[{"Mmnc", " ", "=", " ", 
    RowBox[{"MFunction", "[", "\"\<Modiclus\>\"", "]"}]}], ";"}], "\n", 
@@ -1824,17 +1824,18 @@ Cell[BoxData[{
       RowBox[{"Delete", "[", 
        RowBox[{"vcl", ",", "1"}], "]"}]}], ";", "\n", "    ", 
      RowBox[{"MgToMatlab", "[", "vcl", "]"}]}]}], "\n", "\t\t     ", 
-   "]"}]}]}], "Code",ExpressionUUID->"b8ef52bd-14f6-4e58-8b34-b36ad941ba4f"],
+   "]"}]}]}], "Code",ExpressionUUID->"f64c3717-09aa-40b6-85fd-c1878a13c4c4"],
 
 Cell[BoxData[
  RowBox[{"(*", "\n", 
   RowBox[{"EndPackage", "[", "]"}], "\n", "*)"}]], "Code",ExpressionUUID->\
-"a795053c-dfc9-4b51-9d56-0dcf07fee0e9"]
+"a069c136-8600-41cb-bf5b-3f79a93f077a"]
 },
-WindowSize->{630, 827},
-WindowMargins->{{278, Automatic}, {Automatic, 82}},
-FrontEndVersion->"11.3 for Linux x86 (64-bit) (March 6, 2018)",
-StyleDefinitions->"Default.nb"
+WindowSize->{606, 552},
+WindowMargins->{{Automatic, 78}, {29.25, Automatic}},
+FrontEndVersion->"13.3 for Linux x86 (64-bit) (July 24, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"58f35eef-664f-44fc-897a-9fa5bace38aa"
 ]
 (* End of Notebook Content *)
 
@@ -1847,14 +1848,13 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 3223, 73, 844, "Code",ExpressionUUID->"3f930259-609c-4559-87c6-a5ae77d90233"],
-Cell[3784, 95, 1665, 41, 223, "Code",ExpressionUUID->"7a615f09-4b45-4dc1-aac0-46bbc58ce2c6"],
-Cell[5452, 138, 21099, 491, 6548, "Code",ExpressionUUID->"7835c580-1fb8-43b0-b7d5-ede603fd277e"],
-Cell[26554, 631, 747, 18, 70, "Code",ExpressionUUID->"2ffc7b37-947d-4c32-a09f-38516a72c106"],
-Cell[27304, 651, 19689, 519, 70, "Code",ExpressionUUID->"3074911e-0b8e-4f72-a084-dee0eb096a2c"],
-Cell[46996, 1172, 356, 9, 70, "Code",ExpressionUUID->"e55b09a8-8820-4f8d-9a74-af4902bfdf26"],
-Cell[47355, 1183, 23821, 643, 70, "Code",ExpressionUUID->"b8ef52bd-14f6-4e58-8b34-b36ad941ba4f"],
-Cell[71179, 1828, 151, 3, 70, "Code",ExpressionUUID->"a795053c-dfc9-4b51-9d56-0dcf07fee0e9"]
+Cell[558, 20, 3223, 73, 738, "Code",ExpressionUUID->"af3ee280-a59f-48c1-a3b5-4adcf79c061b"],
+Cell[3784, 95, 1665, 41, 206, "Code",ExpressionUUID->"19b254a3-998c-4f15-8109-734f7721fcda"],
+Cell[5452, 138, 21099, 491, 5708, "Code",ExpressionUUID->"523cd703-a4fc-4eba-848d-d10c53f23fd3"],
+Cell[26554, 631, 747, 18, 70, "Code",ExpressionUUID->"ddf86b08-00a9-4385-b7a0-298b4ea11281"],
+Cell[27304, 651, 19689, 519, 70, "Code",ExpressionUUID->"c436dcb4-a50c-447a-a50d-bd75dfc76a28"],
+Cell[46996, 1172, 24291, 654, 70, "Code",ExpressionUUID->"f64c3717-09aa-40b6-85fd-c1878a13c4c4"],
+Cell[71290, 1828, 151, 3, 70, "Code",ExpressionUUID->"a069c136-8600-41cb-bf5b-3f79a93f077a"]
 }
 ]
 *)

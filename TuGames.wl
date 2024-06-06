@@ -18,23 +18,28 @@ Off[General::obspkg];
     holger.meinhardt@wiwi.uni-karlsruhe.de
 *)
 
-(* :Package Version: 3.1.2 *)
+(* :Package Version: 3.1.4 *)
 
 (* 
-   :Mathematica Version: 12.x
+   :Mathematica Version: 12.x, 13.x, 14.x
 
    The function ConstrainedMax/ConstrainedMin or Linear/DualLinearProgramming have been deprecated
-   in Version 3 and are replaced by LinearOptimization. Thus, this version is not anymore compatible
-   with Mathematica versions smaller than 12. This replacement allows to supply the Method options
-   of LinearOptimization. In this context, we strongly recommend to apply for a MOSEK license, which   
+   in Version 3 and are replaced by LinearOptimization. Thus, this version is not any more compatible
+   with Mathematica versions prior to 12. This replacement allows supplying the Method options
+   of LinearOptimization. In this context, we strongly recommend applying for a MOSEK license, which 
    is in according to our experience up to 50 times faster than the other methods. To change the method 
    one needs just to set Method -> MOSEK. For changing the solver, one has to set CallMinimize -> True
    or CallMaximize -> True, for instance. One shall check first with Options[command] if the solver
-   is available. 
+   is available.  
 
 *)
 
-(* :Package: Tested under RHEL 8.2, Lustre 2.12.6_ddn40 *)
+(* :Package: Tested under RHEL 8.2, Lustre 2.12.6_ddn40,
+                          RHEL 8.6, Lustre 2.12.6_ddn40,
+                          RHEL 8.8, Lustre 2.12.9_ddn41,
+			  Ubunutu: 18.04, 20.04.
+
+*)
 
 (*:Keywords:
    Dual Game, Superadditive Game, Convex Game, Strong Convex Game, Average-Convex Game,
@@ -205,8 +210,8 @@ Off[General::obspkg];
        Some minor code revision. 
    
        New Functions:
-        MLExtension[]           - Computes the multi-linear extension of the game.
-        ShapleyValueML[]        - Computes the Shapley value from the multi-linear extension of the game.
+        MLExtension[]           - Computes the multilinear extension of the game.
+        ShapleyValueML[]        - Computes the Shapley value from the multilinear extension of the game.
         PreKernel[]             - Computes a pre-kernel point by Algorithm 8.2.1 of Meinhardt (2013).
 
        Bug fixes:
@@ -218,7 +223,7 @@ Off[General::obspkg];
    
     Version 2.5
 
-       Adding the function ApproxNuc[] to compute the (p,k)-nucleolus which is an approximation of
+       Adding the function ApproxNuc[] to compute the (p, k)-nucleolus which is an approximation of
        the nucleolus by a non-linear optimization approach, i.e., minimizes a p-norm. The function
        NonLinNuc[] is based on this function to compute the nucleolus. We extended this idea to the
        pre-nucleolus through the commands ApproxPreNuc[] and NonLinPreNuc[]. In addition, we added
@@ -242,7 +247,7 @@ Off[General::obspkg];
 
     Version 2.5.2
 
-        We have revised the Install procedure of the Cddmathlink library, which makes it not anymore necessary
+        We have revised the Installation procedure of the Cddmathlink library, which makes it not any more necessary
         to explicitly formulate some conditions for all operating systems. Moreover, some binaries for RHEL 7.5
         ships now with the package.
 
@@ -258,8 +263,8 @@ Off[General::obspkg];
     Version 2.5.4 
 
         Functions to compute and to verify the simplified modified pre-kernel/nucleolus are added. They are called
-        SMPrenucleolus[],IsSMPrenucleolusQ[],SMPreKernel[],IsSMPreKernelQ[]. For the last two commands we implemented
-        parallel counterparts called ParaSMPreKernel[],and ParaIsSMPreKernelQ[] respectively.
+        SMPrenucleolus[], IsSMPrenucleolusQ[], SMPreKernel[], IsSMPreKernelQ[]. For the last two commands we implemented
+        parallel counterparts called ParaSMPreKernel[], and ParaIsSMPreKernelQ[] respectively.
 
         Adding the function BalancedCollectionQ[] that should replace in the future the function BalancedSelectionQ[].
         For n=>4 the function returns incorrect results, probably caused by a bug of the DualLinearProgramming[] function.
@@ -313,7 +318,7 @@ Off[General::obspkg];
 
     Version 3.0.0
 
-       Not anymore backward compatible to Mathematica versions smaller than 12 due to the port
+       Not any more backward compatible to Mathematica versions smaller than 12 due to the port
        to the new collection of algorithms for solving convex problems introduced in version 12.
 
        ConstrainedMax/ConstrainedMin and LinearProgramming/DualLinearProgramming are replaced by LinearOptimization.
@@ -416,6 +421,23 @@ Off[General::obspkg];
 
     Some minor bug fixes and code revision.
 
+    Version 3.1.4
+
+    1. Revision
+
+      Update of the Documentation references pages.
+      Code Revision for FilledCoreV6 to avoid overlapping labeling.
+
+    2. Modification
+
+    Adding the new functions:
+
+    FilledWeberSetV6, PlotWeberSet3dV6, CddGmpPlotWeberSet, EqDistDividends, CostLocationGame, DualProbabilityGame, PQNorm.
+
+    3. Bug Fixes
+
+    Some minor bug fixes and code revision.
+
 *)
  
 
@@ -464,8 +486,8 @@ If[SameQ[Global`$ParaMode,"False"],
 Print["==================================================="];
 Print["Loading Package 'TuGames' for ", $OperatingSystem];
 Print["==================================================="];
-Print["TuGames V3.1.2 by Holger I. Meinhardt"];
-Print["Release Date: 08.05.2023"];
+Print["TuGames V3.1.4 by Holger I. Meinhardt"];
+Print["Release Date: 03.06.2024"];
 Print["Program runs under Mathematica Version 12.0 or later"];
 Print["Version 12.x or higher is recommended"];
 Print["==================================================="];,
@@ -1142,6 +1164,11 @@ CddGmpPlotLowerSet::usage =
 "CddGmpPlotLowerSet[game,Options] plots the lower set of a game with Cddmathlink2gmp via Mathlink.
  Cddmathlink2gmp uses GMP rational exact arithmetic.";
 
+CddGmpPlotWeberSet::usage = 
+"CddGmpPlotWeberSet[game,Options] plots the Weber set of a game with Cddmathlink2gmp via Mathlink.
+ Cddmathlink2gmp uses GMP rational exact arithmetic.";
+
+
 BaryCenter::usage =
 "BaryCenter[game] computes the barycenter from the extreme points of the core.";
 
@@ -1154,6 +1181,11 @@ StrongEpsCore2d::usage =
 
 FilledCoreV6::usage =
 "FilledCoreV6[game,opts] plots the core of a three person game. Filled the core area with light blue color. 
+ Furthermore, the Shapley value will be depicted as a blue point, the kernel as a light red, the pre-kernel 
+ as a red, and the nucleolus as a green point. Dedicated for Mathematica Version 6.x or higher only.";
+
+FilledWeberSetV6::usage =
+"FilledWeberSetV6[game,opts] plots the Weber set of a three person game. Filled the weber set area with orange color. 
  Furthermore, the Shapley value will be depicted as a blue point, the kernel as a light red, the pre-kernel 
  as a red, and the nucleolus as a green point. Dedicated for Mathematica Version 6.x or higher only.";
 
@@ -1192,6 +1224,10 @@ MLExtension::usage =
 
 HarsanyiValue::usage =
 "HarsanyiValue[game] computes the Harsanyi value of the game.";
+
+EqDistDividends::usage =
+"EqDistDividends[game] computes the equally distributed dividends of the game, that is, the Shapley value.";
+
 
 UtopiaVector::usage = 
 "UtopiaVector[game] calculates the utopia payoffs for all players.";
@@ -1444,11 +1480,13 @@ Which[$OperatingSystem === "Unix",
   Options[CddVerticesCore] = {RationalExact -> True};
   Options[CddGmpVerticesCore] = {RationalExact -> True, WithIncidences -> False};
   Options[CddGmpPlotCore] = {RationalExact -> True};
+  Options[CddGmpPlotImputationSet] = {RationalExact -> True};
   Options[CddVerticesImputationSet] =  {RationalExact -> True};
   Options[CddVerticesReasonableSet] = {RationalExact -> True, ProperContribution -> False};
-  Options[CddGmpPlotReasonableSet] = {ProperContribution -> False};
+  Options[CddGmpPlotReasonableSet] = {RationalExact -> True, ProperContribution -> False};
   Options[CddVerticesLowerSet] = {RationalExact -> True};
-  Options[CddGmpPlotLowerSet] = {}; 
+  Options[CddGmpPlotLowerSet] = {RationalExact -> True};
+  Options[CddGmpPlotWeberSet] = {RationalExact -> True, RedDim -> True};
   Options[BestCoalitions] = {AllCoalitions -> False, AntiPreKernel -> False, MaximumSurpluses -> False, SmallestCardinality -> True}; 
   Options[OptStepSize] = {Silent -> True, SmallestCardinality -> True}; 
   Options[PreKernelElement] = {CalcStepSize -> True, PseudoInv->True,Silent -> True, SmallestCardinality -> True, RationalTol -> 10^(-7)};
@@ -1493,8 +1531,9 @@ Which[$OperatingSystem === "Unix",
   Options[LowerSetIncImputationQ] = {Silent -> True};
   Options[PreKernelEqualsKernelQ] = {Silent -> True};
   Options[AnimationKernelProperty2d] = {UpperCritVal ->{5}, LowerCritVal -> {},IncSize -> {-(1/4)}, FigureSize -> 500, UseManipulate->False};
-  Options[StrongEpsCore2d] = {EpsilonValue -> 5,FigureSize -> 500,Labeling -> True};
+  Options[StrongEpsCore2d] = {EpsilonValue -> 5,FigureSize -> 500,Labeling -> True,PreImpSet -> True};
   Options[FilledCoreV6] = {DisplayLegend -> True,FigureSize -> 500,PreImpSet -> True,Silent -> False};
+  Options[FilledWeberSetV6] = {DisplayLegend -> True,FigureSize -> 500,PlotCore -> False,PreImpSet -> False,Silent -> False};  
   Options[SetsToVec] ={EffVector -> False};
   Options[ImputationToVec] ={DisplayAllResults -> False, EffVector -> False, InFavor -> False};
   Options[ImputationToEqClass] = {BargUnanMat -> False};
@@ -1510,10 +1549,12 @@ True,
   Options[CddVerticesCore] = {RationalExact -> False};
   Options[CddGmpVerticesCore] = {RationalExact -> True, WithIncidences -> False};
   Options[CddGmpPlotCore] = {RationalExact -> True};
+  Options[CddGmpPlotImputationSet] = {RationalExact -> True};  
   Options[CddVerticesImputationSet] =  {RationalExact -> False};
   Options[CddVerticesReasonableSet] = {RationalExact -> False, ProperContribution -> False};
-  Options[CddGmpPlotReasonableSet] = {ProperContribution -> False};
-  Options[CddGmpPlotLowerSet] = {}; 
+  Options[CddGmpPlotReasonableSet] = {RationalExact -> True, ProperContribution -> False};
+  Options[CddGmpPlotLowerSet] = {RationalExact -> True};
+  Options[CddGmpPlotWeberSet] = {RationalExact -> True, RedDim -> True};
   Options[BestCoalitions] := {AllCoalitions -> False, AntiPreKernel -> False, MaximumSurpluses -> False, SmallestCardinality -> True}; 
   Options[OptStepSize] := {Silent -> True, SmallestCardinality -> True};   
   Options[PreKernelElement] = {CalcStepSize -> True, PseudoInv->True,Silent -> True, SmallestCardinality -> True};
@@ -1559,8 +1600,9 @@ True,
   Options[MaxExcessBalanced] = {RationalTol -> 10^(-6)};                        
   Options[MinExcessBalanced] = {RationalTol -> 10^(-6)};
   Options[AnimationKernelProperty2d] = {UpperCritVal ->{5}, LowerCritVal -> {},IncSize -> {-(1/4)},UseManipulate->False};
-  Options[StrongEpsCore2d] = {EpsilonValue -> 5,FigureSize -> 500,Labeling -> True};
+  Options[StrongEpsCore2d] = {EpsilonValue -> 5,FigureSize -> 500,Labeling -> True,PreImpSet -> True};
   Options[FilledCoreV6] = {DisplayLegend -> True,FigureSize -> 500,PreImpSet -> True,Silent -> False};
+  Options[FilledWeberSetV6] = {DisplayLegend -> True,FigureSize -> 500,PlotCore -> False,PreImpSet -> False,Silent -> False};  
   Options[SetsToVec] ={EffVector -> False};
   Options[ImputationToVec] ={DisplayAllResults -> False, EffVector -> False, InFavor -> False};
   Options[ImputationToEqClass] = {BargUnanMat -> False};
@@ -1599,6 +1641,7 @@ CddVerticesCore::argerr="One argument was expected.";
 CddVerticesImputationSet::argerr="One argument was expected.";
 CddVerticesLowerSet::argerr="One argument was expected.";
 CddVerticesReasonableSet::argerr="One argument was expected.";
+CddGmpPlotWeberSet::argerr="One argument was expected.";
 ChiValue::argerr="One argument was expected.";
 ConcaveQ::argerr="One argument was expected.";
 Concession::argerr="One argument was expected.";
@@ -1617,10 +1660,12 @@ DualGame::argerr="One argument was expected.";
 DuttaRay::argerr="One argument was expected.";
 EANSCValue::argerr="One argument was expected.";
 EpsCore::argerr="One argument was expected.";
+EqDistDividends::argerr="One argument was expected.";
 EPSDValue::argerr="One argument was expected.";
 EvalSumMinCoord::argerr="One argument was expected.";
 FifthCriticalVal::argerr="One argument was expected.";
 FilledCoreV6::argerr="One argument was expected.";
+FilledWeberSetV6::argerr="One argument was expected.";
 FindKernelSolution::argerr="One argument was expected.";
 FindPreKernelSolution::argerr="One argument was expected.";
 FirstCriticalVal::argerr="One argument was expected.";
@@ -1836,6 +1881,7 @@ If[Length[Position[StringFreeQ[#[[1]], "TUG" ~~ ___ ~~ "cddmathlink"] & /@ links
 (* Checking first if a LinkObject exists already and uninstall the cddml libraries. *)
          Uninstall[cddml];
          Uninstall[cddmlgmp];
+	 Uninstall[cddmlgmp2];
          Uninstall[cddml2];
 (* We owe the following lines of code to Szabolcs Horv\[AAcute]t. *)
 (* In the second step install the cddml libraries again.*)
@@ -2535,6 +2581,18 @@ ReasonableSet[game_] := Block[{assr},
     ];
  
 (* strong epsilon core section ends *) 
+(* Section Shapley value starts *)
+
+EqDistDividends[args___]:=(Message[EqDistDividends::argerr];$Failed);
+EqDistDividends[game_]:=Block[{hd,sS,card,cphd,plmbcoa,pos},
+                     hd=Drop[HarsanyiDividends[game],1];
+		     sS=Drop[Subsets[T],1];
+		     card=Length[#] &/@ sS;
+		     cphd=MapThread[Divide[#1,#2]&,{hd,card}];
+                     plmbcoa=Cases[sS,{___,#,___}] &/@ T;
+		     pos=First[Position[sS,#]] &/@ # &/@ plmbcoa;
+		     Total[Flatten[Extract[cphd,#]]] &/@ pos
+];
 
 HarsanyiValue[args___]:=(Message[HarsanyiValue::argerr];$Failed);
 HarsanyiValue[game_]:=Block[{hd,sz,pt,liste,pm,aryf,mat},
@@ -2594,6 +2652,8 @@ PrintRemark[payoff_List]:= (
       Print["The variable 'payoff' has not the correct input format."];
       Print["The variable 'payoff' must be a list of payoff vectors or a single payoff vector."]
 );
+(* Section Shapley value ends *)
+
 
 ExcessPayoff[args___]:=(Message[ExcessPayoff::argerr];$Failed);
 ExcessPayoff[game_,payoff_List, opts:OptionsPattern[ExcessPayoff]]:= Block[{dispmat,assg,li,res},
@@ -6069,8 +6129,10 @@ functions AllVertices and all functions starting with 'Cdd'. *)
 AllVertices0[m_Integer, d_Integer, a_List] := ExternalCall[cddml,CallPacket[0,{m,d,a}]];
 AllVertices[m_Integer, d_Integer, a_String] := ExternalCall[cddmlgmp,CallPacket[0,{m,d,a}]];
 AllVertices2[m_Integer, d_Integer, a_String] :=ExternalCall[cddml2,CallPacket[0,{m,d,a}]];
-
+AllVerticesWithAdjacency[m_Integer, d_Integer, a_String] := ExternalCall[cddml2,CallPacket[1,{m,d,a}]];
 AllVerticesWithAdjacency2[m_Integer, d_Integer, a_String] := ExternalCall[cddmlgmp,CallPacket[1,{m,d,a}]];
+AllFacetsWithAdjacency[n_Integer, d_Integer, g_String] := ExternalCall[cddmlgmp,CallPacket[1,{n,d,g}]];
+AllFacetsWithAdjacency2[n_Integer, d_Integer, g_String] := ExternalCall[cddml2,CallPacket[1,{n,d,g}]];
 
 CddVerticesCore[args___]:=(Message[CddVerticesCore::argerr];$Failed);
 CddVerticesCore[game_,opts:OptionsPattern[CddVerticesCore]] := 
@@ -6191,15 +6253,18 @@ CddGmpPlotCore[game_,opts:OptionsPattern[CddGmpPlotCore]] :=
      AppendTo[values, -Last[values]];
      extmat=MapThread[Prepend,{mat,-values}];
      string1=ToString[extmat,InputForm];
+     (* Print["string1=",string1]; *)
      {m1,d1}=Dimensions[extmat];
-	   {{vert1,linearity1},ecdlist1,eadlist1,icdlist1,iadlist1} = AllVerticesWithAdjacency2[m1,d1,string1];
+     {{vert1,linearity1},ecdlist1,eadlist1,icdlist1,iadlist1} = Which[SameQ[ratexact,True],AllVerticesWithAdjacency2[m1,d1,string1],
+                                                                      True,AllVerticesWithAdjacency[m1,d1,string1]];
      vertlist1 = Map[Drop[#,1]&, ToExpression[vert1]];
      {{vertlist1,linearity1},ecdlist1,eadlist1,icdlist1,iadlist1,extmat}
  ];
 
 CddGmpPlotImputationSet[args___]:=(Message[CddGmpPlotImputationSet::argerr];$Failed);
-CddGmpPlotImputationSet[game_] := 
-  Block[{liste, zwmat, finmat, bvec, extmat, m, d1, vert1, string1, vertlist1, linearity1, sortlist, ecdlist1,eadlist1,icdlist1,iadlist1},
+CddGmpPlotImputationSet[game_,opts:OptionsPattern[CddGmpPlotCore]] := 
+  Block[{ratexact,liste, zwmat, finmat, bvec, extmat, m, d1, vert1, string1, vertlist1, linearity1, sortlist, ecdlist1,eadlist1,icdlist1,iadlist1},
+    ratexact = OptionValue[RationalExact];   
     liste = Table[If[i >= j, 1, 0], {i, Length[T]}, {j, Length[T]}];
     zwmat = Flatten[Permutations[#] & /@ liste, 1];
     finmat = Append[Take[zwmat, Length[T]], Last[zwmat]];
@@ -6207,7 +6272,8 @@ CddGmpPlotImputationSet[game_] :=
     extmat = MapThread[Prepend, {finmat, -bvec}];
     {m, d1} = Dimensions[extmat];
     string1=ToString[extmat,InputForm];
-    {{vert1,linearity1},ecdlist1,eadlist1,icdlist1,iadlist1} = AllVerticesWithAdjacency2[m,d1,string1];
+    {{vert1,linearity1},ecdlist1,eadlist1,icdlist1,iadlist1} = Which[SameQ[ratexact,True],AllVerticesWithAdjacency2[m,d1,string1],
+                                                                      True,AllVerticesWithAdjacency[m,d1,string1]];
     vert1 = Drop[Sort[vert1],Length[T]];
     vertlist1 = Map[Drop[#,1]&, ToExpression[vert1]];
     {{vertlist1,linearity1},ecdlist1,eadlist1,icdlist1,iadlist1,extmat}
@@ -6230,8 +6296,9 @@ CddGmpImputationVertices[game_] :=
 
 CddGmpPlotReasonableSet[args___]:=(Message[CddGmpPlotReasonableSet::argerr];$Failed);
 CddGmpPlotReasonableSet[game_,opts:OptionsPattern[CddGmpPlotReasonableSet]] := 
-  Block[{propcont,liste, zwmat, finmat, reasout,propout,bvec, extmat, m, d1, vert1, vertlist1, string1, linearity1, incidences1, sortlist,ecdlist1,eadlist1,icdlist1,iadlist1},
+  Block[{ratexact,propcont,liste, zwmat, finmat, reasout,propout,bvec, extmat, m, d1, vert1, vertlist1, string1, linearity1, incidences1, sortlist,ecdlist1,eadlist1,icdlist1,iadlist1},
     propcont =  OptionValue[ProperContribution];
+    ratexact = OptionValue[RationalExact]; 
     liste = Table[If[i >= j, 1, 0], {i, Length[T]}, {j, Length[T]}];
     zwmat = Flatten[Permutations[#] & /@ liste, 1];
     finmat = -Append[Take[zwmat, Length[T]], Last[zwmat]];
@@ -6243,7 +6310,8 @@ CddGmpPlotReasonableSet[game_,opts:OptionsPattern[CddGmpPlotReasonableSet]] :=
     extmat = MapThread[Prepend, {finmat, bvec}];
     {m, d1} = Dimensions[extmat];
     string1=ToString[extmat,InputForm];
-    {{vert1,linearity1},ecdlist1,eadlist1,icdlist1,iadlist1} = AllVerticesWithAdjacency2[m,d1,string1];
+    {{vert1,linearity1},ecdlist1,eadlist1,icdlist1,iadlist1} = Which[SameQ[ratexact,True],AllVerticesWithAdjacency2[m,d1,string1],
+                                                                      True,AllVerticesWithAdjacency[m,d1,string1]];
     vert1 = Drop[Sort[vert1],Length[T]];
     vertlist1 = Map[Drop[#,1]&, ToExpression[vert1]];
     Which[SameQ[Length[vertlist1],1],Print["Upper Set is a unique point."];,True,True];
@@ -6253,7 +6321,8 @@ CddGmpPlotReasonableSet[game_,opts:OptionsPattern[CddGmpPlotReasonableSet]] :=
 
 CddGmpPlotLowerSet[args___]:=(Message[CddGmpPlotLowerSet::argerr];$Failed);
 CddGmpPlotLowerSet[game_,opts:OptionsPattern[CddGmpPlotLowerSet]] := 
-  Block[{liste, zwmat, finmat, bvec, smc, extmat, m, d1, vert1, vertlist1, string1, linearity1, incidences1, sortlist,ecdlist1,eadlist1,icdlist1,iadlist1},
+  Block[{ratexact,liste, zwmat, finmat, bvec, smc, extmat, m, d1, vert1, vertlist1, string1, linearity1, incidences1, sortlist,ecdlist1,eadlist1,icdlist1,iadlist1},
+    ratexact = OptionValue[RationalExact];
     liste = Table[If[i >= j, 1, 0], {i, Length[T]}, {j, Length[T]}];
     zwmat = Flatten[Permutations[#] & /@ liste, 1];
     finmat = -Append[Take[zwmat, Length[T]], Last[zwmat]];
@@ -6264,12 +6333,52 @@ CddGmpPlotLowerSet[game_,opts:OptionsPattern[CddGmpPlotLowerSet]] :=
     extmat = MapThread[Prepend, {-finmat, bvec}];
     {m, d1} = Dimensions[extmat];
     string1=ToString[extmat,InputForm];
-    {{vert1,linearity1},ecdlist1,eadlist1,icdlist1,iadlist1} = AllVerticesWithAdjacency2[m,d1,string1];
+    {{vert1,linearity1},ecdlist1,eadlist1,icdlist1,iadlist1} = Which[SameQ[ratexact,True],AllVerticesWithAdjacency2[m,d1,string1],
+                                                                     True,AllVerticesWithAdjacency[m,d1,string1]];
     vert1 = Drop[Sort[vert1],Length[T]];
     vertlist1 = Map[Drop[#,1]&, ToExpression[vert1]];
     Which[SameQ[Length[vertlist1],1],Print["Lower Set is a unique point."];,True,True];
     {{vertlist1,linearity1},ecdlist1,eadlist1,icdlist1,iadlist1,extmat}
     ];
+
+
+CddGmpPlotWeberSet[args___]:=(Message[CddGmpPlotWeberSet::argerr];$Failed);
+CddGmpPlotWeberSet[game_,opts:OptionsPattern[CddGmpPlotWeberSet]] := 
+   Block[{psm,ratexact, mgval,extmgval,extvec,extvert,m1,d1,faclist1, equalities1, icdlist1, iadlist1, ecdlist1, eadlist1,m2,d2,faclist2, equalities2, icdlist2, iadlist2, ecdlist2, eadlist2,bd,faces,string1,extmat,extmat1},
+     psm = OptionValue[RedDim];
+     ratexact = OptionValue[RationalExact];     
+     mgval=MargValue[game];
+     (* extvec=Vec4DToSimplex[#] &/@ mgval; *)
+     extvec = ListRedDim4D[mgval, RedDim->psm]; 
+     extvert=Prepend[#,1] &/@ extvec;     
+     extmgval=Prepend[#,1] &/@ mgval;
+     {m1,d1}=Dimensions[extvert];
+     {m2,d2}=Dimensions[extmgval];
+     string1=ToString[Flatten[extvert],InputForm];
+     string2=ToString[Flatten[extmgval],InputForm];
+     {{faclist1, equalities1}, icdlist1, iadlist1, ecdlist1, eadlist1}=Which[SameQ[ratexact,True],AllFacetsWithAdjacency[m1,d1,string1],
+                                                                             True,AllFacetsWithAdjacency2[m1,d1,string1]];
+     {{faclist2, equalities2}, icdlist2, iadlist2, ecdlist2, eadlist2}=Which[SameQ[ratexact,True],AllFacetsWithAdjacency[m2,d2,string2],
+                                                                             True,AllFacetsWithAdjacency2[m2,d2,string2]];
+     bd=Take[#,1] &/@ faclist1;
+     faces=Take[#,-3] &/@ faclist1;
+     extmat = MapThread[List[First[#1],#2] &,{bd,faces}];
+     extmat1 = Flatten[#] &/@ extmat;
+     {{faclist1,equalities2},ecdlist2,eadlist2,icdlist2,iadlist2,extmat1}
+ ];
+
+ListRedDim4D[vertlist_,opts:OptionsPattern[{CddGmpPlotWeberSet,Graphics3D}]] := 
+  Module[{trext,varl,minv,psm},
+    dld4= OptionValue[RedDim];
+    trext = Transpose[vertlist];
+    varl=N[Variance[#] &/@ trext];
+    minv=Min[varl];
+    psm=Position[varl,minv];
+    psm = First[psm];
+    psm = If[SameQ[dld4,True],psm,dld4];
+    Delete[#,psm] &/@ vertlist
+];
+
 
 BaryCenter[args___]:=(Message[BaryCenter::argerr];$Failed);
 BaryCenter[game_]:=Block[{crv},
@@ -6300,8 +6409,9 @@ StrongEpsCore2d[game_, opts:OptionsPattern[StrongEpsCore2d]] :=
      fs  =  OptionValue[FigureSize];
      epsval = OptionValue[EpsilonValue];
      lab = OptionValue[Labeling];
+     prim = OptionValue[PreImpSet];
      oldvls= v[#] & /@ Subsets[T];
-     gr1=FilledCoreV6[game,DisplayLegend -> False,Silent -> True];
+     gr1=FilledCoreV6[game,DisplayLegend -> False,Silent -> True,PreImpSet->prim];
      epsvls = EpsValue[game, epsval];
      epsvls = Prepend[epsvls,0];
      epsvls = Append[epsvls,Last[oldvls]];
@@ -6312,7 +6422,7 @@ StrongEpsCore2d[game_, opts:OptionsPattern[StrongEpsCore2d]] :=
      AppendTo[cvh,First[cvh]];
      mv=Mean[vert];
      vpts = Point[#] &/@ vert;
-     lgd = If[SameQ[lab,True],MapThread[Text[#1,1.15*#2-0.15*mv] &, {vertlist,vert}],{}];
+     lgd = If[SameQ[lab,True],MapThread[Text[Style[#1,FontSize->12],1.15*#2-0.15*mv] &, {vertlist,vert}],{}];
      gr2=Graphics[{Thick, GraphicsComplex[vert, Line[cvh]]}];
      gr2b=If[SameQ[lgd,{}],{},Graphics[{{Brown,PointSize[0.015],vpts},lgd}]];
      origgame=DefineGame[T,oldvls];
@@ -6323,7 +6433,7 @@ StrongEpsCore2d[game_, opts:OptionsPattern[StrongEpsCore2d]] :=
 
 FilledCoreV6[args___]:=(Message[FilledCoreV6::argerr];$Failed);
 FilledCoreV6[game_, opts:OptionsPattern[FilledCoreV6]] := 
-  Block[{dlg,fs,sil,prim,vertlist,impext,solv,vert,mv1,mv2,imp,clm,lgd1,lgd2,vpts,ipts,spts,redead,rg,impred,dltr,cvh,tric,crdli,trpts,gr0,gr0b,gr1,gr1b,gr2,gr3,grli,gr},
+  Block[{dlg,fs,sil,prim,vertlist,impext,solv,vert,mv1,mv2,imp,clm,lgd1,lgd2,vpts,vrtw,vrts,nwpos2,ipts,spts,redead,rg,impred,dltr,cvh,tric,crdli,trpts,gr0,gr0b,gr1,gr1b,gr2,gr3,grli,gr},
     dlg  = OptionValue[DisplayLegend];
     fs  =  OptionValue[FigureSize];
     sil  = OptionValue[Silent];
@@ -6337,8 +6447,13 @@ FilledCoreV6[game_, opts:OptionsPattern[FilledCoreV6]] :=
     imp = Vec3DToSimplex[#] & /@ impext;
     mv1 = If[SameQ[vert,{}],{},Mean[vert]];
     mv2 = Mean[imp];
-    lgd1 = If[SameQ[vert,{}],{},MapThread[Text[#1,1.15*#2-0.15*mv1] &, {vertlist,vert}]];
-    lgd2 = MapThread[Text[#1,1.1*#2-0.1*mv2] &, {impext,imp}];
+    vrtw = Complement[vertlist,impext]; (* Deleting overlapping vertices, but changes ordering!! *)
+    vrts = Complement[vert,imp]; (* Deleting overlapping vertices, but changes ordering!! *)
+    nwpos2=DeleteCases[Position[vert,#] &/@ vrts,{}]; (* Correcting ordering!! *)
+    vrts=Flatten[Extract[vert,nwpos2],1];
+    vrtw=Flatten[Extract[vertlist,nwpos2],1];
+    lgd1 = If[SameQ[vert,{}],{},MapThread[Text[Style[N[#1],FontSize->12],1.15*#2-0.15*mv1] &, {vrtw,vrts}]];
+    lgd2 = MapThread[Text[Style[N[#1],FontSize->12],1.1*#2-0.1*mv2] &, {impext,imp}];
     vpts = If[SameQ[vert,{}],{},Point[#] &/@ vert];
     ipts = Point[#] &/@ imp;
     spts = Point[#] &/@ solv;
@@ -6381,6 +6496,65 @@ PointSol[game_] :=
 
 
 (* Function FilledCore[] is deprecated. Use TuGames Version 1.8 if you need this function. *)
+
+
+FilledWeberSetV6[args___]:=(Message[FilledWeberSetV6::argerr];$Failed);
+FilledWeberSetV6[game_, opts:OptionsPattern[FilledWeberSetV6]] := 
+  Block[{dlg,fs,sil,prim,vertlist,impext,solv,vert,mv1,mv2,imp,clm,lgd1,lgd2,crQ,vpts,vrtw,vrts,nwpos2,ipts,spts,redead,rg,impred,dltr,cvh,tric,crdli,trpts,gr0,gr0b,gr1,gr1b,gr2,gr3,grli,gr},
+    dlg  = OptionValue[DisplayLegend];
+    fs  =  OptionValue[FigureSize];
+    sil  = OptionValue[Silent];
+    prim = OptionValue[PreImpSet];
+    crQ = OptionValue[PlotCore];
+    vertlist=Sort[DeleteDuplicates[MargValue[game]]]; (* CddGmpPlotWeberSet[game]; *)
+    impext= If[SameQ[prim,True],Permutations[{v[T],0,0}],CddGmpImputationVertices[game]];
+    solv =  PointSol[game];
+    vert = If[SameQ[vertlist,{}],
+                      If[SameQ[sil,False],Print["No Marginal Contribution Vectors computed"],True];{},
+                    Vec3DToSimplex[#] & /@ vertlist];
+    imp = Vec3DToSimplex[#] & /@ impext;
+    mv1 = If[SameQ[vert,{}],{},Mean[vert]];
+    mv2 = Mean[imp];
+    vrtw = Complement[vertlist,impext]; (* Deleting overlapping vertices, but changes ordering!! *)
+    vrts = Complement[vert,imp]; (* Deleting overlapping vertices, but changes ordering!! *)
+    nwpos2=DeleteCases[Position[vrts,#] &/@ vert,{}]; (* Correcting ordering!! *)
+    vrts=Flatten[Extract[vert,nwpos2],1];
+    vrtw=Flatten[Extract[vrtw,nwpos2],1];
+    lgd1 = If[SameQ[vert,{}],{},MapThread[Text[Style[N[#1],FontSize->12],0.95*#2+0.35*mv1] &, {vrtw,vrts}]];
+    lgd2 = MapThread[Text[Style[N[#1],FontSize->12],1.1*#2-0.1*mv2] &, {impext,imp}];
+    vpts = If[SameQ[vert,{}],{},Point[#] &/@ Reverse[N[vert]]];
+    ipts = Point[#] &/@ imp;
+    spts = Point[#] &/@ solv;
+    redead = Delete[T,#] &/@ T;
+    rg = Range[3];
+    impred=MapThread[Append,{redead,rg}];
+    trpts = Which[SameQ[vert,{}],{},
+                  (* SameQ[Length[vert],1],vert,*)
+                  True, dltr = DelaunayTriangulation[vert];
+                        cvh= ConvexHull[vert];
+                        AppendTo[cvh,First[cvh]];
+	                Flatten[Drop[#, 1]] & /@ dltr];
+    gr0=Graphics[{Thick, GraphicsComplex[imp, Line[impred]]}];
+    gr0b=Graphics[{{Gray,PointSize[0.015],ipts},lgd2}];
+    gr1=If[GreaterEqual[$VersionNumber,10.],
+	      Which[SameQ[vert,{}],{},
+           SameQ[Length[vert],1],Graphics[{Orange,PointSize[0.018],Point[vert]}],
+           True, ConvexHullMesh[vert]],
+	   If[SameQ[vert,{}],{}, Graphics[{Orange, GraphicsComplex[vert,Polygon[trpts]]}]]];
+    gr1a=If[SameQ[vert,{}],{}, Graphics[{Orange, GraphicsComplex[vert,Polygon[trpts]]}]];
+    gr1b=If[SameQ[vert,{}],{}, Graphics[{{Orange,PointSize[0.015],vpts},lgd1}]];
+    gr2=If[SameQ[vert,{}],{},Graphics[{Thick, GraphicsComplex[vert, Line[cvh]]}]];
+    clm = {LightRed,Green,Blue,Red};
+    gr3 = Flatten[MapThread[Graphics[{#1,PointSize[0.018],#2}] &,{clm,spts}]];
+    gr4=If[SameQ[crQ,False],{},
+           Which[SameQ[CoreQ[game],False],Print["Core is empty! No Core plotted!"];{},
+	         SameQ[ConvexQ[game],True],Print["Game is Convex! Core is identical to Weber set! No Core plotted!"];{},
+		 True,FilledCoreV6[game,DisplayLegend -> False, FigureSize -> fs, PreImpSet -> prim, Silent -> False]]];
+    grli = Flatten[{gr1,gr1a,gr4,gr1b,gr2,gr3,gr0,gr0b}];
+    gr = Show[grli,ImageSize -> fs];
+    gr = If[SameQ[dlg,True], ShowLegend[gr,{{{Graphics[{Blue, Disk[{0, 0}, 0.005]}], "Shapley Value"}, {Graphics[{Green, Disk[{0, 0}, 0.005]}], "Nucleolus"}, {Graphics[{LightRed, Disk[{0, 0}, 0.005]}], "Kernel"},{Graphics[{Red, Disk[{0, 0}, 0.005]}], "Pre-Kernel"}}, LegendShadow -> None, LegendTextSpace -> 5,LegendPosition -> {1.1, -.4},LegendSize->{0.5,0.25}}],gr];
+    Return[gr];
+    ];
 
 
 Vec3DToSimplex[{x1_?NumberQ, x2_?NumberQ, x3_?NumberQ}] := 
@@ -7069,12 +7243,5 @@ Print["==================================================="];,
    True];
 
 EndPackage[]
-
-
-
-
-
-
-
 
 

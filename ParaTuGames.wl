@@ -194,6 +194,9 @@ ParaCharacteristicValues::usage =
 "ParaCharacteristicValues[unancrd_List,T,opts] computes the coalitional values from the vector of 
  unanimity coordinates in parallel.";
 
+ParaProductGame::usage =
+"ParaProductGame[wghs] computes from a weights vector the corresponding product game";
+
 
 Options[ParaAntiPreKernel] = Sort[Options[PreKernel]];
 Options[ParaAntiPreKernelQ] = Sort[Options[PreKernelQ]];
@@ -1060,6 +1063,18 @@ ParaPrintRemark[payoff_List]:= (
       Print["The variable 'payoff' has not the correct input format."];
       Print["The variable 'payoff' must be a list of payoff vectors or a single payoff vector."]
 );
+
+(* Defining Product Game *)
+
+ParaProductGame[wghs_List] := 
+  Module[{xlis, pval, chval, ylis, hdval},
+   xlis = Subsets[wghs];
+   pval = ParallelMap[Apply[Times, #] &, xlis, Method -> "CoarsestGrained", DistributedContexts -> None];
+   chval = pval - 1;
+   ylis = Subsets[wghs - 1];
+   hdval = ParallelMap[Apply[Times, #] &, ylis, Method -> "CoarsestGrained", DistributedContexts -> None];
+   {chval, hdval} (*characteristic values and Harsanyi dividends.*)
+   ];
 
 
 SetSharedVariable[T];

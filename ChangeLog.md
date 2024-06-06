@@ -9,7 +9,7 @@
 #### 1. Code Revision
 *	Minor code revision.
 
-*  Some robustness problems with the function family `ModifiedNucleolus[]` have been fixed but it is not completely solved. For convex games or inessential games the solution computed might still be wrong.
+*  Some robustness problems with the function family `ModifiedNucleolus[]` have been fixed, but it is not completely solved. For convex games or inessential games the solution computed might still be wrong.
 
 #### 2.  Modification
 
@@ -19,9 +19,9 @@ Some new functions to compute the pre-kernel, anti-pre-kernel and some related f
 #### 1. Code Revision
 *	Some code revision.
 
-*  The functions `DefineGame[], MaxExcessBalanced[], MinExcessBalanced[], KernelImputationQ[], SuperAdditiveQ[]` and `AvConvex[]` have been completely rewritten. For this reason the  functions: `AvSumCheck[], ContributionSum[]` have been deprecated.
+*  The functions `DefineGame[], MaxExcessBalanced[], MinExcessBalanced[], KernelImputationQ[], SuperAdditiveQ[]` and `AvConvex[]` have been completely rewritten. For this reason the functions: `AvSumCheck[], ContributionSum[]` have been deprecated.
 
-*  The function `AverageConvexQ[]` is the same as `AvConvexQ[]`, but it allows to issue an option.
+*  The function `AverageConvexQ[]` is the same as `AvConvexQ[]`, but it allows issuing an option.
 
 *  The functions `PreKernelQ[]` and `AntiPreKernelQ[]` have been modified.
 
@@ -78,13 +78,13 @@ The parallel mode has been optimized. For more details see the README file and/o
 
 Tested up to 32 SubKernels. For running even the *Cddmathlink* libraries in parallel see the explanation in the *README* file and/or for an example the notebook file `TuGamesMovieParaModeV6.nb` in the Documentation directory.
 
-To keep track our package with the new graphic concept of Mathematica 6.x and higher, the following functions have been added or modified to depict solutions for three person games:
+To keep track our package with the new graphic concept of Mathematica 6.x and higher, the following functions have been added or modified to depict solutions for three-person games:
 
 * `AnimationKernelProperty2d[]`  - new function, dedicated for Mathematica 6.x and higher only!
 * `StrongEpsCore2d[]`            - new function, dedicated for Mathematica 6.x and higher only!
 * `FilledCoreV6[]`               - is an upgrade of FilledCore[] for version 6.x and higher.
 
-The graphical functions to plot game solutions for four person games reside in the package `IOTuGamesV6.m`. To use the old graphic concept one has to load the package `IOTuGames.m` in connection with << Version5`Graphics`. All graphical extensions require the *Cddmathlink* libraries.
+The graphical functions to plot game solutions for four-person games reside in the package `IOTuGamesV6.m`. To use the old graphic concept one has to load the package `IOTuGames.m` in connection with << Version5`Graphics`. All graphical extensions require the *Cddmathlink* libraries.
 
 ###    Version 1.8
 #### 1.  Revision
@@ -113,8 +113,8 @@ Change protected command `SubsetQ[]` to `SubSetQ[]` from the VertexEnum package.
 Some minor code revision.
 
 #### 3. New Functions
-* `MLExtension[]`           - Computes the multi-linear extension of the game.
-* `ShapleyValueML[]`        - Computes the Shapley value from the multi-linear extension of the game.
+* `MLExtension[]`           - Computes the multilinear extension of the game.
+* `ShapleyValueML[]`        - Computes the Shapley value from the multilinear extension of the game.
 * `PreKernel[]`             - Computes a pre-kernel point by Algorithm 8.2.1 of Meinhardt (2013).
 
 #### 4. Bug fixes
@@ -129,7 +129,7 @@ Some minor code revision.
 ###    Version 2.5
 #### 1. Modification
 
-Adding the function `ApproxNuc[]` to compute the (p,k)-nucleolus which is an approximation of the nucleolus by a non-linear optimization approach, i.e., minimizes a p-norm. The function `NonLinNuc[]` is based on this function to compute the nucleolus. We extended this idea to the pre-nucleolus through the commands `ApproxPreNuc[]` and `NonLinPreNuc[]`. In addition, we added the least square computation of the (pre-)nucleolus by the functions `LSNuc[]` and `LSPreNuc[]`.
+Adding the function `ApproxNuc[]` to compute the (p, k)-nucleolus which is an approximation of the nucleolus by a non-linear optimization approach, i.e., minimizes a p-norm. The function `NonLinNuc[]` is based on this function to compute the nucleolus. We extended this idea to the pre-nucleolus through the commands `ApproxPreNuc[]` and `NonLinPreNuc[]`. In addition, we added the least square computation of the (pre-)nucleolus by the functions `LSNuc[]` and `LSPreNuc[]`.
 
 Functions to compute the barycenter of the extreme points of the core, dual cover game, dual extension, primal extension, modiclus, a proper modified pre-kernel element, potential of a game, the Lorenz solution, and Dutta-Ray solution for convex games have been added.
 
@@ -152,7 +152,7 @@ Some minor code revision and bug fixes.
 ###   Version 2.5.2
 #### 1. Modification
 
-We have revised the Install procedure of the *Cddmathlink* library, which makes it not anymore necessary to explicitly formulate some conditions for all operating systems. Moreover, some default binaries for *RHEL* 7.5 and *Mathematica* 11.3 ship now with the package. Alternatively, we also added some for *RHEL* systems for *Mathematica* 10 and later. These binaries must be copied into the pre-specified folder.
+We have revised the Installation procedure of the *Cddmathlink* library, which makes it not any more necessary to explicitly formulate some conditions for all operating systems. Moreover, some default binaries for *RHEL* 7.5 and *Mathematica* 11.3 ship now with the package. Alternatively, we also added some for *RHEL* systems for *Mathematica* 10 and later. These binaries must be copied into the pre-specified folder.
 
 #### 2. Bug fixes
 
@@ -166,7 +166,7 @@ Some minor code revision and bug fixes.
 
 ###    Version 2.5.4
 #### 1. Modification
-* Functions to compute and to verify the simplified modified pre-kernel/nucleolus are added. They are called `SMPrenucleolus[],IsSMPrenuceolusQ[],SMPreKernel[],IsSMPreKernelQ[]`. For the last two commands we implemented parallel counterparts called `ParaSMPreKernel[]`,and `ParaIsSMPreKernelQ[]` respectively.
+* Functions to compute and to verify the simplified modified pre-kernel/nucleolus are added. They are called `SMPrenucleolus[], IsSMPrenuceolusQ[], SMPreKernel[], IsSMPreKernelQ[]`. For the last two commands we implemented parallel counterparts called `ParaSMPreKernel[]`, and `ParaIsSMPreKernelQ[]` respectively.
 * Adding the function `BalancedCollectionQ[]` that should replace in the future the function `BalancedSelectionQ[]`.
         For n=>4 the function returns incorrect results, probably caused by a bug of the `DualLinearProgramming[]` function.
 
@@ -231,7 +231,7 @@ Minor Bug fixes and code revision.
 
 #### 1. Synopsis
 	
-Not anymore backward compatible to Mathematica versions smaller than 12 due to the port to the new collection of algorithms for solving convex problems introduced in version 12.
+Not any more backward compatible to Mathematica versions smaller than 12 due to the port to the new collection of algorithms for solving convex problems introduced in version 12.
 
 #### 2. Modification
 
@@ -282,7 +282,7 @@ Some minor bug fixes.
 
 ###  Version 3.0.2 
 
-#### 1.Revision
+#### 1. Revision
 
 Adjusting the functions
 
@@ -294,7 +294,7 @@ Adjusting the functions
        NonLinNuc                   -- Part of TuGames,
        PreKernelSolution           -- Part of TuGames
 
-to the new set of optimization algorithms.
+To the new set of optimization algorithms.
 
 Adding options to the functions:
 
@@ -375,5 +375,29 @@ Adding the new functions:
 ####  3. Bug Fixes
 
 Fixing Bug related to the Harsanyi dividends in `ProductGame[]`, and `KernelCalculation[]` related to missing output.
+
+Some minor bug fixes and code revision.
+
+
+### Version 3.1.4
+
+####  1. Revision
+
+Update of the Documentation references pages.
+Code Revision for FilledCoreV6 to avoid overlapping labeling.
+
+####  2. Modification
+
+Adding the new functions:
+
+* `CddGmpPlotWeberSet[]` calculates while using Cddmathlink2gmp via Mathlink all relevant data to plot the Weber set.
+* `CostLocationGame[]` computes from a facility location situation the associated cost location game.
+* `EqDistDividends[]` computes the equally distributed dividends of the game, that is, the Shapley value.
+* `DualProbabilityGame[]` computes from weights vector the characteristic values of a dual probability game.
+* `FilledWeberSetV6[]` plots the Weber set of a three person game.
+* `PlotWeberSet3dV6[]` plots the Weber set of a four-person game.
+* `PQNorm[]` computes the PQ-norm from two vectors.
+
+####  3. Bug Fixes
 
 Some minor bug fixes and code revision.

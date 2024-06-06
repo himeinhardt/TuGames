@@ -601,7 +601,6 @@ OpenMATLAB[];
 
 (* Defining the interfaces starts *)
 
-
 Madv = MFunction["ADvalue"];
 Mamc = MFunction["AllMarginalContributions"];
 Masg = MFunction["AllSubGames"];
@@ -613,7 +612,7 @@ MakrQ = MFunction["Anti_kernelQ"];
 Maprk = MFunction["Anti_PreKernel"];
 MaprkQ = MFunction["Anti_PrekernelQ"];
 Maddg = MFunction["additive_game"];
-Mapex = MFunction["m_apex_game"];
+Mkapex = MFunction["m_apex_game"];
 Maslv = MFunction["apu_SolidarityValue"];
 Massignmentg = MFunction["assignment_game"];
 MacvQ = MFunction["average_convexQ"];
@@ -647,11 +646,13 @@ McvQ = MFunction["convex_gameQ"];
 Mcrp = MFunction["m_CorePlot"];
 McrQ = MFunction["coreQ"];
 Mcrv = MFunction["CoreVertices"];
+(* CPLEX is depreciated and may let Matlab crash
 Mcplexkr = MFunction["cplex_kernel"];
 Mcplexnc = MFunction["cplex_nucl"];
 Mcplexprk = MFunction["cplex_prekernel"];
 Mcplexprn = MFunction["cplex_prenucl"];
 Mcplexmnc = MFunction["cplex_modiclus"];
+*)
 Mcritval1 = MFunction["critical_value1"];
 Mcritval2 = MFunction["critical_value2"];
 Mcritvals = MFunction["critical_value_star"];
@@ -712,7 +713,7 @@ Mmskprk = MFunction["msk_prekernel"];
 Mmskprn = MFunction["msk_prenucl"]; 
 Mmskmnc = MFunction["msk_modiclus"]; 
 Mnc = MFunction["nucl"];
-(* MncQ = MFunction["B0_balancedCollectionQ"]; *)
+MncQ = MFunction["B0_balancedCollectionQ"]; 
 Mowv = MFunction["OwenValue"];
 Moaseskr = MFunction["oases_kernel"];
 Moasesprk = MFunction["oases_prekernel"];
@@ -725,7 +726,7 @@ Mprk = MFunction["PreKernel"];
 MprkQ = MFunction["PrekernelQ"];
 Mprn = MFunction["PreNucl"];
 Mprn2 = MFunction["PreNucl2"];
-MprnQ = MFunction["balancedCollectionQ"];
+(* MprnQ = MFunction["balancedCollectionQ"]; *)
 Mmnc = MFunction["Modiclus"];
 MmncQ = MFunction["modiclusQ"];
 Mmodprk = MFunction["ModPreKernel"]; 

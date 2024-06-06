@@ -1,8 +1,8 @@
 (* ::Package:: *)
 
 (* :Title: TuGamesAux.m *)
-(* Release Date: 02.05.2023 *)
-(* Version: 3.1.2 *)
+(* Release Date: 13.03.2024 *)
+(* Version: 3.1.4 *)
 
 (* :Context: TuGamesAux` *)
 
@@ -17,10 +17,10 @@
     E-Mail: Holger.Meinhardt@wiwi.uni-karlsruhe.de
 *)
 
-(* :Package Version: 3.1.2 *)
+(* :Package Version: 3.1.4 *)
 
 (* 
-   :Mathematica Version: 12.x, 13.x
+   :Mathematica Version: 12.x, 13.x, 14.x
 
 *)
 
@@ -30,7 +30,7 @@
 *)
 
 (*:Keywords:
- Extracting the coefficient from a LP. Solving the primal and dual problem.
+ Extracting the coefficient from an LP. Solving the primal and dual problem.
 *)
 
 (* :History:
@@ -77,7 +77,7 @@
 
    Version 2.2
        Transcription of the old option rules to the new ones invented by Mathematica 8.x.
-       This package is now exclusively dedicated to Mathematica version 8.x and higher.    
+       This package is now exclusively dedicated to Mathematica version 8.x and higher.  
 
     Version 2.3:
        Change protected command SubsetQ[] to SubSetQ[] from the VertexEnum package. Order is
@@ -120,26 +120,30 @@ AirportProblem::usage =
 BalancedSystemQ::usage = 
 "{bcQ,cfs}=BalancedSystemQ[coll,T] checks whether the collection of sets 'coll' is balanced.
  It returns a True or False on the first return value, at the second position the weights of
- the balanced collection are returned." ;
+ the balanced collection are returned.";
 
 WeaklyBalancedSystemQ::usage =
 "bcQ=WeaklyBalancedSystemQ[coll,b0,T] checks whether the collection of sets 'coll' in connection with 
- a set of single coalitions b0 -- could be empty -- is weakly balanced. It returns a True or False." ;
+ a set of single coalitions b0 -- could be empty -- is weakly balanced. It returns a True or False.";
 
 GenProfitMatrix::usage = 
 "GenProfitMatrix[valuation_buyers,valuation_sellers] generates a profit matrix for an assignment 
  problem by the list of valuation of buyers and sellers.";
 
 ComplementaryMarket::usage = 
-"ComplementaryMarket[Tlist,Plist_,Qlist,opts] computes the coalitional values of a market situation 
- with complementary goods. See Maschler JET, 13, pp. 184-192. The set P can be understood as manufactures 
- and Q as workers. The set T is the player set with P union Q.";
+"ComplementaryMarket[Tlist,Plist_,Qlist,opts] computes the coalitional values of a market situation with complementary goods. See Maschler JET, 13, pp. 184-192. The set P can be understood as manufactures and Q as workers. The set T is the player set with P union Q.";
+
+CostLocationGame::usage =
+"CostLocationGame[dmpts,refvc,p,q,fixedCost,opts] computes from a facility location situation constituted by a list of demand points, a symbolic reference vector like (x1,x2,...,xn), a pq-norm, and a fixed cost value of the associated cost location game. For the PQ-norm, the default values are p=2 and q=1 (Euclidean norm), and for the fixed cost, the default value is set to zero. These input arguments are optional. Mandatory, are the demand points, and a reference point. Demand points must be selected from positive orthant. Return values are the coalitional cost values, and for each coalition larger than 2, the barycenter of the associated polyhedron in which the new facility built up by this coalition is located. Permissible Methods are: {Automatic, NelderMead, DifferentialEvolution,SimulatedAnnealing} passed as string characters. Selecting a Method invokes the function NMinArg. As its third output argument the savings game of the cost location game is returned."; 
 
 ProductGame::usage =
 "ProductGame[wghs] computes from weights vector the characteristic values and Harsanyi dividends of a product game."; 
 
 ProbabilityGame::usage =
 "ProbabilityGame[wghs] computes from weights vector the characteristic values of a probability game."; 
+
+DualProbabilityGame::usage =
+"DualProbabilityGame[wghs] computes from weights vector the characteristic values of a dual probability game.";
 
 ContestedGarment::usage = 
 "ContestGarment[Estate,{d1,d2}] computes a solution for a contested garment or two-creditor modest 
@@ -153,7 +157,7 @@ GreedyBankruptcy::usage =
 "GreedyBankruptcy[Estate,claims] computes the coalitional values for a greedy bankruptcy game.";
 
 LPtoMatrix::usage = 
-"LPtoMatrix[zf, const, var] extracts the coefficient from a LP. Where 'zf' is the objective function,
+"LPtoMatrix[zf, const, var] extracts the coefficient from an LP. Where 'zf' is the objective function,
  'const' is the linear constraint set and 'var' is set of variables.";
 
 AdjointMatrix::usage=
@@ -200,6 +204,10 @@ EuclidianDistance::usage =
 "EuclidianDistance[liste,refliste] computes the Euclidian distance of the vector 'liste' w.r.t. 
  the vector 'refliste'.";
 
+PQNorm::usage = 
+"PQNorm[liste,refliste,p,q] computes the PQ-norm of the vector 'liste' w.r.t. 
+ the vector 'refliste'. The default is p=2, q=1, i.e., the Euclidean norm.";
+
 NearRingQ::usage =
 "NearRingQ[list,T] checks if the collection of sets is a near ring.";
 
@@ -216,7 +224,7 @@ RStirlingNumber::usage=
 "RStirlingNumber[r,n,k] computes the r-associated Stirling number of the second kind.";
 
 SortVecDecOrder::usage = 
-"SortVecDecOrder[vec] order vec into a non-increasing order. See Eq. (5.11) page 82 Peleg and Sudhoelter (2007). ";
+"SortVecDecOrder[vec] order vec into a non-increasing order. See Eq. (5.11) page 82 Peleg and Sudhoelter (2007).";
 
 (* :Options: *)
 
@@ -224,6 +232,7 @@ Options[AssignmentProblem] := {Verbose -> False};
 Options[BalancedSystemQ] := {Method-> RevisedSimplex};
 Options[ComplementaryMarket] := {MarketParameter -> (1/2)};
 Options[WeaklyBalancedSystemQ] := {Method-> RevisedSimplex};
+Options[CostLocationGame] = {Method -> Automatic};
 
 (* :Error Messages: *)
 
@@ -235,19 +244,22 @@ Sets2Dec::argerr="One argument was expected.";
 SortVecDecOrder::argerr="One argument was expected.";
 ProductGame::argerr="One argument was expected.";
 ProbabilityGame::argerr="One argument was expected.";
+DualProbabilityGame::argerr="One argument was expected.";
 
 (* :Two Arguments: *)
 Angle::argerr="Two arguments were expected.";
 AirportProblem::argerr="Two arguments were expected.";
 BalancedSystemQ::argerr="Two arguments were expected.";
 ContestedGarment::argerr="Two arguments were expected.";
+CostLocationGame::argerr="Two arguments were expected.";
 EuclidianDistance::argerr="Two arguments were expected.";
 GenProfitMatrix::argerr="Two arguments were expected.";
 GreedyBankruptcy::argerr="Two arguments were expected.";
 GetCardinalityGame::argerr="Two arguments were expected.";
 LieBracket::argerr="Two arguments were expected.";
-NearRingQ::argerr="Two arguments were expected.";
 ModestBankruptcy::argerr="Two arguments were expected.";
+NearRingQ::argerr="Two arguments were expected.";
+PQNorm::argerr="Two arguments were expected.";
 TalmudicRule::argerr="Two arguments were expected.";
 
 
@@ -411,6 +423,78 @@ ComplementaryMarket[T_List,P_List,Q_List,opts:OptionsPattern[ComplementaryMarket
 ];
 
 
+(* Cost Location Game *)
+
+PQNorm[args___]:=(Message[PQNorm::argerr];$Failed);
+PQNorm[liste_, refliste_,p_:2,q_:1]:=
+          Which[Depth[liste] == 3, PQNormDist[#, refliste,p,q] & /@ liste,
+                Depth[liste] == 2, PQNormDist[liste, refliste,p,q],
+                True,DisplayPQNrm[liste]];
+
+PQNormDist[liste_, refliste_,p_:2,q_:1]:= Power[Total[ MapThread[Power[#1 - #2, p] &, {liste, refliste}]], (q/p)];
+
+DisplayPQNrm[liste_]:=(
+       Print["Depth is equal to ",Depth[liste]];
+       Print["Usage: PQNorm[liste,refliste,p,q]"];
+       Print["Input format of the variable 'liste' is not correct."];
+       Print["The variable 'liste' must be a list."]
+);
+
+
+CostLocationGame[args___]:=(Message[CostLocationGame::argerr];$Failed);
+CostLocationGame[dmpts_, refvc_,p_:2,q_:1,fixed_:0]:=Block[{st,nb,pos,smvc,cdco,tvc,avvc,objvl},
+                 st = Range[First[Dimensions[dmpts]]];
+		 nb=1+Length[st];
+		 pos=Outer[List,Drop[Subsets[st],nb]];
+		 cdco=Length[#] &/@ pos;
+		 smvc=Total[Extract[dmpts,#]] &/@ pos;
+		 avvc=smvc/cdco;
+		 tvc=Extract[dmpts,#] &/@ pos;
+		 objvl=Total[#] &/@ Table[PQNorm[N[tvc[[i]]],avvc[[i]],p,q],{i,Length[avvc]}];
+		 PrependTo[objvl,Array[0 &,nb-1]];
+		 objvl=Flatten[objvl]+fixed;
+		 {PrependTo[objvl,0], avvc, CostSavings[objvl,st]}
+				  ];
+
+CostLocationGame[dmpts_, refvc_,p_:2,q_:1,fixed_:0,opts:OptionsPattern[CostLocationGame]]:=Module[{mthd,st,refpt,nrmlist,nb,pos,objli,zeros,nonneg,slvprb,optsol,objvl},
+                mthd=OptionValue[Method];							     
+		st = Range[First[Dimensions[dmpts]]];
+		refpt = x[#] &/@ Range[Length[refvc]];
+                nrmlist=PQNorm[#,refpt,p,q] &/@ N[dmpts];
+		nb=1+Length[st];
+		pos=Outer[List,Drop[Subsets[st],nb]];
+		objli=Total[Extract[nrmlist,#]] &/@ pos;
+		zeros=Array[0 &, Length[refpt]];
+                nonneg=Apply[And,MapThread[GreaterEqual,{refpt,zeros}]];
+                (* slvprb=NMinimize[Prepend[{nonneg},#],refpt,Method->mthd] &/@ objli;*)
+		slvprb=NArgMin[Prepend[{nonneg},#],refpt,Method->mthd] &/@ objli;
+		(* optsol=Last[#] &/@ slvprb; *)
+		optsol=MapThread[Rule,{refpt,#}] &/@ slvprb;
+		objvl=MapThread[ReplaceAll,{objli,optsol}];
+		PrependTo[objvl,Array[0 &,nb-1]];
+		objvl=Flatten[objvl]+fixed;
+		{PrependTo[objvl,0], refpt /. optsol, CostSavings[objvl,st]}
+		    ];
+
+
+CostSavings[costvec_List,T_List] := Block[{cs},
+  MapThread[SetDelayed[c[#1], #2] &, {Subsets[T], costvec}];
+  cs=(Total[c[{#}] & /@ #] - c[#]) & /@ Subsets[T];
+  Flatten[{0,Drop[cs,1]}]
+  ];
+
+(* Example for calling different solvers.
+
+a1={0,0};
+a2={1/2,Sqrt[3]/2};
+a3={1,0};
+xx={x1,x2};
+dmpts={a1,a2,a3};
+
+cval2=CostLocationGame[dmpts,xx,2,4,5/24,Method->#] &/@ {"Automatic", "NelderMead", "DifferentialEvolution", "SimulatedAnnealing"}
+
+ *)
+
 (* Product Game  *)
 ProductGame[args___]:=(Message[ProductGame::argerr];$Failed);
 ProductGame[wghs_List]:=Module[{xlis,pval,chval,ylis,hdval},
@@ -429,6 +513,15 @@ ProbabilityGame[wghs_List]:=Module[{xlis,pval,chval},
            xlis = Subsets[wghs];
            pval=Apply[Times,1-#] &/@ xlis;
            chval=1-pval,Print["The weights must lie between zero and one."]]
+		       ];
+
+DualProbabilityGame[args___]:=(Message[DualProbabilityGame::argerr];$Failed);
+DualProbabilityGame[wghs_List]:=Module[{xlis,pval,dpval,chval},
+	If[Apply[And,GreaterEqual[#,0] &/@ wghs] && Apply[And,LessEqual[#,1] &/@ wghs],
+           xlis = Subsets[wghs];
+           pval=Apply[Times,1-#] &/@ xlis;
+	   dpval=Apply[Times,1-#] &/@ Reverse[xlis];
+           chval=(1-pval)*dpval,Print["The weights must lie between zero and one."]]
 		       ];
 
 
@@ -923,3 +1016,5 @@ End[];
 
 
 EndPackage[]
+
+

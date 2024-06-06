@@ -1,19 +1,19 @@
 [![GitHub (pre-)release](https://img.shields.io/github/release/himeinhardt/TuGames/all.svg)](https://github.com/himeinhardt/TuGames/releases)
-[![Mathematica 12.0 - 13.2.1](https://img.shields.io/badge/Mathematica-12.0_--_13.2.1-brightgreen.svg)](#compatibility)
+[![Mathematica 12.0 - 14.0.0](https://img.shields.io/badge/Mathematica-12.0_--_14.0.0-brightgreen.svg)](#compatibility)
 [![license MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/himeinhardt/TuGames/blob/master/LICENSE.md)
 
-# *Mathematica* Package: *TuGames* Version 3.1.2
+# *Mathematica* Package: *TuGames* Version 3.1.4
 
 ```
 Contents:
  1.  Introduction
  2.  Custom Installation
  3.  Getting Started
- 3.1  Basic Example
- 3.2  Using a different Solver
+ 3.1 Basic Example
+ 3.2 Using a different Solver
  4.  Running the Package in Parallel
- 4.1  General Procedure
- 4.2  Running the Cddmathlink libraries in Parallel
+ 4.1 General Procedure
+ 4.2 Running the Cddmathlink libraries in Parallel
  5.  MATLink and MATtug (Matlab toolbox MatTuGames)
  6.  Documentation
  7.  Graphics
@@ -39,10 +39,10 @@ version that is transcribed to the new collection of algorithms for solving conv
 introduced in version 12. For Mathematica versions smaller than 12.0 one should use `TUG-2.6.2`.
 This version remains compatible with the most recent Mathematica version as long as
 ConstrainedMax/ConstrainedMin and LinearProgramming/DualLinearProgramming are supported by Wolfram Research,
-otherwise one has to to switch to `TUG-3.0.0` or later. In this respect, the graphical
-features should run on all platforms. As a highlight, a fast algorithm  to seek for a
+otherwise one has to switch to `TUG-3.0.0` or later. In this respect, the graphical
+features should run on all platforms. As a highlight, a fast algorithm to seek for a
 pre-kernel element is implemented in the updated package. This algorithm is described
-in the book  
+in the book 
 
 ```
 The Pre-Kernel as a Tractable Solution for Cooperative Games
@@ -53,7 +53,7 @@ Meinhardt, Holger Ingmar
 ```
 More information can be found here:
 
-* [Book](http://www.springer.com/economics/game+theory/book/978-3-642-39548-2)   
+* [Book](http://www.springer.com/economics/game+theory/book/978-3-642-39548-2) 
 * [DOI](https://link.springer.com/book/10.1007%2F978-3-642-39549-9)
 
 Moreover, we have included a new package called ParaTuGames to literally run the 
@@ -72,14 +72,14 @@ and click then on hyperlink ` "ParaTuGames Package" ` to open the file
 Finally, this package does not require the configuration procedure as under `Section 4`.
 
 A modified version of the package *CooperativeGames* that has been developed 
-by *M.Carter* to run properly with Mathematica 12.x and higher is enclosed. 
+by *M. Carter* to run properly with Mathematica 12.x and higher is enclosed. 
 It must be mentioned in this place that some commands of TuGames require 
 routines that have been provided by the package CooperativeGames. A description
 of the package CooperativeGames can be found in 
 
 ```
 Hal R. Varian, Economic and Financial Modeling with Mathematica, 
-Telos  Springer Publisher,1993, Chapter 8. 
+Telos Springer Publisher,1993, Chapter 8. 
 ```
 
 Furthermore, if one is interested in computing the vertices of a core 
@@ -97,7 +97,7 @@ with the Mathematica Kernel. Under Linux and Mathematica 11.3 we complied succes
 the binaries using the following compiler flags
 
 ```
-MLFLAGS = -lML64i4 -lpthread -lrt -luuid -ldl  
+MLFLAGS = -lML64i4 -lpthread -lrt -luuid -ldl 
 ```
 
 See also our post at 
@@ -130,10 +130,10 @@ In order check for *Mathematica* versions smaller than 12.1 the paths where you 
 ```
 In[1]:= PacletInformation["TUG"]
 
-Out[1]= {Name -> TUG, Version -> 3.1.2 BuildNumber -> , Qualifier -> , WolframVersion -> 12+,
+Out[1]= {Name -> TUG, Version -> 3.1.4 BuildNumber -> , Qualifier -> , WolframVersion -> 12+,
          SystemID -> All, Description -> A Mathematica Package for Cooperative Game Theory,
 	 Category -> , Creator -> Holger Ingmar Meinhardt <holger.meinhardt@partner.kit.edu>,
-	 Publisher -> , Support -> , Internal -> False, Location -> /home/kit/xxx/xxxx/.Mathematica/Paclets/Repository/TUG-3.1.2
+	 Publisher -> , Support -> , Internal -> False, Location -> /home/kit/xxx/xxxx/.Mathematica/Paclets/Repository/TUG-3.1.4
 	 Context -> {TUG`coop`, TUG`vertex`, TUG`}, Enabled -> True, Loading -> Manual}
 ```
 
@@ -143,7 +143,7 @@ To get the same information and beyond that under *Mathematica* version 12.1, it
 In[1]:= PacletObject["TUG"][All]
 ```
 ```
-Out[1]=  {"Name" -> "TUG", "Version" -> "3.1.2", "WolframVersion" -> "12+", 
+Out[1]=  {"Name" -> "TUG", "Version" -> "3.1.4", "WolframVersion" -> "12+", 
           "Qualifier" -> "", "SystemID" -> All, "Description" -> "A Mathematica Package for Cooperative Game Theory",
           "Category" -> Missing["NotAvailable"], "Keywords" -> Missing["NotAvailable"], 
           "UUID" -> Missing["NotAvailable"], 
@@ -153,7 +153,7 @@ Out[1]=  {"Name" -> "TUG", "Version" -> "3.1.2", "WolframVersion" -> "12+",
           "Internal" -> False, 
           "Context" -> {"TUG`coop`", "TUG`vertex`", "TUG`"}, 
           "Loading" -> Manual, "AutoUpdating" -> False, "Enabled" -> True, 
-          "Location" -> "/home/kit/xxx/xxxx/.Mathematica/Paclets/Repository/TUG-3.1.2"}
+          "Location" -> "/home/kit/xxx/xxxx/.Mathematica/Paclets/Repository/TUG-3.1.4"}
 ```
 or alternatively
 
@@ -168,7 +168,7 @@ Then open the directory for *Mathematica* versions smaller than 12.1 by
 SystemOpen@Lookup[PacletInformation["TUG"], "Location"]
 ```
 
-or for *Mathematica* version 12.1 one opens the directory via  
+or for *Mathematica* version 12.1 one opens the directory via 
 
 ```
 SystemOpen@Lookup[PacletObject["TUG"][All], "Location"]
@@ -186,9 +186,9 @@ occur on these operating systems to run the basic functions of the package.
 
 ## 2. Custom Installation
 
-Since `Version 2.5.1` the package is distributed as a `Paclet`, which allows a custom installation. The latest version is `TUG-3.1.2`, which is only compatible for Mathematica version 12.0 or higher. This version is not anymore usable for versions that are smaller than 12.0. Notice that `TUG-2.6.2` is the latest version that is compatible with Mathematica versions smaller than 12.0, and will remain compatible with the most recent Mathematica version as long as `ConstrainedMax/ConstrainedMin` and `LinearProgramming/DualLinearProgramming` are supported by Wolfram Research, otherwise one has to update to `TUG-3.0.0` or later.  The installation of the package requires about 90 MB free hard-disk space, and the Mathematica version should not be smaller than 10 while installing Version `TUG-2.6.2`. For Mathematica versions smaller than Version 10, a manual installation is requested. In that case one has to follow the guidelines related to the associated operating system that can be found from the Mathematica documentation. 
+Since `Version 2.5.1` the package is distributed as a `Paclet`, which allows a custom installation. The latest version is `TUG-3.1.4`, which is only compatible for Mathematica version 12.0 or higher. This version is not any more usable for versions that are smaller than 12.0. Notice that `TUG-2.6.2` is the latest version that is compatible with Mathematica versions smaller than 12.0, and will remain compatible with the most recent Mathematica version as long as `ConstrainedMax/ConstrainedMin` and `LinearProgramming/DualLinearProgramming` are supported by Wolfram Research, otherwise one has to update to `TUG-3.0.0` or later.  The installation of the package requires about 90 MB free hard-disk space, and the Mathematica version should not be smaller than 10 while installing Version `TUG-2.6.2`. For Mathematica versions smaller than Version 10, a manual installation is requested. In that case one has to follow the guidelines related to the associated operating system that can be found from the Mathematica documentation. 
 
-The most simplest method is to install the `Paclet` directly from GitHub under Mathematica V12.0 or later while executing   
+The simplest method is to install the `Paclet` directly from GitHub under Mathematica V12.0 or later while executing   
 
 ```
 ResourceFunction["GitHubInstall"]["himeinhardt", "TuGames"]
@@ -263,7 +263,7 @@ Finally, in order to see how to open the documentation and to run some example w
 
 ## 3. Getting Started
 
-The forthcoming discussion assume that you have properly installed the 
+The forthcoming discussion assumes that you have properly installed the 
 files mentioned above on your computer. 
 
 ### 3.1 Basic Example
@@ -275,8 +275,8 @@ In[1]:=  Needs["TUG`"]
 ===================================================
 Loading Package 'TuGames' for Unix
 ===================================================
-TuGames V3.1.2 by Holger I. Meinhardt
-Release Date: 02.05.2023
+TuGames V3.1.4 by Holger I. Meinhardt
+Release Date: 03.06.2024
 Program runs under Mathematica Version 12.0 or later
 Version 12.x or higher is recommended
 ===================================================
@@ -364,7 +364,7 @@ Out[17]= True
 ```
 ### 3.2 Using a different Solver
 
-Alternatively, one can also supply a different method to check the existence of the core or to find a (pre-)kernel element or the (pre-)nucleolus. This may be useful when one encounters numerical issues, the evaluation lasts too long or with the need to determine an additional (pre-)kernel element. Although, the latter case is not relevant for a three person game, we nevertheless demonstrate its usage for the above example.  
+Alternatively, one can also supply a different method to check the existence of the core or to find a (pre-)kernel element or the (pre-)nucleolus. This may be useful when one encounters numerical issues, the evaluation lasts too long or with the need to determine an additional (pre-)kernel element. Although, the latter case is not relevant for a three-person game, we nevertheless demonstrate its usage for the above example.  
 
 
 ```
@@ -448,7 +448,7 @@ For more information see `TUG/Tutorials/GettingStarted` from the Documentation C
 ### 4.1 General Procedure
 
 
-In order to run the TuGames package in parallel, we recommend to put at least in the Kernel 
+In order to run the TuGames package in parallel, we recommend putting at least in the Kernel 
 init.m file a new variable called `$ParaMode` while setting its value to "False". For doing so, open 
 the init.m  file under `~/.Mathematica/Kernel` by your favorite editor. Windows and MacOSX users should
 consult `$UserBaseDirectory` to find their personal init.m. Then copy the variable 
@@ -584,7 +584,7 @@ For more information consult `TUG/Guides/MATtug` from the Documentation Center `
 
 Open the `Mathematica Documentation Center`, and enter into the panel just `TUG` or `guide/InstalledAddOns`, 
 or scroll down, and click at the end of the page at the right corner on the field `Add-ons and Packages`. This directs 
-you to the Documentation of the package from which several examples can be called up or more detailed information 
+you to the Documentation of the package from which several examples can be called up, or more detailed information 
 can be retrieved. From there, one has access to about 230 pages of documentation.
 
 
@@ -626,3 +626,5 @@ Institute of Operations Research
 University of Karlsruhe (KIT) 
 E-mail: Holger.Meinhardt ät wiwi.uni-karlsruhe.de
         holger.meinhardt ät partner.kit.edu
+
+

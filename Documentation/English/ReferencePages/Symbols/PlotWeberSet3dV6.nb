@@ -1,0 +1,3547 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    148753,       3537]
+NotebookOptionsPosition[    131215,       3207]
+NotebookOutlinePosition[    133210,       3255]
+CellTagsIndexPosition[    133123,       3250]
+WindowTitle->PlotWeberSet3dV6
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[GridBox[{
+   {GridBox[{
+      {
+       ItemBox[Cell[BoxData[
+         RowBox[{
+          TemplateBox[{12},
+           "Spacer1"], Cell["T U G SYMBOL", "PacletNameCell",
+           TextAlignment->Center,ExpressionUUID->
+           "3d605ef7-c21c-45e5-b1aa-154b3621c0c5"], 
+          TemplateBox[{8},
+           "Spacer1"]}]],
+         TextAlignment->Center,ExpressionUUID->
+         "e4424561-bb09-4077-afa3-1182f98b850a"],
+        Background->RGBColor[0.490196, 0.576471, 0.690196],
+        ItemSize->Full], ""}
+     },
+     GridBoxAlignment->{"Rows" -> {{Center}}},
+     GridBoxItemSize->{"Columns" -> {Full, 
+         Scaled[0.02]}, "Rows" -> {{2.5}}}], Cell[TextData[{
+     Cell[BoxData[
+      TagBox[
+       ActionMenuBox[
+        FrameBox[Cell[TextData[{
+          "See Also",
+          " ",
+          Cell[BoxData[
+           GraphicsBox[
+            {GrayLevel[0.66667], Thickness[0.13], 
+             LineBox[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]},
+            AspectRatio->1,
+            ImageSize->20,
+            PlotRange->{{-3, 4}, {-1, 1}}]],ExpressionUUID->
+           "c4ed532e-d86a-4f13-a14b-3fb1a8bf6f61"]
+         }],ExpressionUUID->"5b356ccd-d164-4455-904e-a401a1467fc0"],
+         StripOnInput->False],{
+        "\"Nucleolus\"" :> 
+         Documentation`HelpLookup["paclet:TUG/ref/Nucleolus"], 
+         "\"PreNucleolus\"" :> 
+         Documentation`HelpLookup["paclet:TUG/ref/PreNucleolus"], 
+         "\"PreKernelSolution\"" :> 
+         Documentation`HelpLookup["paclet:TUG/ref/PreKernelSolution"], 
+         "\"FilledCoreV6\"" :> 
+         Documentation`HelpLookup["paclet:TUG/ref/FilledCoreV6"], 
+         "\"FilledWeberSetV6\"" :> 
+         Documentation`HelpLookup["paclet:TUG/ref/FilledWeberSetV6"], 
+         "\"PlotWeberSet3dV6\"" :> 
+         Documentation`HelpLookup["paclet:TUG/ref/PlotWeberSet3dV6"], 
+         "\"StrongEpsCore2d\"" :> 
+         Documentation`HelpLookup["paclet:TUG/ref/StrongEpsCore2d"], 
+         "\"FindKernelSolution\"" :> 
+         Documentation`HelpLookup["paclet:TUG/ref/FindKernelSolution"], 
+         "\"KernelCalculation\"" :> 
+         Documentation`HelpLookup["paclet:TUG/ref/KernelCalculation"], 
+         "\"BalancedCollectionQ\"" :> 
+         Documentation`HelpLookup["paclet:TUG/ref/BalancedCollectionQ"], 
+         "\"ShapleyValue\"" :> 
+         Documentation`HelpLookup["paclet:TUG/ref/ShapleyValue"]},
+        Appearance->None,
+        MenuAppearance->Automatic,
+        MenuStyle->"SeeAlso"],
+       MouseAppearanceTag["LinkHand"]]],
+      LineSpacing->{1.4, 0},ExpressionUUID->
+      "d21cfc68-9e3d-4bef-8c79-635abb6cab91"],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      TagBox[
+       ActionMenuBox[
+        FrameBox[Cell[TextData[{
+          "Related Guides",
+          " ",
+          Cell[BoxData[
+           GraphicsBox[
+            {GrayLevel[0.66667], Thickness[0.13], 
+             LineBox[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]},
+            AspectRatio->1,
+            ImageSize->20,
+            PlotRange->{{-3, 4}, {-1, 1}}]],ExpressionUUID->
+           "f5f32ea7-5980-4e04-b9a1-9cb2c65da232"]
+         }],ExpressionUUID->"490d5f6d-ed05-4f13-9329-ef22dedee10e"],
+         StripOnInput->False],{
+        "\"Graphics 2D\"" :> 
+         Documentation`HelpLookup["paclet:TUG/Guides/TuGamesView2dV6"], 
+         "\"Graphics 3D\"" :> 
+         Documentation`HelpLookup["paclet:TUG/Guides/TuGamesView3dV6"]},
+        Appearance->None,
+        MenuAppearance->Automatic,
+        MenuStyle->"MoreAbout"],
+       MouseAppearanceTag["LinkHand"]]],
+      LineSpacing->{1.4, 0},ExpressionUUID->
+      "d074d284-5a15-4e93-9f28-99b5ff74a9c7"],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      TagBox[
+       ActionMenuBox[
+        FrameBox[Cell[TextData[{
+          "Tech Notes",
+          " ",
+          Cell[BoxData[
+           GraphicsBox[
+            {GrayLevel[0.66667], Thickness[0.13], 
+             LineBox[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]},
+            AspectRatio->1,
+            ImageSize->20,
+            PlotRange->{{-3, 4}, {-1, 1}}]],ExpressionUUID->
+           "a311e2df-7a42-4246-ad25-b8505d71696d"]
+         }],ExpressionUUID->"79c4e0b8-4cd2-4a3d-87f0-03b21d280f26"],
+         StripOnInput->False],{
+        "\"Game Theory Package\"" :> 
+         Documentation`HelpLookup["paclet:TUG/Guides/RefPageTuGames"]},
+        Appearance->None,
+        MenuAppearance->Automatic,
+        MenuStyle->"Tutorials"],
+       MouseAppearanceTag["LinkHand"]]],
+      LineSpacing->{1.4, 0},ExpressionUUID->
+      "2481da25-18a5-430e-a42b-57fb08a4419d"],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      TagBox[
+       ActionMenuBox[
+        FrameBox[Cell[TextData[{
+          "URL",
+          " ",
+          Cell[BoxData[
+           GraphicsBox[
+            {GrayLevel[0.66667], Thickness[0.13], 
+             LineBox[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]},
+            AspectRatio->1,
+            ImageSize->20,
+            PlotRange->{{-3, 4}, {-1, 1}}]],ExpressionUUID->
+           "59e90c47-15fd-47a3-b354-397ab03860dd"]
+         }],ExpressionUUID->"e01324d1-00b3-4f15-9ce3-9cd82542ceab"],
+         StripOnInput->False],{
+        "\"TUG/ref/PlotWeberSet3dV6\"" :> None, 
+         "\"Copy Wolfram Documentation Center URL\"" :> 
+         Module[{DocumentationSearch`Private`nb$}, 
+           DocumentationSearch`Private`nb$ = 
+            NotebookPut[
+             Notebook[{Cell["TUG/ref/PlotWeberSet3dV6"]}, Visible -> False]]; 
+           SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+           FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+           NotebookClose[DocumentationSearch`Private`nb$]; Null], Delimiter, 
+         "\"Copy web URL\"" :> 
+         Module[{DocumentationSearch`Private`nb$}, 
+           DocumentationSearch`Private`nb$ = 
+            NotebookPut[
+             Notebook[{
+               Cell[BoxData[
+                 MakeBoxes[
+                  Hyperlink[
+                   "http://reference.wolfram.com/language/TUG/ref/\
+PlotWeberSet3dV6.html"], StandardForm]], "Input", TextClipboardType -> 
+                 "PlainText"]}, Visible -> False]]; 
+           SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+           FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+           NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+         "\"Go to web URL\"" :> 
+         FrontEndExecute[{
+           NotebookLocate[{
+             URL[If[TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$163334], 
+                 "http://reference.wolfram.com/system-modeler/", 
+                 "http://reference.wolfram.com/language/"] <> 
+               "TUG/ref/PlotWeberSet3dV6" <> ".html"], None}]}]},
+        Appearance->None,
+        MenuAppearance->Automatic,
+        MenuStyle->"URLMenu"],
+       MouseAppearanceTag["LinkHand"]]],
+      LineSpacing->{1.4, 0},ExpressionUUID->
+      "806eba48-cbb6-40ab-a47a-0c268ea3c1df"]
+    }], "AnchorBar",
+     CacheGraphics->False,ExpressionUUID->
+     "6cd5206c-69f0-464d-957a-4a6481785064"]}
+  }]], "AnchorBarGrid",
+ CellID->1,ExpressionUUID->"07da145c-99f0-4752-beb5-a558b56d6fdf"],
+
+Cell["TUG`coop`", "ContextNameCell",ExpressionUUID->"1c86df29-d939-4c6c-9033-5e513a3057f7"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[GridBox[{
+   {Cell[TextData[{
+     Cell[
+     "PlotWeberSet3dV6", "ObjectName",ExpressionUUID->
+      "62b2251e-127a-4975-97ec-b90a150f0ec7"],
+     Cell[BoxData[
+      TemplateBox[{8},
+       "Spacer1"]],ExpressionUUID->"cc3980ed-2136-49a3-852a-dd0ce1b9dba5"],
+     Cell[BoxData[
+     ""], "ObjectNameTranslation",ExpressionUUID->
+      "01a71a7d-3ff9-4d3f-85a3-180f94d952c4"]
+    }],ExpressionUUID->"ebf9777c-81af-4137-a9b8-c6a746a5cbf3"], 
+    "\[SpanFromLeft]"}
+  }]], "ObjectNameGrid",ExpressionUUID->"f146ad84-2c70-4456-8e2e-\
+74f7983270e8"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{"FilledWeberSetV6", "[", "game", "]"}]], "InlineFormula",
+      FontFamily->"Source Sans Pro",ExpressionUUID->
+      "ca4e24fc-0900-46ce-9573-57d90d8e3d06"],
+     " \[LineSeparator]plots the Weber set of a four person game."
+    }],ExpressionUUID->"d51ff0eb-08e4-418d-b9be-c390d7c7472e"]},
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{"FilledWeberSetV6", "[", 
+       RowBox[{"game", ",", "options"}], "]"}]], "InlineFormula",
+      FontFamily->"Source Sans Pro",ExpressionUUID->
+      "9044e459-79d7-47e3-8f60-da9be9449b3a"],
+     " \[LineSeparator]by option set, the figure size and view can be \
+changed. In addition, the legend can be turned on. However, the core cannot \
+be included into the figure. "
+    }],ExpressionUUID->"6701fde1-a7fe-4116-b62f-68a7536d1032"]}
+  }]], "Usage",
+ CellID->261473278,ExpressionUUID->"1677a7ba-bbaa-4baa-a732-a5f48fccbb41"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[Cell[BoxData[
+ ButtonBox[Cell[TextData[{
+   Cell[BoxData[
+    DynamicBox[ToBoxes[
+      If[
+       MatchQ[
+        CurrentValue[
+         EvaluationNotebook[], {TaggingRules, "Openers", "NotesSection"}, 
+         Closed], 
+        Alternatives[Open, True]], 
+       Style[
+        Graphics[{
+          Thickness[0.18], 
+          RGBColor[0.8509803921568627, 0.396078431372549, 0], 
+          Line[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]}, AspectRatio -> 1, 
+         PlotRange -> {{-3, 4}, {-1, 1}}, ImageSize -> 20], Magnification -> 
+        0.68 Inherited], 
+       Rotate[
+        Style[
+         Graphics[{
+           Thickness[0.18], 
+           RGBColor[0.8509803921568627, 0.396078431372549, 0], 
+           Line[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]}, AspectRatio -> 1, 
+          PlotRange -> {{-3, 4}, {-1, 1}}, ImageSize -> 20], Magnification -> 
+         0.68 Inherited], Rational[1, 2] Pi, {-1.65, -1}]]],
+     ImageSizeCache->{13.600000000000001`, {5., 8.600000000000001}}]],
+    ExpressionUUID->"3e7cdfd6-b2e3-4642-bfec-335ed125fefd"],
+   Cell[BoxData[
+    TemplateBox[{1},
+     "Spacer1"]],ExpressionUUID->"7e5981c6-f8e8-4488-804d-e099c838e567"],
+   "Details and Options"
+  }], "NotesFrameText",ExpressionUUID->"4d8826be-a515-42dd-868b-3561b4d973ee"],
+  Appearance->{Automatic, None, "Normal", Automatic},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->
+   "Preemptive"]],ExpressionUUID->"c9e47888-3b41-40f3-aaf3-ae8b9f75ef68"]], \
+"NotesSection",
+ WholeCellGroupOpener->True,
+ CellGroupingRules->{"SectionGrouping", 50},
+ CacheGraphics->False,
+ CellID->1046262721,ExpressionUUID->"9f46792d-7d13-4c15-87d4-f8dfba430fa3"],
+
+Cell[TextData[{
+ "The input expression ",
+ Cell[BoxData["game"], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "57df2212-5ca2-418a-a356-e0370c471709"],
+ " must be represented in characteristic function form, where its values ",
+ Cell[BoxData[
+  RowBox[{"v", "[", "S", "]"}]], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "2add4f7f-6eb7-412b-a3bb-e6d3a91ae1f2"],
+ "\nare numeric."
+}], "]]", "Notes",
+ CellID->313448337,ExpressionUUID->"95c51e80-f2d9-4cd2-8fce-781bf47f57d7"],
+
+Cell[TextData[{
+ "To use this function, you need first to load the ",
+ Cell[BoxData[
+  TemplateBox[{"\"TuGames Package\"", "paclet:TUG/Guides/RefPageTuGames"},
+   "HyperlinkPaclet"]], "Output",ExpressionUUID->
+  "a7b98d46-d142-4794-a686-01cf4b93255e"],
+ " using  ",
+ Cell[BoxData[
+  RowBox[{"Needs", "[", "\"\<TUG`\>\"", "]"}]], "Input",ExpressionUUID->
+  "85126d19-6c47-4e8b-aef2-991e5aedb15f"],
+ "."
+}], "Notes",
+ CellID->177724765,ExpressionUUID->"09d1907c-be35-4a19-ae1e-ce4b2962d571"],
+
+Cell["\<\
+The Weber set is a solution constituted by all pre-imputations based on the \
+concept of a random order value, whenever the game is monotone.  Otherwise, \
+the Weber set also depends on elements that are not random order values.\
+\>", "Notes",
+ CellID->881701117,ExpressionUUID->"97324de8-9ad9-430c-b26e-80201293ed87"],
+
+Cell["\<\
+Note that the Shapley value is a random order value while assuming that the \
+likelihood of assembling coalitions is based on the uniform probability \
+distribution of the ordering of players. Since the Weber set is the \
+collection of payoffs associated with random order values, the Shapley value \
+must be an element of this set.\
+\>", "Notes",
+ CellID->873586931,ExpressionUUID->"c48ab7a2-5dbe-40ce-a18c-74bbf8334e61"],
+
+Cell["This function draws the Weber set of a four person game.", "Notes",
+ CellID->305331391,ExpressionUUID->"0c83dc81-d777-4b21-8602-97a0dd26bff7"],
+
+Cell["\<\
+The Weber set area is depicted as a transparent orange polytope. Furthermore, \
+the Shapley value will be drawn as a blue point, the kernel as a light red, \
+the pre-kernel as a red, the nucleolus as a green, the modiclus as a purple \
+point, and the Harsanyi value as a brown point. \
+\>", "Notes",
+ CellID->651706482,ExpressionUUID->"222001c5-edd5-4255-829d-29b762655406"],
+
+Cell[TextData[{
+ "For more information see ",
+ Cell[BoxData[
+  ButtonBox[
+   TagBox[
+    TemplateBox[{
+      TemplateArgBox["\"Graphics 3D\"", 1], 
+      StyleBox[
+       TemplateArgBox["\"Graphics 3D\"", 1], "HyperlinkActive"], BaseStyle -> 
+      "Hyperlink"},
+     "MouseoverTemplate"],
+    MouseAppearanceTag["LinkHand"]],
+   BaseStyle->"Link",
+   ButtonData->"paclet:TUG/Guides/TuGamesView3dV6",
+   ButtonNote->"paclet:TUG/Guides/TuGamesView3dV6"]],ExpressionUUID->
+  "a6e123ef-f173-44b9-9354-4838abcd03d1"],
+ "."
+}], "Notes",
+ CellID->135892803,ExpressionUUID->"ece7133f-e738-4e6e-a874-a31487f9a61d"],
+
+Cell["Dedicated for Mathematica Version 12.x or higher only.", "Notes",
+ CellID->2111799648,ExpressionUUID->"d9636b8a-88e7-458d-bdc1-0b2ba7ddb3cf"],
+
+Cell["The following options can be given: ", "Notes",
+ CellLabel->
+  "Options tables, which describe valid options, their default values, and \
+what they control, are often given in this section",
+ CellID->13178,ExpressionUUID->"6b297c74-7d02-4940-988e-9ea03a5d3552"],
+
+Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon",ExpressionUUID->
+     "f8d03a2c-46cd-4fae-bed8-4d33de433ee2"], 
+    TemplateBox[{
+      Cell[
+       TextData["HarsanyiValCoord"]], "paclet:TUG/ref/HarsanyiValCoord", 
+      "TUG Package Symbol"},
+     "PackageLink",
+     BaseStyle->"3ColumnTableMod"], 
+    RowBox[{"{", "}"}], Cell["\<\
+do not use to pass the Harsanyi value to the function. Selection made by \
+internal calculation.\
+\>", "TableText",ExpressionUUID->"8b970b2c-5d66-414c-b97d-204d20076241"]}
+  }]], "3ColumnTableMod",
+ GridBoxOptions->{
+ GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {{None}}},
+ GridBoxDividers->{"Rows" -> {{True, True}}}},
+ CellID->969813666,ExpressionUUID->"4ad62fdc-e736-4e32-b9ce-c4d2ecb42a63"],
+
+Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon",ExpressionUUID->
+     "5cdad0dd-9504-490e-885b-6c75f861eacb"], 
+    TemplateBox[{
+      Cell[
+       TextData["KernelCoord"]], "paclet:TUG/ref/KernelCoord", 
+      "TUG Package Symbol"},
+     "PackageLink",
+     BaseStyle->"3ColumnTableMod"], 
+    ButtonBox[
+     RowBox[{"{", "}"}],
+     BaseStyle->"FunctionLink"], Cell["\<\
+do not use to pass a kernel element to the function. Selection made by \
+internal calculation.\
+\>", "TableText",ExpressionUUID->"8eac2bee-4c07-48d8-bc5b-ce1dd4088619"]}
+  }]], "3ColumnTableMod",
+ GridBoxOptions->{
+ GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {{None}}},
+ GridBoxDividers->{"Rows" -> {{True, True}}}},
+ CellID->1035213662,ExpressionUUID->"0ad7f5a1-1dcb-4bf2-b180-aef54f7b0bab"],
+
+Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon",ExpressionUUID->
+     "ae3ae2bc-47b2-4877-8323-9cf5c26c9084"], 
+    TemplateBox[{
+      Cell[
+       TextData["PayoffCoord"]], "paclet:TUG/ref/PayoffCoord", 
+      "TUG Package Symbol"},
+     "PackageLink",
+     BaseStyle->"3ColumnTableMod"], 
+    RowBox[{"{", "}"}], Cell["\<\
+do not use to pass an arbitrary payoff/imputation to the function. \
+\>", "TableText",ExpressionUUID->"ad7d1e90-b979-4694-901e-46f10ec5c720"]},
+   {Cell["      ", "TableRowIcon",ExpressionUUID->
+     "0176fe6a-9e8a-4158-9949-b90b5164741d"], 
+    TemplateBox[{
+      Cell[
+       TextData["NucleolusCoord"]], "paclet:TUG/ref/NucleolusCoord", 
+      "TUG Package Symbol"},
+     "PackageLink",
+     BaseStyle->"3ColumnTableMod"], 
+    RowBox[{"{", "}"}], Cell["\<\
+do not use to pass the nucleolus to the function. Selection made by internal \
+calculation.\
+\>", "TableText",ExpressionUUID->"aa54017a-18f5-493d-8bc1-42fc89c60123"]},
+   {Cell["      ", "TableRowIcon",ExpressionUUID->
+     "c78c9ded-d8d4-4683-9f72-c99a452657af"], 
+    TemplateBox[{
+      Cell[
+       TextData["ModiclusCoord"]], "paclet:TUG/ref/ModiclusCoord", 
+      "TUG Package Symbol"},
+     "PackageLink",
+     BaseStyle->"3ColumnTableMod"], 
+    ButtonBox[
+     RowBox[{"{", "}"}],
+     BaseStyle->"FunctionLink"], Cell["\<\
+do not use to pass the modiclus to the function. Selection made by internal \
+calculation.\
+\>", "TableText",ExpressionUUID->"ca56a58c-36a0-4282-818c-7b45fbc77843"]}
+  }]], "3ColumnTableMod",
+ GridBoxOptions->{
+ GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {None, None, {None}}},
+ GridBoxDividers->{"Rows" -> {{True, True, True, True}}}},
+ CellID->1640619354,ExpressionUUID->"ac6fe295-1cd0-4ed6-93d6-4da3ac6153c3"],
+
+Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon",ExpressionUUID->
+     "6a37f7db-36c2-4018-b552-cb5e95779a6e"], 
+    TemplateBox[{
+      Cell[
+       TextData["ShapleyCoord"]], "paclet:TUG/ref/ShapleyCoord", 
+      "TUG Package Symbol"},
+     "PackageLink",
+     BaseStyle->"3ColumnTableMod"], 
+    RowBox[{"{", "}"}], Cell["\<\
+do not use to pass the Shapley value to the function. Selection made by \
+internal calculation.\
+\>", "TableText",ExpressionUUID->"8b25dc1c-ba52-4604-8f0e-7deb15b08964"]}
+  }]], "3ColumnTableMod",
+ GridBoxOptions->{
+ GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {{None}}},
+ GridBoxDividers->{"Rows" -> {{True, True}}}},
+ CellID->2628340,ExpressionUUID->"fcf5d13e-e5ea-477f-9c4a-1188ce290cb9"],
+
+Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon",ExpressionUUID->
+     "be57dd90-c847-41a0-85b4-3681c930e732"], 
+    TemplateBox[{
+      Cell[
+       TextData["PtRadius"]], "paclet:TUG/ref/PtRadius", "TUG Package Symbol"},
+     "PackageLink",
+     BaseStyle->"3ColumnTableMod"], "0.021`", Cell[
+    "use to set point radius of point solutions.", "TableText",ExpressionUUID->
+     "12edba81-44b6-49ac-ad2a-b954e6264648"]}
+  }]], "3ColumnTableMod",
+ GridBoxOptions->{
+ GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {{None}}},
+ GridBoxDividers->{"Rows" -> {{True, True}}}},
+ CellID->1581386759,ExpressionUUID->"8119b82d-0862-4f8b-92bd-ef7cbf48da91"],
+
+Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon",ExpressionUUID->
+     "8f705833-0ac5-431e-974f-f7766d3eada5"], 
+    TemplateBox[{
+      Cell[
+       TextData["PictureSize"]], "paclet:TUG/ref/PictureSize", 
+      "TUG Package Symbol"},
+     "PackageLink",
+     BaseStyle->"3ColumnTableMod"], 
+    RowBox[{"{", 
+     RowBox[{"400", ",", "434"}], "}"}], Cell[
+    "use to set the picture size.", "TableText",ExpressionUUID->
+     "ca2a37b1-0d02-4529-a0c1-04daed2d1643"]}
+  }]], "3ColumnTableMod",
+ GridBoxOptions->{
+ GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {{None}}},
+ GridBoxDividers->{"Rows" -> {{True, True}}}},
+ CellID->11156,ExpressionUUID->"5f001886-b8f5-4b31-896b-6a219f698b54"],
+
+Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon",ExpressionUUID->
+     "ae5245cf-0f05-4e21-95f3-57878315cb8e"], 
+    TemplateBox[{
+      Cell[
+       TextData["ShowImputationSet"]], "paclet:TUG/ref/ShowImputationSet", 
+      "TUG Package Symbol"},
+     "PackageLink",
+     BaseStyle->"3ColumnTableMod"], "True", Cell[
+    "use to draw the imputation set. ", "TableText",ExpressionUUID->
+     "4f9e7fe2-a69d-493d-b178-c49ebe908297"]}
+  }]], "3ColumnTableMod",
+ GridBoxOptions->{
+ GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {{None}}},
+ GridBoxDividers->{"Rows" -> {{True, True}}}},
+ CellID->1348502217,ExpressionUUID->"38ad28fb-fefe-493b-a992-0a059345a292"],
+
+Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon",ExpressionUUID->
+     "4b7bcf90-e040-40e9-808a-36cd3747c3b3"], 
+    TemplateBox[{
+      Cell[
+       TextData["SyncDim"]], "paclet:TUG/ref/SyncDim", "TUG Package Symbol"},
+     "PackageLink",
+     BaseStyle->"3ColumnTableMod"], "True", Cell["\<\
+use to synchronize the projection plane into the three-dimensional vector \
+space. \
+\>", "TableText",ExpressionUUID->"3c249c1e-d3b9-4e01-ac75-bd86780e2ccc"]}
+  }]], "3ColumnTableMod",
+ GridBoxOptions->{
+ GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {{None}}},
+ GridBoxDividers->{"Rows" -> {{True, True}}}},
+ CellID->1889737650,ExpressionUUID->"15b81b88-855d-47df-b6cd-d9e32386e551"],
+
+Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon",ExpressionUUID->
+     "f33aa1c9-966f-4705-8b7a-759f9df1293e"], 
+    TemplateBox[{
+      Cell[
+       TextData["Verbosely"]], "paclet:TUG/ref/Verbosely", 
+      "TUG Package Symbol"},
+     "PackageLink",
+     BaseStyle->"3ColumnTableMod"], "True", Cell[
+    "use a verbose mode.  ", "TableText",ExpressionUUID->
+     "152896b8-5088-4930-8d67-07413d7463a6"]}
+  }]], "3ColumnTableMod",
+ GridBoxOptions->{
+ GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {{None}}},
+ GridBoxDividers->{"Rows" -> {{True, True}}}},
+ CellID->1661816152,ExpressionUUID->"97a36adc-37a5-44ea-afb1-caa31f4077d2"],
+
+Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon",ExpressionUUID->
+     "a6cb9661-d2aa-403e-9b14-479c28fd3de9"], 
+    TemplateBox[{
+      Cell[
+       TextData["ViewLegend"]], "paclet:TUG/ref/ViewLegend", 
+      "TUG Package Symbol"},
+     "PackageLink",
+     BaseStyle->"3ColumnTableMod"], "False", Cell[
+    "use not to draw the legend. ", "TableText",ExpressionUUID->
+     "bb9f7a34-3806-4cc2-b7b7-e81e255992e6"]}
+  }]], "3ColumnTableMod",
+ GridBoxOptions->{
+ GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {{None}}},
+ GridBoxDividers->{"Rows" -> {{True, True}}}},
+ CellID->2021650755,ExpressionUUID->"a4bcffd9-063d-499a-b5c5-3037b12c646a"],
+
+Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon",ExpressionUUID->
+     "f762f7c4-8f23-401a-98ac-68bb890f67c9"], 
+    TemplateBox[{
+      Cell[
+       TextData["ViewHarsanyiSol"]], "paclet:TUG/ref/ViewHarsanyiSol", 
+      "TUG Package Symbol"},
+     "PackageLink",
+     BaseStyle->"3ColumnTableMod"], "False", Cell[
+    "use to not draw the Harsanyi value. ", "TableText",ExpressionUUID->
+     "4bb4380e-69db-4bd5-ad76-e60db12e76eb"]}
+  }]], "3ColumnTableMod",
+ GridBoxOptions->{
+ GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {{None}}},
+ GridBoxDividers->{"Rows" -> {{True, True}}}},
+ CellID->2117624847,ExpressionUUID->"c6f49732-c3e1-434f-bb9c-ff1dd4774d7d"],
+
+Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon",ExpressionUUID->
+     "9eaf91f2-eb7a-4b72-bfc1-abd187bd9348"], 
+    TemplateBox[{
+      Cell[
+       TextData["ViewKernelSol"]], "paclet:TUG/ref/ViewKernelSol", 
+      "TUG Package Symbol"},
+     "PackageLink",
+     BaseStyle->"3ColumnTableMod"], "False", Cell[
+    "use to not draw the kernel. ", "TableText",ExpressionUUID->
+     "f3692f3e-4dac-4414-a9c2-b2901030ec35"]}
+  }]], "3ColumnTableMod",
+ GridBoxOptions->{
+ GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {{None}}},
+ GridBoxDividers->{"Rows" -> {{True, True}}}},
+ CellID->2145330687,ExpressionUUID->"420d661b-9352-4b57-87f5-7e4a87ea5c44"],
+
+Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon",ExpressionUUID->
+     "789a250d-0c15-49ca-b887-aa0e8a85ecbf"], 
+    TemplateBox[{
+      Cell[
+       TextData["ViewModiclusSol"]], "paclet:TUG/ref/ViewModiclusSol", 
+      "TUG Package Symbol"},
+     "PackageLink",
+     BaseStyle->"3ColumnTableMod"], "False", Cell[
+    "use to not draw the modiclus. ", "TableText",ExpressionUUID->
+     "e6e09a43-3146-4025-826b-dcdd86d502e0"]}
+  }]], "3ColumnTableMod",
+ GridBoxOptions->{
+ GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {{None}}},
+ GridBoxDividers->{"Rows" -> {{True, True}}}},
+ CellID->203358790,ExpressionUUID->"9978d195-5f7a-4e3a-8b99-c0356e9ce066"],
+
+Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon",ExpressionUUID->
+     "1305cca6-532e-449e-8db5-108efd0f2d51"], 
+    TemplateBox[{
+      Cell[
+       TextData["ViewNucleolusSol"]], "paclet:TUG/ref/ViewNucleolusSol", 
+      "TUG Package Symbol"},
+     "PackageLink",
+     BaseStyle->"3ColumnTableMod"], "False", Cell[
+    "use to not draw the nucleolus. ", "TableText",ExpressionUUID->
+     "eda66f81-8baa-4901-8eb7-14ab123246e5"]}
+  }]], "3ColumnTableMod",
+ GridBoxOptions->{
+ GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {{None}}},
+ GridBoxDividers->{"Rows" -> {{True, True}}}},
+ CellID->1843978144,ExpressionUUID->"87c790bb-5f79-4b23-8ee7-a3eca293e2ef"],
+
+Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon",ExpressionUUID->
+     "ef2bbcce-4e04-4d72-84f1-b37541d874d5"], 
+    TemplateBox[{
+      Cell[
+       TextData["ViewPayoffSol"]], "paclet:TUG/ref/ViewPayoffSol", 
+      "TUG Package Symbol"},
+     "PackageLink",
+     BaseStyle->"3ColumnTableMod"], "False", Cell[
+    "use to not draw an arbitrary payoff or list of payoffs. ", "TableText",
+     ExpressionUUID->"5cf62233-2257-4e3d-8615-59befbd27fe9"]}
+  }]], "3ColumnTableMod",
+ GridBoxOptions->{
+ GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {{None}}},
+ GridBoxDividers->{"Rows" -> {{True, True}}}},
+ CellID->1353055139,ExpressionUUID->"7ddf9a03-ac86-4d3c-bd69-7b9a5a3d7a71"],
+
+Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon",ExpressionUUID->
+     "21c4bb14-cf5d-4cfd-b686-c414955bf59b"], 
+    TemplateBox[{
+      Cell[
+       TextData["ViewShapleySol"]], "paclet:TUG/ref/ViewShapleySol", 
+      "TUG Package Symbol"},
+     "PackageLink",
+     BaseStyle->"3ColumnTableMod"], "False", Cell[
+    "use to not draw the Shapley value. ", "TableText",ExpressionUUID->
+     "c3b78899-2953-4400-93b3-00a8ec3dad19"]}
+  }]], "3ColumnTableMod",
+ GridBoxOptions->{
+ GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {{None}}},
+ GridBoxDividers->{"Rows" -> {{True, True}}}},
+ CellID->1846391669,ExpressionUUID->"46dc08f2-80d3-49eb-8181-2edd38859385"],
+
+Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon",ExpressionUUID->
+     "82d64305-0e18-49c2-a5b8-430ee768acef"], 
+    TemplateBox[{
+      Cell[
+       TextData["ViewSkel"]], "paclet:TUG/ref/ViewSkel", "TUG Package Symbol"},
+     "PackageLink",
+     BaseStyle->"3ColumnTableMod"], "False", Cell[
+    "use to not draw the Weber sets as a skeleton. ", "TableText",
+     ExpressionUUID->"b008902c-194f-4f2b-951e-506ef929cf2c"]}
+  }]], "3ColumnTableMod",
+ GridBoxOptions->{
+ GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {{None}}},
+ GridBoxDividers->{"Rows" -> {{True, True}}}},
+ CellID->901767574,ExpressionUUID->"b319816f-7446-468a-b60e-64a5d095f0b0"],
+
+Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon",ExpressionUUID->
+     "756a0d26-a5bd-4dd1-8913-26fa2b1ae661"], 
+    TemplateBox[{
+      Cell[
+       TextData["VRepresentation"]], "paclet:TUG/ref/VRepresentation", 
+      "TUG Package Symbol"},
+     "PackageLink",
+     BaseStyle->"3ColumnTableMod"], "False", Cell[
+    "use a hyperplane representation to draw the Weber set.", "TableText",
+     ExpressionUUID->"4b01a127-e6cf-41a6-9b3a-e554ca8e3086"]}
+  }]], "3ColumnTableMod",
+ GridBoxOptions->{
+ GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {{None}}},
+ GridBoxDividers->{"Rows" -> {{True, True}}}},
+ CellID->1435485306,ExpressionUUID->"72a29e2f-78d5-4e0f-bd7c-41ac23dc2f39"],
+
+Cell[TextData[{
+ "The option ",
+ Cell[BoxData[
+  RowBox[{
+   TemplateBox[{
+     Cell[
+      TextData["KernelCoord"]], "paclet:TUG/ref/KernelCoord", 
+     "TUG Package Symbol"},
+    "PackageLink",
+    BaseStyle->"InlineFormula"], "->", "kervec"}]], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "591e5c42-76c9-4d48-b348-0d2b3d10f88d"],
+ " passes a kernel element to the function/graphics, whereas  ",
+ Cell[BoxData[
+  RowBox[{
+   TemplateBox[{
+     Cell[
+      TextData["KernelCoord"]], "paclet:TUG/ref/KernelCoord", 
+     "TUG Package Symbol"},
+    "PackageLink",
+    BaseStyle->"InlineFormula"], "->", 
+   RowBox[{"{", 
+    RowBox[{"kervec1", ",", "kervec2"}], "}"}]}]], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "f74ba7ef-30c1-4263-8310-8b0953bb5d44"],
+ " passes a kernel line segment, instead. Has only an effect in connection \
+with  ",
+ Cell[BoxData[
+  RowBox[{
+   TemplateBox[{
+     Cell[
+      TextData["ViewKernelSol"]], "paclet:TUG/ref/ViewKernelSol", 
+     "TUG Package Symbol"},
+    "PackageLink",
+    BaseStyle->"InlineFormula"], "->", "True"}]], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "bd4534e4-0045-4466-be9a-a7fe9cd29556"],
+ ". "
+}], "Notes",
+ CellID->1570062306,ExpressionUUID->"4e7b172f-7c48-4a80-8ffd-5fc2e988aa82"],
+
+Cell[TextData[{
+ "The option ",
+ Cell[BoxData[
+  RowBox[{
+   TemplateBox[{
+     Cell[
+      TextData["ModiclusCoord"]], "paclet:TUG/ref/ModiclusCoord", 
+     "TUG Package Symbol"},
+    "PackageLink",
+    BaseStyle->"InlineFormula"], "->", "modvec"}]], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "417ed40c-5bc6-4694-a4c3-1f179129696d"],
+ " passes the modiclus to the function/graphics. Has only an effect in \
+connection with  ",
+ Cell[BoxData[
+  RowBox[{
+   TemplateBox[{
+     Cell[
+      TextData["ViewModiclusSol"]], "paclet:TUG/ref/ViewModiclusSol", 
+     "TUG Package Symbol"},
+    "PackageLink",
+    BaseStyle->"InlineFormula"], "->", "True"}]], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "482ca5bc-94e7-4d3a-bc5a-8d2805ca9efc"],
+ ". "
+}], "Notes",
+ CellID->660614,ExpressionUUID->"3afce79a-f892-40c5-9ff0-5c19420a3300"],
+
+Cell[TextData[{
+ "The option ",
+ Cell[BoxData[
+  RowBox[{
+   TemplateBox[{
+     Cell[
+      TextData["NucleolusCoord"]], "paclet:TUG/ref/NucleolusCoord", 
+     "TUG Package Symbol"},
+    "PackageLink",
+    BaseStyle->"InlineFormula"], "->", "nucvec"}]], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "1ad21ac7-5a42-4e6a-9faa-3622cb992bf4"],
+ " passes the nucleolus to the function/graphics. Has only an effect in \
+connection with  ",
+ Cell[BoxData[
+  RowBox[{
+   TemplateBox[{
+     Cell[
+      TextData["NucleolusCoord"]], "paclet:TUG/ref/NucleolusCoord", 
+     "TUG Package Symbol"},
+    "PackageLink",
+    BaseStyle->"InlineFormula"], "->", "True"}]], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "a161a4ff-b9e4-4b7b-94bf-f4d85833e0bb"],
+ ". "
+}], "Notes",
+ CellID->2102971043,ExpressionUUID->"f0b14b20-ae77-47ec-a99e-c8f67318f423"],
+
+Cell[TextData[{
+ "The option ",
+ Cell[BoxData[
+  RowBox[{
+   TemplateBox[{
+     Cell[
+      TextData["PayoffCoord"]], "paclet:TUG/ref/PayoffCoord", 
+     "TUG Package Symbol"},
+    "PackageLink",
+    BaseStyle->"InlineFormula"], "->", "payvec"}]], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "428187de-796a-4554-b98b-8748c8c0a0b6"],
+ " passes an arbitrary imputation to the function/graphics, whereas  ",
+ Cell[BoxData[
+  RowBox[{
+   TemplateBox[{
+     Cell[
+      TextData["PayoffCoord"]], "paclet:TUG/ref/PayoffCoord", 
+     "TUG Package Symbol"},
+    "PackageLink",
+    BaseStyle->"InlineFormula"], "->", 
+   RowBox[{"{", 
+    RowBox[{"payvec1", ",", "payvec2"}], "}"}]}]], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "8e4e7a4a-937a-448e-8477-30f8c59f6eee"],
+ " passes a list of imputations, instead. Has only an effect in connection \
+with  ",
+ Cell[BoxData[
+  RowBox[{
+   TemplateBox[{
+     Cell[
+      TextData["ViewPayoffSol"]], "paclet:TUG/ref/ViewPayoffSol", 
+     "TUG Package Symbol"},
+    "PackageLink",
+    BaseStyle->"InlineFormula"], "->", "True"}]], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "c1243df6-b3a4-4fc9-84cb-dab135cfd6e1"],
+ ". "
+}], "Notes",
+ CellID->1108551522,ExpressionUUID->"93075b68-2a67-4070-944d-282663c9237b"],
+
+Cell[TextData[{
+ "The option ",
+ Cell[BoxData[
+  RowBox[{
+   TemplateBox[{
+     Cell[
+      TextData["ShapleyCoord"]], "paclet:TUG/ref/ShapleyCoord", 
+     "TUG Package Symbol"},
+    "PackageLink",
+    BaseStyle->"InlineFormula"], "->", "shvec"}]], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "da9b174d-dc8c-4c83-a2a7-95609a739a64"],
+ " passes the Shapley value to the function/graphics. . Has only an effect in \
+connection with  ",
+ Cell[BoxData[
+  RowBox[{
+   TemplateBox[{
+     Cell[
+      TextData["ShapleyCoord"]], "paclet:TUG/ref/ShapleyCoord", 
+     "TUG Package Symbol"},
+    "PackageLink",
+    BaseStyle->"InlineFormula"], "->", "True"}]], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "cbf28d82-9562-409f-a7d5-bbb66c5a1678"],
+ ". "
+}], "Notes",
+ CellID->1499340563,ExpressionUUID->"d62bf911-03c2-4a46-ad4b-9f13ed53504a"],
+
+Cell[TextData[{
+ "The option ",
+ Cell[BoxData[
+  RowBox[{
+   TemplateBox[{
+     Cell[
+      TextData["ShowImputationSet"]], "paclet:TUG/ref/ShowImputationSet", 
+     "TUG Package Symbol"},
+    "PackageLink",
+    BaseStyle->"InlineFormula"], "->", "False"}]], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "38235d81-e1f7-4f9f-b1b9-0bf99d6d68ec"],
+ " does not depict the imputation set."
+}], "Notes",
+ CellID->2041043955,ExpressionUUID->"1bb82811-6105-4268-ac72-d02948506c47"],
+
+Cell[TextData[{
+ "The option ",
+ Cell[BoxData[
+  RowBox[{
+   TemplateBox[{
+     Cell[
+      TextData["PictureSize"]], "paclet:TUG/ref/PictureSize", 
+     "TUG Package Symbol"},
+    "PackageLink",
+    BaseStyle->"InlineFormula"], "->", 
+   RowBox[{"{", 
+    RowBox[{"600", ",", "668"}], "}"}]}]], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "a91c7e45-6314-4745-996c-05762fd96fdf"],
+ " changes the picture size of the graphics."
+}], "Notes",
+ CellID->282211233,ExpressionUUID->"b3c89691-abfc-445c-ae8c-58d6c10d8a17"],
+
+Cell[TextData[{
+ "The option ",
+ Cell[BoxData[
+  RowBox[{
+   TemplateBox[{
+     Cell[
+      TextData["PtRadius"]], "paclet:TUG/ref/PtRadius", "TUG Package Symbol"},
+    
+    "PackageLink",
+    BaseStyle->"InlineFormula"], "->", "0.031"}]], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "5a3410b8-b1f4-4923-bdb4-e41bd988c1cf"],
+ " enlarges the point radius of the point solutions size."
+}], "Notes",
+ CellID->2126189377,ExpressionUUID->"dfb6f0c9-7c93-4306-8b1f-272be70d7d5a"],
+
+Cell[TextData[{
+ "The option ",
+ Cell[BoxData[
+  RowBox[{
+   TemplateBox[{
+     Cell[
+      TextData["SyncDim"]], "paclet:TUG/ref/SyncDim", "TUG Package Symbol"},
+    "PackageLink",
+    BaseStyle->"InlineFormula"], "->", "False"}]], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "bfdcabcf-0a17-4366-b1f4-9adc3010cd9e"],
+ " does not synchronize the projection plane into the three-dimensional \
+vector space of each graphic. May result in an inaccurate display of the \
+graphics."
+}], "Notes",
+ CellID->995309240,ExpressionUUID->"2ce026e5-ed15-4c25-af72-e99db16dd92e"],
+
+Cell[TextData[{
+ "The option ",
+ Cell[BoxData[
+  RowBox[{
+   TemplateBox[{
+     Cell[
+      TextData["Verbosely"]], "paclet:TUG/ref/Verbosely", 
+     "TUG Package Symbol"},
+    "PackageLink",
+    BaseStyle->"InlineFormula"], "->", "False"}]], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "ab5f9b27-0bfe-4b66-8945-95538c663037"],
+ " does not use a verbose mode."
+}], "Notes",
+ CellID->608546217,ExpressionUUID->"40c01c26-f749-4e25-ad43-93668271f78c"],
+
+Cell[TextData[{
+ "The option ",
+ Cell[BoxData[
+  RowBox[{
+   TemplateBox[{
+     Cell[
+      TextData["ViewLegend"]], "paclet:TUG/ref/ViewLegend", 
+     "TUG Package Symbol"},
+    "PackageLink",
+    BaseStyle->"InlineFormula"], "->", "True"}]], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "7c865e9e-00c8-42b7-ad91-0f09cfac8fda"],
+ " depicts the legend. "
+}], "Notes",
+ CellID->1426210193,ExpressionUUID->"fdd08ee7-aebe-4a5c-ae06-451af1f4beee"],
+
+Cell[TextData[{
+ "The option ",
+ Cell[BoxData[
+  RowBox[{
+   TemplateBox[{
+     Cell[
+      TextData["ViewKernelSol"]], "paclet:TUG/ref/ViewKernelSol", 
+     "TUG Package Symbol"},
+    "PackageLink",
+    BaseStyle->"InlineFormula"], "->", "True"}]], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "4b145c51-9d2d-4a77-91c6-a0cb12d6402c"],
+ " depicts the kernel. "
+}], "Notes",
+ CellID->930159234,ExpressionUUID->"1dea4e7a-95a3-4981-a39f-da8bd558a149"],
+
+Cell[TextData[{
+ "The option ",
+ Cell[BoxData[
+  RowBox[{
+   TemplateBox[{
+     Cell[
+      TextData["ViewModiclusSol"]], "paclet:TUG/ref/ViewModiclusSol", 
+     "TUG Package Symbol"},
+    "PackageLink",
+    BaseStyle->"InlineFormula"], "->", "True"}]], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "8d0bfd48-2cd8-4b79-887c-74e860f9d9b2"],
+ " depicts the modiclus. "
+}], "Notes",
+ CellID->266098834,ExpressionUUID->"2ac949bd-eeff-4a11-9670-df5382166dae"],
+
+Cell[TextData[{
+ "The option ",
+ Cell[BoxData[
+  RowBox[{
+   TemplateBox[{
+     Cell[
+      TextData["ViewNucleolusSol"]], "paclet:TUG/ref/ViewNucleolusSol", 
+     "TUG Package Symbol"},
+    "PackageLink",
+    BaseStyle->"InlineFormula"], "->", "True"}]], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "f11c718c-4c87-44f8-9676-aae799aff727"],
+ " depicts the nucleolus. "
+}], "Notes",
+ CellID->1374650356,ExpressionUUID->"a6ea11bd-a92d-49e1-8cc9-eaa770312e28"],
+
+Cell[TextData[{
+ "The option ",
+ Cell[BoxData[
+  RowBox[{
+   TemplateBox[{
+     Cell[
+      TextData["ViewPayoffSol"]], "paclet:TUG/ref/ViewPayoffSol", 
+     "TUG Package Symbol"},
+    "PackageLink",
+    BaseStyle->"InlineFormula"], "->", "True"}]], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "096bbb59-158a-4c0f-a049-1727bc728e4d"],
+ " depicts an arbitrary imputation or list of imputations. "
+}], "Notes",
+ CellID->2096118988,ExpressionUUID->"893c3fde-adcf-49fa-a3a2-99668a34c3e8"],
+
+Cell[TextData[{
+ "The option ",
+ Cell[BoxData[
+  RowBox[{
+   TemplateBox[{
+     Cell[
+      TextData["ViewShapleySol"]], "paclet:TUG/ref/ViewShapleySol", 
+     "TUG Package Symbol"},
+    "PackageLink",
+    BaseStyle->"InlineFormula"], "->", "True"}]], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "7aee3170-b487-4b7d-85c5-18d21748be1c"],
+ " depicts the Shapley value. "
+}], "Notes",
+ CellID->692156901,ExpressionUUID->"b71c8f3b-84b3-4db3-a1e2-227a4b43962f"],
+
+Cell[TextData[{
+ "The option ",
+ Cell[BoxData[
+  RowBox[{
+   TemplateBox[{
+     Cell[
+      TextData["ViewSkel"]], "paclet:TUG/ref/ViewSkel", "TUG Package Symbol"},
+    
+    "PackageLink",
+    BaseStyle->"InlineFormula"], "->", "True"}]], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "8fe6e637-f3be-4679-bb5a-a2326867a62d"],
+ " depicts the Weber set as a skeleton instead. "
+}], "Notes",
+ CellID->1735714032,ExpressionUUID->"cb5d0937-5c63-4846-8fd8-497625b87c2b"],
+
+Cell[TextData[{
+ "The option ",
+ Cell[BoxData[
+  RowBox[{
+   TemplateBox[{
+     Cell[
+      TextData["VRepresentation"]], "paclet:TUG/ref/VRepresentation", 
+     "TUG Package Symbol"},
+    "PackageLink",
+    BaseStyle->"InlineFormula"], "->", "True"}]], "InlineFormula",
+  FontFamily->"Source Sans Pro",ExpressionUUID->
+  "a7c50b2e-cd3d-4cef-b7cc-354728ffe965"],
+ " depicts the Weber set using a vertex representation instead of a \
+hyperplane representation."
+}], "Notes",
+ CellID->294414635,ExpressionUUID->"05f1a0b1-fb10-4889-a9fd-1197c9009707"]
+}, Dynamic[CurrentValue[
+ EvaluationNotebook[], {TaggingRules, "Openers", "NotesSection"}, Closed]]]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell[BoxData[
+  DynamicBox[ToBoxes[
+    If[
+     MatchQ[
+      CurrentValue[
+       EvaluationNotebook[], {
+       TaggingRules, "Openers", "PrimaryExamplesSection"}, Open], 
+      Alternatives[True, Open]], 
+     Style[
+      Graphics[{
+        Thickness[0.18], 
+        RGBColor[0.8509803921568627, 0.396078431372549, 0], 
+        Line[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]}, AspectRatio -> 1, 
+       PlotRange -> {{-3, 4}, {-1, 1}}, ImageSize -> 20], Magnification -> 
+      0.68 Inherited], 
+     Rotate[
+      Style[
+       Graphics[{
+         Thickness[0.18], 
+         RGBColor[0.8509803921568627, 0.396078431372549, 0], 
+         Line[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]}, AspectRatio -> 1, 
+        PlotRange -> {{-3, 4}, {-1, 1}}, ImageSize -> 20], Magnification -> 
+       0.68 Inherited], Rational[1, 2] Pi, {-1.65, -1}]]],
+   ImageSizeCache->{13.600000000000001`, {5., 8.600000000000001}}]],
+  ExpressionUUID->"b1a40e6b-fefb-4977-9de2-d969cd7805cc"],
+ Cell[BoxData[
+  TemplateBox[{1},
+   "Spacer1"]],ExpressionUUID->"26aca9ba-28a2-4791-aa0b-274336a8ad4c"],
+ "Examples",
+ "\[NonBreakingSpace]\[NonBreakingSpace]",
+ Cell["(1)", "ExampleCount",ExpressionUUID->
+  "5426fd2b-42f1-464a-a223-d22378f4c515"]
+}], "PrimaryExamplesSection",
+ WholeCellGroupOpener->True,
+ CacheGraphics->False,
+ CellTags->"PrimaryExamplesSection",
+ CellID->1456978607,ExpressionUUID->"732d5cba-15a7-4acd-8f98-23933589bfa1"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ Cell[BoxData[
+  DynamicBox[ToBoxes[
+    If[
+     MatchQ[
+      CurrentValue[
+       EvaluationNotebook[], {TaggingRules, "Openers", "ExampleSection", "0"},
+        Closed], 
+      Alternatives[Open, True]], 
+     Style[
+      Graphics[{
+        Thickness[0.18], 
+        RGBColor[0.8509803921568627, 0.396078431372549, 0], 
+        Line[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]}, AspectRatio -> 1, 
+       PlotRange -> {{-3, 4}, {-1, 1}}, ImageSize -> 20], Magnification -> 
+      0.68 Inherited], 
+     Rotate[
+      Style[
+       Graphics[{
+         Thickness[0.18], 
+         RGBColor[0.8509803921568627, 0.396078431372549, 0], 
+         Line[{{-1.8, 0.5}, {0, 0}, {1.8, 0.5}}]}, AspectRatio -> 1, 
+        PlotRange -> {{-3, 4}, {-1, 1}}, ImageSize -> 20], Magnification -> 
+       0.68 Inherited], Rational[1, 2] Pi, {-1.65, -1}]]],
+   ImageSizeCache->{13.600000000000001`, {5., 8.600000000000001}}]],
+  ExpressionUUID->"66fbb31c-4cfd-4965-a19a-74ae0c444fc6"],
+ Cell[BoxData[
+  TemplateBox[{1},
+   "Spacer1"]],ExpressionUUID->"a59a0fdd-b546-41e5-a377-396a4b9df4b8"],
+ "Basic Examples",
+ "\[NonBreakingSpace]\[NonBreakingSpace]",
+ Cell["(1)", "ExampleCount",ExpressionUUID->
+  "895988c3-b83a-4683-98a7-9d5cd785d493"]
+}], "ExampleSection", "ExampleSection",
+ WholeCellGroupOpener->True,
+ CacheGraphics->False,
+ CellID->1311748289,ExpressionUUID->"6bff4e4f-acf0-4144-b8db-f6158d8e3de5"],
+
+Cell["Loading the package:", "ExampleText",
+ CellID->724598077,ExpressionUUID->"4b80794f-4994-4d9f-b2c0-b0012372ad2b"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Needs", "[", "\"\<TUG`\>\"", "]"}]], "Input",
+ CellLabel->"In[1]:=",
+ CellID->2141335847,ExpressionUUID->"1321d5f0-7a07-4e3d-8e4e-cf92723aec9f"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\<\"===================================================\"\>"], \
+"Print",
+ CellContext->"Cell$$16171`",
+ CellLabel->"During evaluation of In[1]:=",
+ CellID->1491254379,ExpressionUUID->"6e8be7a6-cb84-44d4-89df-9338f8e3fc4d"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Loading Package 'TuGames' for \"\>", 
+   "\[InvisibleSpace]", "\<\"Unix\"\>"}],
+  SequenceForm["Loading Package 'TuGames' for ", "Unix"],
+  Editable->False]], "Print",
+ CellContext->"Cell$$16171`",
+ CellLabel->"During evaluation of In[1]:=",
+ CellID->1738312348,ExpressionUUID->"54d71574-b066-4b98-bd04-0e756ffc2740"],
+
+Cell[BoxData["\<\"===================================================\"\>"], \
+"Print",
+ CellContext->"Cell$$16171`",
+ CellLabel->"During evaluation of In[1]:=",
+ CellID->664190017,ExpressionUUID->"2cb0c8a8-4c30-4ac5-a4f3-223a862c7170"],
+
+Cell[BoxData["\<\"TuGames V3.1.4 by Holger I. Meinhardt\"\>"], "Print",
+ CellContext->"Cell$$16171`",
+ CellLabel->"During evaluation of In[1]:=",
+ CellID->233808370,ExpressionUUID->"71cfaf1a-a0cf-4390-9d1a-36060fb793aa"],
+
+Cell[BoxData["\<\"Release Date: 31.05.2024\"\>"], "Print",
+ CellContext->"Cell$$16171`",
+ CellLabel->"During evaluation of In[1]:=",
+ CellID->1133241564,ExpressionUUID->"77f5cdd1-de33-4176-900b-d91f6590ca5f"],
+
+Cell[BoxData["\<\"Program runs under Mathematica Version 12.0 or later\"\>"], \
+"Print",
+ CellContext->"Cell$$16171`",
+ CellLabel->"During evaluation of In[1]:=",
+ CellID->1265109267,ExpressionUUID->"e766fdaa-1a2b-4541-abae-0924deac0c4f"],
+
+Cell[BoxData["\<\"Version 12.x or higher is recommended\"\>"], "Print",
+ CellContext->"Cell$$16171`",
+ CellLabel->"During evaluation of In[1]:=",
+ CellID->1401849865,ExpressionUUID->"5175a5a0-7338-437c-b157-ff758a650498"],
+
+Cell[BoxData["\<\"===================================================\"\>"], \
+"Print",
+ CellContext->"Cell$$16171`",
+ CellLabel->"During evaluation of In[1]:=",
+ CellID->1849920252,ExpressionUUID->"27057489-be80-4510-827a-efd2da089c9e"],
+
+Cell[BoxData["\<\"===================================================\"\>"], \
+"Print",
+ CellContext->"Cell$$16171`",
+ CellLabel->"During evaluation of In[1]:=",
+ CellID->1857040066,ExpressionUUID->"322918fb-4691-4854-9e41-f6f41f68f0e9"],
+
+Cell[BoxData["\<\"Package 'TuGames' loaded\"\>"], "Print",
+ CellContext->"Cell$$16171`",
+ CellLabel->"During evaluation of In[1]:=",
+ CellID->1186473769,ExpressionUUID->"eee5ca88-7551-4826-b456-46e1302cb566"],
+
+Cell[BoxData["\<\"===================================================\"\>"], \
+"Print",
+ CellContext->"Cell$$16171`",
+ CellLabel->"During evaluation of In[1]:=",
+ CellID->359649877,ExpressionUUID->"def6c8d4-9965-41ed-a92e-20da1d9f092b"]
+}, Open  ]]
+}, Open  ]],
+
+Cell["Define the following four person game:", "ExampleText",
+ CellID->2083786667,ExpressionUUID->"9b91e60d-9489-48b5-bee4-b0526058b4f4"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"T", "=", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2", ",", "3", ",", "4"}], "}"}]}], ";"}]], "Input",
+ CellLabel->"In[2]:=",
+ CellID->585427827,ExpressionUUID->"3cbd347b-7636-48f3-9f30-e1e8365bbfb7"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"vec", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "0", ",", "4", ",", "0", ",", "2", ",", "0", ",", "8", ",", "0", ",", "0",
+      ",", "0", ",", "0", ",", "8", ",", "0", ",", "0", ",", "0", ",", "0", 
+     ",", "20"}], "}"}]}], ";"}]], "Input",
+ CellLabel->"In[3]:=",
+ CellID->1947756944,ExpressionUUID->"bb866015-b92c-4436-b8f1-24acb1ef39de"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ExpGame", ":=", 
+   RowBox[{"DefineGame", "[", 
+    RowBox[{"T", ",", "vec"}], "]"}]}], ";"}]], "Input",
+ CellLabel->"In[4]:=",
+ CellID->1946614331,ExpressionUUID->"0f7da18c-3302-49d8-9a61-6d1a0e4de348"],
+
+Cell["\<\
+First, let us consider the set of options with its default values that is \
+given by\
+\>", "ExampleText",
+ CellID->937669004,ExpressionUUID->"24157604-2b59-4fc5-a995-ac03c3be5ce6"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Options", "[", "PlotWeberSet3dV6", "]"}]], "Input",
+ CellLabel->"In[5]:=",
+ CellID->2096152795,ExpressionUUID->"23c06206-65c2-430c-acfe-fd1838b0def8"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"HarsanyiValCoord", "\[Rule]", 
+    RowBox[{"{", "}"}]}], ",", 
+   RowBox[{"KernelCoord", "\[Rule]", 
+    RowBox[{"{", "}"}]}], ",", 
+   RowBox[{"ModiclusCoord", "\[Rule]", 
+    RowBox[{"{", "}"}]}], ",", 
+   RowBox[{"NucleolusCoord", "\[Rule]", 
+    RowBox[{"{", "}"}]}], ",", 
+   RowBox[{"PayoffCoord", "\[Rule]", 
+    RowBox[{"{", "}"}]}], ",", 
+   RowBox[{"PictureSize", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"400", ",", "434"}], "}"}]}], ",", 
+   RowBox[{"PtRadius", "\[Rule]", "0.021`"}], ",", 
+   RowBox[{"ShapleyCoord", "\[Rule]", 
+    RowBox[{"{", "}"}]}], ",", 
+   RowBox[{"ShowImputationSet", "\[Rule]", "True"}], ",", 
+   RowBox[{"SyncDim", "\[Rule]", "True"}], ",", 
+   RowBox[{"Verbosely", "\[Rule]", "True"}], ",", 
+   RowBox[{"ViewHarsanyiSol", "\[Rule]", "False"}], ",", 
+   RowBox[{"ViewKernelSol", "\[Rule]", "False"}], ",", 
+   RowBox[{"ViewLegend", "\[Rule]", "False"}], ",", 
+   RowBox[{"ViewModiclusSol", "\[Rule]", "False"}], ",", 
+   RowBox[{"ViewNucleolusSol", "\[Rule]", "False"}], ",", 
+   RowBox[{"ViewPayoffSol", "\[Rule]", "False"}], ",", 
+   RowBox[{"ViewShapleySol", "\[Rule]", "False"}], ",", 
+   RowBox[{"ViewSkel", "\[Rule]", "False"}], ",", 
+   RowBox[{"VRepresentation", "\[Rule]", "False"}]}], "}"}]], "Output",
+ CellContext->"Cell$$16171`",
+ CellLabel->"Out[5]=",
+ CellID->1664527245,ExpressionUUID->"83485ec2-0f3e-45c3-8f10-29fd98fb29b0"]
+}, Open  ]],
+
+Cell["\<\
+The three-dimensional Weber set of the game is now plotted while calling\
+\>", "ExampleText",
+ CellID->4896524,ExpressionUUID->"c506ace3-8fc1-4a8a-8c1f-9084bfe892b1"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"fig01", "=", 
+  RowBox[{"PlotWeberSet3dV6", "[", "ExpGame", "]"}]}]], "Input",
+ CellLabel->"In[6]:=",
+ CellID->640476792,ExpressionUUID->"1f26fdfa-6c2f-455b-ba9c-43bf4a588697"],
+
+Cell[BoxData[
+ Graphics3DBox[{
+   {RGBColor[1, 0.5, 0], Opacity[0.4], GraphicsComplex3DBox[CompressedData["
+1:eJxTTMoPSmViYGAQAWJmIJ41EwRO2kPom/sZwOCDPUwclQ+Th+uDq0fTB1eH
+CtDlYfrQzYPxb2Kow+UedHn8fJj5O+1R5WHm7kRz18796Oqxi6O7b6e9MRhc
+hrsXXRyX+/ADuP/R3AkzHyEOAI2MhOU=
+     "], Polygon3DBox[{{18, 16, 7}, {6, 4, 17}, {6, 18, 4}, {1, 7, 3}, {15, 4,
+       1}, {12, 19, 6}, {19, 2, 6}, {10, 13, 20}, {13, 16, 20}, {14, 16, 
+      18}, {17, 4, 15}, {18, 7, 4}, {4, 7, 1}, {12, 6, 17}, {5, 10, 20}, {2, 
+      8, 6}, {6, 8, 18}, {3, 9, 1}, {3, 13, 9}, {9, 11, 1}, {1, 11, 15}, {15, 
+      12, 17}, {15, 19, 12}, {19, 11, 10}, {15, 11, 19}, {11, 13, 10}, {7, 13,
+       3}, {7, 16, 13}, {9, 13, 11}, {20, 8, 5}, {20, 14, 8}, {2, 10, 5}, {8, 
+      14, 18}, {5, 8, 2}, {19, 10, 2}, {20, 16, 14}}]]}, 
+   {Thickness[Large], 
+    {Thickness[0.0085], 
+     TubeBox[NCache[{{Rational[1, 5], Rational[-2, 5], 1}, {
+        1, Rational[-1, 5], 0}}, {{0.2, -0.4, 1}, {1, -0.2, 0}}]], 
+     TubeBox[NCache[{{Rational[1, 5], Rational[-2, 5], 1}, {
+        0, Rational[-2, 5], 1}}, {{0.2, -0.4, 1}, {0, -0.4, 1}}]], 
+     TubeBox[NCache[{{Rational[1, 5], Rational[-2, 5], 1}, {
+        0, Rational[1, 10], 1}}, {{0.2, -0.4, 1}, {0, 0.1, 1}}]], 
+     TubeBox[NCache[{{Rational[1, 5], Rational[-2, 5], 1}, {
+        1, Rational[1, 10], Rational[3, 10]}}, {{0.2, -0.4, 1}, {
+        1, 0.1, 0.3}}]], 
+     TubeBox[NCache[{{Rational[1, 5], 1, Rational[-2, 5]}, {
+        1, 0, Rational[-1, 5]}}, {{0.2, 1, -0.4}, {1, 0, -0.2}}]], 
+     TubeBox[NCache[{{Rational[1, 5], 1, Rational[-2, 5]}, {
+        0, 1, Rational[-2, 5]}}, {{0.2, 1, -0.4}, {0, 1, -0.4}}]], 
+     TubeBox[NCache[{{Rational[1, 5], 1, Rational[-2, 5]}, {0, 1, 0}}, {{
+        0.2, 1, -0.4}, {0, 1, 0}}]], 
+     TubeBox[NCache[{{Rational[1, 5], 1, Rational[-2, 5]}, {
+        1, Rational[2, 5], 0}}, {{0.2, 1, -0.4}, {1, 0.4, 0}}]], 
+     TubeBox[NCache[{{1, Rational[-1, 5], 0}, {1, 0, Rational[-1, 5]}}, {{
+        1, -0.2, 0}, {1, 0, -0.2}}]], 
+     TubeBox[NCache[{{1, Rational[-1, 5], 0}, {0, Rational[-2, 5], 1}}, {{
+        1, -0.2, 0}, {0, -0.4, 1}}]], 
+     TubeBox[NCache[{{1, Rational[-1, 5], 0}, {0, 0, 0}}, {{1, -0.2, 0}, {0, 
+        0, 0}}]], 
+     TubeBox[NCache[{{1, Rational[-1, 5], 0}, {
+        1, Rational[1, 10], Rational[3, 10]}}, {{1, -0.2, 0}, {
+        1, 0.1, 0.3}}]], 
+     TubeBox[NCache[{{1, 0, Rational[-1, 5]}, {0, 1, Rational[-2, 5]}}, {{
+        1, 0, -0.2}, {0, 1, -0.4}}]], 
+     TubeBox[NCache[{{1, 0, Rational[-1, 5]}, {0, 0, 0}}, {{1, 0, -0.2}, {0, 
+        0, 0}}]], 
+     TubeBox[NCache[{{1, 0, Rational[-1, 5]}, {1, Rational[2, 5], 0}}, {{
+        1, 0, -0.2}, {1, 0.4, 0}}]], 
+     TubeBox[NCache[{{0, Rational[-2, 5], 1}, {0, 0, 0}}, {{0, -0.4, 1}, {0, 
+        0, 0}}]], 
+     TubeBox[NCache[{{0, Rational[-2, 5], 1}, {
+        Rational[-1, 10], Rational[1, 10], 1}}, {{
+        0, -0.4, 1}, {-0.1, 0.1, 1}}]], 
+     TubeBox[NCache[{{0, Rational[-2, 5], 1}, {
+        Rational[-2, 5], Rational[1, 10], Rational[3, 10]}}, {{
+        0, -0.4, 1}, {-0.4, 0.1, 0.3}}]], 
+     TubeBox[NCache[{{0, 1, Rational[-2, 5]}, {0, 0, 0}}, {{0, 1, -0.4}, {0, 
+        0, 0}}]], 
+     TubeBox[NCache[{{0, 1, Rational[-2, 5]}, {0, 1, 0}}, {{0, 1, -0.4}, {0, 
+        1, 0}}]], 
+     TubeBox[NCache[{{0, 1, Rational[-2, 5]}, {
+        Rational[-2, 5], Rational[2, 5], 0}}, {{
+        0, 1, -0.4}, {-0.4, 0.4, 0}}]], 
+     TubeBox[NCache[{{0, 0, 0}, {
+        Rational[-2, 5], Rational[1, 10], Rational[3, 10]}}, {{0, 0, 
+        0}, {-0.4, 0.1, 0.3}}]], 
+     TubeBox[NCache[{{0, 0, 0}, {Rational[-2, 5], Rational[2, 5], 0}}, {{0, 0,
+         0}, {-0.4, 0.4, 0}}]], 
+     TubeBox[NCache[{{0, 1, 0}, {0, Rational[1, 10], 1}}, {{0, 1, 0}, {
+        0, 0.1, 1}}]], 
+     TubeBox[NCache[{{0, 1, 0}, {Rational[-1, 10], Rational[1, 10], 1}}, {{0, 
+        1, 0}, {-0.1, 0.1, 1}}]], 
+     TubeBox[NCache[{{0, 1, 0}, {1, Rational[2, 5], 0}}, {{0, 1, 0}, {
+        1, 0.4, 0}}]], 
+     TubeBox[NCache[{{0, 1, 0}, {Rational[-2, 5], Rational[2, 5], 0}}, {{0, 1,
+         0}, {-0.4, 0.4, 0}}]], 
+     TubeBox[NCache[{{0, Rational[1, 10], 1}, {
+        Rational[-1, 10], Rational[1, 10], 1}}, {{
+        0, 0.1, 1}, {-0.1, 0.1, 1}}]], 
+     TubeBox[NCache[{{0, Rational[1, 10], 1}, {
+        1, Rational[1, 10], Rational[3, 10]}}, {{0, 0.1, 1}, {1, 0.1, 0.3}}]],
+      TubeBox[NCache[{{0, Rational[1, 10], 1}, {1, Rational[2, 5], 0}}, {{
+        0, 0.1, 1}, {1, 0.4, 0}}]], 
+     TubeBox[NCache[{{Rational[-1, 10], Rational[1, 10], 1}, {
+        Rational[-2, 5], Rational[1, 10], Rational[3, 10]}}, {{-0.1, 0.1, 
+         1}, {-0.4, 0.1, 0.3}}]], 
+     TubeBox[NCache[{{Rational[-1, 10], Rational[1, 10], 1}, {
+        Rational[-2, 5], Rational[2, 5], 0}}, {{-0.1, 0.1, 1}, {-0.4, 0.4, 
+         0}}]], TubeBox[
+      NCache[{{1, Rational[1, 10], Rational[3, 10]}, {
+        1, Rational[2, 5], 0}}, {{1, 0.1, 0.3}, {1, 0.4, 0}}]], 
+     TubeBox[NCache[{{Rational[-2, 5], Rational[1, 10], Rational[3, 10]}, {
+        Rational[-2, 5], Rational[2, 5], 0}}, {{-0.4, 0.1, 
+        0.3}, {-0.4, 0.4, 0}}]]}, 
+    {Thickness[0.0035], Dashing[{0.01, 0.012}]}}, 
+   {Thickness[Large], 
+    GraphicsComplex3DBox[
+     NCache[{{0, Rational[1, 10], Rational[7, 10]}, {0, Rational[4, 5], 0}, {
+       Rational[7, 10], Rational[1, 10], 0}, {0, Rational[1, 10], 0}}, {{
+       0, 0.1, 0.7}, {0, 0.8, 0}, {0.7, 0.1, 0}, {0, 0.1, 0}}], 
+     TubeBox[{{2, 3, 4, 1}, {1, 3, 4, 2}, {1, 2, 4, 3}, {1, 2, 3, 4}}]]}},
+  AspectRatio->1,
+  Boxed->False,
+  ImageMargins->15,
+  ImageSize->{400, 434},
+  Lighting->(Lighting -> {{"Directional", 
+      RGBColor[0.3, 1, 0.1], {{5, 5, 4}, {5, 5, 0}}}}),
+  ViewCenter->{0.35, 0.35, 0.3},
+  ViewPoint->{1.714, 2.478, 1.54}]], "Output",
+ CellContext->"Cell$$16171`",
+ CellLabel->"Out[6]=",
+ CellID->506462743,ExpressionUUID->"82c7cbdd-03a9-4b5d-af29-9734ecfe2118"]
+}, Open  ]],
+
+Cell["\<\
+Plotting the Weber set without the a subset of the pre-imputation set is \
+accomplished through\
+\>", "ExampleText",
+ CellID->1283129384,ExpressionUUID->"e0c9407d-d842-4a43-aa19-6bb3dc4e6a16"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"fig02", "=", 
+  RowBox[{"PlotWeberSet3dV6", "[", 
+   RowBox[{"ExpGame", ",", 
+    RowBox[{"ShowImputationSet", "\[Rule]", " ", "False"}]}], 
+   "]"}]}]], "Input",
+ CellLabel->"In[7]:=",
+ CellID->99189785,ExpressionUUID->"289ac7ba-44a8-4573-a170-18a4b7271c39"],
+
+Cell[BoxData[
+ Graphics3DBox[{
+   {RGBColor[1, 0.5, 0], Opacity[0.4], GraphicsComplex3DBox[CompressedData["
+1:eJxTTMoPSmViYGAQAWJmIJ41EwRO2kPom/sZwOCDPUwclQ+Th+uDq0fTB1eH
+CtDlYfrQzYPxb2Kow+UedHn8fJj5O+1R5WHm7kRz18796Oqxi6O7b6e9MRhc
+hrsXXRyX+/ADuP/R3AkzHyEOAI2MhOU=
+     "], Polygon3DBox[{{18, 16, 7}, {6, 4, 17}, {6, 18, 4}, {1, 7, 3}, {15, 4,
+       1}, {12, 19, 6}, {19, 2, 6}, {10, 13, 20}, {13, 16, 20}, {14, 16, 
+      18}, {17, 4, 15}, {18, 7, 4}, {4, 7, 1}, {12, 6, 17}, {5, 10, 20}, {2, 
+      8, 6}, {6, 8, 18}, {3, 9, 1}, {3, 13, 9}, {9, 11, 1}, {1, 11, 15}, {15, 
+      12, 17}, {15, 19, 12}, {19, 11, 10}, {15, 11, 19}, {11, 13, 10}, {7, 13,
+       3}, {7, 16, 13}, {9, 13, 11}, {20, 8, 5}, {20, 14, 8}, {2, 10, 5}, {8, 
+      14, 18}, {5, 8, 2}, {19, 10, 2}, {20, 16, 14}}]]}, 
+   {Thickness[Large], 
+    {Thickness[0.0085], 
+     TubeBox[NCache[{{Rational[1, 5], Rational[-2, 5], 1}, {
+        1, Rational[-1, 5], 0}}, {{0.2, -0.4, 1}, {1, -0.2, 0}}]], 
+     TubeBox[NCache[{{Rational[1, 5], Rational[-2, 5], 1}, {
+        0, Rational[-2, 5], 1}}, {{0.2, -0.4, 1}, {0, -0.4, 1}}]], 
+     TubeBox[NCache[{{Rational[1, 5], Rational[-2, 5], 1}, {
+        0, Rational[1, 10], 1}}, {{0.2, -0.4, 1}, {0, 0.1, 1}}]], 
+     TubeBox[NCache[{{Rational[1, 5], Rational[-2, 5], 1}, {
+        1, Rational[1, 10], Rational[3, 10]}}, {{0.2, -0.4, 1}, {
+        1, 0.1, 0.3}}]], 
+     TubeBox[NCache[{{Rational[1, 5], 1, Rational[-2, 5]}, {
+        1, 0, Rational[-1, 5]}}, {{0.2, 1, -0.4}, {1, 0, -0.2}}]], 
+     TubeBox[NCache[{{Rational[1, 5], 1, Rational[-2, 5]}, {
+        0, 1, Rational[-2, 5]}}, {{0.2, 1, -0.4}, {0, 1, -0.4}}]], 
+     TubeBox[NCache[{{Rational[1, 5], 1, Rational[-2, 5]}, {0, 1, 0}}, {{
+        0.2, 1, -0.4}, {0, 1, 0}}]], 
+     TubeBox[NCache[{{Rational[1, 5], 1, Rational[-2, 5]}, {
+        1, Rational[2, 5], 0}}, {{0.2, 1, -0.4}, {1, 0.4, 0}}]], 
+     TubeBox[NCache[{{1, Rational[-1, 5], 0}, {1, 0, Rational[-1, 5]}}, {{
+        1, -0.2, 0}, {1, 0, -0.2}}]], 
+     TubeBox[NCache[{{1, Rational[-1, 5], 0}, {0, Rational[-2, 5], 1}}, {{
+        1, -0.2, 0}, {0, -0.4, 1}}]], 
+     TubeBox[NCache[{{1, Rational[-1, 5], 0}, {0, 0, 0}}, {{1, -0.2, 0}, {0, 
+        0, 0}}]], 
+     TubeBox[NCache[{{1, Rational[-1, 5], 0}, {
+        1, Rational[1, 10], Rational[3, 10]}}, {{1, -0.2, 0}, {
+        1, 0.1, 0.3}}]], 
+     TubeBox[NCache[{{1, 0, Rational[-1, 5]}, {0, 1, Rational[-2, 5]}}, {{
+        1, 0, -0.2}, {0, 1, -0.4}}]], 
+     TubeBox[NCache[{{1, 0, Rational[-1, 5]}, {0, 0, 0}}, {{1, 0, -0.2}, {0, 
+        0, 0}}]], 
+     TubeBox[NCache[{{1, 0, Rational[-1, 5]}, {1, Rational[2, 5], 0}}, {{
+        1, 0, -0.2}, {1, 0.4, 0}}]], 
+     TubeBox[NCache[{{0, Rational[-2, 5], 1}, {0, 0, 0}}, {{0, -0.4, 1}, {0, 
+        0, 0}}]], 
+     TubeBox[NCache[{{0, Rational[-2, 5], 1}, {
+        Rational[-1, 10], Rational[1, 10], 1}}, {{
+        0, -0.4, 1}, {-0.1, 0.1, 1}}]], 
+     TubeBox[NCache[{{0, Rational[-2, 5], 1}, {
+        Rational[-2, 5], Rational[1, 10], Rational[3, 10]}}, {{
+        0, -0.4, 1}, {-0.4, 0.1, 0.3}}]], 
+     TubeBox[NCache[{{0, 1, Rational[-2, 5]}, {0, 0, 0}}, {{0, 1, -0.4}, {0, 
+        0, 0}}]], 
+     TubeBox[NCache[{{0, 1, Rational[-2, 5]}, {0, 1, 0}}, {{0, 1, -0.4}, {0, 
+        1, 0}}]], 
+     TubeBox[NCache[{{0, 1, Rational[-2, 5]}, {
+        Rational[-2, 5], Rational[2, 5], 0}}, {{
+        0, 1, -0.4}, {-0.4, 0.4, 0}}]], 
+     TubeBox[NCache[{{0, 0, 0}, {
+        Rational[-2, 5], Rational[1, 10], Rational[3, 10]}}, {{0, 0, 
+        0}, {-0.4, 0.1, 0.3}}]], 
+     TubeBox[NCache[{{0, 0, 0}, {Rational[-2, 5], Rational[2, 5], 0}}, {{0, 0,
+         0}, {-0.4, 0.4, 0}}]], 
+     TubeBox[NCache[{{0, 1, 0}, {0, Rational[1, 10], 1}}, {{0, 1, 0}, {
+        0, 0.1, 1}}]], 
+     TubeBox[NCache[{{0, 1, 0}, {Rational[-1, 10], Rational[1, 10], 1}}, {{0, 
+        1, 0}, {-0.1, 0.1, 1}}]], 
+     TubeBox[NCache[{{0, 1, 0}, {1, Rational[2, 5], 0}}, {{0, 1, 0}, {
+        1, 0.4, 0}}]], 
+     TubeBox[NCache[{{0, 1, 0}, {Rational[-2, 5], Rational[2, 5], 0}}, {{0, 1,
+         0}, {-0.4, 0.4, 0}}]], 
+     TubeBox[NCache[{{0, Rational[1, 10], 1}, {
+        Rational[-1, 10], Rational[1, 10], 1}}, {{
+        0, 0.1, 1}, {-0.1, 0.1, 1}}]], 
+     TubeBox[NCache[{{0, Rational[1, 10], 1}, {
+        1, Rational[1, 10], Rational[3, 10]}}, {{0, 0.1, 1}, {1, 0.1, 0.3}}]],
+      TubeBox[NCache[{{0, Rational[1, 10], 1}, {1, Rational[2, 5], 0}}, {{
+        0, 0.1, 1}, {1, 0.4, 0}}]], 
+     TubeBox[NCache[{{Rational[-1, 10], Rational[1, 10], 1}, {
+        Rational[-2, 5], Rational[1, 10], Rational[3, 10]}}, {{-0.1, 0.1, 
+         1}, {-0.4, 0.1, 0.3}}]], 
+     TubeBox[NCache[{{Rational[-1, 10], Rational[1, 10], 1}, {
+        Rational[-2, 5], Rational[2, 5], 0}}, {{-0.1, 0.1, 1}, {-0.4, 0.4, 
+         0}}]], TubeBox[
+      NCache[{{1, Rational[1, 10], Rational[3, 10]}, {
+        1, Rational[2, 5], 0}}, {{1, 0.1, 0.3}, {1, 0.4, 0}}]], 
+     TubeBox[NCache[{{Rational[-2, 5], Rational[1, 10], Rational[3, 10]}, {
+        Rational[-2, 5], Rational[2, 5], 0}}, {{-0.4, 0.1, 
+        0.3}, {-0.4, 0.4, 0}}]]}, 
+    {Thickness[0.0035], Dashing[{0.01, 0.012}]}}},
+  AspectRatio->1,
+  Boxed->False,
+  ImageMargins->15,
+  ImageSize->{400, 434},
+  Lighting->(Lighting -> {{"Directional", 
+      RGBColor[0.3, 1, 0.1], {{5, 5, 4}, {5, 5, 0}}}}),
+  ViewCenter->{0.35, 0.35, 0.3},
+  ViewPoint->{1.714, 2.478, 1.54}]], "Output",
+ CellContext->"Cell$$16171`",
+ CellLabel->"Out[7]=",
+ CellID->349361716,ExpressionUUID->"5b9a8ab1-d3d8-4822-8ebe-0bc7faec18c5"]
+}, Open  ]],
+
+Cell["\<\
+Moreover, the Weber set plot can also be displayed as a skeleton through \
+\>", "ExampleText",
+ CellID->1693517317,ExpressionUUID->"0ff7d19c-6464-488b-84f7-39278819b76a"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"fig03", "=", 
+  RowBox[{"PlotWeberSet3dV6", "[", 
+   RowBox[{"ExpGame", ",", 
+    RowBox[{"ViewSkel", "\[Rule]", " ", "True"}]}], "]"}]}]], "Input",
+ CellLabel->"In[8]:=",
+ CellID->827728234,ExpressionUUID->"8c166302-2a38-4361-b9a3-a30a186cc78f"],
+
+Cell[BoxData[
+ Graphics3DBox[{
+   {Thickness[Large], 
+    GraphicsComplex3DBox[
+     NCache[{{0, Rational[1, 10], Rational[7, 10]}, {0, Rational[4, 5], 0}, {
+       Rational[7, 10], Rational[1, 10], 0}, {0, Rational[1, 10], 0}}, {{
+       0, 0.1, 0.7}, {0, 0.8, 0}, {0.7, 0.1, 0}, {0, 0.1, 0}}], 
+     TubeBox[{{2, 3, 4, 1}, {1, 3, 4, 2}, {1, 2, 4, 3}, {1, 2, 3, 4}}]]}, 
+   {Thickness[Large], 
+    {Thickness[0.0085], 
+     TubeBox[NCache[{{Rational[1, 5], Rational[-2, 5], 1}, {
+        1, Rational[-1, 5], 0}}, {{0.2, -0.4, 1}, {1, -0.2, 0}}]], 
+     TubeBox[NCache[{{Rational[1, 5], Rational[-2, 5], 1}, {
+        0, Rational[-2, 5], 1}}, {{0.2, -0.4, 1}, {0, -0.4, 1}}]], 
+     TubeBox[NCache[{{Rational[1, 5], Rational[-2, 5], 1}, {
+        0, Rational[1, 10], 1}}, {{0.2, -0.4, 1}, {0, 0.1, 1}}]], 
+     TubeBox[NCache[{{Rational[1, 5], Rational[-2, 5], 1}, {
+        1, Rational[1, 10], Rational[3, 10]}}, {{0.2, -0.4, 1}, {
+        1, 0.1, 0.3}}]], 
+     TubeBox[NCache[{{Rational[1, 5], 1, Rational[-2, 5]}, {
+        1, 0, Rational[-1, 5]}}, {{0.2, 1, -0.4}, {1, 0, -0.2}}]], 
+     TubeBox[NCache[{{Rational[1, 5], 1, Rational[-2, 5]}, {
+        0, 1, Rational[-2, 5]}}, {{0.2, 1, -0.4}, {0, 1, -0.4}}]], 
+     TubeBox[NCache[{{Rational[1, 5], 1, Rational[-2, 5]}, {0, 1, 0}}, {{
+        0.2, 1, -0.4}, {0, 1, 0}}]], 
+     TubeBox[NCache[{{Rational[1, 5], 1, Rational[-2, 5]}, {
+        1, Rational[2, 5], 0}}, {{0.2, 1, -0.4}, {1, 0.4, 0}}]], 
+     TubeBox[NCache[{{1, Rational[-1, 5], 0}, {1, 0, Rational[-1, 5]}}, {{
+        1, -0.2, 0}, {1, 0, -0.2}}]], 
+     TubeBox[NCache[{{1, Rational[-1, 5], 0}, {0, Rational[-2, 5], 1}}, {{
+        1, -0.2, 0}, {0, -0.4, 1}}]], 
+     TubeBox[NCache[{{1, Rational[-1, 5], 0}, {0, 0, 0}}, {{1, -0.2, 0}, {0, 
+        0, 0}}]], 
+     TubeBox[NCache[{{1, Rational[-1, 5], 0}, {
+        1, Rational[1, 10], Rational[3, 10]}}, {{1, -0.2, 0}, {
+        1, 0.1, 0.3}}]], 
+     TubeBox[NCache[{{1, 0, Rational[-1, 5]}, {0, 1, Rational[-2, 5]}}, {{
+        1, 0, -0.2}, {0, 1, -0.4}}]], 
+     TubeBox[NCache[{{1, 0, Rational[-1, 5]}, {0, 0, 0}}, {{1, 0, -0.2}, {0, 
+        0, 0}}]], 
+     TubeBox[NCache[{{1, 0, Rational[-1, 5]}, {1, Rational[2, 5], 0}}, {{
+        1, 0, -0.2}, {1, 0.4, 0}}]], 
+     TubeBox[NCache[{{0, Rational[-2, 5], 1}, {0, 0, 0}}, {{0, -0.4, 1}, {0, 
+        0, 0}}]], 
+     TubeBox[NCache[{{0, Rational[-2, 5], 1}, {
+        Rational[-1, 10], Rational[1, 10], 1}}, {{
+        0, -0.4, 1}, {-0.1, 0.1, 1}}]], 
+     TubeBox[NCache[{{0, Rational[-2, 5], 1}, {
+        Rational[-2, 5], Rational[1, 10], Rational[3, 10]}}, {{
+        0, -0.4, 1}, {-0.4, 0.1, 0.3}}]], 
+     TubeBox[NCache[{{0, 1, Rational[-2, 5]}, {0, 0, 0}}, {{0, 1, -0.4}, {0, 
+        0, 0}}]], 
+     TubeBox[NCache[{{0, 1, Rational[-2, 5]}, {0, 1, 0}}, {{0, 1, -0.4}, {0, 
+        1, 0}}]], 
+     TubeBox[NCache[{{0, 1, Rational[-2, 5]}, {
+        Rational[-2, 5], Rational[2, 5], 0}}, {{
+        0, 1, -0.4}, {-0.4, 0.4, 0}}]], 
+     TubeBox[NCache[{{0, 0, 0}, {
+        Rational[-2, 5], Rational[1, 10], Rational[3, 10]}}, {{0, 0, 
+        0}, {-0.4, 0.1, 0.3}}]], 
+     TubeBox[NCache[{{0, 0, 0}, {Rational[-2, 5], Rational[2, 5], 0}}, {{0, 0,
+         0}, {-0.4, 0.4, 0}}]], 
+     TubeBox[NCache[{{0, 1, 0}, {0, Rational[1, 10], 1}}, {{0, 1, 0}, {
+        0, 0.1, 1}}]], 
+     TubeBox[NCache[{{0, 1, 0}, {Rational[-1, 10], Rational[1, 10], 1}}, {{0, 
+        1, 0}, {-0.1, 0.1, 1}}]], 
+     TubeBox[NCache[{{0, 1, 0}, {1, Rational[2, 5], 0}}, {{0, 1, 0}, {
+        1, 0.4, 0}}]], 
+     TubeBox[NCache[{{0, 1, 0}, {Rational[-2, 5], Rational[2, 5], 0}}, {{0, 1,
+         0}, {-0.4, 0.4, 0}}]], 
+     TubeBox[NCache[{{0, Rational[1, 10], 1}, {
+        Rational[-1, 10], Rational[1, 10], 1}}, {{
+        0, 0.1, 1}, {-0.1, 0.1, 1}}]], 
+     TubeBox[NCache[{{0, Rational[1, 10], 1}, {
+        1, Rational[1, 10], Rational[3, 10]}}, {{0, 0.1, 1}, {1, 0.1, 0.3}}]],
+      TubeBox[NCache[{{0, Rational[1, 10], 1}, {1, Rational[2, 5], 0}}, {{
+        0, 0.1, 1}, {1, 0.4, 0}}]], 
+     TubeBox[NCache[{{Rational[-1, 10], Rational[1, 10], 1}, {
+        Rational[-2, 5], Rational[1, 10], Rational[3, 10]}}, {{-0.1, 0.1, 
+         1}, {-0.4, 0.1, 0.3}}]], 
+     TubeBox[NCache[{{Rational[-1, 10], Rational[1, 10], 1}, {
+        Rational[-2, 5], Rational[2, 5], 0}}, {{-0.1, 0.1, 1}, {-0.4, 0.4, 
+         0}}]], TubeBox[
+      NCache[{{1, Rational[1, 10], Rational[3, 10]}, {
+        1, Rational[2, 5], 0}}, {{1, 0.1, 0.3}, {1, 0.4, 0}}]], 
+     TubeBox[
+      NCache[{{Rational[-2, 5], Rational[1, 10], Rational[3, 10]}, {
+        Rational[-2, 5], Rational[2, 5], 0}}, {{-0.4, 0.1, 
+        0.3}, {-0.4, 0.4, 0}}]]}, 
+    {Thickness[0.0035], Dashing[{0.01, 0.012}]}}, 
+   {Thickness[Large], 
+    GraphicsComplex3DBox[
+     NCache[{{0, Rational[1, 10], Rational[7, 10]}, {0, Rational[4, 5], 0}, {
+       Rational[7, 10], Rational[1, 10], 0}, {0, Rational[1, 10], 0}}, {{
+       0, 0.1, 0.7}, {0, 0.8, 0}, {0.7, 0.1, 0}, {0, 0.1, 0}}], 
+     TubeBox[{{2, 3, 4, 1}, {1, 3, 4, 2}, {1, 2, 4, 3}, {1, 2, 3, 4}}]]}},
+  AspectRatio->1,
+  Boxed->False,
+  ImageMargins->15,
+  ImageSize->{400, 434},
+  Lighting->(Lighting -> {{"Directional", 
+      RGBColor[0.3, 1, 0.1], {{5, 5, 4}, {5, 5, 0}}}}),
+  ViewCenter->{0.35, 0.35, 0.3},
+  ViewPoint->{1.714, 2.478, 1.54},
+  ViewVertical->{0., 0., 1.}]], "Output",
+ CellContext->"Cell$$16171`",
+ CellLabel->"Out[8]=",
+ CellID->1071246206,ExpressionUUID->"14021640-ee9a-4d02-982b-73b356ed2fa1"]
+}, Open  ]],
+
+Cell["\<\
+Some important game solutions can also be added to the graphic.\
+\>", "ExampleText",
+ CellID->470193088,ExpressionUUID->"f7dcdf42-b8da-4c4a-935f-defd62ca4162"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"fig04", "=", 
+  RowBox[{"PlotWeberSet3dV6", "[", 
+   RowBox[{"ExpGame", ",", 
+    RowBox[{"ViewShapleySol", "\[Rule]", " ", "True"}], ",", 
+    RowBox[{"ViewNucleolusSol", "\[Rule]", " ", "True"}], ",", 
+    RowBox[{"ViewKernelSol", "\[Rule]", " ", "False"}], ",", " ", 
+    RowBox[{"ViewModiclusSol", "\[Rule]", " ", "True"}]}], "]"}]}]], "Input",
+ CellLabel->"In[9]:=",
+ CellID->1375615690,ExpressionUUID->"0db7bad1-e69f-46be-b5fd-5b82c967a892"],
+
+Cell[BoxData[
+ Graphics3DBox[{
+   {RGBColor[1, 0.5, 0], Opacity[0.4], GraphicsComplex3DBox[CompressedData["
+1:eJxTTMoPSmViYGAQAWJmIJ41EwRO2kPom/sZwOCDPUwclQ+Th+uDq0fTB1eH
+CtDlYfrQzYPxb2Kow+UedHn8fJj5O+1R5WHm7kRz18796Oqxi6O7b6e9MRhc
+hrsXXRyX+/ADuP/R3AkzHyEOAI2MhOU=
+     "], Polygon3DBox[{{18, 16, 7}, {6, 4, 17}, {6, 18, 4}, {1, 7, 3}, {15, 4,
+       1}, {12, 19, 6}, {19, 2, 6}, {10, 13, 20}, {13, 16, 20}, {14, 16, 
+      18}, {17, 4, 15}, {18, 7, 4}, {4, 7, 1}, {12, 6, 17}, {5, 10, 20}, {2, 
+      8, 6}, {6, 8, 18}, {3, 9, 1}, {3, 13, 9}, {9, 11, 1}, {1, 11, 15}, {15, 
+      12, 17}, {15, 19, 12}, {19, 11, 10}, {15, 11, 19}, {11, 13, 10}, {7, 13,
+       3}, {7, 16, 13}, {9, 13, 11}, {20, 8, 5}, {20, 14, 8}, {2, 10, 5}, {8, 
+      14, 18}, {5, 8, 2}, {19, 10, 2}, {20, 16, 14}}]]}, 
+   {Thickness[Large], 
+    {Thickness[0.0085], 
+     TubeBox[NCache[{{Rational[1, 5], Rational[-2, 5], 1}, {
+        1, Rational[-1, 5], 0}}, {{0.2, -0.4, 1}, {1, -0.2, 0}}]], 
+     TubeBox[NCache[{{Rational[1, 5], Rational[-2, 5], 1}, {
+        0, Rational[-2, 5], 1}}, {{0.2, -0.4, 1}, {0, -0.4, 1}}]], 
+     TubeBox[NCache[{{Rational[1, 5], Rational[-2, 5], 1}, {
+        0, Rational[1, 10], 1}}, {{0.2, -0.4, 1}, {0, 0.1, 1}}]], 
+     TubeBox[NCache[{{Rational[1, 5], Rational[-2, 5], 1}, {
+        1, Rational[1, 10], Rational[3, 10]}}, {{0.2, -0.4, 1}, {
+        1, 0.1, 0.3}}]], 
+     TubeBox[NCache[{{Rational[1, 5], 1, Rational[-2, 5]}, {
+        1, 0, Rational[-1, 5]}}, {{0.2, 1, -0.4}, {1, 0, -0.2}}]], 
+     TubeBox[NCache[{{Rational[1, 5], 1, Rational[-2, 5]}, {
+        0, 1, Rational[-2, 5]}}, {{0.2, 1, -0.4}, {0, 1, -0.4}}]], 
+     TubeBox[NCache[{{Rational[1, 5], 1, Rational[-2, 5]}, {0, 1, 0}}, {{
+        0.2, 1, -0.4}, {0, 1, 0}}]], 
+     TubeBox[NCache[{{Rational[1, 5], 1, Rational[-2, 5]}, {
+        1, Rational[2, 5], 0}}, {{0.2, 1, -0.4}, {1, 0.4, 0}}]], 
+     TubeBox[NCache[{{1, Rational[-1, 5], 0}, {1, 0, Rational[-1, 5]}}, {{
+        1, -0.2, 0}, {1, 0, -0.2}}]], 
+     TubeBox[NCache[{{1, Rational[-1, 5], 0}, {0, Rational[-2, 5], 1}}, {{
+        1, -0.2, 0}, {0, -0.4, 1}}]], 
+     TubeBox[NCache[{{1, Rational[-1, 5], 0}, {0, 0, 0}}, {{1, -0.2, 0}, {0, 
+        0, 0}}]], 
+     TubeBox[NCache[{{1, Rational[-1, 5], 0}, {
+        1, Rational[1, 10], Rational[3, 10]}}, {{1, -0.2, 0}, {
+        1, 0.1, 0.3}}]], 
+     TubeBox[NCache[{{1, 0, Rational[-1, 5]}, {0, 1, Rational[-2, 5]}}, {{
+        1, 0, -0.2}, {0, 1, -0.4}}]], 
+     TubeBox[NCache[{{1, 0, Rational[-1, 5]}, {0, 0, 0}}, {{1, 0, -0.2}, {0, 
+        0, 0}}]], 
+     TubeBox[NCache[{{1, 0, Rational[-1, 5]}, {1, Rational[2, 5], 0}}, {{
+        1, 0, -0.2}, {1, 0.4, 0}}]], 
+     TubeBox[NCache[{{0, Rational[-2, 5], 1}, {0, 0, 0}}, {{0, -0.4, 1}, {0, 
+        0, 0}}]], 
+     TubeBox[NCache[{{0, Rational[-2, 5], 1}, {
+        Rational[-1, 10], Rational[1, 10], 1}}, {{
+        0, -0.4, 1}, {-0.1, 0.1, 1}}]], 
+     TubeBox[NCache[{{0, Rational[-2, 5], 1}, {
+        Rational[-2, 5], Rational[1, 10], Rational[3, 10]}}, {{
+        0, -0.4, 1}, {-0.4, 0.1, 0.3}}]], 
+     TubeBox[NCache[{{0, 1, Rational[-2, 5]}, {0, 0, 0}}, {{0, 1, -0.4}, {0, 
+        0, 0}}]], 
+     TubeBox[NCache[{{0, 1, Rational[-2, 5]}, {0, 1, 0}}, {{0, 1, -0.4}, {0, 
+        1, 0}}]], 
+     TubeBox[NCache[{{0, 1, Rational[-2, 5]}, {
+        Rational[-2, 5], Rational[2, 5], 0}}, {{
+        0, 1, -0.4}, {-0.4, 0.4, 0}}]], 
+     TubeBox[NCache[{{0, 0, 0}, {
+        Rational[-2, 5], Rational[1, 10], Rational[3, 10]}}, {{0, 0, 
+        0}, {-0.4, 0.1, 0.3}}]], 
+     TubeBox[NCache[{{0, 0, 0}, {Rational[-2, 5], Rational[2, 5], 0}}, {{0, 0,
+         0}, {-0.4, 0.4, 0}}]], 
+     TubeBox[NCache[{{0, 1, 0}, {0, Rational[1, 10], 1}}, {{0, 1, 0}, {
+        0, 0.1, 1}}]], 
+     TubeBox[NCache[{{0, 1, 0}, {Rational[-1, 10], Rational[1, 10], 1}}, {{0, 
+        1, 0}, {-0.1, 0.1, 1}}]], 
+     TubeBox[NCache[{{0, 1, 0}, {1, Rational[2, 5], 0}}, {{0, 1, 0}, {
+        1, 0.4, 0}}]], 
+     TubeBox[NCache[{{0, 1, 0}, {Rational[-2, 5], Rational[2, 5], 0}}, {{0, 1,
+         0}, {-0.4, 0.4, 0}}]], 
+     TubeBox[NCache[{{0, Rational[1, 10], 1}, {
+        Rational[-1, 10], Rational[1, 10], 1}}, {{
+        0, 0.1, 1}, {-0.1, 0.1, 1}}]], 
+     TubeBox[NCache[{{0, Rational[1, 10], 1}, {
+        1, Rational[1, 10], Rational[3, 10]}}, {{0, 0.1, 1}, {1, 0.1, 0.3}}]],
+      TubeBox[NCache[{{0, Rational[1, 10], 1}, {1, Rational[2, 5], 0}}, {{
+        0, 0.1, 1}, {1, 0.4, 0}}]], 
+     TubeBox[NCache[{{Rational[-1, 10], Rational[1, 10], 1}, {
+        Rational[-2, 5], Rational[1, 10], Rational[3, 10]}}, {{-0.1, 0.1, 
+         1}, {-0.4, 0.1, 0.3}}]], 
+     TubeBox[NCache[{{Rational[-1, 10], Rational[1, 10], 1}, {
+        Rational[-2, 5], Rational[2, 5], 0}}, {{-0.1, 0.1, 1}, {-0.4, 0.4, 
+         0}}]], TubeBox[
+      NCache[{{1, Rational[1, 10], Rational[3, 10]}, {
+        1, Rational[2, 5], 0}}, {{1, 0.1, 0.3}, {1, 0.4, 0}}]], 
+     TubeBox[NCache[{{Rational[-2, 5], Rational[1, 10], Rational[3, 10]}, {
+        Rational[-2, 5], Rational[2, 5], 0}}, {{-0.4, 0.1, 
+        0.3}, {-0.4, 0.4, 0}}]]}, 
+    {Thickness[0.0035], Dashing[{0.01, 0.012}]}}, 
+   {Thickness[Large], 
+    GraphicsComplex3DBox[
+     NCache[{{0, Rational[1, 10], Rational[7, 10]}, {0, Rational[4, 5], 0}, {
+       Rational[7, 10], Rational[1, 10], 0}, {0, Rational[1, 10], 0}}, {{
+       0, 0.1, 0.7}, {0, 0.8, 0}, {0.7, 0.1, 0}, {0, 0.1, 0}}], 
+     TubeBox[{{2, 3, 4, 1}, {1, 3, 4, 2}, {1, 2, 4, 3}, {1, 2, 3, 4}}]]}, 
+   {RGBColor[0, 0, 1], 
+    SphereBox[
+     NCache[{Rational[9, 40], Rational[31, 120], Rational[9, 40]}, {0.225, 
+      0.25833333333333336`, 0.225}], 0.021]}, 
+   {RGBColor[0, 1, 0], 
+    SphereBox[
+     NCache[{Rational[3, 20], Rational[3, 10], Rational[1, 5]}, {0.15, 0.3, 
+      0.2}], 0.021]}, 
+   {RGBColor[0.5, 0, 0.5], 
+    SphereBox[
+     NCache[{Rational[1, 4], Rational[1, 4], Rational[1, 4]}, {0.25, 0.25, 
+      0.25}], 0.021]}},
+  AspectRatio->1,
+  Boxed->False,
+  ImageMargins->15,
+  ImageSize->{400, 434},
+  Lighting->(Lighting -> {{"Directional", 
+      RGBColor[0.3, 1, 0.1], {{5, 5, 4}, {5, 5, 0}}}}),
+  ViewCenter->{0.35, 0.35, 0.3},
+  ViewPoint->{1.714, 2.478, 1.54}]], "Output",
+ CellContext->"Cell$$16171`",
+ CellLabel->"Out[9]=",
+ CellID->1115049089,ExpressionUUID->"32e647e9-b321-4e1f-9c2f-d0928fffe548"]
+}, Open  ]],
+
+Cell["In addition, we can include the legend into the graphic by", \
+"ExampleText",
+ CellID->2132075007,ExpressionUUID->"959a99ef-5a0c-4bfd-9691-847c05682ee3"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"fig05", "=", 
+  RowBox[{"PlotWeberSet3dV6", "[", 
+   RowBox[{"ExpGame", ",", 
+    RowBox[{"ViewShapleySol", "\[Rule]", " ", "True"}], ",", 
+    RowBox[{"ViewNucleolusSol", "\[Rule]", " ", "True"}], ",", 
+    RowBox[{"ViewKernelSol", "\[Rule]", " ", "False"}], ",", " ", 
+    RowBox[{"ViewModiclusSol", "\[Rule]", " ", "True"}], ",", 
+    RowBox[{"ViewLegend", "\[Rule]", " ", "True"}]}], "]"}]}]], "Input",
+ CellLabel->"In[10]:=",
+ CellID->967638449,ExpressionUUID->"e8e53a39-4a9c-4df2-bb38-6820b7ee2652"],
+
+Cell[BoxData[
+ GraphicsBox[{InsetBox[
+    Graphics3DBox[{
+      {RGBColor[1, 0.5, 0], Opacity[0.4], GraphicsComplex3DBox[CompressedData["
+1:eJxTTMoPSmViYGAQAWJmIJ41EwRO2kPom/sZwOCDPUwclQ+Th+uDq0fTB1eH
+CtDlYfrQzYPxb2Kow+UedHn8fJj5O+1R5WHm7kRz18796Oqxi6O7b6e9MRhc
+hrsXXRyX+/ADuP/R3AkzHyEOAI2MhOU=
+        "], 
+        Polygon3DBox[{{18, 16, 7}, {6, 4, 17}, {6, 18, 4}, {1, 7, 3}, {15, 4, 
+         1}, {12, 19, 6}, {19, 2, 6}, {10, 13, 20}, {13, 16, 20}, {14, 16, 
+         18}, {17, 4, 15}, {18, 7, 4}, {4, 7, 1}, {12, 6, 17}, {5, 10, 20}, {
+         2, 8, 6}, {6, 8, 18}, {3, 9, 1}, {3, 13, 9}, {9, 11, 1}, {1, 11, 
+         15}, {15, 12, 17}, {15, 19, 12}, {19, 11, 10}, {15, 11, 19}, {11, 13,
+          10}, {7, 13, 3}, {7, 16, 13}, {9, 13, 11}, {20, 8, 5}, {20, 14, 
+         8}, {2, 10, 5}, {8, 14, 18}, {5, 8, 2}, {19, 10, 2}, {20, 16, 
+         14}}]]}, 
+      {Thickness[Large], 
+       {Thickness[0.0085], 
+        TubeBox[NCache[{{Rational[1, 5], Rational[-2, 5], 1}, {
+           1, Rational[-1, 5], 0}}, {{0.2, -0.4, 1}, {1, -0.2, 0}}]], 
+        TubeBox[NCache[{{Rational[1, 5], Rational[-2, 5], 1}, {
+           0, Rational[-2, 5], 1}}, {{0.2, -0.4, 1}, {0, -0.4, 1}}]], 
+        TubeBox[NCache[{{Rational[1, 5], Rational[-2, 5], 1}, {
+           0, Rational[1, 10], 1}}, {{0.2, -0.4, 1}, {0, 0.1, 1}}]], 
+        TubeBox[NCache[{{Rational[1, 5], Rational[-2, 5], 1}, {
+           1, Rational[1, 10], Rational[3, 10]}}, {{0.2, -0.4, 1}, {
+           1, 0.1, 0.3}}]], 
+        TubeBox[NCache[{{Rational[1, 5], 1, Rational[-2, 5]}, {
+           1, 0, Rational[-1, 5]}}, {{0.2, 1, -0.4}, {1, 0, -0.2}}]], 
+        TubeBox[NCache[{{Rational[1, 5], 1, Rational[-2, 5]}, {
+           0, 1, Rational[-2, 5]}}, {{0.2, 1, -0.4}, {0, 1, -0.4}}]], 
+        TubeBox[NCache[{{Rational[1, 5], 1, Rational[-2, 5]}, {0, 1, 0}}, {{
+           0.2, 1, -0.4}, {0, 1, 0}}]], 
+        TubeBox[NCache[{{Rational[1, 5], 1, Rational[-2, 5]}, {
+           1, Rational[2, 5], 0}}, {{0.2, 1, -0.4}, {1, 0.4, 0}}]], 
+        TubeBox[NCache[{{1, Rational[-1, 5], 0}, {1, 0, Rational[-1, 5]}}, {{
+           1, -0.2, 0}, {1, 0, -0.2}}]], 
+        TubeBox[NCache[{{1, Rational[-1, 5], 0}, {0, Rational[-2, 5], 1}}, {{
+           1, -0.2, 0}, {0, -0.4, 1}}]], 
+        TubeBox[NCache[{{1, Rational[-1, 5], 0}, {0, 0, 0}}, {{1, -0.2, 0}, {
+           0, 0, 0}}]], 
+        TubeBox[NCache[{{1, Rational[-1, 5], 0}, {
+           1, Rational[1, 10], Rational[3, 10]}}, {{1, -0.2, 0}, {
+           1, 0.1, 0.3}}]], 
+        TubeBox[NCache[{{1, 0, Rational[-1, 5]}, {0, 1, Rational[-2, 5]}}, {{
+           1, 0, -0.2}, {0, 1, -0.4}}]], 
+        TubeBox[NCache[{{1, 0, Rational[-1, 5]}, {0, 0, 0}}, {{1, 0, -0.2}, {
+           0, 0, 0}}]], 
+        TubeBox[NCache[{{1, 0, Rational[-1, 5]}, {1, Rational[2, 5], 0}}, {{
+           1, 0, -0.2}, {1, 0.4, 0}}]], 
+        TubeBox[NCache[{{0, Rational[-2, 5], 1}, {0, 0, 0}}, {{0, -0.4, 1}, {
+           0, 0, 0}}]], 
+        TubeBox[NCache[{{0, Rational[-2, 5], 1}, {
+           Rational[-1, 10], Rational[1, 10], 1}}, {{
+           0, -0.4, 1}, {-0.1, 0.1, 1}}]], 
+        TubeBox[NCache[{{0, Rational[-2, 5], 1}, {
+           Rational[-2, 5], Rational[1, 10], Rational[3, 10]}}, {{
+           0, -0.4, 1}, {-0.4, 0.1, 0.3}}]], 
+        TubeBox[NCache[{{0, 1, Rational[-2, 5]}, {0, 0, 0}}, {{0, 1, -0.4}, {
+           0, 0, 0}}]], 
+        TubeBox[NCache[{{0, 1, Rational[-2, 5]}, {0, 1, 0}}, {{0, 1, -0.4}, {
+           0, 1, 0}}]], 
+        TubeBox[NCache[{{0, 1, Rational[-2, 5]}, {
+           Rational[-2, 5], Rational[2, 5], 0}}, {{
+           0, 1, -0.4}, {-0.4, 0.4, 0}}]], 
+        TubeBox[NCache[{{0, 0, 0}, {
+           Rational[-2, 5], Rational[1, 10], Rational[3, 10]}}, {{0, 0, 
+           0}, {-0.4, 0.1, 0.3}}]], 
+        TubeBox[NCache[{{0, 0, 0}, {Rational[-2, 5], Rational[2, 5], 0}}, {{0,
+            0, 0}, {-0.4, 0.4, 0}}]], 
+        TubeBox[NCache[{{0, 1, 0}, {0, Rational[1, 10], 1}}, {{0, 1, 0}, {
+           0, 0.1, 1}}]], 
+        TubeBox[NCache[{{0, 1, 0}, {Rational[-1, 10], Rational[1, 10], 1}}, {{
+           0, 1, 0}, {-0.1, 0.1, 1}}]], 
+        TubeBox[NCache[{{0, 1, 0}, {1, Rational[2, 5], 0}}, {{0, 1, 0}, {
+           1, 0.4, 0}}]], 
+        TubeBox[NCache[{{0, 1, 0}, {Rational[-2, 5], Rational[2, 5], 0}}, {{0,
+            1, 0}, {-0.4, 0.4, 0}}]], 
+        TubeBox[NCache[{{0, Rational[1, 10], 1}, {
+           Rational[-1, 10], Rational[1, 10], 1}}, {{
+           0, 0.1, 1}, {-0.1, 0.1, 1}}]], 
+        TubeBox[NCache[{{0, Rational[1, 10], 1}, {
+           1, Rational[1, 10], Rational[3, 10]}}, {{0, 0.1, 1}, {
+           1, 0.1, 0.3}}]], 
+        TubeBox[NCache[{{0, Rational[1, 10], 1}, {1, Rational[2, 5], 0}}, {{
+           0, 0.1, 1}, {1, 0.4, 0}}]], 
+        TubeBox[NCache[{{Rational[-1, 10], Rational[1, 10], 1}, {
+           Rational[-2, 5], Rational[1, 10], Rational[3, 10]}}, {{-0.1, 0.1, 
+            1}, {-0.4, 0.1, 0.3}}]], 
+        TubeBox[NCache[{{Rational[-1, 10], Rational[1, 10], 1}, {
+           Rational[-2, 5], Rational[2, 5], 0}}, {{-0.1, 0.1, 1}, {-0.4, 0.4, 
+            0}}]], TubeBox[
+         NCache[{{1, Rational[1, 10], Rational[3, 10]}, {
+           1, Rational[2, 5], 0}}, {{1, 0.1, 0.3}, {1, 0.4, 0}}]], 
+        TubeBox[NCache[{{Rational[-2, 5], Rational[1, 10], Rational[3, 10]}, {
+           Rational[-2, 5], Rational[2, 5], 0}}, {{-0.4, 0.1, 
+           0.3}, {-0.4, 0.4, 0}}]]}, 
+       {Thickness[0.0035], Dashing[{0.01, 0.012}]}}, 
+      {Thickness[Large], 
+       GraphicsComplex3DBox[
+        NCache[{{0, Rational[1, 10], Rational[7, 10]}, {
+          0, Rational[4, 5], 0}, {Rational[7, 10], Rational[1, 10], 0}, {
+          0, Rational[1, 10], 0}}, {{0, 0.1, 0.7}, {0, 0.8, 0}, {
+          0.7, 0.1, 0}, {0, 0.1, 0}}], 
+        TubeBox[{{2, 3, 4, 1}, {1, 3, 4, 2}, {1, 2, 4, 3}, {1, 2, 3, 4}}]]}, 
+      {RGBColor[0, 0, 1], 
+       SphereBox[
+        NCache[{Rational[9, 40], Rational[31, 120], Rational[9, 40]}, {0.225, 
+         0.25833333333333336`, 0.225}], 0.021]}, 
+      {RGBColor[0, 1, 0], 
+       SphereBox[
+        NCache[{Rational[3, 20], Rational[3, 10], Rational[1, 5]}, {0.15, 0.3,
+          0.2}], 0.021]}, 
+      {RGBColor[0.5, 0, 0.5], 
+       SphereBox[
+        NCache[{Rational[1, 4], Rational[1, 4], Rational[1, 4]}, {0.25, 0.25, 
+         0.25}], 0.021]}},
+     AspectRatio->1,
+     Boxed->False,
+     ImageMargins->15,
+     ImageSize->{400, 434},
+     Lighting->(Lighting -> {{"Directional", 
+         RGBColor[0.3, 1, 0.1], {{5, 5, 4}, {5, 5, 0}}}}),
+     ViewCenter->{0.35, 0.35, 0.3},
+     ViewPoint->{1.714, 2.478, 1.54}], {-1, -1.}, {Left, Bottom}, {2, 2.}], 
+   GraphicsGroupBox[{
+     {GrayLevel[0], RectangleBox[{1.1, -0.4}, {1.6, -0.15000000000000002}]}, 
+     {GrayLevel[1], EdgeForm[{GrayLevel[0], Thickness[0.001]}], 
+      GraphicsGroupBox[{
+        RectangleBox[{1.1, -0.4}, {1.6, -0.15000000000000002}], InsetBox[
+         GraphicsBox[{{{InsetBox[
+              GraphicsBox[
+               {RGBColor[0.6, 0.4, 0.2], 
+                DiskBox[{0, 0}, 0.005]}], {0.08, 0.08}, {
+              Left, Bottom}, {1, 1}], 
+             InsetBox["\<\"Harsanyi Value\"\>", {1.2100000000000002, 0.58}, 
+              NCache[ImageScaled[{0, Rational[1, 2]}], ImageScaled[{0, 0.5}]],
+               Automatic, {1, 0}]}, {InsetBox[
+              GraphicsBox[
+               {RGBColor[0.5, 0, 0.5], 
+                DiskBox[{0, 0}, 0.005]}], {0.08, 1.24}, {
+              Left, Bottom}, {1, 1}], 
+             InsetBox["\<\"Modiclus\"\>", {1.2100000000000002, 1.74}, NCache[
+              ImageScaled[{0, Rational[1, 2]}], ImageScaled[{0, 0.5}]], 
+              Automatic, {1, 0}]}, {InsetBox[
+              GraphicsBox[
+               {RGBColor[1, 0, 0], DiskBox[{0, 0}, 0.005]}], {0.08, 2.4}, {
+              Left, Bottom}, {1, 1}], 
+             InsetBox["\<\"Kernel\"\>", {1.2100000000000002, 2.9}, NCache[
+              ImageScaled[{0, Rational[1, 2]}], ImageScaled[{0, 0.5}]], 
+              Automatic, {1, 0}]}, {InsetBox[
+              GraphicsBox[
+               {RGBColor[0, 1, 0], DiskBox[{0, 0}, 0.005]}], {0.08, 3.56}, {
+              Left, Bottom}, {1, 1}], 
+             InsetBox["\<\"Nucleolus\"\>", {1.2100000000000002, 4.0600000000000005},
+               NCache[ImageScaled[{0, Rational[1, 2]}], 
+               ImageScaled[{0, 0.5}]], Automatic, {1, 0}]}, {InsetBox[
+              GraphicsBox[
+               {RGBColor[0, 0, 1], DiskBox[{0, 0}, 0.005]}], {0.08, 4.72}, {
+              Left, Bottom}, {1, 1}], 
+             InsetBox["\<\"Shapley Value\"\>", {1.2100000000000002, 5.22}, 
+              NCache[ImageScaled[{0, Rational[1, 2]}], ImageScaled[{0, 0.5}]],
+               Automatic, {1, 0}]}}, {}},
+          AspectRatio->0.5,
+          
+          PlotRange->{{-0.1, 6.26}, {-0.1, 
+           5.8999999999999995`}}], {1.1, -0.4}, {
+         Left, Bottom}, {0.5, 0.25}]}]}}]},
+  AspectRatio->Automatic,
+  Background->None,
+  ColorOutput->Automatic,
+  ImageSize->{400., 434.},
+  PlotRange->All]], "Output",
+ CellContext->"Cell$$16171`",
+ CellLabel->"Out[10]=",
+ CellID->601365662,ExpressionUUID->"78079c73-773b-42bc-b94e-a2cf1ae76ced"]
+}, Open  ]],
+
+Cell["\<\
+As it was noticed, each additional game solution that was included into the \
+graphic was recalculated. To avoid, this behavior, we compute each solution \
+that we want to add to the graphic. Thus, we compute   \
+\>", "ExampleText",
+ CellID->73193713,ExpressionUUID->"a0373fc7-e96d-495f-840d-4758dac3679d"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"shv", "=", 
+  RowBox[{"ShapleyValue", "[", "ExpGame", "]"}]}]], "Input",
+ CellLabel->"In[11]:=",
+ CellID->1642130140,ExpressionUUID->"cc427b0a-fa9b-4b4e-a0c0-fa06716a8149"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   FractionBox["35", "6"], ",", 
+   FractionBox["9", "2"], ",", 
+   FractionBox["31", "6"], ",", 
+   FractionBox["9", "2"]}], "}"}]], "Output",
+ CellContext->"Cell$$16171`",
+ CellLabel->"Out[11]=",
+ CellID->1187132246,ExpressionUUID->"57cf20e2-2d7b-4071-b536-76e9eb15c433"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"nc", "=", 
+  RowBox[{"ModifiedNucleolus", "[", "ExpGame", "]"}]}]], "Input",
+ CellLabel->"In[12]:=",
+ CellID->1428805585,ExpressionUUID->"2753ff98-1146-4708-9ffc-98c8eb8ce485"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"7", ",", "3", ",", "6", ",", "4"}], "}"}]], "Output",
+ CellContext->"Cell$$16171`",
+ CellLabel->"Out[12]=",
+ CellID->1132362631,ExpressionUUID->"1c900aea-1eff-438f-8fd8-664d832dface"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"mnc", "=", 
+  RowBox[{"Modiclus", "[", "ExpGame", "]"}]}]], "Input",
+ CellLabel->"In[13]:=",
+ CellID->590982472,ExpressionUUID->"638edd1e-2f99-441d-adbc-49ae9b905312"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"5", ",", "5", ",", "5", ",", "5"}], "}"}]], "Output",
+ CellContext->"Cell$$16171`",
+ CellLabel->"Out[13]=",
+ CellID->2025362985,ExpressionUUID->"709a096b-d63e-414b-991e-5bdeb7b46b8b"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"pk", "=", 
+  RowBox[{"PreKernelElement", "[", "ExpGame", "]"}]}]], "Input",
+ CellLabel->"In[14]:=",
+ CellID->1372698786,ExpressionUUID->"fddfe47f-224e-47af-b281-2f8aebcd7820"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"7", ",", "3", ",", "6", ",", "4"}], "}"}]], "Output",
+ CellContext->"Cell$$16171`",
+ CellLabel->"Out[14]=",
+ CellID->1244126209,ExpressionUUID->"59807431-2e86-4cb7-8092-416542974317"]
+}, Open  ]],
+
+Cell["\<\
+The solution vectors were now supplied to the function command by \
+\>", "ExampleText",
+ CellID->542469117,ExpressionUUID->"aa489ea3-dead-4722-b633-a87b20a175ce"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"fig06", "=", 
+  RowBox[{"PlotWeberSet3dV6", "[", 
+   RowBox[{"ExpGame", ",", 
+    RowBox[{"ViewShapleySol", "\[Rule]", " ", "True"}], ",", 
+    RowBox[{"ShapleyCoord", "\[Rule]", " ", "shv"}], ",", 
+    RowBox[{"ViewNucleolusSol", "\[Rule]", " ", "True"}], ",", 
+    RowBox[{"NucleolusCoord", "\[Rule]", " ", "nc"}], ",", 
+    RowBox[{"ViewKernelSol", "\[Rule]", " ", "False"}], ",", " ", 
+    RowBox[{"ViewModiclusSol", "\[Rule]", " ", "True"}], ",", 
+    RowBox[{"ModiclusCoord", "\[Rule]", " ", "mnc"}]}], "]"}]}]], "Input",
+ CellLabel->"In[15]:=",
+ CellID->700969344,ExpressionUUID->"c29d0e41-9013-4a5e-b8aa-0ddbac34414b"],
+
+Cell[BoxData[
+ Graphics3DBox[{
+   {RGBColor[1, 0.5, 0], Opacity[0.4], GraphicsComplex3DBox[CompressedData["
+1:eJxTTMoPSmViYGAQAWJmIJ41EwRO2kPom/sZwOCDPUwclQ+Th+uDq0fTB1eH
+CtDlYfrQzYPxb2Kow+UedHn8fJj5O+1R5WHm7kRz18796Oqxi6O7b6e9MRhc
+hrsXXRyX+/ADuP/R3AkzHyEOAI2MhOU=
+     "], Polygon3DBox[{{18, 16, 7}, {6, 4, 17}, {6, 18, 4}, {1, 7, 3}, {15, 4,
+       1}, {12, 19, 6}, {19, 2, 6}, {10, 13, 20}, {13, 16, 20}, {14, 16, 
+      18}, {17, 4, 15}, {18, 7, 4}, {4, 7, 1}, {12, 6, 17}, {5, 10, 20}, {2, 
+      8, 6}, {6, 8, 18}, {3, 9, 1}, {3, 13, 9}, {9, 11, 1}, {1, 11, 15}, {15, 
+      12, 17}, {15, 19, 12}, {19, 11, 10}, {15, 11, 19}, {11, 13, 10}, {7, 13,
+       3}, {7, 16, 13}, {9, 13, 11}, {20, 8, 5}, {20, 14, 8}, {2, 10, 5}, {8, 
+      14, 18}, {5, 8, 2}, {19, 10, 2}, {20, 16, 14}}]]}, 
+   {Thickness[Large], 
+    {Thickness[0.0085], 
+     TubeBox[NCache[{{Rational[1, 5], Rational[-2, 5], 1}, {
+        1, Rational[-1, 5], 0}}, {{0.2, -0.4, 1}, {1, -0.2, 0}}]], 
+     TubeBox[NCache[{{Rational[1, 5], Rational[-2, 5], 1}, {
+        0, Rational[-2, 5], 1}}, {{0.2, -0.4, 1}, {0, -0.4, 1}}]], 
+     TubeBox[NCache[{{Rational[1, 5], Rational[-2, 5], 1}, {
+        0, Rational[1, 10], 1}}, {{0.2, -0.4, 1}, {0, 0.1, 1}}]], 
+     TubeBox[NCache[{{Rational[1, 5], Rational[-2, 5], 1}, {
+        1, Rational[1, 10], Rational[3, 10]}}, {{0.2, -0.4, 1}, {
+        1, 0.1, 0.3}}]], 
+     TubeBox[NCache[{{Rational[1, 5], 1, Rational[-2, 5]}, {
+        1, 0, Rational[-1, 5]}}, {{0.2, 1, -0.4}, {1, 0, -0.2}}]], 
+     TubeBox[NCache[{{Rational[1, 5], 1, Rational[-2, 5]}, {
+        0, 1, Rational[-2, 5]}}, {{0.2, 1, -0.4}, {0, 1, -0.4}}]], 
+     TubeBox[NCache[{{Rational[1, 5], 1, Rational[-2, 5]}, {0, 1, 0}}, {{
+        0.2, 1, -0.4}, {0, 1, 0}}]], 
+     TubeBox[NCache[{{Rational[1, 5], 1, Rational[-2, 5]}, {
+        1, Rational[2, 5], 0}}, {{0.2, 1, -0.4}, {1, 0.4, 0}}]], 
+     TubeBox[NCache[{{1, Rational[-1, 5], 0}, {1, 0, Rational[-1, 5]}}, {{
+        1, -0.2, 0}, {1, 0, -0.2}}]], 
+     TubeBox[NCache[{{1, Rational[-1, 5], 0}, {0, Rational[-2, 5], 1}}, {{
+        1, -0.2, 0}, {0, -0.4, 1}}]], 
+     TubeBox[NCache[{{1, Rational[-1, 5], 0}, {0, 0, 0}}, {{1, -0.2, 0}, {0, 
+        0, 0}}]], 
+     TubeBox[NCache[{{1, Rational[-1, 5], 0}, {
+        1, Rational[1, 10], Rational[3, 10]}}, {{1, -0.2, 0}, {
+        1, 0.1, 0.3}}]], 
+     TubeBox[NCache[{{1, 0, Rational[-1, 5]}, {0, 1, Rational[-2, 5]}}, {{
+        1, 0, -0.2}, {0, 1, -0.4}}]], 
+     TubeBox[NCache[{{1, 0, Rational[-1, 5]}, {0, 0, 0}}, {{1, 0, -0.2}, {0, 
+        0, 0}}]], 
+     TubeBox[NCache[{{1, 0, Rational[-1, 5]}, {1, Rational[2, 5], 0}}, {{
+        1, 0, -0.2}, {1, 0.4, 0}}]], 
+     TubeBox[NCache[{{0, Rational[-2, 5], 1}, {0, 0, 0}}, {{0, -0.4, 1}, {0, 
+        0, 0}}]], 
+     TubeBox[NCache[{{0, Rational[-2, 5], 1}, {
+        Rational[-1, 10], Rational[1, 10], 1}}, {{
+        0, -0.4, 1}, {-0.1, 0.1, 1}}]], 
+     TubeBox[NCache[{{0, Rational[-2, 5], 1}, {
+        Rational[-2, 5], Rational[1, 10], Rational[3, 10]}}, {{
+        0, -0.4, 1}, {-0.4, 0.1, 0.3}}]], 
+     TubeBox[NCache[{{0, 1, Rational[-2, 5]}, {0, 0, 0}}, {{0, 1, -0.4}, {0, 
+        0, 0}}]], 
+     TubeBox[NCache[{{0, 1, Rational[-2, 5]}, {0, 1, 0}}, {{0, 1, -0.4}, {0, 
+        1, 0}}]], 
+     TubeBox[NCache[{{0, 1, Rational[-2, 5]}, {
+        Rational[-2, 5], Rational[2, 5], 0}}, {{
+        0, 1, -0.4}, {-0.4, 0.4, 0}}]], 
+     TubeBox[NCache[{{0, 0, 0}, {
+        Rational[-2, 5], Rational[1, 10], Rational[3, 10]}}, {{0, 0, 
+        0}, {-0.4, 0.1, 0.3}}]], 
+     TubeBox[NCache[{{0, 0, 0}, {Rational[-2, 5], Rational[2, 5], 0}}, {{0, 0,
+         0}, {-0.4, 0.4, 0}}]], 
+     TubeBox[NCache[{{0, 1, 0}, {0, Rational[1, 10], 1}}, {{0, 1, 0}, {
+        0, 0.1, 1}}]], 
+     TubeBox[NCache[{{0, 1, 0}, {Rational[-1, 10], Rational[1, 10], 1}}, {{0, 
+        1, 0}, {-0.1, 0.1, 1}}]], 
+     TubeBox[NCache[{{0, 1, 0}, {1, Rational[2, 5], 0}}, {{0, 1, 0}, {
+        1, 0.4, 0}}]], 
+     TubeBox[NCache[{{0, 1, 0}, {Rational[-2, 5], Rational[2, 5], 0}}, {{0, 1,
+         0}, {-0.4, 0.4, 0}}]], 
+     TubeBox[NCache[{{0, Rational[1, 10], 1}, {
+        Rational[-1, 10], Rational[1, 10], 1}}, {{
+        0, 0.1, 1}, {-0.1, 0.1, 1}}]], 
+     TubeBox[NCache[{{0, Rational[1, 10], 1}, {
+        1, Rational[1, 10], Rational[3, 10]}}, {{0, 0.1, 1}, {1, 0.1, 0.3}}]],
+      TubeBox[NCache[{{0, Rational[1, 10], 1}, {1, Rational[2, 5], 0}}, {{
+        0, 0.1, 1}, {1, 0.4, 0}}]], 
+     TubeBox[NCache[{{Rational[-1, 10], Rational[1, 10], 1}, {
+        Rational[-2, 5], Rational[1, 10], Rational[3, 10]}}, {{-0.1, 0.1, 
+         1}, {-0.4, 0.1, 0.3}}]], 
+     TubeBox[NCache[{{Rational[-1, 10], Rational[1, 10], 1}, {
+        Rational[-2, 5], Rational[2, 5], 0}}, {{-0.1, 0.1, 1}, {-0.4, 0.4, 
+         0}}]], TubeBox[
+      NCache[{{1, Rational[1, 10], Rational[3, 10]}, {
+        1, Rational[2, 5], 0}}, {{1, 0.1, 0.3}, {1, 0.4, 0}}]], 
+     TubeBox[NCache[{{Rational[-2, 5], Rational[1, 10], Rational[3, 10]}, {
+        Rational[-2, 5], Rational[2, 5], 0}}, {{-0.4, 0.1, 
+        0.3}, {-0.4, 0.4, 0}}]]}, 
+    {Thickness[0.0035], Dashing[{0.01, 0.012}]}}, 
+   {Thickness[Large], 
+    GraphicsComplex3DBox[
+     NCache[{{0, Rational[1, 10], Rational[7, 10]}, {0, Rational[4, 5], 0}, {
+       Rational[7, 10], Rational[1, 10], 0}, {0, Rational[1, 10], 0}}, {{
+       0, 0.1, 0.7}, {0, 0.8, 0}, {0.7, 0.1, 0}, {0, 0.1, 0}}], 
+     TubeBox[{{2, 3, 4, 1}, {1, 3, 4, 2}, {1, 2, 4, 3}, {1, 2, 3, 4}}]]}, 
+   {RGBColor[0, 0, 1], 
+    SphereBox[
+     NCache[{Rational[9, 40], Rational[31, 120], Rational[9, 40]}, {0.225, 
+      0.25833333333333336`, 0.225}], 0.021]}, 
+   {RGBColor[0, 1, 0], 
+    SphereBox[
+     NCache[{Rational[3, 20], Rational[3, 10], Rational[1, 5]}, {0.15, 0.3, 
+      0.2}], 0.021]}, 
+   {RGBColor[0.5, 0, 0.5], 
+    SphereBox[
+     NCache[{Rational[1, 4], Rational[1, 4], Rational[1, 4]}, {0.25, 0.25, 
+      0.25}], 0.021]}},
+  AspectRatio->1,
+  Boxed->False,
+  ImageMargins->15,
+  ImageSize->{400, 434},
+  Lighting->(Lighting -> {{"Directional", 
+      RGBColor[0.3, 1, 0.1], {{5, 5, 4}, {5, 5, 0}}}}),
+  ViewCenter->{0.35, 0.35, 0.3},
+  ViewPoint->{1.714, 2.478, 1.54},
+  ViewVertical->{0., 0., 1.}]], "Output",
+ CellContext->"Cell$$16171`",
+ CellLabel->"Out[15]=",
+ CellID->971783185,ExpressionUUID->"bd9c56d6-f041-402f-9cd8-d1b6147a2b58"]
+}, Open  ]],
+
+Cell["\<\
+This procedure avoids the annoying recalculation of each solution whenever \
+the graphic is re-rendered. The graphic is now displayed more rapidly.\
+\>", "ExampleText",
+ CellID->1846857448,ExpressionUUID->"07ddc81a-8bbc-439f-a15b-698cbf8e992f"],
+
+Cell["\<\
+There exists also the possibility to add other payoff vectors to the graphic. \
+Suppose that we want to add the extreme points of the Weber set to the \
+graphic. All we must to do is to compute the vertices by\
+\>", "ExampleText",
+ CellID->31377083,ExpressionUUID->"11e64e38-4190-4ba2-8c0f-aa0fda4c67da"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"wbv", "=", 
+  RowBox[{"MargValue", "[", "ExpGame", "]"}]}]], "Input",
+ CellLabel->"In[16]:=",
+ CellID->946849018,ExpressionUUID->"b65f3d4f-c113-444a-941c-5c166078852c"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"4", ",", "4", ",", 
+     RowBox[{"-", "8"}], ",", "20"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"4", ",", "4", ",", "20", ",", 
+     RowBox[{"-", "8"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"4", ",", "0", ",", 
+     RowBox[{"-", "4"}], ",", "20"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"4", ",", "20", ",", 
+     RowBox[{"-", "4"}], ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"4", ",", "0", ",", "20", ",", 
+     RowBox[{"-", "4"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"4", ",", "20", ",", "0", ",", 
+     RowBox[{"-", "4"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"8", ",", "0", ",", 
+     RowBox[{"-", "8"}], ",", "20"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"8", ",", "0", ",", "20", ",", 
+     RowBox[{"-", "8"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0", ",", "20"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"20", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "20", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"20", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "2"}], ",", "0", ",", "2", ",", "20"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "2"}], ",", "20", ",", "2", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", 
+     RowBox[{"-", "2"}], ",", "2", ",", "20"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"20", ",", 
+     RowBox[{"-", "2"}], ",", "2", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "8"}], ",", "20", ",", "2", ",", "6"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"20", ",", 
+     RowBox[{"-", "8"}], ",", "2", ",", "6"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "20", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "20", ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "20", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"20", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "8"}], ",", "20", ",", "8", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"20", ",", 
+     RowBox[{"-", "8"}], ",", "8", ",", "0"}], "}"}]}], "}"}]], "Output",
+ CellContext->"Cell$$16171`",
+ CellLabel->"Out[16]=",
+ CellID->315368588,ExpressionUUID->"2accbbd9-8bc3-460b-94e8-c410543910a7"]
+}, Open  ]],
+
+Cell[TextData[{
+ "and then we supply them to the option ",
+ StyleBox["PayoffCoord ",
+  FontSlant->"Italic"],
+ "by"
+}], "ExampleText",
+ CellID->1921439494,ExpressionUUID->"c7b62e4f-e841-4609-abb2-6f6552281066"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"fig07", "=", 
+  RowBox[{"PlotWeberSet3dV6", "[", 
+   RowBox[{"ExpGame", ",", 
+    RowBox[{"ViewShapleySol", "\[Rule]", " ", "True"}], ",", 
+    RowBox[{"ShapleyCoord", "\[Rule]", " ", "shv"}], ",", 
+    RowBox[{"ViewNucleolusSol", "\[Rule]", " ", "True"}], ",", 
+    RowBox[{"NucleolusCoord", "\[Rule]", " ", "nc"}], ",", 
+    RowBox[{"ViewKernelSol", "\[Rule]", " ", "False"}], ",", " ", 
+    RowBox[{"ViewModiclusSol", "\[Rule]", " ", "True"}], ",", 
+    RowBox[{"ModiclusCoord", "\[Rule]", " ", "mnc"}], ",", 
+    RowBox[{"ViewPayoffSol", "\[Rule]", " ", "True"}], ",", 
+    RowBox[{"PayoffCoord", "\[Rule]", " ", "wbv"}]}], "]"}]}]], "Input",
+ CellLabel->"In[17]:=",
+ CellID->1632084698,ExpressionUUID->"f11fd242-61ce-4820-bfa0-642711ce7dc9"],
+
+Cell[BoxData[
+ Graphics3DBox[{
+   {RGBColor[1, 0.5, 0], Opacity[0.4], GraphicsComplex3DBox[CompressedData["
+1:eJxTTMoPSmViYGAQAWJmIJ41EwRO2kPom/sZwOCDPUwclQ+Th+uDq0fTB1eH
+CtDlYfrQzYPxb2Kow+UedHn8fJj5O+1R5WHm7kRz18796Oqxi6O7b6e9MRhc
+hrsXXRyX+/ADuP/R3AkzHyEOAI2MhOU=
+     "], Polygon3DBox[{{18, 16, 7}, {6, 4, 17}, {6, 18, 4}, {1, 7, 3}, {15, 4,
+       1}, {12, 19, 6}, {19, 2, 6}, {10, 13, 20}, {13, 16, 20}, {14, 16, 
+      18}, {17, 4, 15}, {18, 7, 4}, {4, 7, 1}, {12, 6, 17}, {5, 10, 20}, {2, 
+      8, 6}, {6, 8, 18}, {3, 9, 1}, {3, 13, 9}, {9, 11, 1}, {1, 11, 15}, {15, 
+      12, 17}, {15, 19, 12}, {19, 11, 10}, {15, 11, 19}, {11, 13, 10}, {7, 13,
+       3}, {7, 16, 13}, {9, 13, 11}, {20, 8, 5}, {20, 14, 8}, {2, 10, 5}, {8, 
+      14, 18}, {5, 8, 2}, {19, 10, 2}, {20, 16, 14}}]]}, 
+   {Thickness[Large], 
+    {Thickness[0.0085], 
+     TubeBox[NCache[{{Rational[1, 5], Rational[-2, 5], 1}, {
+        1, Rational[-1, 5], 0}}, {{0.2, -0.4, 1}, {1, -0.2, 0}}]], 
+     TubeBox[NCache[{{Rational[1, 5], Rational[-2, 5], 1}, {
+        0, Rational[-2, 5], 1}}, {{0.2, -0.4, 1}, {0, -0.4, 1}}]], 
+     TubeBox[NCache[{{Rational[1, 5], Rational[-2, 5], 1}, {
+        0, Rational[1, 10], 1}}, {{0.2, -0.4, 1}, {0, 0.1, 1}}]], 
+     TubeBox[NCache[{{Rational[1, 5], Rational[-2, 5], 1}, {
+        1, Rational[1, 10], Rational[3, 10]}}, {{0.2, -0.4, 1}, {
+        1, 0.1, 0.3}}]], 
+     TubeBox[NCache[{{Rational[1, 5], 1, Rational[-2, 5]}, {
+        1, 0, Rational[-1, 5]}}, {{0.2, 1, -0.4}, {1, 0, -0.2}}]], 
+     TubeBox[NCache[{{Rational[1, 5], 1, Rational[-2, 5]}, {
+        0, 1, Rational[-2, 5]}}, {{0.2, 1, -0.4}, {0, 1, -0.4}}]], 
+     TubeBox[NCache[{{Rational[1, 5], 1, Rational[-2, 5]}, {0, 1, 0}}, {{
+        0.2, 1, -0.4}, {0, 1, 0}}]], 
+     TubeBox[NCache[{{Rational[1, 5], 1, Rational[-2, 5]}, {
+        1, Rational[2, 5], 0}}, {{0.2, 1, -0.4}, {1, 0.4, 0}}]], 
+     TubeBox[NCache[{{1, Rational[-1, 5], 0}, {1, 0, Rational[-1, 5]}}, {{
+        1, -0.2, 0}, {1, 0, -0.2}}]], 
+     TubeBox[NCache[{{1, Rational[-1, 5], 0}, {0, Rational[-2, 5], 1}}, {{
+        1, -0.2, 0}, {0, -0.4, 1}}]], 
+     TubeBox[NCache[{{1, Rational[-1, 5], 0}, {0, 0, 0}}, {{1, -0.2, 0}, {0, 
+        0, 0}}]], 
+     TubeBox[NCache[{{1, Rational[-1, 5], 0}, {
+        1, Rational[1, 10], Rational[3, 10]}}, {{1, -0.2, 0}, {
+        1, 0.1, 0.3}}]], 
+     TubeBox[NCache[{{1, 0, Rational[-1, 5]}, {0, 1, Rational[-2, 5]}}, {{
+        1, 0, -0.2}, {0, 1, -0.4}}]], 
+     TubeBox[NCache[{{1, 0, Rational[-1, 5]}, {0, 0, 0}}, {{1, 0, -0.2}, {0, 
+        0, 0}}]], 
+     TubeBox[NCache[{{1, 0, Rational[-1, 5]}, {1, Rational[2, 5], 0}}, {{
+        1, 0, -0.2}, {1, 0.4, 0}}]], 
+     TubeBox[NCache[{{0, Rational[-2, 5], 1}, {0, 0, 0}}, {{0, -0.4, 1}, {0, 
+        0, 0}}]], 
+     TubeBox[NCache[{{0, Rational[-2, 5], 1}, {
+        Rational[-1, 10], Rational[1, 10], 1}}, {{
+        0, -0.4, 1}, {-0.1, 0.1, 1}}]], 
+     TubeBox[NCache[{{0, Rational[-2, 5], 1}, {
+        Rational[-2, 5], Rational[1, 10], Rational[3, 10]}}, {{
+        0, -0.4, 1}, {-0.4, 0.1, 0.3}}]], 
+     TubeBox[NCache[{{0, 1, Rational[-2, 5]}, {0, 0, 0}}, {{0, 1, -0.4}, {0, 
+        0, 0}}]], 
+     TubeBox[NCache[{{0, 1, Rational[-2, 5]}, {0, 1, 0}}, {{0, 1, -0.4}, {0, 
+        1, 0}}]], 
+     TubeBox[NCache[{{0, 1, Rational[-2, 5]}, {
+        Rational[-2, 5], Rational[2, 5], 0}}, {{
+        0, 1, -0.4}, {-0.4, 0.4, 0}}]], 
+     TubeBox[NCache[{{0, 0, 0}, {
+        Rational[-2, 5], Rational[1, 10], Rational[3, 10]}}, {{0, 0, 
+        0}, {-0.4, 0.1, 0.3}}]], 
+     TubeBox[NCache[{{0, 0, 0}, {Rational[-2, 5], Rational[2, 5], 0}}, {{0, 0,
+         0}, {-0.4, 0.4, 0}}]], 
+     TubeBox[NCache[{{0, 1, 0}, {0, Rational[1, 10], 1}}, {{0, 1, 0}, {
+        0, 0.1, 1}}]], 
+     TubeBox[NCache[{{0, 1, 0}, {Rational[-1, 10], Rational[1, 10], 1}}, {{0, 
+        1, 0}, {-0.1, 0.1, 1}}]], 
+     TubeBox[NCache[{{0, 1, 0}, {1, Rational[2, 5], 0}}, {{0, 1, 0}, {
+        1, 0.4, 0}}]], 
+     TubeBox[NCache[{{0, 1, 0}, {Rational[-2, 5], Rational[2, 5], 0}}, {{0, 1,
+         0}, {-0.4, 0.4, 0}}]], 
+     TubeBox[NCache[{{0, Rational[1, 10], 1}, {
+        Rational[-1, 10], Rational[1, 10], 1}}, {{
+        0, 0.1, 1}, {-0.1, 0.1, 1}}]], 
+     TubeBox[NCache[{{0, Rational[1, 10], 1}, {
+        1, Rational[1, 10], Rational[3, 10]}}, {{0, 0.1, 1}, {1, 0.1, 0.3}}]],
+      TubeBox[NCache[{{0, Rational[1, 10], 1}, {1, Rational[2, 5], 0}}, {{
+        0, 0.1, 1}, {1, 0.4, 0}}]], 
+     TubeBox[NCache[{{Rational[-1, 10], Rational[1, 10], 1}, {
+        Rational[-2, 5], Rational[1, 10], Rational[3, 10]}}, {{-0.1, 0.1, 
+         1}, {-0.4, 0.1, 0.3}}]], 
+     TubeBox[NCache[{{Rational[-1, 10], Rational[1, 10], 1}, {
+        Rational[-2, 5], Rational[2, 5], 0}}, {{-0.1, 0.1, 1}, {-0.4, 0.4, 
+         0}}]], TubeBox[
+      NCache[{{1, Rational[1, 10], Rational[3, 10]}, {
+        1, Rational[2, 5], 0}}, {{1, 0.1, 0.3}, {1, 0.4, 0}}]], 
+     TubeBox[NCache[{{Rational[-2, 5], Rational[1, 10], Rational[3, 10]}, {
+        Rational[-2, 5], Rational[2, 5], 0}}, {{-0.4, 0.1, 
+        0.3}, {-0.4, 0.4, 0}}]]}, 
+    {Thickness[0.0035], Dashing[{0.01, 0.012}]}}, 
+   {Thickness[Large], 
+    GraphicsComplex3DBox[
+     NCache[{{0, Rational[1, 10], Rational[7, 10]}, {0, Rational[4, 5], 0}, {
+       Rational[7, 10], Rational[1, 10], 0}, {0, Rational[1, 10], 0}}, {{
+       0, 0.1, 0.7}, {0, 0.8, 0}, {0.7, 0.1, 0}, {0, 0.1, 0}}], 
+     TubeBox[{{2, 3, 4, 1}, {1, 3, 4, 2}, {1, 2, 4, 3}, {1, 2, 3, 4}}]]}, 
+   {RGBColor[0, 0, 1], 
+    SphereBox[
+     NCache[{Rational[9, 40], Rational[31, 120], Rational[9, 40]}, {0.225, 
+      0.25833333333333336`, 0.225}], 0.021]}, 
+   {RGBColor[0, 1, 0], 
+    SphereBox[
+     NCache[{Rational[3, 20], Rational[3, 10], Rational[1, 5]}, {0.15, 0.3, 
+      0.2}], 0.021]}, 
+   {RGBColor[0.5, 0, 0.5], 
+    SphereBox[
+     NCache[{Rational[1, 4], Rational[1, 4], Rational[1, 4]}, {0.25, 0.25, 
+      0.25}], 0.021]}, {
+    {RGBColor[
+      NCache[{
+        Rational[1, 5], 
+        Rational[-2, 5], 1}, {0.2, -0.4, 1}]], 
+     SphereBox[NCache[{Rational[1, 5], Rational[-2, 5], 1}, {0.2, -0.4, 1}], 
+      0.021]}, 
+    {RGBColor[
+      NCache[{
+        Rational[1, 5], 1, 
+        Rational[-2, 5]}, {0.2, 1, -0.4}]], 
+     SphereBox[NCache[{Rational[1, 5], 1, Rational[-2, 5]}, {0.2, 1, -0.4}], 
+      0.021]}, 
+    {RGBColor[
+      NCache[{0, 
+        Rational[-1, 5], 1}, {0, -0.2, 1}]], 
+     SphereBox[NCache[{0, Rational[-1, 5], 1}, {0, -0.2, 1}], 0.021]}, 
+    {RGBColor[
+      NCache[{1, 
+        Rational[-1, 5], 0}, {1, -0.2, 0}]], 
+     SphereBox[NCache[{1, Rational[-1, 5], 0}, {1, -0.2, 0}], 0.021]}, 
+    {RGBColor[
+      NCache[{0, 1, 
+        Rational[-1, 5]}, {0, 1, -0.2}]], 
+     SphereBox[NCache[{0, 1, Rational[-1, 5]}, {0, 1, -0.2}], 0.021]}, 
+    {RGBColor[
+      NCache[{1, 0, 
+        Rational[-1, 5]}, {1, 0, -0.2}]], 
+     SphereBox[NCache[{1, 0, Rational[-1, 5]}, {1, 0, -0.2}], 0.021]}, 
+    {RGBColor[
+      NCache[{0, 
+        Rational[-2, 5], 1}, {0, -0.4, 1}]], 
+     SphereBox[NCache[{0, Rational[-2, 5], 1}, {0, -0.4, 1}], 0.021]}, 
+    {RGBColor[
+      NCache[{0, 1, 
+        Rational[-2, 5]}, {0, 1, -0.4}]], 
+     SphereBox[NCache[{0, 1, Rational[-2, 5]}, {0, 1, -0.4}], 0.021]}, 
+    {RGBColor[0, 0, 1], SphereBox[{0, 0, 1}, 0.021]}, 
+    {RGBColor[0, 0, 0], SphereBox[{0, 0, 0}, 0.021]}, 
+    {RGBColor[0, 1, 0], SphereBox[{0, 1, 0}, 0.021]}, 
+    {RGBColor[0, 0, 0], SphereBox[{0, 0, 0}, 0.021]}, 
+    {RGBColor[
+      NCache[{0, 
+        Rational[1, 10], 1}, {0, 0.1, 1}]], 
+     SphereBox[NCache[{0, Rational[1, 10], 1}, {0, 0.1, 1}], 0.021]}, 
+    {RGBColor[
+      NCache[{1, 
+        Rational[1, 10], 0}, {1, 0.1, 0}]], 
+     SphereBox[NCache[{1, Rational[1, 10], 0}, {1, 0.1, 0}], 0.021]}, 
+    {RGBColor[
+      NCache[{
+        Rational[-1, 10], 
+        Rational[1, 10], 1}, {-0.1, 0.1, 1}]], 
+     SphereBox[NCache[{Rational[-1, 10], Rational[1, 10], 1}, {-0.1, 0.1, 1}],
+       0.021]}, 
+    {RGBColor[
+      NCache[{
+        Rational[-1, 10], 
+        Rational[1, 10], 0}, {-0.1, 0.1, 0}]], 
+     SphereBox[NCache[{Rational[-1, 10], Rational[1, 10], 0}, {-0.1, 0.1, 0}],
+       0.021]}, 
+    {RGBColor[
+      NCache[{1, 
+        Rational[1, 10], 
+        Rational[3, 10]}, {1, 0.1, 0.3}]], 
+     SphereBox[NCache[{1, Rational[1, 10], Rational[3, 10]}, {1, 0.1, 0.3}], 
+      0.021]}, 
+    {RGBColor[
+      NCache[{
+        Rational[-2, 5], 
+        Rational[1, 10], 
+        Rational[3, 10]}, {-0.4, 0.1, 0.3}]], 
+     SphereBox[
+      NCache[{Rational[-2, 5], Rational[1, 10], Rational[3, 10]}, {-0.4, 0.1, 
+       0.3}], 0.021]}, 
+    {RGBColor[0, 1, 0], SphereBox[{0, 1, 0}, 0.021]}, 
+    {RGBColor[1, 0, 0], SphereBox[{1, 0, 0}, 0.021]}, 
+    {RGBColor[0, 1, 0], SphereBox[{0, 1, 0}, 0.021]}, 
+    {RGBColor[0, 0, 0], SphereBox[{0, 0, 0}, 0.021]}, 
+    {RGBColor[
+      NCache[{1, 
+        Rational[2, 5], 0}, {1, 0.4, 0}]], 
+     SphereBox[NCache[{1, Rational[2, 5], 0}, {1, 0.4, 0}], 0.021]}, 
+    {RGBColor[
+      NCache[{
+        Rational[-2, 5], 
+        Rational[2, 5], 0}, {-0.4, 0.4, 0}]], 
+     SphereBox[NCache[{Rational[-2, 5], Rational[2, 5], 0}, {-0.4, 0.4, 0}], 
+      0.021]}}},
+  AspectRatio->1,
+  Boxed->False,
+  ImageMargins->15,
+  ImageSize->{400, 434},
+  Lighting->(Lighting -> {{"Directional", 
+      RGBColor[0.3, 1, 0.1], {{5, 5, 4}, {5, 5, 0}}}}),
+  ViewCenter->{0.35, 0.35, 0.3},
+  ViewPoint->{1.714, 2.478, 1.54}]], "Output",
+ CellContext->"Cell$$16171`",
+ CellLabel->"Out[17]=",
+ CellID->1185962280,ExpressionUUID->"2961d796-a30b-4fcf-81de-0b53792596c9"]
+}, Open  ]],
+
+Cell["\<\
+However, the core and core vertices cannot be included in the Weber set \
+directly. By doing so, one has to call the function PlotCore3dV6 with the \
+option ShowWeberSet -> True.  Thus, we need to plot the core against the \
+Weber set. For adding  the extreme points of the core to a graphic, all we \
+must to do is to compute the vertices by\
+\>", "ExampleText",
+ CellID->364455761,ExpressionUUID->"7e0ddf44-b5c4-4408-ac58-21944d0d7dea"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"crv", "=", 
+  RowBox[{"CddGmpVerticesCore", "[", "ExpGame", "]"}]}]], "Input",
+ CellLabel->"In[18]:=",
+ CellID->1366773447,ExpressionUUID->"fa43d9b0-be25-40fc-b1b1-03349708eb13"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"12", ",", "0", ",", "2", ",", "6"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"12", ",", "0", ",", "8", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"4", ",", "4", ",", "12", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"4", ",", "4", ",", "2", ",", "10"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"4", ",", "8", ",", "2", ",", "6"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"4", ",", "8", ",", "8", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"8", ",", "0", ",", "12", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"8", ",", "0", ",", "2", ",", "10"}], "}"}]}], "}"}]], "Output",
+ CellContext->"Cell$$16171`",
+ CellLabel->"Out[18]=",
+ CellID->1869689999,ExpressionUUID->"f5940d53-4b09-4c6d-a646-e32f7578bdab"]
+}, Open  ]],
+
+Cell[TextData[{
+ "and then we supply them to the option ",
+ StyleBox["PayoffCoord ",
+  FontSlant->"Italic"],
+ "within the command PlotCore3dV6 to get:"
+}], "ExampleText",
+ CellID->349071146,ExpressionUUID->"f9c3c127-01a5-4e83-91c2-4440e7449214"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"fig08", "=", 
+  RowBox[{"PlotCore3dV6", "[", 
+   RowBox[{"ExpGame", ",", 
+    RowBox[{"ViewShapleySol", "\[Rule]", " ", "True"}], ",", 
+    RowBox[{"ShapleyCoord", "\[Rule]", " ", "shv"}], ",", 
+    RowBox[{"ViewNucleolusSol", "\[Rule]", " ", "True"}], ",", 
+    RowBox[{"NucleolusCoord", "\[Rule]", " ", "nc"}], ",", 
+    RowBox[{"ViewKernelSol", "\[Rule]", " ", "False"}], ",", " ", 
+    RowBox[{"ViewModiclusSol", "\[Rule]", " ", "True"}], ",", 
+    RowBox[{"ModiclusCoord", "\[Rule]", " ", "mnc"}], ",", 
+    RowBox[{"ViewPayoffSol", "\[Rule]", " ", "True"}], ",", 
+    RowBox[{"PayoffCoord", "\[Rule]", " ", "crv"}], ",", 
+    RowBox[{"ShowWeberSet", "->", " ", "True"}]}], "]"}]}]], "Input",
+ CellLabel->"In[19]:=",
+ CellID->763366402,ExpressionUUID->"ecb9e045-c79c-467e-9f27-e82cc1b72c31"],
+
+Cell[BoxData[
+ Graphics3DBox[{
+   {RGBColor[1, 1, 0], Opacity[0.4], 
+    GraphicsComplex3DBox[{{0., 0.4, 0.}, {0., 0.6, 0.}, {0.4, 0.4, 0.}, {0.2, 
+     0.6, 0.}, {0.2, 0.1, 0.5}, {0.4, 0.1, 0.3}, {0., 0.1, 0.5}, {0., 0.1, 
+     0.3}}, Polygon3DBox[{{4, 2, 1}, {5, 2, 4}, {1, 7, 8}, {8, 7, 5}, {5, 3, 
+      6}, {4, 3, 5}, {6, 3, 1}, {1, 3, 4}, {2, 7, 1}, {5, 7, 2}, {6, 8, 5}, {
+      1, 8, 6}}]]}, 
+   {Thickness[Large], 
+    GraphicsComplex3DBox[{{0., 0.4, 0.}, {0., 0.6, 0.}, {0.4, 0.4, 0.}, {0.2, 
+     0.6, 0.}, {0.2, 0.1, 0.5}, {0.4, 0.1, 0.3}, {0., 0.1, 0.5}, {0., 0.1, 
+     0.3}}, {
+      {Thickness[0.0085], TubeBox[{{0., 0.4, 0.}, {0., 0.6, 0.}}], 
+       TubeBox[{{0., 0.4, 0.}, {0.4, 0.4, 0.}}], 
+       TubeBox[{{0., 0.4, 0.}, {0., 0.1, 0.3}}], 
+       TubeBox[{{0., 0.6, 0.}, {0.2, 0.6, 0.}}], 
+       TubeBox[{{0., 0.6, 0.}, {0., 0.1, 0.5}}], 
+       TubeBox[{{0.4, 0.4, 0.}, {0.2, 0.6, 0.}}], 
+       TubeBox[{{0.4, 0.4, 0.}, {0.4, 0.1, 0.3}}], 
+       TubeBox[{{0.2, 0.6, 0.}, {0.2, 0.1, 0.5}}], 
+       TubeBox[{{0.2, 0.1, 0.5}, {0.4, 0.1, 0.3}}], 
+       TubeBox[{{0.2, 0.1, 0.5}, {0., 0.1, 0.5}}], 
+       TubeBox[{{0.4, 0.1, 0.3}, {0., 0.1, 0.3}}], 
+       TubeBox[{{0., 0.1, 0.5}, {0., 0.1, 0.3}}]}, 
+      {Thickness[0.0035], Dashing[{0.01, 0.012}]}}]}, 
+   {Thickness[Large], 
+    GraphicsComplex3DBox[
+     NCache[{{0, Rational[1, 10], Rational[7, 10]}, {0, Rational[4, 5], 0}, {
+       Rational[7, 10], Rational[1, 10], 0}, {0, Rational[1, 10], 0}}, {{
+       0, 0.1, 0.7}, {0, 0.8, 0}, {0.7, 0.1, 0}, {0, 0.1, 0}}], 
+     TubeBox[{{2, 3, 4, 1}, {1, 3, 4, 2}, {1, 2, 4, 3}, {1, 2, 3, 4}}]]}, 
+   {RGBColor[0, 0, 1], 
+    SphereBox[
+     NCache[{Rational[9, 40], Rational[31, 120], Rational[9, 40]}, {0.225, 
+      0.25833333333333336`, 0.225}], 0.021]}, 
+   {RGBColor[0, 1, 0], 
+    SphereBox[
+     NCache[{Rational[3, 20], Rational[3, 10], Rational[1, 5]}, {0.15, 0.3, 
+      0.2}], 0.021]}, 
+   {RGBColor[0.5, 0, 0.5], 
+    SphereBox[
+     NCache[{Rational[1, 4], Rational[1, 4], Rational[1, 4]}, {0.25, 0.25, 
+      0.25}], 0.021]}, {
+    {RGBColor[
+      NCache[{0, 
+        Rational[1, 10], 
+        Rational[3, 10]}, {0, 0.1, 0.3}]], 
+     SphereBox[NCache[{0, Rational[1, 10], Rational[3, 10]}, {0, 0.1, 0.3}], 
+      0.021]}, 
+    {RGBColor[
+      NCache[{0, 
+        Rational[2, 5], 0}, {0, 0.4, 0}]], 
+     SphereBox[NCache[{0, Rational[2, 5], 0}, {0, 0.4, 0}], 0.021]}, 
+    {RGBColor[
+      NCache[{
+        Rational[1, 5], 
+        Rational[3, 5], 0}, {0.2, 0.6, 0}]], 
+     SphereBox[NCache[{Rational[1, 5], Rational[3, 5], 0}, {0.2, 0.6, 0}], 
+      0.021]}, 
+    {RGBColor[
+      NCache[{
+        Rational[1, 5], 
+        Rational[1, 10], 
+        Rational[1, 2]}, {0.2, 0.1, 0.5}]], 
+     SphereBox[
+      NCache[{Rational[1, 5], Rational[1, 10], Rational[1, 2]}, {0.2, 0.1, 
+       0.5}], 0.021]}, 
+    {RGBColor[
+      NCache[{
+        Rational[2, 5], 
+        Rational[1, 10], 
+        Rational[3, 10]}, {0.4, 0.1, 0.3}]], 
+     SphereBox[
+      NCache[{Rational[2, 5], Rational[1, 10], Rational[3, 10]}, {0.4, 0.1, 
+       0.3}], 0.021]}, 
+    {RGBColor[
+      NCache[{
+        Rational[2, 5], 
+        Rational[2, 5], 0}, {0.4, 0.4, 0}]], 
+     SphereBox[NCache[{Rational[2, 5], Rational[2, 5], 0}, {0.4, 0.4, 0}], 
+      0.021]}, 
+    {RGBColor[
+      NCache[{0, 
+        Rational[3, 5], 0}, {0, 0.6, 0}]], 
+     SphereBox[NCache[{0, Rational[3, 5], 0}, {0, 0.6, 0}], 0.021]}, 
+    {RGBColor[
+      NCache[{0, 
+        Rational[1, 10], 
+        Rational[1, 2]}, {0, 0.1, 0.5}]], 
+     SphereBox[NCache[{0, Rational[1, 10], Rational[1, 2]}, {0, 0.1, 0.5}], 
+      0.021]}}, {
+    {RGBColor[1, 0.5, 0], Opacity[0.4], GraphicsComplex3DBox[CompressedData["
+1:eJxTTMoPSmViYGAQAWJmIJ41EwRO2kPom/sZwOCDPUwclQ+Th+uDq0fTB1eH
+CtDlYfrQzYPxb2Kow+UedHn8fJj5O+1R5WHm7kRz18796Oqxi6O7b6e9MRhc
+hrsXXRyX+/ADuP/R3AkzHyEOAI2MhOU=
+      "], 
+      Polygon3DBox[{{18, 16, 7}, {6, 4, 17}, {6, 18, 4}, {1, 7, 3}, {15, 4, 
+       1}, {12, 19, 6}, {19, 2, 6}, {10, 13, 20}, {13, 16, 20}, {14, 16, 
+       18}, {17, 4, 15}, {18, 7, 4}, {4, 7, 1}, {12, 6, 17}, {5, 10, 20}, {2, 
+       8, 6}, {6, 8, 18}, {3, 9, 1}, {3, 13, 9}, {9, 11, 1}, {1, 11, 15}, {15,
+        12, 17}, {15, 19, 12}, {19, 11, 10}, {15, 11, 19}, {11, 13, 10}, {7, 
+       13, 3}, {7, 16, 13}, {9, 13, 11}, {20, 8, 5}, {20, 14, 8}, {2, 10, 
+       5}, {8, 14, 18}, {5, 8, 2}, {19, 10, 2}, {20, 16, 14}}]]}, 
+    {Thickness[Large], 
+     {Thickness[0.0085], 
+      TubeBox[NCache[{{Rational[1, 5], Rational[-2, 5], 1}, {
+         1, Rational[-1, 5], 0}}, {{0.2, -0.4, 1}, {1, -0.2, 0}}]], 
+      TubeBox[NCache[{{Rational[1, 5], Rational[-2, 5], 1}, {
+         0, Rational[-2, 5], 1}}, {{0.2, -0.4, 1}, {0, -0.4, 1}}]], 
+      TubeBox[NCache[{{Rational[1, 5], Rational[-2, 5], 1}, {
+         0, Rational[1, 10], 1}}, {{0.2, -0.4, 1}, {0, 0.1, 1}}]], 
+      TubeBox[NCache[{{Rational[1, 5], Rational[-2, 5], 1}, {
+         1, Rational[1, 10], Rational[3, 10]}}, {{0.2, -0.4, 1}, {
+         1, 0.1, 0.3}}]], 
+      TubeBox[NCache[{{Rational[1, 5], 1, Rational[-2, 5]}, {
+         1, 0, Rational[-1, 5]}}, {{0.2, 1, -0.4}, {1, 0, -0.2}}]], 
+      TubeBox[NCache[{{Rational[1, 5], 1, Rational[-2, 5]}, {
+         0, 1, Rational[-2, 5]}}, {{0.2, 1, -0.4}, {0, 1, -0.4}}]], 
+      TubeBox[NCache[{{Rational[1, 5], 1, Rational[-2, 5]}, {0, 1, 0}}, {{
+         0.2, 1, -0.4}, {0, 1, 0}}]], 
+      TubeBox[NCache[{{Rational[1, 5], 1, Rational[-2, 5]}, {
+         1, Rational[2, 5], 0}}, {{0.2, 1, -0.4}, {1, 0.4, 0}}]], 
+      TubeBox[NCache[{{1, Rational[-1, 5], 0}, {1, 0, Rational[-1, 5]}}, {{
+         1, -0.2, 0}, {1, 0, -0.2}}]], 
+      TubeBox[NCache[{{1, Rational[-1, 5], 0}, {0, Rational[-2, 5], 1}}, {{
+         1, -0.2, 0}, {0, -0.4, 1}}]], 
+      TubeBox[NCache[{{1, Rational[-1, 5], 0}, {0, 0, 0}}, {{1, -0.2, 0}, {0, 
+         0, 0}}]], 
+      TubeBox[NCache[{{1, Rational[-1, 5], 0}, {
+         1, Rational[1, 10], Rational[3, 10]}}, {{1, -0.2, 0}, {
+         1, 0.1, 0.3}}]], 
+      TubeBox[NCache[{{1, 0, Rational[-1, 5]}, {0, 1, Rational[-2, 5]}}, {{
+         1, 0, -0.2}, {0, 1, -0.4}}]], 
+      TubeBox[NCache[{{1, 0, Rational[-1, 5]}, {0, 0, 0}}, {{1, 0, -0.2}, {0, 
+         0, 0}}]], 
+      TubeBox[NCache[{{1, 0, Rational[-1, 5]}, {1, Rational[2, 5], 0}}, {{
+         1, 0, -0.2}, {1, 0.4, 0}}]], 
+      TubeBox[NCache[{{0, Rational[-2, 5], 1}, {0, 0, 0}}, {{0, -0.4, 1}, {0, 
+         0, 0}}]], 
+      TubeBox[NCache[{{0, Rational[-2, 5], 1}, {
+         Rational[-1, 10], Rational[1, 10], 1}}, {{
+         0, -0.4, 1}, {-0.1, 0.1, 1}}]], 
+      TubeBox[NCache[{{0, Rational[-2, 5], 1}, {
+         Rational[-2, 5], Rational[1, 10], Rational[3, 10]}}, {{
+         0, -0.4, 1}, {-0.4, 0.1, 0.3}}]], 
+      TubeBox[NCache[{{0, 1, Rational[-2, 5]}, {0, 0, 0}}, {{0, 1, -0.4}, {0, 
+         0, 0}}]], 
+      TubeBox[NCache[{{0, 1, Rational[-2, 5]}, {0, 1, 0}}, {{0, 1, -0.4}, {0, 
+         1, 0}}]], 
+      TubeBox[NCache[{{0, 1, Rational[-2, 5]}, {
+         Rational[-2, 5], Rational[2, 5], 0}}, {{
+         0, 1, -0.4}, {-0.4, 0.4, 0}}]], 
+      TubeBox[NCache[{{0, 0, 0}, {
+         Rational[-2, 5], Rational[1, 10], Rational[3, 10]}}, {{0, 0, 
+         0}, {-0.4, 0.1, 0.3}}]], 
+      TubeBox[NCache[{{0, 0, 0}, {Rational[-2, 5], Rational[2, 5], 0}}, {{0, 
+         0, 0}, {-0.4, 0.4, 0}}]], 
+      TubeBox[NCache[{{0, 1, 0}, {0, Rational[1, 10], 1}}, {{0, 1, 0}, {
+         0, 0.1, 1}}]], 
+      TubeBox[NCache[{{0, 1, 0}, {Rational[-1, 10], Rational[1, 10], 1}}, {{0,
+          1, 0}, {-0.1, 0.1, 1}}]], 
+      TubeBox[NCache[{{0, 1, 0}, {1, Rational[2, 5], 0}}, {{0, 1, 0}, {
+         1, 0.4, 0}}]], 
+      TubeBox[NCache[{{0, 1, 0}, {Rational[-2, 5], Rational[2, 5], 0}}, {{0, 
+         1, 0}, {-0.4, 0.4, 0}}]], 
+      TubeBox[NCache[{{0, Rational[1, 10], 1}, {
+         Rational[-1, 10], Rational[1, 10], 1}}, {{
+         0, 0.1, 1}, {-0.1, 0.1, 1}}]], 
+      TubeBox[NCache[{{0, Rational[1, 10], 1}, {
+         1, Rational[1, 10], Rational[3, 10]}}, {{0, 0.1, 1}, {
+         1, 0.1, 0.3}}]], 
+      TubeBox[NCache[{{0, Rational[1, 10], 1}, {1, Rational[2, 5], 0}}, {{
+         0, 0.1, 1}, {1, 0.4, 0}}]], 
+      TubeBox[NCache[{{Rational[-1, 10], Rational[1, 10], 1}, {
+         Rational[-2, 5], Rational[1, 10], Rational[3, 10]}}, {{-0.1, 0.1, 
+          1}, {-0.4, 0.1, 0.3}}]], 
+      TubeBox[NCache[{{Rational[-1, 10], Rational[1, 10], 1}, {
+         Rational[-2, 5], Rational[2, 5], 0}}, {{-0.1, 0.1, 1}, {-0.4, 0.4, 
+          0}}]], TubeBox[
+       NCache[{{1, Rational[1, 10], Rational[3, 10]}, {
+         1, Rational[2, 5], 0}}, {{1, 0.1, 0.3}, {1, 0.4, 0}}]], 
+      TubeBox[NCache[{{Rational[-2, 5], Rational[1, 10], Rational[3, 10]}, {
+         Rational[-2, 5], Rational[2, 5], 0}}, {{-0.4, 0.1, 
+         0.3}, {-0.4, 0.4, 0}}]]}, 
+     {Thickness[0.0035], Dashing[{0.01, 0.012}]}}}},
+  AspectRatio->1,
+  Boxed->False,
+  ImageMargins->15,
+  ImageSize->{400, 434},
+  Lighting->(Lighting -> {{"Directional", 
+      RGBColor[0.3, 1, 0.1], {{5, 5, 4}, {5, 5, 0}}}}),
+  ViewCenter->{0.35, 0.35, 0.3},
+  ViewPoint->{1.714, 2.478, 1.54}]], "Output",
+ CellContext->"Cell$$16171`",
+ CellLabel->"Out[19]=",
+ CellID->1380937022,ExpressionUUID->"a216fff8-1b03-4c04-b9be-3896d21a4a9d"]
+}, Open  ]],
+
+Cell["\<\
+We observe that all core vertices are included into the graphic, showing that \
+the Weber set contains the core.\
+\>", "ExampleText",
+ CellID->672243198,ExpressionUUID->"1e6533b0-8713-4e9d-90b5-21f5e2c9ca10"]
+}, Dynamic[CurrentValue[
+ EvaluationNotebook[], {TaggingRules, "Openers", "ExampleSection", "0"}, 
+  Closed]]]]
+}, Dynamic[CurrentValue[
+ EvaluationNotebook[], {TaggingRules, "Openers", "PrimaryExamplesSection"}, 
+  Closed]]]],
+
+Cell[BoxData[GridBox[{
+   {
+    DynamicBox[FEPrivate`ImportImage[
+      FrontEnd`FileName[{"Documentation", "FooterIcons"}, 
+       "RelatedFunction.png"]],
+     ImageSizeCache->{50., {27., 33.}}], GridBox[{
+      {
+       StyleBox[
+        RowBox[{"See", " ", "Also"}], "SeeAlsoSection"]},
+      {Cell[TextData[{
+        Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["Nucleolus"]], "paclet:TUG/ref/Nucleolus", 
+           "TUG Package Symbol"},
+          "PackageLink",
+          BaseStyle->"InlineFormula"]], "InlineFormula",
+         FontFamily->"Source Sans Pro",ExpressionUUID->
+         "6ddb433c-86ee-4902-9806-44a92523e14a"],
+        "\[NonBreakingSpace]",
+        StyleBox[
+        "\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+         "InlineSeparator"],
+        " ",
+        Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["PreNucleolus"]], "paclet:TUG/ref/PreNucleolus", 
+           "TUG Package Symbol"},
+          "PackageLink",
+          BaseStyle->"InlineFormula"]], "InlineFormula",
+         FontFamily->"Source Sans Pro",ExpressionUUID->
+         "0910b8eb-6a1e-47ad-91dc-76e2c00473f5"],
+        "\[NonBreakingSpace]",
+        StyleBox[
+        "\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+         "InlineSeparator"],
+        " ",
+        Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["PreKernelSolution"]], 
+           "paclet:TUG/ref/PreKernelSolution", "TUG Package Symbol"},
+          "PackageLink",
+          BaseStyle->"InlineFormula"]], "InlineFormula",
+         FontFamily->"Source Sans Pro",ExpressionUUID->
+         "f2bbaecc-bec4-4336-9abb-fd8ff5716cc6"],
+        "\[NonBreakingSpace]",
+        StyleBox[
+        "\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+         "InlineSeparator"],
+        " ",
+        Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["FilledCoreV6"]], "paclet:TUG/ref/FilledCoreV6", 
+           "TUG Package Symbol"},
+          "PackageLink",
+          BaseStyle->"InlineFormula"]], "InlineFormula",
+         FontFamily->"Source Sans Pro",ExpressionUUID->
+         "22473ea5-1e19-4142-acbc-8005f654be36"],
+        "\[NonBreakingSpace]",
+        StyleBox[
+        "\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+         "InlineSeparator"],
+        " ",
+        Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["FilledWeberSetV6"]], "paclet:TUG/ref/FilledWeberSetV6", 
+           "TUG Package Symbol"},
+          "PackageLink",
+          BaseStyle->"InlineFormula"]], "InlineFormula",
+         FontFamily->"Source Sans Pro",ExpressionUUID->
+         "21d66eb9-f5f5-4aeb-9166-43ebccaff93f"],
+        "\[NonBreakingSpace]",
+        StyleBox[
+        "\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+         "InlineSeparator"],
+        " ",
+        Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["PlotWeberSet3dV6"]], "paclet:TUG/ref/PlotWeberSet3dV6", 
+           "TUG Package Symbol"},
+          "PackageLink",
+          BaseStyle->"InlineFormula"]], "InlineFormula",
+         FontFamily->"Source Sans Pro",ExpressionUUID->
+         "a5a64fb3-0c5a-41dd-9c78-df3ef871a252"],
+        "\[NonBreakingSpace]",
+        StyleBox[
+        "\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+         "InlineSeparator"],
+        " ",
+        Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["StrongEpsCore2d"]], "paclet:TUG/ref/StrongEpsCore2d", 
+           "TUG Package Symbol"},
+          "PackageLink",
+          BaseStyle->"InlineFormula"]], "InlineFormula",
+         FontFamily->"Source Sans Pro",ExpressionUUID->
+         "19afeedc-0e60-4958-8c98-d1579ea65c0c"],
+        "\[NonBreakingSpace]",
+        StyleBox[
+        "\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+         "InlineSeparator"],
+        " ",
+        Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["FindKernelSolution"]], 
+           "paclet:TUG/ref/FindKernelSolution", "TUG Package Symbol"},
+          "PackageLink",
+          BaseStyle->"InlineFormula"]], "InlineFormula",
+         FontFamily->"Source Sans Pro",ExpressionUUID->
+         "f4729e2c-0fc7-471b-a3b8-aaaefd4c3f41"],
+        "\[NonBreakingSpace]",
+        StyleBox[
+        "\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+         "InlineSeparator"],
+        " ",
+        Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["KernelCalculation"]], 
+           "paclet:TUG/ref/KernelCalculation", "TUG Package Symbol"},
+          "PackageLink",
+          BaseStyle->"InlineFormula"]], "InlineFormula",
+         FontFamily->"Source Sans Pro",ExpressionUUID->
+         "078a1d6e-b240-42ff-90f5-843e66f668d1"],
+        "\[NonBreakingSpace]",
+        StyleBox[
+        "\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+         "InlineSeparator"],
+        " ",
+        Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["BalancedCollectionQ"]], 
+           "paclet:TUG/ref/BalancedCollectionQ", "TUG Package Symbol"},
+          "PackageLink",
+          BaseStyle->"InlineFormula"]], "InlineFormula",
+         FontFamily->"Source Sans Pro",ExpressionUUID->
+         "a5d586c0-7f88-4f54-930d-9704f8ae29fd"],
+        "\[NonBreakingSpace]",
+        StyleBox[
+        "\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+         "InlineSeparator"],
+        " ",
+        Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["ShapleyValue"]], "paclet:TUG/ref/ShapleyValue", 
+           "TUG Package Symbol"},
+          "PackageLink",
+          BaseStyle->"InlineFormula"]], "InlineFormula",
+         FontFamily->"Source Sans Pro",ExpressionUUID->
+         "f1ccbf86-8e2b-4335-802d-755a31b0d1e9"]
+       }], "SeeAlso",ExpressionUUID->"fd4fb381-3270-4620-b044-4c930afbbf94"]}
+     }]}
+  }]], "SeeAlsoSection",ExpressionUUID->"ef34edca-96cb-4e84-b34b-\
+6e94a214a3d8"],
+
+Cell[BoxData[GridBox[{
+   {
+    DynamicBox[FEPrivate`ImportImage[
+      FrontEnd`FileName[{"Documentation", "FooterIcons"}, 
+       "RelatedTechNote.png"]],
+     ImageSizeCache->{50., {27., 33.}}], GridBox[{
+      {
+       StyleBox[
+        RowBox[{"Tech", " ", "Notes"}], "TechNotesSection"]},
+      {
+       RowBox[{
+       "\[FilledVerySmallSquare]", Cell[TextData[ButtonBox[
+        "Game Theory Package",
+         BaseStyle->"Link",
+         ButtonData->"paclet:TUG/Guides/RefPageTuGames"]], "TechNotes",
+         ExpressionUUID->"a72b1a00-6a6a-4e1d-ba5a-9f4f53e79e55"]}]}
+     }]}
+  }]], "TechNotesSection",ExpressionUUID->"71742729-1056-43f5-88ee-\
+04b32dfae1f0"],
+
+Cell[BoxData[GridBox[{
+   {
+    DynamicBox[FEPrivate`ImportImage[
+      FrontEnd`FileName[{"Documentation", "FooterIcons"}, "RelatedGuide.png"]],
+     ImageSizeCache->{50., {27., 33.}}], GridBox[{
+      {
+       StyleBox[
+        RowBox[{"Related", " ", "Guides"}], "MoreAboutSection"]},
+      {
+       RowBox[{"\[FilledVerySmallSquare]", Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["Graphics 2D"]], "paclet:TUG/Guides/TuGamesView2dV6"},
+          "RefLinkPlain",
+          BaseStyle->{"MoreAbout"}]], "MoreAbout",ExpressionUUID->
+         "b651beca-bd24-4557-9819-beaf35bc1c37"]}]},
+      {
+       RowBox[{"\[FilledVerySmallSquare]", Cell[BoxData[
+         TemplateBox[{
+           Cell[
+            TextData["Graphics 3D"]], "paclet:TUG/Guides/TuGamesView3dV6"},
+          "RefLinkPlain",
+          BaseStyle->{"MoreAbout"}]], "MoreAbout",ExpressionUUID->
+         "af8ec2d3-427a-4f89-b498-9c2a637b9216"]}]}
+     }]}
+  }]], "MoreAboutSection",ExpressionUUID->"2fa94af4-65bc-4359-95ec-\
+0160054c8f6c"],
+
+Cell[BoxData[GridBox[{
+   {
+    TemplateBox[{29},
+     "Spacer1"], GridBox[{
+      {
+       RowBox[{
+        TemplateBox[{17},
+         "Spacer1"], 
+        StyleBox[
+         RowBox[{"Related", " ", "Links"}], "RelatedLinksSection"]}]},
+      {Cell[BoxData[Cell[BoxData[
+         RowBox[{
+          TemplateBox[{16},
+           "Spacer1"], "\[FilledVerySmallSquare]", 
+          TemplateBox[{
+            Cell[
+             TextData[
+              Cell[
+               TextData[{
+                 Cell[
+                  BoxData[
+                   TemplateBox[{2}, "Spacer1"]]], 
+                 "AnimationKernelPropertyV6"}]]]], 
+            "paclet:TUG/Ref/AnimationKernelPropertyV6"},
+           "RefLinkPlain",
+           BaseStyle->{"RelatedLinks"}]}]],ExpressionUUID->
+         "fab2f3ce-be50-4ee7-bb94-0c428b8caff5"]], "RelatedLinks",
+        ExpressionUUID->"d4151e33-5ba1-460a-9e02-f81e64c5d890"]},
+      {Cell[BoxData[Cell[BoxData[
+         RowBox[{
+          TemplateBox[{16},
+           "Spacer1"], "\[FilledVerySmallSquare]", 
+          TemplateBox[{
+            Cell[
+             TextData[
+              Cell[
+               TextData[{
+                 Cell[
+                  BoxData[
+                   TemplateBox[{2}, "Spacer1"]]], "CddVerticesCore"}]]]], 
+            "paclet:TUG/Ref/CddVerticesCore"},
+           "RefLinkPlain",
+           BaseStyle->{"RelatedLinks"}]}]],ExpressionUUID->
+         "6d647d26-eb8a-4d55-8a5a-947c0655a7a9"]], "RelatedLinks",
+        ExpressionUUID->"63671645-4087-4513-b58c-2cfae1d70ac9"]},
+      {Cell[BoxData[Cell[BoxData[
+         RowBox[{
+          TemplateBox[{16},
+           "Spacer1"], "\[FilledVerySmallSquare]", 
+          TemplateBox[{
+            Cell[
+             TextData[
+              Cell[
+               TextData[{
+                 Cell[
+                  BoxData[
+                   TemplateBox[{2}, "Spacer1"]]], "PlotCore3dV6"}]]]], 
+            "paclet:TUG/Ref/PlotCore3dV6"},
+           "RefLinkPlain",
+           BaseStyle->{"RelatedLinks"}]}]],ExpressionUUID->
+         "12fc3694-f183-4a18-83b6-91ec1804e9bf"]], "RelatedLinks",
+        ExpressionUUID->"d7a945d5-9083-4145-b294-2b322fc10ec1"]},
+      {Cell[BoxData[Cell[BoxData[
+         RowBox[{
+          TemplateBox[{16},
+           "Spacer1"], "\[FilledVerySmallSquare]", 
+          TemplateBox[{
+            Cell[
+             TextData[
+              Cell[
+               TextData[{
+                 Cell[
+                  BoxData[
+                   TemplateBox[{2}, "Spacer1"]]], "StarCriticalVal"}]]]], 
+            "paclet:TUG/Ref/StarCriticalVal"},
+           "RefLinkPlain",
+           BaseStyle->{"RelatedLinks"}]}]],ExpressionUUID->
+         "bc50b6a1-6100-409d-bbb9-f90df4f7ff6f"]], "RelatedLinks",
+        ExpressionUUID->"e5f2fac9-accf-4cbd-b19d-22af587f4b48"]}
+     }]}
+  }]], "RelatedLinksSection",ExpressionUUID->"9da3cd56-27c8-411d-94e2-\
+cccfaaba9a9c"],
+
+Cell[CellGroupData[{
+
+Cell["Related Demonstrations", "RelatedDemonstrationsSection",
+ CellID->2135167160,ExpressionUUID->"9becd839-5532-42b1-983e-552a1b348468"],
+
+Cell[TextData[ButtonBox["Getting Started",
+ BaseStyle->"Link",
+ ButtonData->"paclet:TUG/Tutorials/GettingStarted"]], "RelatedDemonstrations",\
+
+ CellID->1194386356,ExpressionUUID->"e578713f-bf66-4022-85f0-5366bc72dca3"],
+
+Cell[TextData[ButtonBox["Manual TuGames",
+ BaseStyle->"Link",
+ ButtonData->"paclet:TUG/Guides/ManualTuGames"]], "RelatedDemonstrations",
+ CellID->1641706272,ExpressionUUID->"2c6e51f9-4a87-4278-945e-429a4a5a6b7c"],
+
+Cell[TextData[ButtonBox["ParaTuGames Package",
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:TUG/Tutorials/ParaExpGamePers12"]], "RelatedDemonstrations",
+ CellID->399251956,ExpressionUUID->"7323dd20-7643-4179-a345-29fdc2003d8b"],
+
+Cell[TextData[ButtonBox["MATLink Connection to MatTuGames",
+ BaseStyle->"Link",
+ ButtonData->"paclet:TUG/Guides/MATtug"]], "RelatedDemonstrations",
+ CellID->821434655,ExpressionUUID->"cc800674-1e6c-4a7e-b621-cb048676a4d8"]
+}, Open  ]],
+
+Cell[" ", "FooterCell",ExpressionUUID->"2cc7c53b-abdf-4f76-921f-ebb8fbfcbd18"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{900, 830.25},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"PlotWeberSet3dV6",
+TaggingRules->{
+ "ModificationHighlight" -> False, "ColorType" -> "", "LinkTrails" -> "", 
+  "HasOptions" -> True, "ExampleCounter" -> 1, 
+  "Openers" -> {
+   "PrimaryExamplesSection" -> Open, "ExampleSection" -> {"0" -> Open}, 
+    "NotesSection" -> Closed}, "NewStyles" -> True, 
+  "CitationPopupData" -> $Failed, "ShowCitation" -> False, "RootCaptions" -> 
+  "", "Metadata" -> {
+   "built" -> "{2024, 6, 3, 16, 54, 52.350260}", 
+    "history" -> {"XX", "", "", ""}, "context" -> "TUG`coop`", 
+    "keywords" -> {}, "specialkeywords" -> {}, 
+    "tutorialcollectionlinks" -> {}, "index" -> True, "label" -> 
+    "T U G Symbol", "language" -> "en", "paclet" -> "TUG", "status" -> "None",
+     "summary" -> 
+    "FilledWeberSetV6[game] plots the Weber set of a four person game. \
+FilledWeberSetV6[game, options] by option set, the figure size and view can \
+be changed. In addition, the legend can be turned on. However, the core \
+cannot be included into the figure. ", "synonyms" -> {}, "tabletags" -> {}, 
+    "title" -> "PlotWeberSet3dV6", "titlemodifier" -> "", "metadescription" -> 
+    "", "windowtitle" -> "PlotWeberSet3dV6", "type" -> "Symbol", "uri" -> 
+    "TUG/ref/PlotWeberSet3dV6"}},
+FrontEndVersion->"13.3 for Linux x86 (64-bit) (July 24, 2023)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "UTF-8"],
+ExpressionUUID->"08dbd6e7-5999-4ca4-95aa-8581b12e0e8e"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "PrimaryExamplesSection"->{
+  Cell[40245, 1098, 1421, 37, 70, "PrimaryExamplesSection",ExpressionUUID->"732d5cba-15a7-4acd-8f98-23933589bfa1",
+   CellTags->"PrimaryExamplesSection",
+   CellID->1456978607]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"PrimaryExamplesSection", 132921, 3243}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[588, 21, 7296, 175, 57, "AnchorBarGrid",ExpressionUUID->"07da145c-99f0-4752-beb5-a558b56d6fdf",
+ CellID->1],
+Cell[7887, 198, 91, 0, 23, "ContextNameCell",ExpressionUUID->"1c86df29-d939-4c6c-9033-5e513a3057f7"],
+Cell[CellGroupData[{
+Cell[8003, 202, 559, 14, 59, "ObjectNameGrid",ExpressionUUID->"f146ad84-2c70-4456-8e2e-74f7983270e8"],
+Cell[8565, 218, 954, 19, 208, "Usage",ExpressionUUID->"1677a7ba-bbaa-4baa-a732-a5f48fccbb41",
+ CellID->261473278]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9556, 242, 1895, 47, 37, "NotesSection",ExpressionUUID->"9f46792d-7d13-4c15-87d4-f8dfba430fa3",
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->1046262721],
+Cell[11454, 291, 518, 12, 57, "]]",ExpressionUUID->"95c51e80-f2d9-4cd2-8fce-781bf47f57d7",
+ CellID->313448337],
+Cell[11975, 305, 489, 12, 38, "Notes",ExpressionUUID->"09d1907c-be35-4a19-ae1e-ce4b2962d571",
+ CellID->177724765],
+Cell[12467, 319, 328, 5, 57, "Notes",ExpressionUUID->"97324de8-9ad9-430c-b26e-80201293ed87",
+ CellID->881701117],
+Cell[12798, 326, 432, 7, 78, "Notes",ExpressionUUID->"c48ab7a2-5dbe-40ce-a18c-74bbf8334e61",
+ CellID->873586931],
+Cell[13233, 335, 148, 1, 36, "Notes",ExpressionUUID->"0c83dc81-d777-4b21-8602-97a0dd26bff7",
+ CellID->305331391],
+Cell[13384, 338, 384, 6, 78, "Notes",ExpressionUUID->"222001c5-edd5-4255-829d-29b762655406",
+ CellID->651706482],
+Cell[13771, 346, 606, 18, 38, "Notes",ExpressionUUID->"ece7133f-e738-4e6e-a874-a31487f9a61d",
+ CellID->135892803],
+Cell[14380, 366, 147, 1, 36, "Notes",ExpressionUUID->"d9636b8a-88e7-458d-bdc1-0b2ba7ddb3cf",
+ CellID->2111799648],
+Cell[14530, 369, 267, 4, 48, "Notes",ExpressionUUID->"6b297c74-7d02-4940-988e-9ea03a5d3552",
+ CellID->13178],
+Cell[14800, 375, 748, 17, 70, "3ColumnTableMod",ExpressionUUID->"4ad62fdc-e736-4e32-b9ce-c4d2ecb42a63",
+ CellID->969813666],
+Cell[15551, 394, 786, 19, 70, "3ColumnTableMod",ExpressionUUID->"0ad7f5a1-1dcb-4bf2-b180-aef54f7b0bab",
+ CellID->1035213662],
+Cell[16340, 415, 1752, 42, 70, "3ColumnTableMod",ExpressionUUID->"ac6fe295-1cd0-4ed6-93d6-4da3ac6153c3",
+ CellID->1640619354],
+Cell[18095, 459, 737, 17, 70, "3ColumnTableMod",ExpressionUUID->"fcf5d13e-e5ea-477f-9c4a-1188ce290cb9",
+ CellID->2628340],
+Cell[18835, 478, 661, 14, 70, "3ColumnTableMod",ExpressionUUID->"8119b82d-0862-4f8b-92bd-ef7cbf48da91",
+ CellID->1581386759],
+Cell[19499, 494, 704, 17, 70, "3ColumnTableMod",ExpressionUUID->"5f001886-b8f5-4b31-896b-6a219f698b54",
+ CellID->11156],
+Cell[20206, 513, 673, 15, 70, "3ColumnTableMod",ExpressionUUID->"38ad28fb-fefe-493b-a992-0a059345a292",
+ CellID->1348502217],
+Cell[20882, 530, 694, 15, 70, "3ColumnTableMod",ExpressionUUID->"15b81b88-855d-47df-b6cd-d9e32386e551",
+ CellID->1889737650],
+Cell[21579, 547, 646, 15, 70, "3ColumnTableMod",ExpressionUUID->"97a36adc-37a5-44ea-afb1-caa31f4077d2",
+ CellID->1661816152],
+Cell[22228, 564, 656, 15, 70, "3ColumnTableMod",ExpressionUUID->"a4bcffd9-063d-499a-b5c5-3037b12c646a",
+ CellID->2021650755],
+Cell[22887, 581, 674, 15, 70, "3ColumnTableMod",ExpressionUUID->"c6f49732-c3e1-434f-bb9c-ff1dd4774d7d",
+ CellID->2117624847],
+Cell[23564, 598, 662, 15, 70, "3ColumnTableMod",ExpressionUUID->"420d661b-9352-4b57-87f5-7e4a87ea5c44",
+ CellID->2145330687],
+Cell[24229, 615, 667, 15, 70, "3ColumnTableMod",ExpressionUUID->"9978d195-5f7a-4e3a-8b99-c0356e9ce066",
+ CellID->203358790],
+Cell[24899, 632, 671, 15, 70, "3ColumnTableMod",ExpressionUUID->"87c790bb-5f79-4b23-8ee7-a3eca293e2ef",
+ CellID->1843978144],
+Cell[25573, 649, 690, 15, 70, "3ColumnTableMod",ExpressionUUID->"7ddf9a03-ac86-4d3c-bd69-7b9a5a3d7a71",
+ CellID->1353055139],
+Cell[26266, 666, 671, 15, 70, "3ColumnTableMod",ExpressionUUID->"46dc08f2-80d3-49eb-8181-2edd38859385",
+ CellID->1846391669],
+Cell[26940, 683, 662, 14, 70, "3ColumnTableMod",ExpressionUUID->"b319816f-7446-468a-b60e-64a5d095f0b0",
+ CellID->901767574],
+Cell[27605, 699, 692, 15, 70, "3ColumnTableMod",ExpressionUUID->"72a29e2f-78d5-4e0f-bd7c-41ac23dc2f39",
+ CellID->1435485306],
+Cell[28300, 716, 1310, 39, 70, "Notes",ExpressionUUID->"4e7b172f-7c48-4a80-8ffd-5fc2e988aa82",
+ CellID->1570062306],
+Cell[29613, 757, 875, 26, 70, "Notes",ExpressionUUID->"3afce79a-f892-40c5-9ff0-5c19420a3300",
+ CellID->660614],
+Cell[30491, 785, 880, 26, 70, "Notes",ExpressionUUID->"f0b14b20-ae77-47ec-a99e-c8f67318f423",
+ CellID->2102971043],
+Cell[31374, 813, 1317, 39, 70, "Notes",ExpressionUUID->"93075b68-2a67-4070-944d-282663c9237b",
+ CellID->1108551522],
+Cell[32694, 854, 877, 26, 70, "Notes",ExpressionUUID->"d62bf911-03c2-4a46-ad4b-9f13ed53504a",
+ CellID->1499340563],
+Cell[33574, 882, 496, 14, 70, "Notes",ExpressionUUID->"1bb82811-6105-4268-ac72-d02948506c47",
+ CellID->2041043955],
+Cell[34073, 898, 538, 16, 70, "Notes",ExpressionUUID->"b3c89691-abfc-445c-ae8c-58d6c10d8a17",
+ CellID->282211233],
+Cell[34614, 916, 496, 14, 70, "Notes",ExpressionUUID->"dfb6f0c9-7c93-4306-8b1f-272be70d7d5a",
+ CellID->2126189377],
+Cell[35113, 932, 589, 15, 70, "Notes",ExpressionUUID->"2ce026e5-ed15-4c25-af72-e99db16dd92e",
+ CellID->995309240],
+Cell[35705, 949, 472, 14, 70, "Notes",ExpressionUUID->"40c01c26-f749-4e25-ad43-93668271f78c",
+ CellID->608546217],
+Cell[36180, 965, 466, 14, 70, "Notes",ExpressionUUID->"fdd08ee7-aebe-4a5c-ae06-451af1f4beee",
+ CellID->1426210193],
+Cell[36649, 981, 471, 14, 70, "Notes",ExpressionUUID->"1dea4e7a-95a3-4981-a39f-da8bd558a149",
+ CellID->930159234],
+Cell[37123, 997, 477, 14, 70, "Notes",ExpressionUUID->"2ac949bd-eeff-4a11-9670-df5382166dae",
+ CellID->266098834],
+Cell[37603, 1013, 481, 14, 70, "Notes",ExpressionUUID->"a6ea11bd-a92d-49e1-8cc9-eaa770312e28",
+ CellID->1374650356],
+Cell[38087, 1029, 508, 14, 70, "Notes",ExpressionUUID->"893c3fde-adcf-49fa-a3a2-99668a34c3e8",
+ CellID->2096118988],
+Cell[38598, 1045, 480, 14, 70, "Notes",ExpressionUUID->"b71c8f3b-84b3-4db3-a1e2-227a4b43962f",
+ CellID->692156901],
+Cell[39081, 1061, 486, 14, 70, "Notes",ExpressionUUID->"cb5d0937-5c63-4846-8fd8-497625b87c2b",
+ CellID->1735714032],
+Cell[39570, 1077, 548, 15, 70, "Notes",ExpressionUUID->"05f1a0b1-fb10-4889-a9fd-1197c9009707",
+ CellID->294414635]
+}, Dynamic[CurrentValue[EvaluationNotebook[], {TaggingRules, "Openers", "NotesSection"}, Closed]]]],
+Cell[CellGroupData[{
+Cell[40245, 1098, 1421, 37, 70, "PrimaryExamplesSection",ExpressionUUID->"732d5cba-15a7-4acd-8f98-23933589bfa1",
+ CellTags->"PrimaryExamplesSection",
+ CellID->1456978607],
+Cell[CellGroupData[{
+Cell[41691, 1139, 1399, 36, 70, "ExampleSection",ExpressionUUID->"6bff4e4f-acf0-4144-b8db-f6158d8e3de5",
+ CellID->1311748289],
+Cell[43093, 1177, 118, 1, 70, "ExampleText",ExpressionUUID->"4b80794f-4994-4d9f-b2c0-b0012372ad2b",
+ CellID->724598077],
+Cell[CellGroupData[{
+Cell[43236, 1182, 168, 3, 70, "Input",ExpressionUUID->"1321d5f0-7a07-4e3d-8e4e-cf92723aec9f",
+ CellID->2141335847],
+Cell[CellGroupData[{
+Cell[43429, 1189, 237, 4, 70, "Print",ExpressionUUID->"6e8be7a6-cb84-44d4-89df-9338f8e3fc4d",
+ CellID->1491254379],
+Cell[43669, 1195, 366, 8, 70, "Print",ExpressionUUID->"54d71574-b066-4b98-bd04-0e756ffc2740",
+ CellID->1738312348],
+Cell[44038, 1205, 236, 4, 70, "Print",ExpressionUUID->"2cb0c8a8-4c30-4ac5-a4f3-223a862c7170",
+ CellID->664190017],
+Cell[44277, 1211, 220, 3, 70, "Print",ExpressionUUID->"71cfaf1a-a0cf-4390-9d1a-36060fb793aa",
+ CellID->233808370],
+Cell[44500, 1216, 208, 3, 70, "Print",ExpressionUUID->"77f5cdd1-de33-4176-900b-d91f6590ca5f",
+ CellID->1133241564],
+Cell[44711, 1221, 238, 4, 70, "Print",ExpressionUUID->"e766fdaa-1a2b-4541-abae-0924deac0c4f",
+ CellID->1265109267],
+Cell[44952, 1227, 221, 3, 70, "Print",ExpressionUUID->"5175a5a0-7338-437c-b157-ff758a650498",
+ CellID->1401849865],
+Cell[45176, 1232, 237, 4, 70, "Print",ExpressionUUID->"27057489-be80-4510-827a-efd2da089c9e",
+ CellID->1849920252],
+Cell[45416, 1238, 237, 4, 70, "Print",ExpressionUUID->"322918fb-4691-4854-9e41-f6f41f68f0e9",
+ CellID->1857040066],
+Cell[45656, 1244, 208, 3, 70, "Print",ExpressionUUID->"eee5ca88-7551-4826-b456-46e1302cb566",
+ CellID->1186473769],
+Cell[45867, 1249, 236, 4, 70, "Print",ExpressionUUID->"def6c8d4-9965-41ed-a92e-20da1d9f092b",
+ CellID->359649877]
+}, Open  ]]
+}, Open  ]],
+Cell[46130, 1257, 137, 1, 70, "ExampleText",ExpressionUUID->"9b91e60d-9489-48b5-bee4-b0526058b4f4",
+ CellID->2083786667],
+Cell[46270, 1260, 234, 6, 70, "Input",ExpressionUUID->"3cbd347b-7636-48f3-9f30-e1e8365bbfb7",
+ CellID->585427827],
+Cell[46507, 1268, 375, 9, 70, "Input",ExpressionUUID->"bb866015-b92c-4436-b8f1-24acb1ef39de",
+ CellID->1947756944],
+Cell[46885, 1279, 238, 6, 70, "Input",ExpressionUUID->"0f7da18c-3302-49d8-9a61-6d1a0e4de348",
+ CellID->1946614331],
+Cell[47126, 1287, 190, 4, 70, "ExampleText",ExpressionUUID->"24157604-2b59-4fc5-a995-ac03c3be5ce6",
+ CellID->937669004],
+Cell[CellGroupData[{
+Cell[47341, 1295, 174, 3, 70, "Input",ExpressionUUID->"23c06206-65c2-430c-acfe-fd1838b0def8",
+ CellID->2096152795],
+Cell[47518, 1300, 1435, 33, 102, "Output",ExpressionUUID->"83485ec2-0f3e-45c3-8f10-29fd98fb29b0",
+ CellID->1664527245]
+}, Open  ]],
+Cell[48968, 1336, 176, 3, 70, "ExampleText",ExpressionUUID->"c506ace3-8fc1-4a8a-8c1f-9084bfe892b1",
+ CellID->4896524],
+Cell[CellGroupData[{
+Cell[49169, 1343, 200, 4, 70, "Input",ExpressionUUID->"1f26fdfa-6c2f-455b-ba9c-43bf4a588697",
+ CellID->640476792],
+Cell[49372, 1349, 5835, 110, 485, "Output",ExpressionUUID->"82c7cbdd-03a9-4b5d-af29-9734ecfe2118",
+ CellID->506462743]
+}, Open  ]],
+Cell[55222, 1462, 202, 4, 70, "ExampleText",ExpressionUUID->"e0c9407d-d842-4a43-aa19-6bb3dc4e6a16",
+ CellID->1283129384],
+Cell[CellGroupData[{
+Cell[55449, 1470, 283, 7, 70, "Input",ExpressionUUID->"289ac7ba-44a8-4573-a170-18a4b7271c39",
+ CellID->99189785],
+Cell[55735, 1479, 5494, 104, 485, "Output",ExpressionUUID->"5b9a8ab1-d3d8-4822-8ebe-0bc7faec18c5",
+ CellID->349361716]
+}, Open  ]],
+Cell[61244, 1586, 180, 3, 70, "ExampleText",ExpressionUUID->"0ff7d19c-6464-488b-84f7-39278819b76a",
+ CellID->1693517317],
+Cell[CellGroupData[{
+Cell[61449, 1593, 270, 6, 70, "Input",ExpressionUUID->"8c166302-2a38-4361-b9a3-a30a186cc78f",
+ CellID->827728234],
+Cell[61722, 1601, 5454, 107, 485, "Output",ExpressionUUID->"14021640-ee9a-4d02-982b-73b356ed2fa1",
+ CellID->1071246206]
+}, Open  ]],
+Cell[67191, 1711, 169, 3, 70, "ExampleText",ExpressionUUID->"f7dcdf42-b8da-4c4a-935f-defd62ca4162",
+ CellID->470193088],
+Cell[CellGroupData[{
+Cell[67385, 1718, 471, 9, 70, "Input",ExpressionUUID->"0db7bad1-e69f-46be-b5fd-5b82c967a892",
+ CellID->1375615690],
+Cell[67859, 1729, 6280, 122, 485, "Output",ExpressionUUID->"32e647e9-b321-4e1f-9c2f-d0928fffe548",
+ CellID->1115049089]
+}, Open  ]],
+Cell[74154, 1854, 159, 2, 70, "ExampleText",ExpressionUUID->"959a99ef-5a0c-4bfd-9691-847c05682ee3",
+ CellID->2132075007],
+Cell[CellGroupData[{
+Cell[74338, 1860, 529, 10, 70, "Input",ExpressionUUID->"e8e53a39-4a9c-4df2-bb38-6820b7ee2652",
+ CellID->967638449],
+Cell[74870, 1872, 9087, 175, 455, "Output",ExpressionUUID->"78079c73-773b-42bc-b94e-a2cf1ae76ced",
+ CellID->601365662]
+}, Open  ]],
+Cell[83972, 2050, 316, 5, 70, "ExampleText",ExpressionUUID->"a0373fc7-e96d-495f-840d-4758dac3679d",
+ CellID->73193713],
+Cell[CellGroupData[{
+Cell[84313, 2059, 196, 4, 70, "Input",ExpressionUUID->"cc427b0a-fa9b-4b4e-a0c0-fa06716a8149",
+ CellID->1642130140],
+Cell[84512, 2065, 313, 9, 51, "Output",ExpressionUUID->"57cf20e2-2d7b-4071-b536-76e9eb15c433",
+ CellID->1187132246]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[84862, 2079, 200, 4, 70, "Input",ExpressionUUID->"2753ff98-1146-4708-9ffc-98c8eb8ce485",
+ CellID->1428805585],
+Cell[85065, 2085, 223, 5, 36, "Output",ExpressionUUID->"1c900aea-1eff-438f-8fd8-664d832dface",
+ CellID->1132362631]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[85325, 2095, 191, 4, 70, "Input",ExpressionUUID->"638edd1e-2f99-441d-adbc-49ae9b905312",
+ CellID->590982472],
+Cell[85519, 2101, 223, 5, 36, "Output",ExpressionUUID->"709a096b-d63e-414b-991e-5bdeb7b46b8b",
+ CellID->2025362985]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[85779, 2111, 199, 4, 70, "Input",ExpressionUUID->"fddfe47f-224e-47af-b281-2f8aebcd7820",
+ CellID->1372698786],
+Cell[85981, 2117, 223, 5, 36, "Output",ExpressionUUID->"59807431-2e86-4cb7-8092-416542974317",
+ CellID->1244126209]
+}, Open  ]],
+Cell[86219, 2125, 172, 3, 70, "ExampleText",ExpressionUUID->"aa489ea3-dead-4722-b633-a87b20a175ce",
+ CellID->542469117],
+Cell[CellGroupData[{
+Cell[86416, 2132, 650, 12, 70, "Input",ExpressionUUID->"c29d0e41-9013-4a5e-b8aa-0ddbac34414b",
+ CellID->700969344],
+Cell[87069, 2146, 6310, 123, 485, "Output",ExpressionUUID->"bd9c56d6-f041-402f-9cd8-d1b6147a2b58",
+ CellID->971783185]
+}, Open  ]],
+Cell[93394, 2272, 254, 4, 70, "ExampleText",ExpressionUUID->"07ddc81a-8bbc-439f-a15b-698cbf8e992f",
+ CellID->1846857448],
+Cell[93651, 2278, 314, 5, 70, "ExampleText",ExpressionUUID->"11e64e38-4190-4ba2-8c0f-aa0fda4c67da",
+ CellID->31377083],
+Cell[CellGroupData[{
+Cell[93990, 2287, 192, 4, 70, "Input",ExpressionUUID->"b65f3d4f-c113-444a-941c-5c166078852c",
+ CellID->946849018],
+Cell[94185, 2293, 2438, 69, 85, "Output",ExpressionUUID->"2accbbd9-8bc3-460b-94e8-c410543910a7",
+ CellID->315368588]
+}, Open  ]],
+Cell[96638, 2365, 209, 6, 70, "ExampleText",ExpressionUUID->"c7b62e4f-e841-4609-abb2-6f6552281066",
+ CellID->1921439494],
+Cell[CellGroupData[{
+Cell[96872, 2375, 770, 14, 70, "Input",ExpressionUUID->"f11fd242-61ce-4820-bfa0-642711ce7dc9",
+ CellID->1632084698],
+Cell[97645, 2391, 9512, 210, 485, "Output",ExpressionUUID->"2961d796-a30b-4fcf-81de-0b53792596c9",
+ CellID->1185962280]
+}, Open  ]],
+Cell[107172, 2604, 448, 7, 70, "ExampleText",ExpressionUUID->"7e0ddf44-b5c4-4408-ac58-21944d0d7dea",
+ CellID->364455761],
+Cell[CellGroupData[{
+Cell[107645, 2615, 202, 4, 70, "Input",ExpressionUUID->"fa43d9b0-be25-40fc-b1b1-03349708eb13",
+ CellID->1366773447],
+Cell[107850, 2621, 821, 21, 36, "Output",ExpressionUUID->"f5940d53-4b09-4c6d-a646-e32f7578bdab",
+ CellID->1869689999]
+}, Open  ]],
+Cell[108686, 2645, 245, 6, 70, "ExampleText",ExpressionUUID->"f9c3c127-01a5-4e83-91c2-4440e7449214",
+ CellID->349071146],
+Cell[CellGroupData[{
+Cell[108956, 2655, 820, 15, 70, "Input",ExpressionUUID->"ecb9e045-c79c-467e-9f27-e82cc1b72c31",
+ CellID->763366402],
+Cell[109779, 2672, 9198, 195, 485, "Output",ExpressionUUID->"a216fff8-1b03-4c04-b9be-3896d21a4a9d",
+ CellID->1380937022]
+}, Open  ]],
+Cell[118992, 2870, 218, 4, 70, "ExampleText",ExpressionUUID->"1e6533b0-8713-4e9d-90b5-21f5e2c9ca10",
+ CellID->672243198]
+}, Dynamic[CurrentValue[EvaluationNotebook[], {TaggingRules, "Openers", "ExampleSection", "0"}, Closed]]]]
+}, Dynamic[CurrentValue[EvaluationNotebook[], {TaggingRules, "Openers", "PrimaryExamplesSection"}, Closed]]]],
+Cell[119440, 2882, 6008, 162, 70, "SeeAlsoSection",ExpressionUUID->"ef34edca-96cb-4e84-b34b-6e94a214a3d8"],
+Cell[125451, 3046, 670, 18, 70, "TechNotesSection",ExpressionUUID->"71742729-1056-43f5-88ee-04b32dfae1f0"],
+Cell[126124, 3066, 1033, 26, 70, "MoreAboutSection",ExpressionUUID->"2fa94af4-65bc-4359-95ec-0160054c8f6c"],
+Cell[127160, 3094, 2904, 81, 70, "RelatedLinksSection",ExpressionUUID->"9da3cd56-27c8-411d-94e2-cccfaaba9a9c"],
+Cell[CellGroupData[{
+Cell[130089, 3179, 138, 1, 70, "RelatedDemonstrationsSection",ExpressionUUID->"9becd839-5532-42b1-983e-552a1b348468",
+ CellID->2135167160],
+Cell[130230, 3182, 219, 4, 70, "RelatedDemonstrations",ExpressionUUID->"e578713f-bf66-4022-85f0-5366bc72dca3",
+ CellID->1194386356],
+Cell[130452, 3188, 212, 3, 70, "RelatedDemonstrations",ExpressionUUID->"2c6e51f9-4a87-4278-945e-429a4a5a6b7c",
+ CellID->1641706272],
+Cell[130667, 3193, 226, 4, 70, "RelatedDemonstrations",ExpressionUUID->"7323dd20-7643-4179-a345-29fdc2003d8b",
+ CellID->399251956],
+Cell[130896, 3199, 222, 3, 70, "RelatedDemonstrations",ExpressionUUID->"cc800674-1e6c-4a7e-b621-cb048676a4d8",
+ CellID->821434655]
+}, Open  ]],
+Cell[131133, 3205, 78, 0, 70, "FooterCell",ExpressionUUID->"2cc7c53b-abdf-4f76-921f-ebb8fbfcbd18"]
+}
+]
+*)
+
+(* End of internal cache information *)
+
